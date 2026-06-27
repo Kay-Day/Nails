@@ -1,0 +1,33 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<div class="page-head">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Home</a> / Journal</div>
+    <h1>The Journal</h1>
+    <p>Tips, tutorials and nail inspiration from Majestic Nailbox.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <% if (posts.length) { %>
+      <div class="blog-grid">
+        <% posts.forEach(function(post) { %>
+          <a href="/blog/<%= post.slug %>" class="post-card">
+            <div class="post-card__media"><img src="<%= post.cover_image || '/images/Website_Photos_Square.jpg' %>" alt="<%= post.title %>" loading="lazy" /></div>
+            <div class="post-card__body">
+              <div class="post-card__date"><%= new Date(post.published_at).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' }) %> · <%= post.author %></div>
+              <h3><%= post.title %></h3>
+              <p><%= post.excerpt || '' %></p>
+            </div>
+          </a>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <div class="empty"><h3>No posts yet</h3><p>Check back soon!</p></div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

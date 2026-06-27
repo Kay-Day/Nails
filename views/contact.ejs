@@ -1,0 +1,52 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<div class="page-head">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Home</a> / Contact</div>
+    <h1>Get in Touch</h1>
+    <p>Questions about a set, sizing, or your order? We'd love to help.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container contact-grid">
+    <div>
+      <h2 style="font-size:30px">Reach Majestic Nailbox</h2>
+      <p style="color:var(--ink-soft);margin-bottom:28px">We don't have an online checkout — just message us directly and we'll help you place your order and answer any questions.</p>
+      <div class="contact-info">
+        <% if (settings.contact_phone) { %>
+        <div class="contact-info__item"><span class="ic">📞</span><div><h4>Phone</h4><a href="tel:<%= settings.contact_phone.replace(/[^0-9+]/g,'') %>"><%= settings.contact_phone %></a></div></div>
+        <% } %>
+        <% if (settings.contact_email) { %>
+        <div class="contact-info__item"><span class="ic">✉️</span><div><h4>Email</h4><a href="mailto:<%= settings.contact_email %>"><%= settings.contact_email %></a></div></div>
+        <% } %>
+        <% if (settings.contact_address) { %>
+        <div class="contact-info__item"><span class="ic">📍</span><div><h4>Location</h4><p><%= settings.contact_address %></p></div></div>
+        <% } %>
+        <% if (settings.contact_hours) { %>
+        <div class="contact-info__item"><span class="ic">🕘</span><div><h4>Hours</h4><p><%= settings.contact_hours %></p></div></div>
+        <% } %>
+      </div>
+      <div class="social-links" style="margin-top:28px">
+        <% if (settings.instagram) { %><a href="<%= settings.instagram %>" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a><% } %>
+        <% if (settings.tiktok) { %><a href="<%= settings.tiktok %>" target="_blank" rel="noopener" aria-label="TikTok">TikTok</a><% } %>
+        <% if (settings.facebook) { %><a href="<%= settings.facebook %>" target="_blank" rel="noopener">FB</a><% } %>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <h3 style="font-size:22px;margin-bottom:18px">Send us a message</h3>
+      <form onsubmit="event.preventDefault(); var s=this.querySelector('.form-success'); s.style.display='block'; this.reset();">
+        <div class="field"><label>Name</label><input type="text" name="name" required /></div>
+        <div class="field"><label>Email</label><input type="email" name="email" required /></div>
+        <div class="field"><label>Phone (optional)</label><input type="tel" name="phone" /></div>
+        <div class="field"><label>Message</label><textarea name="message" placeholder="Tell us what you're looking for…" required></textarea></div>
+        <button type="submit" class="btn btn--primary btn--block">Send Message</button>
+        <p class="form-success" style="display:none;color:var(--accent-deep);margin-top:14px;font-weight:700">Thanks! We'll get back to you shortly. For a faster reply, message us directly using the details on the left.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

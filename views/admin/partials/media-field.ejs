@@ -1,0 +1,21 @@
+<div class="form-row form-row--full admin-media-field"
+  data-media-field
+  data-media-kind="<%= kind || 'image' %>"
+  data-current-url="<%= currentUrl || '' %>">
+  <label><%= label %></label>
+  <% if (typeof hint !== 'undefined' && hint) { %><div class="hint admin-media-field__hint"><%= hint %></div><% } %>
+  <div class="admin-media-field__inputs">
+    <% if (typeof fileName !== 'undefined' && fileName) { %>
+      <input type="file" name="<%= fileName %>" accept="<%= accept || (kind === 'video' ? 'video/*' : 'image/*') %>" data-media-file />
+    <% } %>
+    <input type="text" name="<%= urlName %>" value="" placeholder="<%= placeholder || 'https://example.com/media.jpg' %>" data-media-url />
+  </div>
+  <% if (currentUrl && typeof removeName !== 'undefined' && removeName) { %>
+    <label class="check admin-media-field__remove">
+      <input type="checkbox" name="<%= removeName %>" data-media-remove />
+      Remove current media
+    </label>
+  <% } %>
+  <div class="admin-media-preview" data-media-preview aria-live="polite"></div>
+  <div class="hint admin-media-status" data-media-status></div>
+</div>

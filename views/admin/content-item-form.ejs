@@ -1,0 +1,33 @@
+<%- include('partials/head') %>
+
+<div class="panel" style="margin-bottom:20px"><div class="panel__head"><h2><%= section.page_slug %> / <%= section.section_key %></h2></div></div>
+<form class="form-card" method="post" action="<%= formAction %>" enctype="multipart/form-data">
+  <div class="form-grid">
+    <div class="form-row"><label>Label / icon / number</label><input name="label" value="<%= item.label || '' %>" /></div>
+    <div class="form-row"><label>Title</label><input name="title" value="<%= item.title || '' %>" /></div>
+    <div class="form-row form-row--full"><label>Subtitle</label><textarea name="subtitle" rows="2"><%= item.subtitle || '' %></textarea></div>
+    <%- include('partials/rich-editor', {
+      label: 'Content',
+      name: 'body_html',
+      value: item.body_html || '',
+      hint: 'Write and format the text as it should appear on the website.'
+    }) %>
+    <%- include('partials/media-field', {
+      label: 'Image',
+      kind: 'image',
+      currentUrl: item.image || '',
+      fileName: 'image',
+      urlName: 'image_url',
+      removeName: 'remove_image',
+      accept: 'image/*',
+      placeholder: 'https://example.com/photo.jpg',
+      hint: 'Choose a file from this device or paste a direct image link.'
+    }) %>
+    <div class="form-row form-row--full"><label>Link</label><input name="link" value="<%= item.link || '' %>" placeholder="/collections/all" /></div>
+    <div class="form-row"><label>Sort order</label><input type="number" name="sort_order" value="<%= item.sort_order || 0 %>" /></div>
+    <div class="form-row"><label class="check"><input type="checkbox" name="is_active" <%= item.is_active === undefined || item.is_active ? 'checked' : '' %> /> Active</label></div>
+  </div>
+  <div class="form-actions"><button class="btn btn--primary" type="submit">Save Item</button><a href="/admin/content/<%= section.id || item.section_id %>/edit" class="btn btn--ghost">Cancel</a></div>
+</form>
+
+<%- include('partials/foot') %>

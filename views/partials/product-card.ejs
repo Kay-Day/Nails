@@ -1,0 +1,20 @@
+<a href="/products/<%= product.slug %>" class="card">
+  <div class="card__media">
+    <% if (product.compare_at_price && Number(product.compare_at_price) > Number(product.price)) { %>
+      <span class="card__badge">Sale</span>
+    <% } else if (product.is_featured) { %>
+      <span class="card__badge">Best Seller</span>
+    <% } %>
+    <img src="<%= product.image || '/images/Website_Photos_Square.jpg' %>" alt="<%= product.title %>" loading="lazy" />
+  </div>
+  <div class="card__body">
+    <% if (product.shape) { %><div class="card__shape"><%= product.shape %><%= product.length ? ' · ' + product.length : '' %></div><% } %>
+    <div class="card__title"><%= product.title %></div>
+    <div class="card__price">
+      <% if (product.price != null) { %>$<%= Number(product.price).toFixed(2) %><% } else { %>Contact for price<% } %>
+      <% if (product.compare_at_price && Number(product.compare_at_price) > Number(product.price)) { %>
+        <span class="was">$<%= Number(product.compare_at_price).toFixed(2) %></span>
+      <% } %>
+    </div>
+  </div>
+</a>

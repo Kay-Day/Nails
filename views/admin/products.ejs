@@ -1,0 +1,36 @@
+<%- include('partials/head') %>
+
+<div class="panel">
+  <div class="panel__head">
+    <h2><%= products.length %> Products</h2>
+    <a href="/admin/products/new" class="btn btn--accent btn--sm">+ New Product</a>
+  </div>
+  <table>
+    <thead><tr><th></th><th>Title</th><th>Collection</th><th>Shape</th><th>Price</th><th>Featured</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      <% if (!products.length) { %><tr><td colspan="8" class="empty-row">No products yet. <a href="/admin/products/new">Add one →</a></td></tr><% } %>
+      <% products.forEach(function(p) { %>
+        <tr>
+          <td><img class="thumb" src="<%= p.image || '/images/Website_Photos_Square.jpg' %>" /></td>
+          <td><a href="/products/<%= p.slug %>" target="_blank"><%= p.title %></a></td>
+          <td><%= p.collection_title || '—' %></td>
+          <td><%= p.shape || '—' %></td>
+          <td>
+            <% if (p.price != null) { %>$<%= Number(p.price).toFixed(2) %><% } else { %>—<% } %>
+            <% if (p.compare_at_price) { %><br><small style="color:var(--a-soft);text-decoration:line-through">$<%= Number(p.compare_at_price).toFixed(2) %></small><% } %>
+          </td>
+          <td><%= p.is_featured ? '★' : '' %></td>
+          <td><span class="badge badge--<%= p.is_active ? 'on':'off' %>"><%= p.is_active ? 'Active':'Hidden' %></span></td>
+          <td class="actions">
+            <a href="/admin/products/<%= p.id %>/edit" class="btn btn--ghost btn--sm">Edit</a>
+            <form action="/admin/products/<%= p.id %>/delete" method="post" onsubmit="return confirm('Delete this product?')">
+              <button class="btn btn--danger btn--sm" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/foot') %>

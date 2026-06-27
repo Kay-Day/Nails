@@ -1,0 +1,32 @@
+<%- include('partials/head') %>
+
+<div class="panel">
+  <div class="panel__head">
+    <h2><%= sections.length %> Content Sections</h2>
+    <a href="/admin/content/new" class="btn btn--accent btn--sm">+ New Section</a>
+  </div>
+  <table>
+    <thead><tr><th>Page</th><th>Key</th><th>Title</th><th>Type</th><th>Items</th><th>Products</th><th>Order</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      <% if (!sections.length) { %><tr><td colspan="9" class="empty-row">No content sections yet.</td></tr><% } %>
+      <% sections.forEach(function(section) { %>
+        <tr>
+          <td><strong><%= section.page_slug %></strong></td>
+          <td><code><%= section.section_key %></code></td>
+          <td><%= section.title || '-' %></td>
+          <td><%= section.section_type %></td>
+          <td><%= section.item_count %></td>
+          <td><%= section.product_count %></td>
+          <td><%= section.sort_order %></td>
+          <td><span class="badge badge--<%= section.is_active ? 'on' : 'off' %>"><%= section.is_active ? 'Active' : 'Hidden' %></span></td>
+          <td class="actions">
+            <a href="/admin/content/<%= section.id %>/edit" class="btn btn--ghost btn--sm">Edit</a>
+            <form action="/admin/content/<%= section.id %>/delete" method="post" onsubmit="return confirm('Delete this section and all its items?')"><button class="btn btn--danger btn--sm" type="submit">Delete</button></form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/foot') %>

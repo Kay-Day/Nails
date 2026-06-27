@@ -1,0 +1,52 @@
+<%- include('partials/head') %>
+
+<form class="form-card" method="post" action="<%= formAction %>" enctype="multipart/form-data">
+  <div class="form-grid">
+    <div class="form-row form-row--full">
+      <label>Title</label>
+      <input type="text" name="title" value="<%= post.title || '' %>" required />
+    </div>
+    <div class="form-row">
+      <label>Slug <span class="hint">leave blank to auto-generate</span></label>
+      <input type="text" name="slug" value="<%= post.slug || '' %>" />
+    </div>
+    <div class="form-row">
+      <label>Author</label>
+      <input type="text" name="author" value="<%= post.author || 'Majestic Nailbox' %>" />
+    </div>
+    <div class="form-row form-row--full">
+      <label>Excerpt <span class="hint">short summary shown in lists</span></label>
+      <textarea name="excerpt" rows="2"><%= post.excerpt || '' %></textarea>
+    </div>
+    <%- include('partials/rich-editor', {
+      label: 'Content',
+      name: 'content',
+      value: post.content || '',
+      hint: 'Write the article and use the toolbar to format headings, lists, and links.'
+    }) %>
+    <%- include('partials/media-field', {
+      label: 'Cover image',
+      kind: 'image',
+      currentUrl: post.cover_image || '',
+      fileName: 'cover_image',
+      urlName: 'cover_image_url',
+      removeName: 'remove_cover_image',
+      accept: 'image/*',
+      placeholder: 'https://example.com/cover.jpg',
+      hint: 'Choose a file from this device or paste a direct image link.'
+    }) %>
+    <div class="form-row">
+      <label>Publish date <span class="hint">optional</span></label>
+      <input type="datetime-local" name="published_at" value="<%= post.published_at ? new Date(post.published_at).toISOString().slice(0,16) : '' %>" />
+    </div>
+    <div class="form-row">
+      <label class="check"><input type="checkbox" name="is_published" <%= (post.is_published===undefined||post.is_published)?'checked':'' %> /> Published</label>
+    </div>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn--primary">Save Post</button>
+    <a href="/admin/posts" class="btn btn--ghost">Cancel</a>
+  </div>
+</form>
+
+<%- include('partials/foot') %>

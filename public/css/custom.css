@@ -1,0 +1,24 @@
+
+
+/* Hide non-functional Shopify locale/currency switchers in clone */
+.m-switcher-dropdown,
+.m-currency-switcher,
+.m-country-switcher,
+.m-language-switcher,
+localization-form,
+m-localization-form { display: none !important; }
+
+/* Browse/contact-only storefront: no cart, checkout, or quick add UI. */
+a[href="/cart"].m-cart-icon-bubble,
+m-cart-count,
+m-cart-drawer,
+.m-cart-drawer,
+.m-product-card__action,
+.m-product-card__addons,
+.m-product-quickview-button,
+.m-add-to-cart,
+product-form,
+form[action="/cart/add"],
+button[name="checkout"] {
+  display: none !important;
+}

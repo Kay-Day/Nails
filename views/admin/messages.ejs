@@ -1,0 +1,14 @@
+<%- include('partials/head') %>
+
+<div class="panel">
+  <div class="panel__head"><h2><%= messages.length %> Messages</h2></div>
+  <table>
+    <thead><tr><th>Status</th><th>Sender</th><th>Contact</th><th>Message</th><th>Received</th><th></th></tr></thead>
+    <tbody>
+      <% if (!messages.length) { %><tr><td colspan="6" class="empty-row">No messages yet.</td></tr><% } %>
+      <% messages.forEach(function(message) { %><tr><td><span class="badge badge--<%= message.is_read ? 'off' : 'on' %>"><%= message.is_read ? 'Read' : 'New' %></span></td><td><strong><%= message.name %></strong><% if (message.phone) { %><br><small><%= message.phone %></small><% } %></td><td><a href="mailto:<%= message.email %>"><%= message.email %></a></td><td style="white-space:pre-wrap;min-width:280px"><%= message.message %></td><td><%= new Date(message.created_at).toLocaleString() %></td><td class="actions"><form action="/admin/messages/<%= message.id %>/read" method="post"><button class="btn btn--ghost btn--sm" type="submit"><%= message.is_read ? 'Mark new' : 'Mark read' %></button></form><form action="/admin/messages/<%= message.id %>/delete" method="post" onsubmit="return confirm('Delete this message?')"><button class="btn btn--danger btn--sm" type="submit">Delete</button></form></td></tr><% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/foot') %>

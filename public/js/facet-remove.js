@@ -1,0 +1,2 @@
+class FacetRemove extends HTMLElement{constructor(){super();const removeFilterNode=this.querySelector("a");removeFilterNode.addEventListener("click",e=>{e.preventDefault(),(this.closest("collection-filters-form")||document.querySelector("collection-filters-form")).renderPage(new URL(removeFilterNode.href).searchParams.toString())})}}customElements.define("facet-remove",FacetRemove);
+//# sourceMappingURL=/cdn/shop/t/14/assets/facet-remove.js.map

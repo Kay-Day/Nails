@@ -1,0 +1,3544 @@
+{
+  "generated_at": "2026-06-24T18:08:42.048Z",
+  "collections": [
+    {
+      "slug": "best-sellers-1",
+      "title": "Best Sellers",
+      "description": "Most-loved press-on sets selected by customers.",
+      "image": "/images/0326002.jpg",
+      "sort_order": 0
+    },
+    {
+      "slug": "new-arrival",
+      "title": "New Arrival",
+      "description": "Fresh designs and seasonal sets just added.",
+      "image": "/images/Fresh.jpg",
+      "sort_order": 1
+    },
+    {
+      "slug": "spring-2026-collection",
+      "title": "Spring 2026 Collection",
+      "description": "Soft colors, playful details, and handcrafted salon-quality finish.",
+      "image": "/images/Collection_Banner_-_Desktop_1.jpg",
+      "sort_order": 2
+    },
+    {
+      "slug": "almond",
+      "title": "Almond Shape",
+      "description": "",
+      "image": "/images/0326009.jpg",
+      "sort_order": 3
+    },
+    {
+      "slug": "coffin-shape",
+      "title": "Coffin Shape",
+      "description": "",
+      "image": "/images/0326015.jpg",
+      "sort_order": 4
+    },
+    {
+      "slug": "round-shape",
+      "title": "Round Shape",
+      "description": "",
+      "image": "/images/030150.jpg",
+      "sort_order": 5
+    },
+    {
+      "slug": "square-shape",
+      "title": "Square Shape",
+      "description": "",
+      "image": "/images/050026.jpg",
+      "sort_order": 6
+    },
+    {
+      "slug": "stiletto-shape",
+      "title": "Stiletto Shape",
+      "description": "",
+      "image": "/images/030138.jpg",
+      "sort_order": 7
+    },
+    {
+      "slug": "short-length",
+      "title": "Short Length",
+      "description": "",
+      "image": "/images/050026.jpg",
+      "sort_order": 8
+    },
+    {
+      "slug": "medium-length",
+      "title": "Medium Length",
+      "description": "",
+      "image": "/images/0326009.jpg",
+      "sort_order": 9
+    },
+    {
+      "slug": "long-length",
+      "title": "Long Length",
+      "description": "",
+      "image": "/images/0326015.jpg",
+      "sort_order": 10
+    },
+    {
+      "slug": "now-on-sale",
+      "title": "On Sale",
+      "description": "Salon-perfect nails for less.",
+      "image": "/images/Discount.jpg",
+      "sort_order": 11
+    }
+  ],
+  "products": [
+    {
+      "slug": "dual-dots",
+      "title": "Dual Dots",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 25,
+      "compare_at_price": null,
+      "sku": "030159XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Short",
+      "image": "/images/products/dual-dots/01.jpg",
+      "gallery": [
+        "/images/products/dual-dots/02.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030159XS",
+          "price": 25,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030159S",
+          "price": 25,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030159M",
+          "price": 25,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030159L",
+          "price": 25,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "best-sellers-1",
+        "almond",
+        "short-length"
+      ],
+      "collection_order": {
+        "best-sellers-1": 0,
+        "almond": 0,
+        "short-length": 0
+      },
+      "primary_collection": "best-sellers-1",
+      "is_featured": true
+    },
+    {
+      "slug": "midnight-marble",
+      "title": "Midnight Marble",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 38,
+      "compare_at_price": null,
+      "sku": "030122XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/midnight-marble/01.jpg",
+      "gallery": [],
+      "video": "https://cdn.shopify.com/videos/c/vp/2a34354ff4964b14aa77caef0832596b/2a34354ff4964b14aa77caef0832596b.HD-1080p-7.2Mbps-84234484.mp4",
+      "video_poster": "/images/products/midnight-marble/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030122XS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030122S",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030122M",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030122L",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "best-sellers-1",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "best-sellers-1": 1,
+        "almond": 1,
+        "medium-length": 0
+      },
+      "primary_collection": "best-sellers-1",
+      "is_featured": true
+    },
+    {
+      "slug": "mocha-dots",
+      "title": "Mocha Dots",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "030165XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/mocha-dots/01.jpg",
+      "gallery": [
+        "/images/products/mocha-dots/02.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030165XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030165S",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030165M",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030165L",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "best-sellers-1",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "best-sellers-1": 2,
+        "almond": 2,
+        "medium-length": 1
+      },
+      "primary_collection": "best-sellers-1",
+      "is_featured": true
+    },
+    {
+      "slug": "starfish-shore",
+      "title": "Starfish Shore",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "030141XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/starfish-shore/01.jpg",
+      "gallery": [
+        "/images/products/starfish-shore/02.jpg",
+        "/images/products/starfish-shore/03.jpg",
+        "/images/products/starfish-shore/04.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030141XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030141S",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030141M",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030141L",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "best-sellers-1",
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "best-sellers-1": 3,
+        "spring-2026-collection": 4,
+        "almond": 3,
+        "medium-length": 2
+      },
+      "primary_collection": "best-sellers-1",
+      "is_featured": true
+    },
+    {
+      "slug": "blue-enchante",
+      "title": "Blue Enchanté",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 38,
+      "compare_at_price": null,
+      "sku": "030136XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Short",
+      "image": "/images/products/blue-enchante/01.jpg",
+      "gallery": [
+        "/images/products/blue-enchante/02.jpg",
+        "/images/products/blue-enchante/03.jpg",
+        "/images/products/blue-enchante/04.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030136XS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030136S",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030136M",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030136L",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "best-sellers-1",
+        "spring-2026-collection",
+        "almond",
+        "short-length"
+      ],
+      "collection_order": {
+        "best-sellers-1": 4,
+        "spring-2026-collection": 17,
+        "almond": 6,
+        "short-length": 2
+      },
+      "primary_collection": "best-sellers-1",
+      "is_featured": true
+    },
+    {
+      "slug": "sacred-armor",
+      "title": "Sacred Armor",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 58,
+      "compare_at_price": null,
+      "sku": "030133XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Stiletto",
+      "length": null,
+      "image": "/images/products/sacred-armor/01.jpg",
+      "gallery": [
+        "/images/products/sacred-armor/02.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030133XS",
+          "price": 58,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030133S",
+          "price": 58,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030133M",
+          "price": 58,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030133L",
+          "price": 58,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "best-sellers-1",
+        "stiletto-shape"
+      ],
+      "collection_order": {
+        "best-sellers-1": 5,
+        "stiletto-shape": 0
+      },
+      "primary_collection": "best-sellers-1",
+      "is_featured": true
+    },
+    {
+      "slug": "island-glow-edit",
+      "title": "Island Glow Edit",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "030150XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Stiletto",
+      "length": "Long",
+      "image": "/images/products/island-glow-edit/01.jpg",
+      "gallery": [
+        "/images/products/island-glow-edit/02.jpg",
+        "/images/products/island-glow-edit/03.jpg",
+        "/images/products/island-glow-edit/04.jpg",
+        "/images/products/island-glow-edit/05.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030150XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030150S",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030150M",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030150L",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "best-sellers-1",
+        "spring-2026-collection",
+        "stiletto-shape",
+        "long-length"
+      ],
+      "collection_order": {
+        "best-sellers-1": 6,
+        "spring-2026-collection": 8,
+        "stiletto-shape": 1,
+        "long-length": 0
+      },
+      "primary_collection": "best-sellers-1",
+      "is_featured": true
+    },
+    {
+      "slug": "030102",
+      "title": "PURPLE CAT EYE Short Square",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 20,
+      "compare_at_price": null,
+      "sku": "030102XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Square",
+      "length": "Short",
+      "image": "/images/products/030102/01.jpg",
+      "gallery": [
+        "/images/products/030102/02.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/1ea545fb6eab42da88b60c0624825532/1ea545fb6eab42da88b60c0624825532.HD-1080p-7.2Mbps-84248266.mp4",
+      "video_poster": "/images/products/030102/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030102XS",
+          "price": 20,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030102S",
+          "price": 20,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030102M",
+          "price": 20,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030102L",
+          "price": 20,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "best-sellers-1",
+        "square-shape",
+        "short-length"
+      ],
+      "collection_order": {
+        "best-sellers-1": 7,
+        "square-shape": 1,
+        "short-length": 8
+      },
+      "primary_collection": "best-sellers-1",
+      "is_featured": true
+    },
+    {
+      "slug": "totoros-garden",
+      "title": "Totoro's Garden",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 58,
+      "compare_at_price": null,
+      "sku": "030118XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/totoros-garden/01.jpg",
+      "gallery": [],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030118XS",
+          "price": 58,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030118S",
+          "price": 58,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030118M",
+          "price": 58,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030118L",
+          "price": 58,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "best-sellers-1",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "best-sellers-1": 8,
+        "almond": 18,
+        "medium-length": 16
+      },
+      "primary_collection": "best-sellers-1",
+      "is_featured": true
+    },
+    {
+      "slug": "030145",
+      "title": "Ethereal Star",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 28,
+      "compare_at_price": null,
+      "sku": "030145XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/030145/01.jpg",
+      "gallery": [],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030145XS",
+          "price": 28,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030145S",
+          "price": 28,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030145M",
+          "price": 28,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030145L",
+          "price": 28,
+          "compare_at_price": null,
+          "is_available": false,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "best-sellers-1",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "best-sellers-1": 9,
+        "almond": 26,
+        "medium-length": 22
+      },
+      "primary_collection": "best-sellers-1",
+      "is_featured": true
+    },
+    {
+      "slug": "mocha-muse",
+      "title": "Mocha Muse",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "NN0034XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/mocha-muse/01.jpg",
+      "gallery": [
+        "/images/products/mocha-muse/02.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "NN0034XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "NN0034NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "NN0034NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "NN0034NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": false,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "best-sellers-1",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "best-sellers-1": 10,
+        "almond": 24,
+        "medium-length": 20
+      },
+      "primary_collection": "best-sellers-1",
+      "is_featured": true
+    },
+    {
+      "slug": "celestial-garden",
+      "title": "Celestial Garden",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "030147XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Stiletto",
+      "length": "Long",
+      "image": "/images/products/celestial-garden/01.jpg",
+      "gallery": [
+        "/images/products/celestial-garden/02.jpg",
+        "/images/products/celestial-garden/03.jpg",
+        "/images/products/celestial-garden/04.jpg",
+        "/images/products/celestial-garden/05.jpg",
+        "/images/products/celestial-garden/06.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030147XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030147S",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030147M",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030147L",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "best-sellers-1",
+        "spring-2026-collection",
+        "stiletto-shape",
+        "long-length"
+      ],
+      "collection_order": {
+        "best-sellers-1": 11,
+        "spring-2026-collection": 14,
+        "stiletto-shape": 3,
+        "long-length": 2
+      },
+      "primary_collection": "best-sellers-1",
+      "is_featured": true
+    },
+    {
+      "slug": "030101",
+      "title": "Purple Cat-eye Almond",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 20,
+      "compare_at_price": null,
+      "sku": "030101XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Short",
+      "image": "/images/products/030101/01.jpg",
+      "gallery": [],
+      "video": "https://cdn.shopify.com/videos/c/vp/72ad5ba3a94949708df2b98b141ab3e3/72ad5ba3a94949708df2b98b141ab3e3.HD-1080p-7.2Mbps-84248260.mp4",
+      "video_poster": "/images/products/030101/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030101XS",
+          "price": 20,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030101S",
+          "price": 20,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030101M",
+          "price": 20,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030101L",
+          "price": 20,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "best-sellers-1",
+        "almond",
+        "short-length"
+      ],
+      "collection_order": {
+        "best-sellers-1": 12,
+        "almond": 38,
+        "short-length": 15
+      },
+      "primary_collection": "best-sellers-1",
+      "is_featured": true
+    },
+    {
+      "slug": "royal-ember",
+      "title": "Royal Ember",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "030142XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/royal-ember/01.jpg",
+      "gallery": [],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030142XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030142S",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030142M",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030142L",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "best-sellers-1",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "best-sellers-1": 13,
+        "almond": 36,
+        "medium-length": 30
+      },
+      "primary_collection": "best-sellers-1",
+      "is_featured": true
+    },
+    {
+      "slug": "ice-halo",
+      "title": "Ice Halo",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "0326027XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Stiletto",
+      "length": "Long",
+      "image": "/images/products/ice-halo/01.jpg",
+      "gallery": [
+        "/images/products/ice-halo/02.jpg",
+        "/images/products/ice-halo/03.jpg",
+        "/images/products/ice-halo/04.jpg",
+        "/images/products/ice-halo/05.jpg",
+        "/images/products/ice-halo/06.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326027XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326027NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326027NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326027NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "spring-2026-collection",
+        "stiletto-shape",
+        "long-length"
+      ],
+      "collection_order": {
+        "new-arrival": 0,
+        "spring-2026-collection": 16,
+        "stiletto-shape": 16,
+        "long-length": 19
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "silver-current",
+      "title": "Silver Current",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 38,
+      "compare_at_price": null,
+      "sku": "0326026XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/silver-current/01.jpg",
+      "gallery": [
+        "/images/products/silver-current/02.jpg",
+        "/images/products/silver-current/03.jpg",
+        "/images/products/silver-current/04.jpg",
+        "/images/products/silver-current/05.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/d606811ee1bb4174bc1f853b5d4ba1c0/d606811ee1bb4174bc1f853b5d4ba1c0.HD-1080p-7.2Mbps-84508927.mp4",
+      "video_poster": "/images/products/silver-current/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326026XS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326026NS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326026NM",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326026NL",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 1,
+        "almond": 115,
+        "medium-length": 92
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "0326023",
+      "title": "Pink Sands",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "0326023XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/0326023/01.jpg",
+      "gallery": [
+        "/images/products/0326023/02.jpg",
+        "/images/products/0326023/03.jpg",
+        "/images/products/0326023/04.jpg",
+        "/images/products/0326023/05.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326023XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326023NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326023NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326023NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 2,
+        "spring-2026-collection": 2,
+        "almond": 90,
+        "medium-length": 76
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "0326022",
+      "title": "Pink Yuzu",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "0326022XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/0326022/01.jpg",
+      "gallery": [
+        "/images/products/0326022/02.jpg",
+        "/images/products/0326022/03.jpg",
+        "/images/products/0326022/04.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/704ddd3c95c44911ae2f5e2fb8829707/704ddd3c95c44911ae2f5e2fb8829707.HD-1080p-7.2Mbps-85201710.mp4",
+      "video_poster": "/images/products/0326022/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326022XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326022NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326022NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326022NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 3,
+        "spring-2026-collection": 1,
+        "almond": 136,
+        "medium-length": 109
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "0326021",
+      "title": "Pink Pomelo",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "0326021XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/0326021/01.jpg",
+      "gallery": [
+        "/images/products/0326021/02.jpg",
+        "/images/products/0326021/03.jpg",
+        "/images/products/0326021/04.jpg",
+        "/images/products/0326021/05.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326021XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326021NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326021NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326021NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 4,
+        "spring-2026-collection": 0,
+        "almond": 91,
+        "medium-length": 77
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "silver-aurora",
+      "title": "Silver Aurora",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "0326018XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/silver-aurora/01.jpg",
+      "gallery": [
+        "/images/products/silver-aurora/02.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326018XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326018NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326018NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326018NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 5,
+        "almond": 165,
+        "medium-length": 130
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "0326013",
+      "title": "Citrus Jelly Pop",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "0326013XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Short",
+      "image": "/images/products/0326013/01.jpg",
+      "gallery": [
+        "/images/products/0326013/02.jpg",
+        "/images/products/0326013/03.jpg",
+        "/images/products/0326013/04.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326013XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326013NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": false,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326013NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326013NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "almond",
+        "short-length"
+      ],
+      "collection_order": {
+        "new-arrival": 6,
+        "almond": 117,
+        "short-length": 47
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "polka-cherry-tips",
+      "title": "Polka Cherry Tips",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "0326011XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/polka-cherry-tips/01.jpg",
+      "gallery": [
+        "/images/products/polka-cherry-tips/02.jpg",
+        "/images/products/polka-cherry-tips/03.jpg",
+        "/images/products/polka-cherry-tips/04.jpg",
+        "/images/products/polka-cherry-tips/05.jpg",
+        "/images/products/polka-cherry-tips/06.jpg",
+        "/images/products/polka-cherry-tips/07.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/09fcc4b1e020430f81891ef91993e478/09fcc4b1e020430f81891ef91993e478.HD-1080p-4.8Mbps-83543395.mp4",
+      "video_poster": "/images/products/polka-cherry-tips/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326011XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326011NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326011NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326011NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 7,
+        "spring-2026-collection": 12,
+        "almond": 84,
+        "medium-length": 69
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "ivory-vine-romance",
+      "title": "Ivory Vine Romance",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "0326010XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Short",
+      "image": "/images/products/ivory-vine-romance/01.jpg",
+      "gallery": [
+        "/images/products/ivory-vine-romance/02.jpg",
+        "/images/products/ivory-vine-romance/03.jpg",
+        "/images/products/ivory-vine-romance/04.jpg",
+        "/images/products/ivory-vine-romance/05.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/6cc7c07c0472457094b2a89b7f8a219d/6cc7c07c0472457094b2a89b7f8a219d.HD-1080p-7.2Mbps-83543893.mp4",
+      "video_poster": "/images/products/ivory-vine-romance/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326010XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326010NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326010NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326010NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "spring-2026-collection",
+        "almond",
+        "short-length"
+      ],
+      "collection_order": {
+        "new-arrival": 8,
+        "spring-2026-collection": 11,
+        "almond": 41,
+        "short-length": 16
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "rosy-flutter-tips",
+      "title": "Rosy Flutter Tips",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "0326009XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/rosy-flutter-tips/01.jpg",
+      "gallery": [
+        "/images/products/rosy-flutter-tips/02.jpg",
+        "/images/products/rosy-flutter-tips/03.jpg",
+        "/images/products/rosy-flutter-tips/04.jpg",
+        "/images/products/rosy-flutter-tips/05.jpg",
+        "/images/products/rosy-flutter-tips/06.jpg",
+        "/images/products/rosy-flutter-tips/07.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/93c71903533e4331a3e1d2540aceca1f/93c71903533e4331a3e1d2540aceca1f.HD-1080p-7.2Mbps-83543707.mp4",
+      "video_poster": "/images/products/rosy-flutter-tips/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326009XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326009NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326009NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326009NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 9,
+        "spring-2026-collection": 5,
+        "almond": 57,
+        "medium-length": 45
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "seashell-serenade",
+      "title": "Seashell Serenade",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "0326008XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Short",
+      "image": "/images/products/seashell-serenade/01.jpg",
+      "gallery": [
+        "/images/products/seashell-serenade/02.jpg",
+        "/images/products/seashell-serenade/03.jpg",
+        "/images/products/seashell-serenade/04.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326008XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326008NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326008NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326008NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "spring-2026-collection",
+        "almond",
+        "short-length"
+      ],
+      "collection_order": {
+        "new-arrival": 10,
+        "spring-2026-collection": 10,
+        "almond": 118,
+        "short-length": 48
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "silk-road-petals",
+      "title": "Silk Road Petals",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 58,
+      "compare_at_price": null,
+      "sku": "0326007XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/silk-road-petals/01.jpg",
+      "gallery": [
+        "/images/products/silk-road-petals/02.jpg",
+        "/images/products/silk-road-petals/03.jpg",
+        "/images/products/silk-road-petals/04.jpg",
+        "/images/products/silk-road-petals/05.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326007XS",
+          "price": 58,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326007NS",
+          "price": 58,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326007NM",
+          "price": 58,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326007NL",
+          "price": 58,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 11,
+        "almond": 166,
+        "medium-length": 131
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "lemon-coast",
+      "title": "Lemon Coast",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "0326006XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/lemon-coast/01.jpg",
+      "gallery": [
+        "/images/products/lemon-coast/02.jpg",
+        "/images/products/lemon-coast/03.jpg",
+        "/images/products/lemon-coast/04.jpg",
+        "/images/products/lemon-coast/05.jpg",
+        "/images/products/lemon-coast/06.jpg",
+        "/images/products/lemon-coast/07.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/d21a6a09f08348ca877f10b59563d965/d21a6a09f08348ca877f10b59563d965.HD-1080p-7.2Mbps-83543798.mp4",
+      "video_poster": "/images/products/lemon-coast/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326006XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326006NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326006NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326006NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": false,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 12,
+        "spring-2026-collection": 9,
+        "almond": 34,
+        "medium-length": 28
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "aurora-snowfall",
+      "title": "Aurora Snowfall",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 38,
+      "compare_at_price": null,
+      "sku": "0326004XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/aurora-snowfall/01.jpg",
+      "gallery": [
+        "/images/products/aurora-snowfall/02.jpg",
+        "/images/products/aurora-snowfall/03.jpg",
+        "/images/products/aurora-snowfall/04.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/3bec13bd2a5c416c8df004168818db61/3bec13bd2a5c416c8df004168818db61.HD-1080p-7.2Mbps-84248273.mp4",
+      "video_poster": "/images/products/aurora-snowfall/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326004XS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326004NS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326004NM",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326004NL",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 13,
+        "spring-2026-collection": 25,
+        "almond": 119,
+        "medium-length": 93
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "moonlit-rose",
+      "title": "Moonlit Rosé",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 38,
+      "compare_at_price": null,
+      "sku": "0326003XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/moonlit-rose/01.jpg",
+      "gallery": [
+        "/images/products/moonlit-rose/02.jpg",
+        "/images/products/moonlit-rose/03.jpg",
+        "/images/products/moonlit-rose/04.jpg",
+        "/images/products/moonlit-rose/05.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/dd851da9b1264a2ab32a18c4275d6b8b/dd851da9b1264a2ab32a18c4275d6b8b.HD-1080p-7.2Mbps-84234445.mp4",
+      "video_poster": "/images/products/moonlit-rose/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326003XS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326003NS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326003NM",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326003NL",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 14,
+        "spring-2026-collection": 26,
+        "almond": 106,
+        "medium-length": 87
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "whispering-vows",
+      "title": "Whispering Vows",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 38,
+      "compare_at_price": null,
+      "sku": "0326001XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": null,
+      "image": "/images/products/whispering-vows/01.jpg",
+      "gallery": [
+        "/images/products/whispering-vows/02.jpg",
+        "/images/products/whispering-vows/03.jpg",
+        "/images/products/whispering-vows/04.jpg",
+        "/images/products/whispering-vows/05.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/c7061b0a3fff41878d8682c65f6499ad/c7061b0a3fff41878d8682c65f6499ad.HD-1080p-7.2Mbps-83544068.mp4",
+      "video_poster": "/images/products/whispering-vows/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326001XS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326001NS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326001NM",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326001NL",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "spring-2026-collection",
+        "almond"
+      ],
+      "collection_order": {
+        "new-arrival": 15,
+        "spring-2026-collection": 23,
+        "almond": 107
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "blue-lure-strike",
+      "title": "Blue Lure Strike",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 38,
+      "compare_at_price": null,
+      "sku": "030231XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/blue-lure-strike/01.jpg",
+      "gallery": [
+        "/images/products/blue-lure-strike/02.jpg",
+        "/images/products/blue-lure-strike/03.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/fa6ed9c8d2b14ed6a19040d13dd2a677/fa6ed9c8d2b14ed6a19040d13dd2a677.HD-1080p-7.2Mbps-84234383.mp4",
+      "video_poster": "/images/products/blue-lure-strike/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030231XS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030231NS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030231NM",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030231NL",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 16,
+        "spring-2026-collection": 21,
+        "almond": 66,
+        "medium-length": 54
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "chrome-crusade",
+      "title": "Chrome Crusade",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "030215XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/chrome-crusade/01.jpg",
+      "gallery": [
+        "/images/products/chrome-crusade/02.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030215XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030215NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030215NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030215NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 17,
+        "almond": 30,
+        "medium-length": 25
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "030214",
+      "title": "Sacred Silver Armor",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "030214XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Short",
+      "image": "/images/products/030214/01.jpg",
+      "gallery": [
+        "/images/products/030214/02.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030214XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030214NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030214NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030214NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "almond",
+        "short-length"
+      ],
+      "collection_order": {
+        "new-arrival": 18,
+        "almond": 29,
+        "short-length": 14
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "the-black-throne",
+      "title": "The Black Throne",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "030213XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Stiletto",
+      "length": "Long",
+      "image": "/images/products/the-black-throne/01.jpg",
+      "gallery": [
+        "/images/products/the-black-throne/02.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030213XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030213NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030213NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030213NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "stiletto-shape",
+        "long-length"
+      ],
+      "collection_order": {
+        "new-arrival": 19,
+        "stiletto-shape": 5,
+        "long-length": 4
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "liquid-silver-muse",
+      "title": "Liquid Silver Muse",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 38,
+      "compare_at_price": null,
+      "sku": "030211XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/liquid-silver-muse/01.jpg",
+      "gallery": [
+        "/images/products/liquid-silver-muse/02.jpg",
+        "/images/products/liquid-silver-muse/03.jpg",
+        "/images/products/liquid-silver-muse/04.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030211XS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030211NS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030211NM",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030211NL",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 20,
+        "spring-2026-collection": 27,
+        "almond": 92,
+        "medium-length": 75
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "moonlit-ruin",
+      "title": "Moonlit Ruin",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 38,
+      "compare_at_price": null,
+      "sku": "030210XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/moonlit-ruin/01.jpg",
+      "gallery": [
+        "/images/products/moonlit-ruin/02.jpg",
+        "/images/products/moonlit-ruin/03.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/e687d05af0d34d45b02747ccf332d9bc/e687d05af0d34d45b02747ccf332d9bc.HD-1080p-7.2Mbps-84248269.mp4",
+      "video_poster": "/images/products/moonlit-ruin/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030210XS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030210NS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030210NM",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030210NL",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 21,
+        "almond": 52,
+        "medium-length": 42
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "astral-crown-tips",
+      "title": "Astral Crown Tips",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 58,
+      "compare_at_price": null,
+      "sku": "030207XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Stiletto",
+      "length": "Long",
+      "image": "/images/products/astral-crown-tips/01.jpg",
+      "gallery": [
+        "/images/products/astral-crown-tips/02.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030207XS",
+          "price": 58,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030207S",
+          "price": 58,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030207M",
+          "price": 58,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030207L",
+          "price": 58,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "stiletto-shape",
+        "long-length"
+      ],
+      "collection_order": {
+        "new-arrival": 22,
+        "stiletto-shape": 4,
+        "long-length": 3
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "the-shimmer",
+      "title": "The Shimmer",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "030203XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/the-shimmer/01.jpg",
+      "gallery": [
+        "/images/products/the-shimmer/02.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030203XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030203S",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": false,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030203M",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030203L",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 23,
+        "spring-2026-collection": 28,
+        "almond": 167,
+        "medium-length": 132
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "dark-flame-relic",
+      "title": "Dark Flame Relic",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 38,
+      "compare_at_price": null,
+      "sku": "030201XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/dark-flame-relic/01.jpg",
+      "gallery": [
+        "/images/products/dark-flame-relic/02.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/2194328ad31c4e108dc40e2e4074d39a/2194328ad31c4e108dc40e2e4074d39a.HD-1080p-7.2Mbps-84508809.mp4",
+      "video_poster": "/images/products/dark-flame-relic/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030201XS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030201S",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030201M",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030201L",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "new-arrival": 24,
+        "almond": 12,
+        "medium-length": 10
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "bloodline-couture",
+      "title": "Bloodline Couture",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "030199XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Stiletto",
+      "length": "Long",
+      "image": "/images/products/bloodline-couture/01.jpg",
+      "gallery": [
+        "/images/products/bloodline-couture/02.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030199XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030199NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030199NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030199NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "new-arrival",
+        "stiletto-shape",
+        "long-length"
+      ],
+      "collection_order": {
+        "new-arrival": 25,
+        "stiletto-shape": 11,
+        "long-length": 13
+      },
+      "primary_collection": "new-arrival",
+      "is_featured": false
+    },
+    {
+      "slug": "golden-tide",
+      "title": "Golden Tide",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "030149XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/golden-tide/01.jpg",
+      "gallery": [
+        "/images/products/golden-tide/02.jpg",
+        "/images/products/golden-tide/03.jpg",
+        "/images/products/golden-tide/04.jpg",
+        "/images/products/golden-tide/05.jpg",
+        "/images/products/golden-tide/06.jpg",
+        "/images/products/golden-tide/07.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030149XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030149S",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030149M",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030149L",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "spring-2026-collection": 3,
+        "almond": 7,
+        "medium-length": 6
+      },
+      "primary_collection": "spring-2026-collection",
+      "is_featured": false
+    },
+    {
+      "slug": "buttercream-garden",
+      "title": "Buttercream Garden",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "0326015XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/buttercream-garden/01.jpg",
+      "gallery": [
+        "/images/products/buttercream-garden/02.jpg",
+        "/images/products/buttercream-garden/03.jpg",
+        "/images/products/buttercream-garden/04.jpg",
+        "/images/products/buttercream-garden/05.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/c5ba6ee810254d488eb5ff526b4c5d4b/c5ba6ee810254d488eb5ff526b4c5d4b.HD-1080p-7.2Mbps-83544316.mp4",
+      "video_poster": "/images/products/buttercream-garden/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326015XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326015NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326015NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326015NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "spring-2026-collection": 6,
+        "almond": 105,
+        "medium-length": 86
+      },
+      "primary_collection": "spring-2026-collection",
+      "is_featured": false
+    },
+    {
+      "slug": "blushing-flora",
+      "title": "Blushing Flora",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/blushing-flora/01.jpg",
+      "gallery": [
+        "/images/products/blushing-flora/02.jpg",
+        "/images/products/blushing-flora/03.jpg",
+        "/images/products/blushing-flora/04.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "spring-2026-collection": 7,
+        "almond": 140,
+        "medium-length": 110
+      },
+      "primary_collection": "spring-2026-collection",
+      "is_featured": false
+    },
+    {
+      "slug": "rosy-syrup-glam",
+      "title": "Rosy Syrup Glam",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "030206XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/rosy-syrup-glam/01.jpg",
+      "gallery": [
+        "/images/products/rosy-syrup-glam/02.jpg",
+        "/images/products/rosy-syrup-glam/03.jpg",
+        "/images/products/rosy-syrup-glam/04.jpg",
+        "/images/products/rosy-syrup-glam/05.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/7d28b0ac92ba43c7b63ca7ced82b4633/7d28b0ac92ba43c7b63ca7ced82b4633.HD-1080p-7.2Mbps-85201556.mp4",
+      "video_poster": "/images/products/rosy-syrup-glam/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030206XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030206S",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030206M",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030206L",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "spring-2026-collection": 13,
+        "almond": 27,
+        "medium-length": 23
+      },
+      "primary_collection": "spring-2026-collection",
+      "is_featured": false
+    },
+    {
+      "slug": "matcha-haze",
+      "title": "Matcha Haze",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "0326030XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/matcha-haze/01.jpg",
+      "gallery": [
+        "/images/products/matcha-haze/02.jpg",
+        "/images/products/matcha-haze/03.jpg",
+        "/images/products/matcha-haze/04.jpg",
+        "/images/products/matcha-haze/05.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326030XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326030NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326030NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326030NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "spring-2026-collection": 15,
+        "almond": 104,
+        "medium-length": 85
+      },
+      "primary_collection": "spring-2026-collection",
+      "is_featured": false
+    },
+    {
+      "slug": "040028",
+      "title": "Poetic Petals",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "030216XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/040028/01.jpg",
+      "gallery": [
+        "/images/products/040028/02.jpg",
+        "/images/products/040028/03.jpg",
+        "/images/products/040028/04.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030216XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030216NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030216NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030216NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "spring-2026-collection": 18,
+        "almond": 94,
+        "medium-length": 78
+      },
+      "primary_collection": "spring-2026-collection",
+      "is_featured": false
+    },
+    {
+      "slug": "coquette-noir-bites",
+      "title": "Coquette Noir Bites",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 38,
+      "compare_at_price": null,
+      "sku": "0326002XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Short",
+      "image": "/images/products/coquette-noir-bites/01.jpg",
+      "gallery": [
+        "/images/products/coquette-noir-bites/02.jpg",
+        "/images/products/coquette-noir-bites/03.jpg",
+        "/images/products/coquette-noir-bites/04.jpg",
+        "/images/products/coquette-noir-bites/05.jpg",
+        "/images/products/coquette-noir-bites/06.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/3d1c1ad1f5634f42842c7809bc0e7d9b/3d1c1ad1f5634f42842c7809bc0e7d9b.HD-1080p-7.2Mbps-83544210.mp4",
+      "video_poster": "/images/products/coquette-noir-bites/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326002XS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326002NS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326002NM",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326002NL",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "spring-2026-collection",
+        "almond",
+        "short-length"
+      ],
+      "collection_order": {
+        "spring-2026-collection": 19,
+        "almond": 65,
+        "short-length": 24
+      },
+      "primary_collection": "spring-2026-collection",
+      "is_featured": false
+    },
+    {
+      "slug": "opal-lotus-dream",
+      "title": "Opal Lotus Dream",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 38,
+      "compare_at_price": null,
+      "sku": "0326012XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Round",
+      "length": null,
+      "image": "/images/products/opal-lotus-dream/01.jpg",
+      "gallery": [
+        "/images/products/opal-lotus-dream/02.jpg",
+        "/images/products/opal-lotus-dream/03.jpg",
+        "/images/products/opal-lotus-dream/04.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326012XS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326012NS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326012NM",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326012NL",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "spring-2026-collection",
+        "round-shape"
+      ],
+      "collection_order": {
+        "spring-2026-collection": 20,
+        "round-shape": 9
+      },
+      "primary_collection": "spring-2026-collection",
+      "is_featured": false
+    },
+    {
+      "slug": "rainbow-lure",
+      "title": "Rainbow Lure",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "030230XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/rainbow-lure/01.jpg",
+      "gallery": [
+        "/images/products/rainbow-lure/02.jpg",
+        "/images/products/rainbow-lure/03.jpg",
+        "/images/products/rainbow-lure/04.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030230XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030230NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030230NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030230NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "spring-2026-collection": 22,
+        "almond": 48,
+        "medium-length": 38
+      },
+      "primary_collection": "spring-2026-collection",
+      "is_featured": false
+    },
+    {
+      "slug": "soft-vow-tips",
+      "title": "Soft Vow Tips",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 28,
+      "compare_at_price": null,
+      "sku": "030196XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/soft-vow-tips/01.jpg",
+      "gallery": [
+        "/images/products/soft-vow-tips/02.jpg",
+        "/images/products/soft-vow-tips/03.jpg",
+        "/images/products/soft-vow-tips/04.jpg",
+        "/images/products/soft-vow-tips/05.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/707ab0908d004fecbbeba805a1d0dcb8/707ab0908d004fecbbeba805a1d0dcb8.HD-1080p-7.2Mbps-83543545.mp4",
+      "video_poster": "/images/products/soft-vow-tips/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030196XS",
+          "price": 28,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030196NS",
+          "price": 28,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030196NM",
+          "price": 28,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030196NL",
+          "price": 28,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "spring-2026-collection": 24,
+        "almond": 4,
+        "medium-length": 4
+      },
+      "primary_collection": "spring-2026-collection",
+      "is_featured": false
+    },
+    {
+      "slug": "velvet-zodiac",
+      "title": "Velvet Zodiac",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "030202XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/velvet-zodiac/01.jpg",
+      "gallery": [
+        "/images/products/velvet-zodiac/02.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "030202XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "030202S",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "030202M",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "030202L",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "spring-2026-collection": 29,
+        "almond": 168,
+        "medium-length": 133
+      },
+      "primary_collection": "spring-2026-collection",
+      "is_featured": false
+    },
+    {
+      "slug": "sq0032",
+      "title": "Starlit Wings",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 38,
+      "compare_at_price": null,
+      "sku": "060044XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Almond",
+      "length": "Medium",
+      "image": "/images/products/sq0032/01.jpg",
+      "gallery": [
+        "/images/products/sq0032/02.jpg"
+      ],
+      "video": null,
+      "video_poster": null,
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "060044XS",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "060044S",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": false,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "060044M",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": false,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "060044L",
+          "price": 38,
+          "compare_at_price": null,
+          "is_available": false,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "spring-2026-collection",
+        "almond",
+        "medium-length"
+      ],
+      "collection_order": {
+        "spring-2026-collection": 30,
+        "almond": 22,
+        "medium-length": 18
+      },
+      "primary_collection": "spring-2026-collection",
+      "is_featured": false
+    },
+    {
+      "slug": "0326031",
+      "title": "Salazar’s Curse",
+      "description": "INCLUDED\n- 1 NAIL GLUE\n- 1 SHEET STICKY TABS\n- 1 NAIL FILE\n- 1 ALCOHOL WIPE\n- 1 CUTICLE TOOL\n\nSIZING\nStyle runs true to size.\n\nMEASURMENT METHOD\n\nAPPLICATION\n-STEP 1: Wash hands and dry completely. Buff your natural nails using the finer side of the nail file (included).\n\n-STEP 2: Push back cuticles, then select the best fitting nail for each finger and set aside in order.\n\n-STEP 3: Apply glue/sticky tabs (included) to the back of your Runzie Nail.\n\n-STEP 4: Place your Runzie Nail slightly under your cuticle for a seamless, natural look. Press down firmly for 30+ seconds using your thumb. Ensure the entire nail is covered and receiving pressure.\n\n-STEP 5: If needed, use more glue and pressure to avoid air pockets.\n\nHOW TO REMOVE & REAPPLY\n-STEP 1: Never force or pull off.\n\n-STEP 2: Soak your hands in hot water mixed with soap and a little bit of cooking oil for 10-20 minutes.\n\n-STEP 3: Use your cuticle stick (included) to gently lift off your Runzie Nail from the base of your nails.\n\n-STEP 4: Remove the remaining adhesive from your Runzie Nail and store them back to the acrylic case. \n\nTo reapply, simply follow the steps above and done!",
+      "price": 48,
+      "compare_at_price": null,
+      "sku": "0326031XS",
+      "size_options": "XS,S,M,L",
+      "shape": "Stiletto",
+      "length": "Long",
+      "image": "/images/products/0326031/01.jpg",
+      "gallery": [
+        "/images/products/0326031/02.jpg"
+      ],
+      "video": "https://cdn.shopify.com/videos/c/vp/b357956caf0f492ab2b5c60c7a2847e3/b357956caf0f492ab2b5c60c7a2847e3.HD-1080p-7.2Mbps-84508836.mp4",
+      "video_poster": "/images/products/0326031/video-poster.jpg",
+      "variants": [
+        {
+          "title": "XS",
+          "sku": "0326031XS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 0
+        },
+        {
+          "title": "S",
+          "sku": "0326031NS",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 1
+        },
+        {
+          "title": "M",
+          "sku": "0326031NM",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 2
+        },
+        {
+          "title": "L",
+          "sku": "0326031NL",
+          "price": 48,
+          "compare_at_price": null,
+          "is_available": true,
+          "sort_order": 3
+        }
+      ],
+      "collections": [
+        "spring-2026-collection",
+        "stiletto-shape",
+        "long-length"
+      ],
+      "collection_order": {
+        "spring-2026-collection": -1,
+        "stiletto-shape": 19,
+        "long-length": 23
+      },
+      "primary_collection": "spring-2026-collection",
+      "is_featured": false
+    }
+  ]
+}

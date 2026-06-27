@@ -1,0 +1,187 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<!-- Hero slideshow -->
+<% if (banners.length) { %>
+<section class="hero">
+  <div class="hero__track">
+    <% banners.forEach(function(b) { %>
+    <div class="hero__slide">
+      <div class="hero__media">
+        <% if (b.video) { %>
+          <video autoplay muted loop playsinline poster="<%= b.image || '' %>"><source src="<%= b.video %>" type="video/mp4" /></video>
+        <% } else { %>
+          <img src="<%= b.image || '/images/Website_Photos_Square.jpg' %>" alt="<%= b.title || '' %>" />
+        <% } %>
+        <div class="hero__overlay">
+          <div class="container">
+            <div class="hero__content">
+              <span class="eyebrow"><%= settings.shop_name || 'Majestic Nailbox' %></span>
+              <h1><%= b.title || '' %></h1>
+              <% if (b.subtitle) { %><p><%= b.subtitle %></p><% } %>
+              <% if (b.link) { %><a href="<%= b.link %>" class="btn btn--light"><%= b.button_text || 'Shop Now' %></a><% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+  <% if (banners.length > 1) { %>
+    <button class="hero__arrow hero__arrow--prev" aria-label="Previous">‹</button>
+    <button class="hero__arrow hero__arrow--next" aria-label="Next">›</button>
+    <div class="hero__dots">
+      <% banners.forEach(function(b, i) { %><button class="hero__dot <%= i===0?'active':'' %>"></button><% }) %>
+    </div>
+  <% } %>
+</section>
+<% } %>
+
+<!-- Marquee -->
+<div class="marquee">
+  <div class="marquee__track">
+    <span>Reusable · Cruelty-Free · Salon-Quality · Up to 2 Weeks Wear · Effortless Application · </span>
+    <span>Reusable · Cruelty-Free · Salon-Quality · Up to 2 Weeks Wear · Effortless Application · </span>
+  </div>
+</div>
+
+<!-- Featured products -->
+<% if (featured.length) { %>
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Loved by you</span>
+      <h2>Best Sellers</h2>
+      <p>Our most-wanted sets — hand-finished and ready to wear.</p>
+    </div>
+    <div class="grid grid--products">
+      <% featured.forEach(function(product) { %>
+        <%- include('partials/product-card', { product: product }) %>
+      <% }) %>
+    </div>
+    <div class="text-center" style="margin-top:40px">
+      <a href="/products" class="btn btn--outline">View All Products</a>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Shop by shape -->
+<% if (collections.length) { %>
+<section class="section section--tight" style="background:var(--bg-soft)">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Find your fit</span>
+      <h2>Shop By Shape</h2>
+      <p>From soft almond to bold coffin — choose the look that's you.</p>
+    </div>
+    <div class="grid grid--collections">
+      <% collections.slice(0,4).forEach(function(c) { %>
+        <a href="/collections/<%= c.slug %>" class="collection-card">
+          <img src="<%= c.image || '/images/Website_Photos_Square.jpg' %>" alt="<%= c.title %>" loading="lazy" />
+          <div class="collection-card__label">
+            <h3><%= c.title %></h3>
+            <span>Shop now →</span>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Image with text -->
+<section class="section">
+  <div class="container split">
+    <div class="split__media">
+      <img src="/images/0326009_2.jpg" alt="Press-on application" />
+    </div>
+    <div class="split__content">
+      <span class="eyebrow">Why Majestic Nailbox</span>
+      <h2>A salon manicure, minus the salon.</h2>
+      <p>Each set is hand-finished and built to last up to two weeks. No appointments, no drying time, no damage — just press, wear, and reuse. Our nails are cruelty-free and designed in-house for the perfect everyday fit.</p>
+      <a href="/products" class="btn btn--primary">Explore the Collection</a>
+    </div>
+  </div>
+</section>
+
+<!-- Feature icons -->
+<section class="section--tight" style="background:var(--bg-soft)">
+  <div class="container">
+    <div class="features">
+      <div class="feature"><div class="feature__icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 20c1-5 1-11 3-16 3 2 5 5 7 9 1 3-1 7-5 7H7z"/><path d="M10 8c2 1 4 3 5 5"/></svg></div><h4>Salon Quality</h4><p>Hand-finished, glossy, durable.</p></div>
+      <div class="feature"><div class="feature__icon"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></div><h4>Ready in Minutes</h4><p>Apply at home, anytime.</p></div>
+      <div class="feature"><div class="feature__icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m7 7 3-3 3 3M10 4v7a5 5 0 0 0 5 5h2"/><path d="m17 17-3 3-3-3M14 20v-7a5 5 0 0 0-5-5H7"/></svg></div><h4>Reusable</h4><p>Wear your favourites again.</p></div>
+      <div class="feature"><div class="feature__icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21C7 18 4 14 4 9a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5-3 9-6 12z"/></svg></div><h4>Cruelty-Free</h4><p>Always kind, never tested.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="section reviews">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">★★★★★</span>
+      <h2>Let Customers Speak For Us</h2>
+      <p>Over 10,000 happy hands and counting.</p>
+    </div>
+    <div class="reviews__grid">
+      <div class="review">
+        <div class="review__stars">★★★★★</div>
+        <p class="review__text">"Genuinely lasted two full weeks and looked like I'd been to the salon. The almond fit is perfect."</p>
+        <div class="review__author">— Mia T.</div>
+      </div>
+      <div class="review">
+        <div class="review__stars">★★★★★</div>
+        <p class="review__text">"So easy to apply and the quality is unreal for the price. I'm completely hooked."</p>
+        <div class="review__author">— Jasmine R.</div>
+      </div>
+      <div class="review">
+        <div class="review__stars">★★★★★</div>
+        <p class="review__text">"Reusable, gorgeous, and zero damage to my natural nails. Repurchasing in every shade."</p>
+        <div class="review__author">— Hannah L.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog teaser -->
+<% if (posts.length) { %>
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The Journal</span>
+      <h2>Tips, Tricks & Inspiration</h2>
+    </div>
+    <div class="blog-grid">
+      <% posts.forEach(function(post) { %>
+        <a href="/blog/<%= post.slug %>" class="post-card">
+          <div class="post-card__media"><img src="<%= post.cover_image || '/images/Website_Photos_Square.jpg' %>" alt="<%= post.title %>" loading="lazy" /></div>
+          <div class="post-card__body">
+            <div class="post-card__date"><%= new Date(post.published_at).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' }) %></div>
+            <h3><%= post.title %></h3>
+            <p><%= post.excerpt || '' %></p>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Instagram -->
+<section class="section--tight" style="padding-bottom:72px">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow"><%= settings.instagram ? '@' + (settings.shop_name || 'runzie') : 'Follow us' %></span>
+      <h2>Get Inspired by Every Look</h2>
+    </div>
+    <div class="insta-grid">
+      <% featured.slice(0,6).forEach(function(p) { %>
+        <a href="<%= settings.instagram || '#' %>" target="_blank" rel="noopener"><img src="<%= p.image %>" alt="<%= p.title %>" loading="lazy" /></a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

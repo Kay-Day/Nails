@@ -1,0 +1,84 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<div class="page-head">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Home</a> / Shop</div>
+    <h1><%= filters.collection ? (collections.find(c => c.slug === filters.collection) || {}).title || 'Shop' : 'Shop All Nails' %></h1>
+    <p>Find your perfect press-on set.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container shop">
+    <aside class="filters">
+      <form class="search-form" method="get" action="/products" style="margin-bottom:18px">
+        <input class="input" type="text" name="q" placeholder="Search…" value="<%= filters.q || '' %>" />
+        <button class="btn btn--primary" type="submit">Go</button>
+      </form>
+      <div class="filters__group">
+        <h4>Collections</h4>
+        <a href="/products" class="<%= !filters.collection ? 'active' : '' %>">All</a>
+        <% collections.forEach(function(c) { %>
+          <a href="/products?collection=<%= c.slug %>" class="<%= filters.collection === c.slug ? 'active' : '' %>"><%= c.title %></a>
+        <% }) %>
+      </div>
+      <div class="filters__group">
+        <h4>Shape</h4>
+        <% shapes.forEach(function(s) { %>
+          <a href="/products?shape=<%= s %>" class="<%= filters.shape === s ? 'active' : '' %>"><%= s %></a>
+        <% }) %>
+      </div>
+      <div class="filters__group">
+        <h4>Length</h4>
+        <% lengths.forEach(function(l) { %>
+          <a href="/products?length=<%= encodeURIComponent(l) %>" class="<%= filters.length === l ? 'active' : '' %>"><%= l %></a>
+        <% }) %>
+      </div>
+    </aside>
+
+    <div>
+      <div class="shop__toolbar">
+        <span class="shop__count"><%= total %> product<%= total === 1 ? '' : 's' %></span>
+        <form method="get" action="/products" id="sortForm">
+          <% Object.entries(filters).forEach(function([k,v]) { if (v && k !== 'sort') { %>
+            <input type="hidden" name="<%= k %>" value="<%= v %>" />
+          <% } }) %>
+          <select class="select" name="sort" onchange="document.getElementById('sortForm').submit()">
+            <option value="">Sort: Featured</option>
+            <option value="newest" <%= filters.sort==='newest'?'selected':'' %>>Newest</option>
+            <option value="price-asc" <%= filters.sort==='price-asc'?'selected':'' %>>Price: Low to High</option>
+            <option value="price-desc" <%= filters.sort==='price-desc'?'selected':'' %>>Price: High to Low</option>
+          </select>
+        </form>
+      </div>
+
+      <% if (products.length) { %>
+        <div class="grid grid--products">
+          <% products.forEach(function(product) { %>
+            <%- include('partials/product-card', { product: product }) %>
+          <% }) %>
+        </div>
+
+        <% if (totalPages > 1) { %>
+          <div class="pagination">
+            <% var qs = function(p){ var o = Object.assign({}, filters, {page:p}); return '/products?' + Object.entries(o).filter(function(e){return e[1]}).map(function(e){return e[0]+'='+encodeURIComponent(e[1])}).join('&'); }; %>
+            <% if (page > 1) { %><a href="<%= qs(page-1) %>">←</a><% } %>
+            <% for (var p = 1; p <= totalPages; p++) { %>
+              <% if (p === page) { %><span class="current"><%= p %></span><% } else { %><a href="<%= qs(p) %>"><%= p %></a><% } %>
+            <% } %>
+            <% if (page < totalPages) { %><a href="<%= qs(page+1) %>">→</a><% } %>
+          </div>
+        <% } %>
+      <% } else { %>
+        <div class="empty">
+          <h3>No products found</h3>
+          <p>Try clearing your filters.</p>
+          <a href="/products" class="btn btn--primary">View All</a>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

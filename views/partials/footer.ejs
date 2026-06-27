@@ -1,0 +1,79 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="/" class="brand"><%= settings.shop_name || 'runzie' %></a>
+        <p><%= settings.tagline || 'Press-on nails, salon-perfect in minutes.' %></p>
+        <div class="social-links">
+          <% if (settings.instagram) { %><a href="<%= settings.instagram %>" target="_blank" rel="noopener" aria-label="Instagram"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" class="fill"/></svg></a><% } %>
+          <% if (settings.tiktok) { %><a href="<%= settings.tiktok %>" target="_blank" rel="noopener" aria-label="TikTok"><svg aria-hidden="true" viewBox="0 0 24 24"><path class="fill" d="M15.6 3c.4 2.2 1.7 3.6 4.1 3.8v3.1c-1.5.1-2.8-.3-4.1-1.1v6.3a6.1 6.1 0 1 1-5.3-6V12a3.2 3.2 0 1 0 2.2 3.1V3h3.1z"/></svg></a><% } %>
+        </div>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <a href="/products">All Products</a>
+        <a href="/collections/best-sellers-1">Best Sellers</a>
+        <a href="/collections/new-arrival">New Arrivals</a>
+        <a href="/collections/now-on-sale">On Sale</a>
+      </div>
+      <div>
+        <h4>About</h4>
+        <a href="/blog">Journal</a>
+        <a href="/contact">Contact</a>
+        <a href="/contact">FAQ</a>
+        <a href="/admin">Admin</a>
+      </div>
+      <div class="footer__news">
+        <div style="width:100%">
+          <h4>Stay in the loop</h4>
+          <p style="color:#b6a89f;font-size:14px;margin:0 0 12px">New drops, tips & offers — straight to your inbox.</p>
+          <form class="footer__news" onsubmit="event.preventDefault(); this.reset(); alert('Thanks for subscribing!');">
+            <input type="email" placeholder="Email address" required />
+            <button type="submit">Join</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <%= new Date().getFullYear() %> <%= settings.shop_name || 'runzie' %>. All rights reserved.</span>
+      <span><%= settings.contact_address || '' %> · <%= settings.contact_phone || '' %></span>
+    </div>
+  </div>
+</footer>
+<script>
+  // Hero slideshow
+  (function () {
+    var track = document.querySelector('.hero__track');
+    if (!track) return;
+    var slides = track.children;
+    var dots = document.querySelectorAll('.hero__dot');
+    var i = 0, n = slides.length, timer;
+    function go(idx) {
+      i = (idx + n) % n;
+      track.style.transform = 'translateX(-' + (i * 100) + '%)';
+      dots.forEach(function (d, k) { d.classList.toggle('active', k === i); });
+    }
+    function next() { go(i + 1); }
+    document.querySelectorAll('.hero__dot').forEach(function (d, k) { d.addEventListener('click', function () { go(k); reset(); }); });
+    var prev = document.querySelector('.hero__arrow--prev');
+    var nxt = document.querySelector('.hero__arrow--next');
+    if (prev) prev.addEventListener('click', function () { go(i - 1); reset(); });
+    if (nxt) nxt.addEventListener('click', function () { next(); reset(); });
+    function reset() { clearInterval(timer); timer = setInterval(next, 6000); }
+    if (n > 1) reset();
+  })();
+  // Product gallery
+  (function () {
+    var main = document.getElementById('galleryMain');
+    if (!main) return;
+    document.querySelectorAll('.gallery__thumbs img').forEach(function (t) {
+      t.addEventListener('click', function () {
+        main.src = t.src;
+        document.querySelectorAll('.gallery__thumbs img').forEach(function (x) { x.classList.remove('active'); });
+        t.classList.add('active');
+      });
+    });
+  })();
+</script>
+</body>
+</html>

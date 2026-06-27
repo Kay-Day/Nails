@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> · Admin</title>
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link rel="stylesheet" href="/css/site.css" />
+  <script src="/js/admin.js" defer></script>
+</head>
+<body>
+<div class="admin">
+  <aside class="sidebar">
+    <div class="sidebar__mobile-head">
+      <div class="sidebar__brand"><%= settings.shop_name || 'runzie' %> admin</div>
+      <button class="sidebar__toggle" type="button" aria-controls="admin-navigation" aria-expanded="false" aria-label="Open admin menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav id="admin-navigation">
+      <a href="/admin" class="<%= active==='dashboard'?'active':'' %>">▦ Dashboard</a>
+      <a href="/admin/products" class="<%= active==='products'?'active':'' %>">💅 Products</a>
+      <a href="/admin/collections" class="<%= active==='collections'?'active':'' %>">🗂 Collections</a>
+      <a href="/admin/banners" class="<%= active==='banners'?'active':'' %>">🖼 Banners</a>
+      <a href="/admin/posts" class="<%= active==='posts'?'active':'' %>">📝 Blog</a>
+      <a href="/admin/content" class="<%= active==='content'?'active':'' %>">▤ Page Content</a>
+      <a href="/admin/messages" class="<%= active==='messages'?'active':'' %>">✉ Messages</a>
+      <a href="/admin/settings" class="<%= active==='settings'?'active':'' %>">⚙ Settings</a>
+    </nav>
+    <div class="sidebar__foot">
+      <a href="/" target="_blank">↗ View store</a><br/><br/>
+      <span style="color:#fff"><%= admin ? admin.username : '' %></span> ·
+      <form action="/admin/logout" method="post" style="display:inline"><button type="submit" style="background:none;border:none;color:#aeb8c6;cursor:pointer;font-family:inherit">Logout</button></form>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="topbar">
+      <h1><%= title %></h1>
+      <div><%= typeof headerAction !== 'undefined' ? '' : '' %></div>
+    </div>
+    <div class="content">

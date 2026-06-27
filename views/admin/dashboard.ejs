@@ -1,0 +1,33 @@
+<%- include('partials/head') %>
+
+<div class="stats">
+  <a href="/admin/products" class="stat"><div class="stat__num"><%= counts.products %></div><div class="stat__label">Products</div></a>
+  <a href="/admin/collections" class="stat"><div class="stat__num"><%= counts.collections %></div><div class="stat__label">Collections</div></a>
+  <a href="/admin/banners" class="stat"><div class="stat__num"><%= counts.banners %></div><div class="stat__label">Banners</div></a>
+  <a href="/admin/posts" class="stat"><div class="stat__num"><%= counts.posts %></div><div class="stat__label">Blog Posts</div></a>
+  <a href="/admin/content" class="stat"><div class="stat__num"><%= counts.sections %></div><div class="stat__label">Content Sections</div></a>
+  <a href="/admin/messages" class="stat"><div class="stat__num"><%= counts.messages %></div><div class="stat__label">New Messages</div></a>
+</div>
+
+<div class="panel">
+  <div class="panel__head">
+    <h2>Recent Products</h2>
+    <a href="/admin/products/new" class="btn btn--accent btn--sm">+ New Product</a>
+  </div>
+  <table>
+    <thead><tr><th></th><th>Title</th><th>Price</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      <% recent.forEach(function(p) { %>
+        <tr>
+          <td><img class="thumb" src="<%= p.image || '/images/Website_Photos_Square.jpg' %>" /></td>
+          <td><%= p.title %></td>
+          <td><%= p.price != null ? '$' + Number(p.price).toFixed(2) : '—' %></td>
+          <td><span class="badge badge--<%= p.is_active ? 'on':'off' %>"><%= p.is_active ? 'Active':'Hidden' %></span></td>
+          <td class="actions"><a href="/admin/products/<%= p.id %>/edit" class="btn btn--ghost btn--sm">Edit</a></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/foot') %>

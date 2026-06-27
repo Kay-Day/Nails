@@ -1,0 +1,64 @@
+<%- include('partials/head') %>
+
+<% if (saved === '1') { %><div class="flash">Settings saved successfully.</div><% } %>
+<% if (saved === 'pw') { %><div class="flash">Password updated successfully.</div><% } %>
+<% if (saved === 'err') { %><div class="flash flash--err">Current password is incorrect.</div><% } %>
+
+<form class="form-card" method="post" action="/admin/settings" enctype="multipart/form-data" style="margin-bottom:28px">
+  <h2 style="margin-top:0">Store & Contact Settings</h2>
+  <div class="form-grid">
+    <div class="form-row"><label>Shop name</label><input type="text" name="shop_name" value="<%= settings.shop_name || '' %>" /></div>
+    <div class="form-row"><label>Tagline</label><input type="text" name="tagline" value="<%= settings.tagline || '' %>" /></div>
+    <div class="form-row form-row--full"><label>Announcement 1</label><input type="text" name="announcement" value="<%= settings.announcement || '' %>" /></div>
+    <div class="form-row form-row--full"><label>Announcement 2</label><input type="text" name="announcement_2" value="<%= settings.announcement_2 || '' %>" /></div>
+    <div class="form-row form-row--full"><label>Announcement 3</label><input type="text" name="announcement_3" value="<%= settings.announcement_3 || '' %>" /></div>
+    <div class="form-row form-row--full"><label>Announcement 4</label><input type="text" name="announcement_4" value="<%= settings.announcement_4 || '' %>" /></div>
+    <div class="form-row"><label>Contact phone</label><input type="text" name="contact_phone" value="<%= settings.contact_phone || '' %>" /></div>
+    <div class="form-row"><label>Contact email</label><input type="text" name="contact_email" value="<%= settings.contact_email || '' %>" /></div>
+    <div class="form-row"><label>Business hours</label><input type="text" name="contact_hours" value="<%= settings.contact_hours || '' %>" /></div>
+    <div class="form-row form-row--full"><label>Address</label><input type="text" name="contact_address" value="<%= settings.contact_address || '' %>" /></div>
+    <div class="form-row"><label>Instagram URL</label><input type="text" name="instagram" value="<%= settings.instagram || '' %>" /></div>
+    <div class="form-row"><label>TikTok URL</label><input type="text" name="tiktok" value="<%= settings.tiktok || '' %>" /></div>
+    <div class="form-row"><label>Facebook URL</label><input type="text" name="facebook" value="<%= settings.facebook || '' %>" /></div>
+    <div class="form-row form-row--full"><label>Default SEO description</label><textarea name="seo_description" rows="3"><%= settings.seo_description || '' %></textarea></div>
+    <div class="form-row"><label>Public site URL</label><input type="url" name="site_url" value="<%= settings.site_url || '' %>" placeholder="https://example.com" /></div>
+    <%- include('partials/media-field', {
+      label: 'Default social image',
+      kind: 'image',
+      currentUrl: settings.og_image || '',
+      fileName: 'og_image_file',
+      urlName: 'og_image_url',
+      removeName: 'remove_og_image',
+      accept: 'image/*',
+      placeholder: 'https://example.com/social-image.jpg',
+      hint: 'Used when a page is shared on social media.'
+    }) %>
+    <%- include('partials/media-field', {
+      label: 'Contact fallback banner',
+      kind: 'image',
+      currentUrl: settings.contact_banner || '',
+      fileName: 'contact_banner_file',
+      urlName: 'contact_banner_url',
+      removeName: 'remove_contact_banner',
+      accept: 'image/*',
+      placeholder: 'https://example.com/contact-banner.jpg',
+      hint: 'Used on the contact page when no other banner is selected.'
+    }) %>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn--primary">Save Settings</button>
+  </div>
+</form>
+
+<form class="form-card" method="post" action="/admin/account/password">
+  <h2 style="margin-top:0">Change Admin Password</h2>
+  <div class="form-grid">
+    <div class="form-row"><label>Current password</label><input type="password" name="current_password" required /></div>
+    <div class="form-row"><label>New password</label><input type="password" name="new_password" required minlength="6" /></div>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn--primary">Update Password</button>
+  </div>
+</form>
+
+<%- include('partials/foot') %>

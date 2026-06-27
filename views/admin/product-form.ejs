@@ -1,0 +1,141 @@
+<%- include('partials/head') %>
+
+<form class="form-card" method="post" action="<%= formAction %>" enctype="multipart/form-data">
+  <div class="form-grid">
+    <div class="form-row form-row--full">
+      <label>Title</label>
+      <input type="text" name="title" value="<%= product.title || '' %>" required />
+    </div>
+
+    <div class="form-row">
+      <label>Slug <span class="hint">optional, e.g. 0326031</span></label>
+      <input type="text" name="slug" value="<%= product.slug || '' %>" />
+    </div>
+    <div class="form-row">
+      <label>SKU</label>
+      <input type="text" name="sku" value="<%= product.sku || '' %>" placeholder="0326031XS" />
+    </div>
+
+    <div class="form-row form-row--full">
+      <label>Description</label>
+      <textarea name="description" rows="4"><%= product.description || '' %></textarea>
+    </div>
+
+    <div class="form-row">
+      <label>Price ($) <span class="hint">leave blank for "Contact for price"</span></label>
+      <input type="number" step="0.01" name="price" value="<%= product.price != null ? product.price : '' %>" />
+    </div>
+    <div class="form-row">
+      <label>Compare-at Price ($) <span class="hint">optional, shows as sale</span></label>
+      <input type="number" step="0.01" name="compare_at_price" value="<%= product.compare_at_price != null ? product.compare_at_price : '' %>" />
+    </div>
+
+    <div class="form-row">
+      <label>Shape</label>
+      <input name="shape" list="product-shapes" value="<%= product.shape || '' %>" />
+      <datalist id="product-shapes"><% shapes.forEach(function(shape) { %><option value="<%= shape %>"></option><% }) %></datalist>
+    </div>
+    <div class="form-row">
+      <label>Length</label>
+      <input name="length" list="product-lengths" value="<%= product.length || '' %>" />
+      <datalist id="product-lengths"><% lengths.forEach(function(length) { %><option value="<%= length %>"></option><% }) %></datalist>
+    </div>
+
+    <div class="form-row form-row--full">
+      <label>Size options <span class="hint">comma separated, shown on product detail</span></label>
+      <input type="text" name="size_options" value="<%= product.size_options || 'XS,S,M,L' %>" />
+      <% if (typeof variants !== 'undefined' && variants.length) { %>
+        <div class="hint" style="margin-top:8px">
+          Current variants:
+          <%= variants.map(function(variant){ return variant.title + (variant.sku ? ' (' + variant.sku + ')' : ''); }).join(', ') %>
+        </div>
+      <% } %>
+    </div>
+
+    <div class="form-row form-row--full">
+      <label>Collections <span class="hint">a product can appear in multiple collections</span></label>
+      <div class="collection-checks">
+        <% collections.forEach(function(c){ %>
+          <label class="check">
+            <input type="checkbox" name="collection_ids" value="<%= c.id %>" <%= (collectionIds || []).includes(c.id)?'checked':'' %> />
+            <%= c.title %>
+          </label>
+        <% }) %>
+      </div>
+    </div>
+    <div class="form-row">
+      <label>Sort order</label>
+      <input type="number" name="sort_order" value="<%= product.sort_order || 0 %>" />
+    </div>
+
+    <%- include('partials/media-field', {
+      label: 'Main image',
+      kind: 'image',
+      currentUrl: product.image || '',
+      fileName: 'image',
+      urlName: 'image_url',
+      removeName: 'remove_image',
+      accept: 'image/*',
+      placeholder: 'https://example.com/product.jpg',
+      hint: 'Choose a file from this device or paste a direct image link.'
+    }) %>
+
+    <%- include('partials/media-field', {
+      label: 'Product video',
+      kind: 'video',
+      currentUrl: product.video || '',
+      fileName: 'video',
+      urlName: 'video_url',
+      removeName: 'remove_video',
+      accept: 'video/mp4,video/webm',
+      placeholder: 'YouTube, Vimeo, MP4, or WebM URL',
+      hint: 'Upload an MP4/WebM file or paste a YouTube, Vimeo, MP4, or WebM link.'
+    }) %>
+
+    <%- include('partials/media-field', {
+      label: 'Video cover image',
+      kind: 'image',
+      currentUrl: product.video_poster || '',
+      fileName: 'video_poster',
+      urlName: 'video_poster_url',
+      removeName: 'remove_video_poster',
+      accept: 'image/*',
+      placeholder: 'https://example.com/video-cover.jpg',
+      hint: 'Optional image shown before the video starts.'
+    }) %>
+
+    <div class="form-row form-row--full">
+      <label>Gallery images <span class="hint">add more photos (multiple)</span></label>
+      <input type="file" name="gallery" accept="image/*" multiple data-gallery-input />
+      <div class="gallery-edit gallery-edit--pending" data-gallery-preview aria-live="polite"></div>
+      <% if (typeof images !== 'undefined' && images.length) { %>
+        <div class="gallery-edit">
+          <% images.forEach(function(img){ %>
+            <div class="gallery-edit__item">
+              <img src="<%= img.url %>" />
+              <button type="button" title="Remove" onclick="if(confirm('Remove this image?')){document.getElementById('delimg-<%= img.id %>').submit();}">×</button>
+            </div>
+          <% }) %>
+        </div>
+      <% } %>
+    </div>
+
+    <div class="form-row">
+      <label class="check"><input type="checkbox" name="is_active" <%= (product.is_active===undefined||product.is_active)?'checked':'' %> /> Active (visible in store)</label>
+    </div>
+    <div class="form-row">
+      <label class="check"><input type="checkbox" name="is_featured" <%= product.is_featured?'checked':'' %> /> Featured (Best Sellers)</label>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn--primary">Save Product</button>
+    <a href="/admin/products" class="btn btn--ghost">Cancel</a>
+  </div>
+</form>
+
+<% if (typeof images !== 'undefined') { images.forEach(function(img){ %>
+  <form id="delimg-<%= img.id %>" action="/admin/product-images/<%= img.id %>/delete" method="post" style="display:none"></form>
+<% }) } %>
+
+<%- include('partials/foot') %>

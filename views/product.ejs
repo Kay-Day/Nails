@@ -1,0 +1,82 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<section class="section">
+  <div class="container">
+    <div class="breadcrumb" style="margin-bottom:24px">
+      <a href="/">Home</a> / <a href="/products">Shop</a>
+      <% if (product.collection_slug) { %> / <a href="/products?collection=<%= product.collection_slug %>"><%= product.collection_title %></a><% } %>
+      / <%= product.title %>
+    </div>
+
+    <div class="product">
+      <div class="gallery">
+        <div class="gallery__main">
+          <img id="galleryMain" src="<%= gallery[0] || '/images/Website_Photos_Square.jpg' %>" alt="<%= product.title %>" />
+        </div>
+        <% if (gallery.length > 1) { %>
+        <div class="gallery__thumbs">
+          <% gallery.forEach(function(g, i) { %>
+            <img src="<%= g %>" class="<%= i===0?'active':'' %>" alt="<%= product.title %> <%= i+1 %>" />
+          <% }) %>
+        </div>
+        <% } %>
+      </div>
+
+      <div class="product__info">
+        <% if (product.shape) { %><div class="shape"><%= product.shape %><%= product.length ? ' · ' + product.length : '' %></div><% } %>
+        <h1><%= product.title %></h1>
+        <div class="product__price">
+          <% if (product.price != null) { %>$<%= Number(product.price).toFixed(2) %><% } else { %>Contact for price<% } %>
+          <% if (product.compare_at_price && Number(product.compare_at_price) > Number(product.price)) { %>
+            <span class="was">$<%= Number(product.compare_at_price).toFixed(2) %></span>
+          <% } %>
+        </div>
+
+        <div class="product__meta">
+          <% if (product.shape) { %><span class="chip">Shape: <%= product.shape %></span><% } %>
+          <% if (product.length) { %><span class="chip">Length: <%= product.length %></span><% } %>
+          <% if (product.collection_title) { %><span class="chip"><%= product.collection_title %></span><% } %>
+        </div>
+
+        <% if (product.description) { %><p class="product__desc"><%= product.description %></p><% } %>
+
+        <div class="contact-cta">
+          <h3>Interested in this set?</h3>
+          <p>We don't sell online checkout here — message us and our team will help you order, check availability, and answer any questions.</p>
+          <div class="contact-cta__row">
+            <% if (settings.contact_phone) { %>
+              <a href="tel:<%= settings.contact_phone.replace(/[^0-9+]/g,'') %>" class="btn btn--primary">Call <%= settings.contact_phone %></a>
+            <% } %>
+            <% if (settings.instagram) { %>
+              <a href="<%= settings.instagram %>" class="btn btn--outline" target="_blank" rel="noopener">Instagram</a>
+            <% } %>
+            <% if (settings.tiktok) { %>
+              <a href="<%= settings.tiktok %>" class="btn btn--outline" target="_blank" rel="noopener">TikTok</a>
+            <% } %>
+            <% if (settings.contact_email) { %>
+              <a href="mailto:<%= settings.contact_email %>?subject=<%= encodeURIComponent('Enquiry: ' + product.title) %>" class="btn btn--outline">Email Us</a>
+            <% } %>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;font-size:14px;color:var(--ink-soft)">
+          <p>✓ 24 tips across 12 sizes &nbsp; ✓ Prep kit & adhesive included &nbsp; ✓ Reusable</p>
+        </div>
+      </div>
+    </div>
+
+    <% if (related.length) { %>
+    <div style="margin-top:80px">
+      <div class="section-head"><h2>You May Also Like</h2></div>
+      <div class="grid grid--products">
+        <% related.forEach(function(product) { %>
+          <%- include('partials/product-card', { product: product }) %>
+        <% }) %>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

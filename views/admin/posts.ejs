@@ -1,0 +1,31 @@
+<%- include('partials/head') %>
+
+<div class="panel">
+  <div class="panel__head">
+    <h2><%= posts.length %> Blog Posts</h2>
+    <a href="/admin/posts/new" class="btn btn--accent btn--sm">+ New Post</a>
+  </div>
+  <table>
+    <thead><tr><th></th><th>Title</th><th>Author</th><th>Published</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      <% if (!posts.length) { %><tr><td colspan="6" class="empty-row">No posts yet.</td></tr><% } %>
+      <% posts.forEach(function(p) { %>
+        <tr>
+          <td><img class="thumb thumb--wide" src="<%= p.cover_image || '/images/Website_Photos_Square.jpg' %>" /></td>
+          <td><%= p.title %></td>
+          <td><%= p.author %></td>
+          <td><%= new Date(p.published_at).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' }) %></td>
+          <td><span class="badge badge--<%= p.is_published ? 'on':'off' %>"><%= p.is_published ? 'Published':'Draft' %></span></td>
+          <td class="actions">
+            <a href="/admin/posts/<%= p.id %>/edit" class="btn btn--ghost btn--sm">Edit</a>
+            <form action="/admin/posts/<%= p.id %>/delete" method="post" onsubmit="return confirm('Delete this post?')">
+              <button class="btn btn--danger btn--sm" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/foot') %>

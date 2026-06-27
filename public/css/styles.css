@@ -1,0 +1,1175 @@
+.futureblink-default-shipping {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffb800;
+  padding: 10px;
+  z-index: 10;
+  flex-wrap: wrap;
+  text-align: center
+  }
+  .futureblink-default-shipping p {
+    margin: 0;
+  }
+
+  
+/* Background patterns */
+.fblink-pattern-tiny_square {
+  --s: 8px;
+  /* the size */
+  --c1: #c6f0f9;
+  --c2: #f3b90d;
+
+  background:
+    conic-gradient(at 60% 60%, var(--c1) 75%, #0000 0) 0 0/calc(5*var(--s)/2) calc(5*var(--s)/2),
+    repeating-conic-gradient(var(--c1) 0 25%, #0000 0 50%) 0 0/calc(5*var(--s)) calc(5*var(--s)),
+    repeating-conic-gradient(var(--c2) 0 25%, var(--c1) 0 50%) 0 0/var(--s) var(--s) !important;
+}
+
+.fblink-pattern-random_grain {
+  --s: 4px;
+  --g: repeating-conic-gradient(#774F38 0 25%, #ECE5CE 0 50%) 0/;
+  background:
+    var(--g) calc(1*var(--s)) calc(7*var(--s)),
+    var(--g) calc(2*var(--s)) calc(5*var(--s)),
+    var(--g) calc(3*var(--s)) calc(3*var(--s)),
+    var(--g) calc(5*var(--s)) calc(2*var(--s)),
+    var(--g) calc(7*var(--s)) calc(1*var(--s));
+  background-blend-mode: darken;
+}
+
+.fblink-pattern-puzzle {
+  --sz: 5px;
+  --c1: #4b2889;
+  --c2: #673ab7;
+  --c3: #401c81;
+  --c4: #2d125d;
+  --ts: 50% / calc(var(--sz) * 10) calc(var(--sz) * 10);
+  --pz: calc(var(--sz) * 0.65), #fff0 calc((var(--sz) * 0.65) + 1px);
+  background: radial-gradient(circle at 53% 25%, var(--c4) var(--pz)) var(--ts),
+    radial-gradient(circle at 75% 47%, var(--c2) var(--pz)) var(--ts),
+    radial-gradient(circle at 3% 75%, var(--c2) var(--pz)) var(--ts),
+    radial-gradient(circle at 25% 53%, var(--c4) var(--pz)) var(--ts),
+    radial-gradient(circle at 53% 75%, var(--c3) var(--pz)) var(--ts),
+    radial-gradient(circle at 75% 97%, var(--c1) var(--pz)) var(--ts),
+    radial-gradient(circle at 3% 25%, var(--c1) var(--pz)) var(--ts),
+    radial-gradient(circle at 25% 3%, var(--c3) var(--pz)) var(--ts),
+    conic-gradient(from 0deg at 50% 50%,
+      var(--c1) 0 25%,
+      var(--c2) 0 50%,
+      var(--c3) 0 75%,
+      var(--c4) 0 100%) var(--ts);
+}
+
+
+.fblink-pattern-flowers {
+  --color-primary: rgb(255, 220, 156);
+  --color-secondary: rgb(145, 255, 123);
+  --color-accent1: rgb(248, 144, 227);
+  --color-accent2: rgb(191, 171, 251);
+  --color-bg: #98f3f8;
+
+  background:
+    radial-gradient(circle at 82px 82px, var(--color-primary) 10px, transparent 11px),
+    radial-gradient(circle at 97px 82px, var(--color-secondary) 10px, transparent 11px),
+    radial-gradient(circle at 82px 97px, var(--color-secondary) 10px, transparent 11px),
+    radial-gradient(circle at 67px 82px, var(--color-secondary) 10px, transparent 11px),
+    radial-gradient(circle at 82px 67px, var(--color-secondary) 10px, transparent 11px),
+
+    radial-gradient(circle at 27px 82px, var(--color-secondary) 12px, transparent 13px),
+    radial-gradient(circle at 41px 69px, var(--color-primary) 12px, transparent 13px),
+    radial-gradient(circle at 41px 95px, var(--color-primary) 12px, transparent 13px),
+    radial-gradient(circle at 15px 95px, var(--color-primary) 12px, transparent 13px),
+    radial-gradient(circle at 15px 69px, var(--color-primary) 12px, transparent 13px),
+
+    radial-gradient(circle at 82px 27px, var(--color-secondary) 12px, transparent 13px),
+    radial-gradient(circle at 95px 15px, var(--color-accent1) 12px, transparent 13px),
+    radial-gradient(circle at 95px 41px, var(--color-accent1) 12px, transparent 13px),
+    radial-gradient(circle at 69px 41px, var(--color-accent1) 12px, transparent 13px),
+    radial-gradient(circle at 69px 15px, var(--color-accent1) 12px, transparent 13px),
+
+    radial-gradient(circle at 27px 27px, var(--color-primary) 10px, transparent 11px),
+    radial-gradient(circle at 42px 27px, var(--color-accent2) 10px, transparent 11px),
+    radial-gradient(circle at 27px 42px, var(--color-accent2) 10px, transparent 11px),
+    radial-gradient(circle at 12px 27px, var(--color-accent2) 10px, transparent 11px),
+    radial-gradient(circle at 27px 12px, var(--color-accent2) 10px, transparent 11px);
+
+  background-color: var(--color-bg);
+  background-size: 110px 110px;
+}
+
+.fblink-pattern-radial {
+  --size: 50px;
+  --yellow: #ffce80;
+  --dark-blue: #a4e1ff;
+  --teal: #c0fff9;
+  position: relative;
+  background: radial-gradient(transparent 43%,
+      var(--dark-blue) 44%,
+      var(--dark-blue) 50%,
+      transparent 51%,
+      transparent 75%,
+      var(--yellow) 76%,
+      var(--yellow) 82%,
+      var(--dark-blue) 83%),
+    radial-gradient(transparent 43%,
+      var(--dark-blue) 44%,
+      var(--dark-blue) 50%,
+      var(--teal) 51%,
+      var(--teal) 67%,
+      transparent 68%,
+      transparent 75%,
+      var(--yellow) 76%,
+      var(--yellow) 82%,
+      var(--teal) 83%);
+  background-size: var(--size) var(--size);
+  background-position: 0 0, calc(var(--size) / 2) calc(var(--size) / 2);
+}
+
+.fblink-pattern-upholstery {
+  background:
+    radial-gradient(rgba(76, 76, 76, 1) 4%, rgba(61, 61, 61, 1) 9%, rgba(61, 61, 61, 0) 9%) 0 0,
+    radial-gradient(rgba(76, 76, 76, 1) 4%, rgba(61, 61, 61, 1) 8%, rgba(61, 61, 61, 0) 10%) 25px 25px,
+    radial-gradient(rgba(76, 76, 76, 0.8) 20%, rgba(61, 61, 61, 0)) 25px 0,
+    radial-gradient(rgba(76, 76, 76, 0.8) 20%, rgba(61, 61, 61, 0)) 0 25px,
+    radial-gradient(rgba(61, 61, 61, 1) 35%, rgba(61, 61, 61, 0) 60%) 25px 0,
+    radial-gradient(rgba(61, 61, 61, 1) 35%, rgba(61, 61, 61, 0) 60%) 50px 25px,
+    radial-gradient(rgba(53, 53, 53, 0.7), rgba(61, 61, 61, 0)) 0 0,
+    radial-gradient(rgba(53, 53, 53, 0.7), rgba(61, 61, 61, 0)) 25px 25px,
+    linear-gradient(45deg, rgba(61, 61, 61, 0) 49%, rgba(0, 0, 0, 1) 50%, rgba(61, 61, 61, 0) 70%) 0 0,
+    linear-gradient(-45deg, rgba(61, 61, 61, 0) 49%, rgba(0, 0, 0, 1) 50%, rgba(61, 61, 61, 0) 70%) 0 0;
+
+  background-color: rgba(61, 61, 61, 1);
+  background-size: 50px 50px;
+  /* Reduced size for a denser fblink-pattern */
+}
+
+.fblink-pattern-cheese {
+  --cheese-size: 50px;
+  background:
+    radial-gradient(circle at 20% 30%, #d6a801 10%, transparent 12%),
+    radial-gradient(circle at 70% 50%, #c49000 8%, transparent 10%),
+    radial-gradient(circle at 40% 80%, #b78300 6%, transparent 8%),
+    radial-gradient(circle at 85% 20%, #e0b000 7%, transparent 9%),
+    conic-gradient(from 180deg at 50% 50%, #f5c518, #f1c40f, #e0b000);
+  background-size: var(--cheese-size) var(--cheese-size);
+}
+
+/* background images for patterns */
+
+.fblink-pattern-balloon {
+  background: url('../images/Balloon.jpg') ;
+}
+
+.fblink-pattern-sale {
+  background: url('./sale\ .jpg') ;
+}
+
+.fblink-pattern-discount {
+  background: url('../images/Discount.jpg') ;
+}
+
+.fblink-pattern-girly {
+  background: url('../images/Girly.jpg') ;
+}
+
+.fblink-pattern-birthday {
+  background: url('../images/Birthday.jpg') ;
+}
+
+.fblink-pattern-birthday1 {
+  background: url('./Birthday\ 1.jpg') ;
+}
+
+.fblink-pattern-carnival_monday {
+  background: url('./Carnival\ monday.jpg') ;
+  position: relative;
+  z-index: 0;
+}
+.fblink-pattern-carnival_monday::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+.fblink-pattern-carnival_monday1 {
+  background: url('./Carnival\ monday2.jpg') ;
+  position: relative;
+  z-index: 0;
+}
+.fblink-pattern-carnival_monday1::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: -1;
+}
+
+.fblink-pattern-childrens_day {
+  background: url('./Childrens\ day.jpg') ;
+}
+
+.fblink-pattern-childrens_day2 {
+  background: url('./Children\ day2.jpg') ;
+}
+
+.fblink-pattern-easter_sunday {
+  background: url('./Easter\ sunday.jpg') ;
+}
+
+.fblink-pattern-easter_sunday2 {
+  background: url('./Easter\ sunday2.jpg') ;
+}
+
+.fblink-pattern-fathers_day {
+  background: url('./Fathers\ day.jpg') ;
+}
+
+.fblink-pattern-fathers_day2 {
+  background: url('./Fathers\ day\ 2.jpg') ;
+}
+
+.fblink-pattern-fathers_day3 {
+  background: url('./Fathers\ day3.jpg') ;
+}
+
+.fblink-pattern-labor_day {
+  background: url('./Labour\ day.jpg') ;
+  position: relative;
+  z-index: 0;
+}
+.fblink-pattern-labor_day::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+.fblink-pattern-labor_day2 {
+  background: url('../images/Laborday2.jpg') ;
+}
+
+.fblink-pattern-mens_day {
+  background: url('./Mens\ day.jpg') ;
+}
+
+.fblink-pattern-mothers_day {
+  background: url('./Mothers\ day.jpg') ;
+}
+
+.fblink-pattern-mothers_day2 {
+  background: url('../images/Mothersday2.jpg') ;
+}
+
+.fblink-pattern-thanksgiving {
+  background: url('../images/Thanksgiving.jpg') ;
+}
+
+.fblink-pattern-thanksgiving2 {
+  background: url('../images/Thanksgving2.jpg') ;
+}
+
+.fblink-pattern-veterans_day {
+  background: url('./Veterans\ day.jpg') ;
+}
+
+.fblink-pattern-veterans_day2 {
+  background: url('./Veterans\ day2.jpg') ;
+}
+
+.fblink-pattern-womans_day {
+  background: url('../images/Womansday.jpg') ;
+}
+
+.fblink-pattern-womans_day2 {
+  background: url('../images/Womansday2.jpg') ;
+}
+
+.fblink-pattern-womans_day3 {
+  background: url('./Womans\ day3.jpg') ;
+}
+
+.fblink-pattern-wavy {
+  background: url('../images/Wavy.jpg') ;
+}
+
+.fblink-pattern-fresh {
+  background: url('../images/Fresh.jpg') ;
+}
+
+/* button animation and hover effects */
+
+
+.futureblink-shake {
+  animation: horizontal-shaking 1s infinite;
+}
+
+@keyframes horizontal-shaking {
+  0% { transform: translateX(0) }
+  25% { transform: translateX(5px) }
+  50% { transform: translateX(-5px) }
+  75% { transform: translateX(5px) }
+  100% { transform: translateX(0) }
+}
+
+.futureblink-pulse{
+  animation: pulse 1s ease-in infinite;
+}
+
+@keyframes pulse{
+  25%  {transform: scale(0.9);}
+  75%  {transform: scale(1.1);}
+}
+
+.futureblink-zoom {
+  animation: zoom-in-zoom-out 2s ease-out infinite;
+}
+
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.5, 1.5);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+
+.futureblink-spin {
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; 
+  /* transform: rotate(3deg); */
+   /* transform: rotate(0.3rad);/ */
+   /* transform: rotate(3grad); */ 
+   /* transform: rotate(.03turn);  */
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+.futureblink-pop{
+  animation: pop 1s infinite;
+}
+
+@keyframes pop{
+  50%  {transform: scale(1.2);}
+}
+
+.futureblink-blink{
+  animation: blink 1s linear infinite;
+}
+@keyframes blink{
+0%{opacity: 0;}
+50%{opacity: .5;}
+100%{opacity: 1;}
+}
+
+.futureblink-slide {
+animation: slideeLeftToRight 1s ease-out infinite;
+opacity: 0; /* start invisible */
+}
+
+@keyframes slideeLeftToRight {
+0% {
+  opacity: 0;
+  transform: translateX(-30px); /* start slightly to the left */
+}
+100% {
+  opacity: 1;
+  transform: translateX(0); /* move to original position */
+}
+}
+
+.futureblink-fade {
+position: relative;
+display: inline-block;
+animation: fadeLeftToRight 2s linear infinite;
+mask-image: linear-gradient(to right, transparent 0%, black 100%);
+-webkit-mask-image: linear-gradient(to right, transparent 0%, black 100%);
+mask-size: 200% 100%;
+-webkit-mask-size: 200% 100%;
+mask-position: 100% 0;
+-webkit-mask-position: 100% 0;
+}
+
+@keyframes fadeLeftToRight {
+0% {
+  mask-position: 100% 0;
+  -webkit-mask-position: 100% 0;
+}
+100% {
+  mask-position: 0 0;
+  -webkit-mask-position: 0 0;
+}
+}
+
+
+
+
+
+/* button hover effects */
+.futureblink-glow {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+}
+
+.futureblink-glow:before {
+  content: '';
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  position: absolute;
+  top: -2px;
+  left:-2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+
+.futureblink-glow:active {
+  color: #000
+}
+
+.futureblink-glow:active:after {
+  background: transparent;
+}
+
+.futureblink-glow:hover:before {
+  opacity: 1;
+}
+
+.futureblink-glow:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
+}
+
+.futureblink-pulse_hover {
+position: relative;
+overflow: visible; 
+}
+
+
+.futureblink-pulse_hover  {
+position: relative;
+z-index: 1;
+font-size: 16px;
+cursor: pointer;
+transition: background-color 0.3s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.futureblink-pulse_hover:active {
+transform: translateY(-5px); /* Noticeable upward lift */
+box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Deep shadow below */
+}
+
+
+.futureblink-pulse_hover::after {
+content: '';
+position: absolute;
+top: 50%;
+left: 50%;
+width: 100%;
+height: 100%;
+border: 2px solid #010101;
+border-radius: inherit;
+transform: translate(-50%, -50%) scale(1); /* Centered on button */
+opacity: 0;
+pointer-events: none;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)
+}
+
+.futureblink-pulse_hover:hover::after {
+animation: borderPulse 0.6s ease-out;
+}
+
+@keyframes borderPulse {
+0% {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0.8;
+}
+100% {
+  transform: translate(-50%, -50%) scale(1.3);
+  opacity: 0;
+}
+}
+
+
+.futureblink-swipeRight {
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s ease-in-out;
+  z-index: 0;
+}
+
+.futureblink-swipeRight::before {
+  content: "";
+  position: absolute;
+  background-color: red;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transition: left 0.4s ease-in-out;
+}
+
+.futureblink-swipeRight:hover::before {
+  left: 0;
+}
+
+[futureblink-shipping-bar] .swiper {
+  max-width: 400px;
+}
+
+.futureblink-swipeRight:hover {
+  color: white; /* Optional: change text color on hover */
+}
+
+
+.futureblink-blob {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.futureblink-blob::before {
+  content: '';
+  position: absolute;
+  bottom: -100%;  /* Start completely outside the button */
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg'><path fill='%230087ff' fill-opacity='1' d='M0,160C80,160,160,120,240,96C320,72,400,80,480,100C560,120,640,150,720,160C800,170,880,150,960,160C1040,170,1120,200,1200,200C1280,200,1360,170,1440,160L1440,320L0,320Z'/></svg>") repeat-x;
+  background-size: cover;
+  transition: background-position 4s linear, bottom 1s ease-out, opacity 1s ease-out;
+  opacity: 1;
+  z-index: -1;
+}
+
+.futureblink-blob:hover::before {
+  bottom: 0%;  /* Move to the top on hover */
+  opacity: 1;  /* Fully visible when hovered */
+  animation: waveMove 4s linear forwards;  /* Smooth movement from left to right */
+}
+
+.futureblink-blob:not(:hover)::before {
+  bottom: -100%;  /* Move completely out of view when not hovered */
+  opacity: 0;  /* Fade out completely when sinking */
+  animation: waveMoveReverse 2s linear forwards;  /* Ensure it moves from right to left when sinking */
+}
+
+@keyframes waveMove {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 1000px;
+  }
+}
+
+@keyframes waveMoveReverse {
+  0% {
+    background-position-x: 1000px;
+  }
+  100% {
+    background-position-x: 0;
+  }
+}
+
+
+.futureblink-flush {
+position: relative;
+overflow: hidden;
+border: 2px solid #0087ff;
+border-radius: 8px;
+color: white;
+padding: 15px 30px;
+background-color: transparent;
+cursor: pointer;
+z-index: 0;
+}
+
+/* Base blue liquid fill */
+.futureblink-flush::before {
+content: '';
+position: absolute;
+inset: 0;
+background: #0087ff;
+z-index: -2;
+transition: clip-path 0.4s ease;
+clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 100% 100%);
+animation: bubbleRise 4s linear infinite;
+opacity: 0.9;
+}
+
+/* Overlay zones to trigger hover effects */
+.futureblink-flush::after,
+.futureblink-flush::middle,
+.futureblink-flush::left,
+.futureblink-flush::right {
+content: '';
+position: absolute;
+top: 0;
+bottom: 0;
+z-index: 1;
+}
+
+/* Left zone */
+.futureblink-flush::left {
+left: 0;
+width: 33.33%;
+}
+
+/* Middle zone */
+.futureblink-flush::middle {
+left: 33.33%;
+width: 33.34%;
+}
+
+/* Right zone */
+.futureblink-flush::right {
+left: 66.66%;
+width: 33.34%;
+}
+
+/* Middle hover: flat liquid at 50% */
+.futureblink-flush:hover::before {
+clip-path: polygon(0% 100%, 0% 50%, 100% 50%, 100% 100%);
+}
+
+/* Left triangle */
+.futureblink-flush:hover::left:hover ~ .futureblink-flush::before {
+clip-path: polygon(0% 100%, 0% 20%, 100% 80%, 100% 100%);
+}
+
+/* Right triangle */
+.futureblink-flush:hover::right:hover ~ .futureblink-flush::before {
+clip-path: polygon(0% 100%, 0% 80%, 100% 20%, 100% 100%);
+}
+
+/* Bubbles rising animation */
+@keyframes bubbleRise {
+0%, 100% {
+  background-position: 0% 100%;
+}
+50% {
+  background-position: 0% 0%;
+}
+}
+
+
+.futureblink-smoosh {
+transition: all 0.2s ease;  /* Smooth transition */
+box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);  /* Initial shadow (looks raised) */
+}
+
+/* When hovered, the button looks like it's being pressed down */
+.futureblink-smoosh:hover {
+transform: scale(0.98);  /* Shrinks the button to make it appear pressed */
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);  /* Shadow looks smaller and sharper */
+}
+
+/* When clicked (active), it looks more pressed, like a key press */
+.futureblink-smoosh:active {
+transform: scale(0.95);  /* Further shrinking for active press effect */
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);  /* Even smaller shadow for deeper pressed effect */
+}
+
+.futureblink-squishy {
+box-shadow: 
+  inset 0 1px 0 0 #f4f4f4,
+  0 1px 0 0 #efefef,
+  0 2px 0 0 #ececec,
+  0 4px 0 0 #e0e0e0,
+  0 5px 0 0 #dedede,
+  0 6px 0 0 #dcdcdc,
+  0 7px 0 0 #cacaca,
+  0 7px 8px 0 #cecece;
+}
+
+.futureblink-squishy:hover {
+transform: translateY(4px);
+box-shadow: 
+  inset 0 1px 0 0 #f4f4f4,
+  0 1px 0 0 #efefef,
+  0 1px 0 0 #ececec,
+  0 2px 0 0 #e0e0e0,
+  0 2px 0 0 #dedede,
+  0 3px 0 0 #dcdcdc,
+  0 4px 0 0 #cacaca,
+  0 4px 6px 0 #cecece;
+}
+
+.futureblink-collision {
+position: relative;
+display: inline-block;
+padding: 16px 48px;
+font-size: 16px;
+color: #333;
+background: #eee;
+border: none;          /* no border */
+border-radius: 12px;
+cursor: pointer;
+overflow: hidden;
+user-select: none;
+transition: background-color 0.3s ease 0.8s, color 0.3s ease 0.8s; /* delay to sync with bubbles */
+}
+
+/* Bubbles */
+.futureblink-collision::before,
+.futureblink-collision::after {
+content: "";
+position: absolute;
+top: 50%;
+width: 40px;
+height: 40px;
+background: #00aaff;
+border-radius: 50%;
+box-shadow: 0 0 12px #00aaffaa;
+transform: translateY(-50%);
+pointer-events: none;
+opacity: 0;
+z-index: 10;
+}
+
+/* Left futureblink-bubble starts off-screen left */
+.futureblink-collision::before {
+left: -50px;
+}
+
+/* Right futureblink-bubble starts off-screen right */
+.futureblink-collision::after {
+right: -50px;
+}
+
+/* When hovered, add animations */
+.futureblink-collision:hover::before {
+opacity: 1;
+animation: moveRight 1s linear forwards;
+}
+
+.futureblink-collision:hover::after {
+opacity: 1;
+animation: moveLeft 1s linear forwards;
+}
+
+/* No animation when not hovered */
+.futureblink-collision:not(:hover)::before,
+.futureblink-collision:not(:hover)::after {
+animation: none;
+opacity: 0;
+}
+
+/* Bubbles move from edges to center */
+@keyframes moveRight {
+0% {
+  left: -50px;
+  opacity: 1;
+}
+80% {
+  left: calc(50% - 20px);
+  opacity: 1;
+}
+100% {
+  left: calc(50% - 20px);
+  opacity: 0;
+}
+}
+
+@keyframes moveLeft {
+0% {
+  right: -50px;
+  opacity: 1;
+}
+80% {
+  right: calc(50% - 20px);
+  opacity: 1;
+}
+100% {
+  right: calc(50% - 20px);
+  opacity: 0;
+}
+}
+
+/* Background fill on hover with delay */
+.futureblink-collision:hover {
+background-color: #00aaff;
+color: white;
+}
+
+/* Reset background and color on unhover */
+.futureblink-collision:not(:hover) {
+background-color: #eee;
+color: #333;
+}
+
+.futureblink-bubble {
+position: relative;
+display: inline-block;
+padding: 16px 48px;
+font-size: 16px;
+color: #fff;
+background: #00aaff;
+border: none;
+border-radius: 12px;
+cursor: pointer;
+overflow: visible;
+transition: transform 0.2s ease;
+}
+
+/* Bubbles */
+.futureblink-bubble::before,
+.futureblink-bubble::after {
+content: "";
+position: absolute;
+width: 30px;
+height: 30px;
+background: inherit;
+border-radius: 50%;
+opacity: 0;
+pointer-events: none;
+z-index: 2;
+transform: scale(1);
+}
+
+/* Top-left futureblink-bubble */
+.futureblink-bubble::before {
+top: 0;
+left: 0;
+}
+
+/* Bottom-right futureblink-bubble */
+.futureblink-bubble::after {
+bottom: 0;
+right: 0;
+}
+
+/* Animate on hover */
+.futureblink-bubble:hover::before {
+animation: burstTopLeft 1s ease-out forwards;
+}
+
+.futureblink-bubble:hover::after {
+animation: burstBottomRight 1s ease-out forwards;
+}
+
+/* Button squish animation */
+.futureblink-bubble:hover {
+animation: stretchButton 0.6s ease-out;
+}
+
+/* Reset non-hover state */
+.futureblink-bubble:not(:hover)::before,
+.futureblink-bubble:not(:hover)::after {
+animation: none;
+opacity: 0;
+}
+
+.futureblink-bubble:not(:hover) {
+animation: none;
+transform: scale(1);
+}
+
+/* Top-left futureblink-bubble: full move out, fade at end */
+@keyframes burstTopLeft {
+0% {
+  opacity: 1;
+  transform: scale(1) translate(0, 0);
+}
+70% {
+  transform: scale(1) translate(-30px, -30px);
+  opacity: 1;
+}
+100% {
+  transform: scale(1) translate(-60px, -60px);
+  opacity: 0;
+}
+}
+
+/* Bottom-right futureblink-bubble: full move out, fade at end */
+@keyframes burstBottomRight {
+0% {
+  opacity: 1;
+  transform: scale(1) translate(0, 0);
+}
+70% {
+  transform: scale(1) translate(30px, 30px);
+  opacity: 1;
+}
+100% {
+  transform: scale(1) translate(60px, 60px);
+  opacity: 0;
+}
+}
+
+/* Button squish effect */
+@keyframes stretchButton {
+0% {
+  transform-origin: center;
+  transform: scale(1) translate(0, 0);
+}
+25% {
+  transform-origin: top left;
+  transform: scale(1.05, 0.95) translate(-5px, -5px);
+}
+50% {
+  transform-origin: bottom right;
+  transform: scale(0.95, 1.05) translate(5px, 5px);
+}
+100% {
+  transform-origin: center;
+  transform: scale(1) translate(0, 0);
+}
+}
+
+
+
+.futureblink-mask1 {
+position: relative;
+display: inline-block;
+padding: 16px 48px;
+font-size: 16px;
+color: inherit;
+background: inherit;
+border-radius: 12px;
+cursor: pointer;
+overflow: visible;
+}
+
+.futureblink-mask1::before {
+content: "";
+position: absolute;
+top: 50%;
+left: 50%;
+width: 0;
+height: 0;
+background: currentColor;
+border-radius: 50%;
+clip-path: polygon(
+  50% 5%, 61% 20%, 75% 15%, 80% 30%, 90% 40%, 85% 55%, 95% 65%, 80% 75%, 70% 90%,
+  55% 85%, 40% 95%, 30% 80%, 15% 70%, 10% 55%, 5% 40%, 15% 30%, 25% 15%, 39% 20%
+);
+transform: translate(-50%, -50%) scale(0);
+opacity: 0;
+pointer-events: none;
+z-index: 2;
+}
+
+/* Animation for splash: expand + fade out */
+@keyframes splashExpandFade {
+0% {
+  width: 0;
+  height: 0;
+  opacity: 0.6;
+  transform: translate(-50%, -50%) scale(0);
+}
+50% {
+  width: 150%;
+  height: 150%;
+  opacity: 0.6;
+  transform: translate(-50%, -50%) scale(1);
+}
+100% {
+  width: 150%;
+  height: 150%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1);
+}
+}
+
+/* On hover, run the splash animation */
+.futureblink-mask1:hover::before {
+animation: splashExpandFade 0.8s forwards;
+}
+
+
+/* price text animations */
+/* Neon Glow Animation (Purple Theme) */
+
+
+/* Breathe Animation */
+@keyframes breathe-animation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+[data-animation-futureblink-shipping="breathe"] {
+  display: inline-block;
+  will-change: transform;
+  animation: breathe-animation 3s ease-in-out infinite;
+}
+
+/* Wave Animation */
+@keyframes wave-fake {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-4px) rotate(-1deg); }
+  50% { transform: translateY(4px) rotate(1deg); }
+  75% { transform: translateY(-2px) rotate(-1deg); }
+}
+
+[data-animation-futureblink-shipping="wave"] {
+  display: inline-block;
+  animation: wave-fake 1.5s ease-in-out infinite;
+}
+
+/* Float Animation */
+@keyframes float-move {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+[data-animation-futureblink-shipping="easy"] {
+  display: inline-block;
+  animation: float-move 2s ease-in-out infinite;
+}
+
+
+
+@keyframes matrix-scan {
+  0%, 100% {
+    background-position: 0% -100%;
+  }
+  50% {
+    background-position: 0% 100%;
+  }
+}
+
+[data-animation-futureblink-shipping="matrix"] {
+  position: relative;
+  display: inline-block;
+  color: #00ff00; /* Matrix green */
+  font-family: monospace;
+  z-index: 0;
+}
+
+/* Absolutely positioned overlay that does NOT affect layout */
+[data-animation-futureblink-shipping="matrix"]::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1; /* ON TOP of text, for scan */
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 255, 0, 0.15) 45%,
+    rgba(0, 255, 0, 0.25) 50%,
+    rgba(0, 255, 0, 0.15) 55%,
+    transparent 100%
+  );
+  background-size: 100% 200%;
+  animation: matrix-scan 2.5s linear infinite;
+  mix-blend-mode: screen; /* So futureblink-glow passes over text without hiding it */
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+
+
+
+@keyframes futureblink-stroke-handwriting {
+  from {
+    background-size: 0% 100%;
+  }
+  to {
+    background-size: 100% 100%;
+  }
+}
+
+[data-animation-futureblink-shipping="handwriting"] {
+  display: inline-block;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  background-position: left;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: futureblink-stroke-handwriting 3s linear infinite;
+
+}
+
+@keyframes keyboard-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+[data-animation-futureblink-shipping="keyboard"] {
+  display: inline-block;
+  white-space: nowrap;
+}
+.spinner {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #fff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

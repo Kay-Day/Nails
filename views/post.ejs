@@ -1,0 +1,40 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<section class="section">
+  <div class="container article">
+    <div class="breadcrumb"><a href="/">Home</a> / <a href="/blog">Journal</a> / <%= post.title %></div>
+    <div class="text-center" style="margin-bottom:28px">
+      <div class="post-card__date" style="margin-bottom:8px"><%= new Date(post.published_at).toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' }) %> · <%= post.author %></div>
+      <h1 style="font-size:clamp(30px,4.5vw,48px)"><%= post.title %></h1>
+      <% if (post.excerpt) { %><p style="color:var(--ink-soft);font-size:18px"><%= post.excerpt %></p><% } %>
+    </div>
+    <% if (post.cover_image) { %>
+      <div class="article__cover"><img src="<%= post.cover_image %>" alt="<%= post.title %>" /></div>
+    <% } %>
+    <div class="article__body"><%- post.content %></div>
+
+    <div class="text-center" style="margin-top:48px">
+      <a href="/products" class="btn btn--primary">Shop the Collection</a>
+    </div>
+  </div>
+
+  <% if (recent.length) { %>
+  <div class="container" style="margin-top:80px">
+    <div class="section-head"><h2>Keep Reading</h2></div>
+    <div class="blog-grid">
+      <% recent.forEach(function(post) { %>
+        <a href="/blog/<%= post.slug %>" class="post-card">
+          <div class="post-card__media"><img src="<%= post.cover_image || '/images/Website_Photos_Square.jpg' %>" alt="<%= post.title %>" loading="lazy" /></div>
+          <div class="post-card__body">
+            <div class="post-card__date"><%= new Date(post.published_at).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' }) %></div>
+            <h3><%= post.title %></h3>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>
