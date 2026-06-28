@@ -9,6 +9,8 @@ const path = require('path');
 const HOME_FILE = path.join(__dirname, '..', 'public', 'home', 'index.html');
 const MAIN_OPEN = '<main role="main" id="MainContent">';
 const MAIN_CLOSE = '</main>';
+const DEFAULT_SHOP_NAME = 'PASTELLE NAILS';
+const DEFAULT_LOGO_URL = '/images/Logo/Logo.jpeg';
 
 let TOP = '';
 let BOTTOM = '';
@@ -68,6 +70,7 @@ const FOOTER_ICONS = {
 };
 
 function footerContact(settings = {}) {
+  const shopName = settings.shop_name || DEFAULT_SHOP_NAME;
   const phoneDigits = settings.contact_phone ? settings.contact_phone.replace(/\D/g, '') : '';
   const phoneHref = phoneDigits ? '+' + (phoneDigits.length === 10 ? '1' + phoneDigits : phoneDigits) : '';
   const item = (icon, label, value, href, external) => {
@@ -86,7 +89,7 @@ function footerContact(settings = {}) {
   ].filter(Boolean).join('');
 
   if (!content) return '';
-  return `<section class="db-site-contact-strip" aria-label="Store contact information"><div class="container"><h2>Contact Majestic Nailbox</h2><div class="db-site-contact-strip__grid">${content}</div></div></section>`;
+  return `<section class="db-site-contact-strip" aria-label="Store contact information"><div class="container"><h2>Contact ${escapeHtml(shopName)}</h2><div class="db-site-contact-strip__grid">${content}</div></div></section>`;
 }
 
 function addBlogNavigation(html) {
@@ -180,6 +183,32 @@ function applyAnnouncements(html, settings = {}) {
     const message = messages[index++];
     return message ? `${open}${escapeHtml(message)}${close}` : match;
   });
+}
+
+function applyBranding(html, settings = {}) {
+  const shopName = settings.shop_name || DEFAULT_SHOP_NAME;
+  const logoUrl = settings.logo_url || DEFAULT_LOGO_URL;
+  const logo = `
+    <a href="/" class="m-logo__image m:block db-brand-lockup" title="${escapeHtml(shopName)}">
+      <span class="db-brand-logo-frame" aria-hidden="true">
+        <img src="${escapeHtml(logoUrl)}" alt="">
+      </span>
+      <span class="db-brand-name">${escapeHtml(shopName)}</span>
+    </a>`;
+
+  let output = html.replace(
+    /<a href="\/" class="m-logo__image m:block" title="[^"]*">[\s\S]*?<\/a>/g,
+    logo
+  );
+  output = output.replace(
+    /<link rel="shortcut icon"[^>]*>/i,
+    `<link rel="icon" type="image/jpeg" href="${escapeHtml(logoUrl)}">`
+  );
+  output = output.replace(
+    /<meta property="og:site_name" content="[^"]*">/i,
+    `<meta property="og:site_name" content="${escapeHtml(shopName)}">`
+  );
+  return output;
 }
 
 function footerNavigation(items = []) {
@@ -311,6 +340,7 @@ function addBodyClass(html, className) {
 function personalizeHtml(html, { title, description, url, settings, navigation, isInnerPage } = {}) {
   let output = applyNavigation(normalizeShopNavigation(stripCommerce(html)), navigation);
   output = applyAnnouncements(output, settings);
+  output = applyBranding(output, settings);
   if (isInnerPage) {
     output = addBodyClass(output, 'db-inner-page');
     output = output
@@ -359,7 +389,10 @@ function personalizeHtml(html, { title, description, url, settings, navigation, 
   output = output
     .replace(/https:\/\/instagram\.com\/runzienails/g, escapeHtml(settings && settings.instagram || '#'))
     .replace(/https:\/\/www\.tiktok\.com\/@runzienails/g, escapeHtml(settings && settings.tiktok || '#'))
-    .replace(/© 2026 Runzie, All rights reserved\./g, '© 2026 Majestic Nailbox, All rights reserved.');
+    .replace(
+      /© 2026 Runzie, All rights reserved\./g,
+      `© 2026 ${escapeHtml(settings?.shop_name || DEFAULT_SHOP_NAME)}, All rights reserved.`
+    );
 
   const contact = footerContact(settings);
   const footer = footerNavigation(navigation?.footer || []);

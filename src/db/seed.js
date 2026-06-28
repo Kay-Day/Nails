@@ -93,7 +93,8 @@ const names = [
 ];
 
 const siteSettings = {
-  shop_name: 'Majestic Nailbox',
+  shop_name: 'PASTELLE NAILS',
+  logo_url: '/images/Logo/Logo.jpeg',
   tagline: 'Handcrafted press-on nails in Ontario.',
   contact_phone: '4379983533',
   contact_email: '',
@@ -215,13 +216,13 @@ const blogPosts = [
   {
     slug: 'how-to-order-press-on-nails-in-ontario',
     title: 'How to Order Press-On Nails in Ontario',
-    excerpt: 'Found a set you love? Here is how to choose your size and contact Majestic Nailbox before ordering.',
+    excerpt: 'Found a set you love? Here is how to choose your size and contact PASTELLE NAILS before ordering.',
     cover_image: '4_e4749313-2ef6-43fd-918f-fe7d2f6b97c3.jpg',
     content: `<p>Our storefront is designed for browsing first. When you find a set you love, open the product page, choose your size, then contact us directly so we can confirm availability, pickup or shipping options, and any sizing questions.</p>
 <h3>What to send us</h3>
 <p>Send the product name, size, and a screenshot if possible. For example: Salazar's Curse, size XS.</p>
 <h3>Where we are</h3>
-<p>Majestic Nailbox is based in Ontario, Canada. You can reach us by phone, Instagram, or TikTok from the product page.</p>`,
+<p>PASTELLE NAILS is based in Ontario, Canada. You can reach us by phone, Instagram, or TikTok from the product page.</p>`,
   },
   {
     slug: 'how-to-apply-press-on-nails',
@@ -306,10 +307,10 @@ const blogPosts = [
   },
   {
     slug: 'runzie-story',
-    title: 'The Story Behind Majestic Nailbox',
+    title: 'The Story Behind PASTELLE NAILS',
     excerpt: 'A small Ontario studio obsessed with hand-finished press-on nails. Here is how it all started.',
     cover_image: 'Fresh.jpg',
-    content: `<p>Majestic Nailbox started with a simple idea: beautiful, salon-quality nails should be easy, affordable, and kind to the planet.</p>
+    content: `<p>PASTELLE NAILS started with a simple idea: beautiful, salon-quality nails should be easy, affordable, and kind to the planet.</p>
 <h3>Handcrafted, not mass-produced</h3>
 <p>Every set is finished by a real nail tech in our Ontario studio. We inspect each one before it goes out, because a small batch is the only way we know every set is right.</p>
 <h3>Reusable by design</h3>
@@ -478,7 +479,7 @@ async function seed() {
     await pool.query(
       `INSERT INTO posts (slug, title, excerpt, content, cover_image, author, is_published, published_at)
        VALUES ($1,$2,$3,$4,$5,$6,true, now() - ($7 || ' days')::interval)`,
-      [p.slug, p.title, p.excerpt, p.content, img(p.cover_image), 'Majestic Nailbox', i * 5]
+      [p.slug, p.title, p.excerpt, p.content, img(p.cover_image), 'PASTELLE NAILS', i * 5]
     );
   }
   console.log(`✓ ${blogPosts.length} blog posts`);

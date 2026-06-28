@@ -6,7 +6,10 @@
     <button class="icon-btn menu-toggle" aria-label="Menu" onclick="document.querySelector('.nav').classList.toggle('open')">
       <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
-    <a href="/" class="brand"><%= settings.shop_name || 'runzie' %></a>
+    <a href="/" class="brand brand--logo">
+      <span class="brand__logo-frame" aria-hidden="true"><img src="/images/Logo/Logo.jpeg" alt="" /></span>
+      <span><%= settings.shop_name || 'PASTELLE NAILS' %></span>
+    </a>
     <nav class="nav">
       <a href="/" class="<%= currentPath === '/' ? 'active' : '' %>">Home</a>
       <a href="/products" class="<%= currentPath.startsWith('/products') ? 'active' : '' %>">Shop</a>

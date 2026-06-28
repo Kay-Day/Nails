@@ -200,7 +200,7 @@ function productsPage({ products, collections, shapes, lengths, filters, page, t
   <aside class="db-filters" id="db-product-filters">
     <form class="db-search" method="get" action="/products">
       <input type="text" name="q" placeholder="Search…" value="${e(filters.q || '')}">
-      <button class="m-button m-button--primary" type="submit" style="padding:8px 14px">Go</button>
+      <button class="m-button m-button--primary db-search__submit" type="submit">Go</button>
     </form>
     <div class="db-filters__group">
       <h4>Collections</h4>
@@ -302,7 +302,7 @@ function productPage({ product, gallery, variants, collections, related, setting
   const selectableVariants = productVariants.filter((variant) => !/^default title$/i.test(variant.title));
   const initialVariant = productVariants.find((variant) => variant.is_available !== false) || productVariants[0] || {};
   const sku = initialVariant.sku || product.sku || '';
-  const shopName = settings.shop_name || 'Majestic Nailbox';
+  const shopName = settings.shop_name || 'PASTELLE NAILS';
   const phoneDigits = settings.contact_phone ? settings.contact_phone.replace(/\D/g, '') : '';
   const phoneHref = phoneDigits ? '+' + (phoneDigits.length === 10 ? '1' + phoneDigits : phoneDigits) : '';
 
@@ -550,7 +550,7 @@ ${marquee()}`;
 function postPage({ post, recent, sections }) {
   const cta = cmsSection(sections, 'cta');
   const arrow = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg>';
-  const author = post.author || 'Majestic Nailbox';
+  const author = post.author || 'PASTELLE NAILS';
   const initials = author
     .split(/\s+/)
     .filter(Boolean)
@@ -819,7 +819,7 @@ function notFound() {
 
 // --- Home page (scraped runzie theme) ---
 function homePageLegacy({ banners, featured, collections, posts, asSeenProducts, settings }) {
-  const shop = settings.shop_name || 'Majestic Nailbox';
+  const shop = settings.shop_name || 'PASTELLE NAILS';
   const instagram = settings.instagram || '#';
   const arrow = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg>';
 
@@ -1191,7 +1191,7 @@ const POLICY_CONTENT = {
 
 function policyPageLegacy({ kind, title, settings }) {
   const entry = POLICY_CONTENT[kind] || { title, body: '<p>Content coming soon.</p>' };
-  const shop = settings.shop_name || 'Majestic Nailbox';
+  const shop = settings.shop_name || 'PASTELLE NAILS';
   const body = entry.body.replace(/\$\{e\('\{shop_name\}'\)\}/g, e(shop)).replace(/\{shop_name\}/g, shop);
   return `${header()}
 ${pageBanner({ image: DEFAULT_BANNER, title: entry.title, subtitle: 'Last updated: ' + new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }), breadcrumbHtml: '<a href="/">Home</a> / ' + e(entry.title) })}
@@ -1298,7 +1298,7 @@ function accountPage({ mode, settings }) {
   const subtitle = isRegister
     ? 'Save your favourite sets and message us faster next time.'
     : 'Sign in to manage your favourites and message us about an order.';
-  const shop = settings.shop_name || 'Majestic Nailbox';
+  const shop = settings.shop_name || 'PASTELLE NAILS';
   const instagram = settings.instagram || '#';
   const tiktok = settings.tiktok || '#';
   const phone = settings.contact_phone || '';

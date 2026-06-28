@@ -497,7 +497,7 @@ router.post('/posts', upload.single('cover_image'), async (req, res, next) => {
     await pool.query(
       `INSERT INTO posts (slug, title, excerpt, content, cover_image, author, is_published, published_at)
        VALUES ($1,$2,$3,$4,$5,$6,$7, COALESCE($8::timestamptz, now()))`,
-      [slug, b.title, b.excerpt || null, b.content || null, cover, b.author || 'Majestic Nailbox', b.is_published === 'on', b.published_at || null]
+      [slug, b.title, b.excerpt || null, b.content || null, cover, b.author || 'PASTELLE NAILS', b.is_published === 'on', b.published_at || null]
     );
     res.redirect('/admin/posts');
   } catch (err) {
@@ -525,7 +525,7 @@ router.post('/posts/:id', upload.single('cover_image'), async (req, res, next) =
     const slug = await uniqueSlug('posts', b.slug || b.title, req.params.id);
     await pool.query(
       `UPDATE posts SET slug=$1, title=$2, excerpt=$3, content=$4, cover_image=$5, author=$6, is_published=$7, published_at=COALESCE($8::timestamptz, published_at) WHERE id=$9`,
-      [slug, b.title, b.excerpt || null, b.content || null, cover, b.author || 'Majestic Nailbox', b.is_published === 'on', b.published_at || null, req.params.id]
+      [slug, b.title, b.excerpt || null, b.content || null, cover, b.author || 'PASTELLE NAILS', b.is_published === 'on', b.published_at || null, req.params.id]
     );
     await cleanupMediaUrls([oldCover]);
     res.redirect('/admin/posts');

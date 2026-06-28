@@ -32,7 +32,8 @@ async function setup() {
 
   // Default settings
   const defaults = {
-    shop_name: 'Majestic Nailbox',
+    shop_name: 'PASTELLE NAILS',
+    logo_url: '/images/Logo/Logo.jpeg',
     tagline: 'Handcrafted press-on nails in Ontario.',
     contact_phone: '4379983533',
     contact_email: '',
@@ -51,6 +52,30 @@ async function setup() {
     );
   }
   console.log('✓ Default settings ready (existing values preserved)');
+
+  // One-time-safe brand migration for databases created before the rename.
+  await pool.query(
+    `UPDATE settings
+     SET value = REPLACE(value, 'Majestic Nailbox', 'PASTELLE NAILS')
+     WHERE value LIKE '%Majestic Nailbox%'`
+  );
+  await pool.query(
+    `UPDATE site_sections
+     SET eyebrow = REPLACE(eyebrow, 'Majestic Nailbox', 'PASTELLE NAILS'),
+         title = REPLACE(title, 'Majestic Nailbox', 'PASTELLE NAILS'),
+         subtitle = REPLACE(subtitle, 'Majestic Nailbox', 'PASTELLE NAILS'),
+         body_html = REPLACE(body_html, 'Majestic Nailbox', 'PASTELLE NAILS')
+     WHERE CONCAT_WS(' ', eyebrow, title, subtitle, body_html) LIKE '%Majestic Nailbox%'`
+  );
+  await pool.query(
+    `UPDATE posts
+     SET title = REPLACE(title, 'Majestic Nailbox', 'PASTELLE NAILS'),
+         excerpt = REPLACE(excerpt, 'Majestic Nailbox', 'PASTELLE NAILS'),
+         content = REPLACE(content, 'Majestic Nailbox', 'PASTELLE NAILS'),
+         author = REPLACE(author, 'Majestic Nailbox', 'PASTELLE NAILS')
+     WHERE CONCAT_WS(' ', title, excerpt, content, author) LIKE '%Majestic Nailbox%'`
+  );
+  console.log('✓ PASTELLE NAILS branding ready');
 
   await pool.end();
   console.log('Done.');

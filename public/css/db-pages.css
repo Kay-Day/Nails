@@ -1,6 +1,65 @@
 /* Layout helpers for DB-driven pages rendered inside the runzie theme chrome */
 .db-page { padding-bottom: 60px; }
 
+.db-brand-lockup {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 11px;
+  width: auto !important;
+  white-space: nowrap;
+}
+
+.db-brand-logo-frame {
+  position: relative;
+  display: block;
+  flex: 0 0 62px;
+  width: 62px;
+  height: 62px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.db-brand-logo-frame img {
+  position: absolute;
+  top: -3px;
+  left: -6px;
+  width: 74px !important;
+  max-width: none !important;
+  height: 74px !important;
+  object-fit: cover;
+}
+
+.db-brand-name {
+  font-family: "Gilda Display", Georgia, serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: .14em;
+  line-height: 1;
+}
+
+.m-logo--mobile .db-brand-lockup {
+  gap: 7px;
+}
+
+.m-logo--mobile .db-brand-logo-frame {
+  flex-basis: 48px;
+  width: 48px;
+  height: 48px;
+}
+
+.m-logo--mobile .db-brand-logo-frame img {
+  top: -2px;
+  left: -5px;
+  width: 58px !important;
+  height: 58px !important;
+}
+
+.m-logo--mobile .db-brand-name {
+  font-size: 13px;
+  letter-spacing: .1em;
+}
+
 /* Dynamic storefront pages are browse-and-contact only, so hide Shopify cart UI. */
 a[href="/cart"].m-cart-icon-bubble,
 m-cart-count,
@@ -843,7 +902,23 @@ body.db-overlay-open {
 .db-filters__group a:hover, .db-filters__group a.is-active { opacity: 1; font-weight: 700; text-decoration: underline; }
 .db-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; flex-wrap: wrap; gap: 12px; }
 .db-toolbar select, .db-search input { padding: 9px 12px; border: 1px solid rgba(0,0,0,.18); border-radius: 4px; font: inherit; background: #fff; }
-.db-search { display: flex; gap: 6px; margin-bottom: 16px; }
+.db-search {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  margin-bottom: 16px;
+}
+.db-search input {
+  width: 100%;
+  min-width: 0;
+}
+.db-search .db-search__submit {
+  min-width: 0;
+  padding: 8px 14px;
+  white-space: nowrap;
+}
 .db-count { font-size: 14px; opacity: .7; }
 .db-filter-toggle {
   display: none;

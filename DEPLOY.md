@@ -1,4 +1,4 @@
-# Đưa Nails Shop lên VPS
+# Đưa PASTELLE NAILS lên VPS
 
 Cấu hình này chạy ba container:
 

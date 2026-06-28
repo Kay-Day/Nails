@@ -5,6 +5,16 @@ const { renderPage } = require('../layout');
 const render = require('../render');
 const { loadSections } = require('../content');
 
+const DEFAULT_SHOP_NAME = 'PASTELLE NAILS';
+
+function shopName(res) {
+  return res.locals.settings.shop_name || DEFAULT_SHOP_NAME;
+}
+
+function pageTitle(res, title) {
+  return `${title} · ${shopName(res)}`;
+}
+
 // Send an inner-HTML page wrapped in the shared runzie theme chrome
 function sendThemed(res, innerHtml, title, status, description) {
   res.status(status || 200).type('html').send(renderPage(innerHtml, {
@@ -41,7 +51,7 @@ async function showHome(req, res, next) {
         sections,
         settings: res.locals.settings,
       }),
-      (res.locals.settings.shop_name || 'Majestic Nailbox') + ' — Handcrafted Press-On Nails'
+      shopName(res) + ' — Handcrafted Press-On Nails'
     );
   } catch (err) {
     next(err);
@@ -129,7 +139,7 @@ async function showProducts(req, res, next) {
     const shapes = facetsRes.rows.filter((row) => row.facet === 'shape').map((row) => row.value);
     const lengths = facetsRes.rows.filter((row) => row.facet === 'length').map((row) => row.value);
     if (collection && !collectionsRes.rows.some((item) => item.slug === collection)) {
-      return sendThemed(res, render.notFound(), 'Collection not found · Majestic Nailbox', 404);
+      return sendThemed(res, render.notFound(), pageTitle(res, 'Collection not found'), 404);
     }
 
     const html = render.productsPage({
@@ -144,7 +154,7 @@ async function showProducts(req, res, next) {
       bannerImage: bannerRes.rows[0] && bannerRes.rows[0].image,
       sections,
     });
-    sendThemed(res, html, (collection ? 'Shop' : 'Shop All') + ' · Majestic Nailbox');
+    sendThemed(res, html, pageTitle(res, collection ? 'Shop' : 'Shop All'));
   } catch (err) {
     next(err);
   }
@@ -171,7 +181,7 @@ router.get('/products/:slug', async (req, res, next) => {
        WHERE p.slug = $1 AND p.is_active = true`,
       [req.params.slug]
     );
-    if (!rows.length) return sendThemed(res, render.notFound(), 'Product not found · Majestic Nailbox', 404);
+    if (!rows.length) return sendThemed(res, render.notFound(), pageTitle(res, 'Product not found'), 404);
     const product = rows[0];
 
     const imagesRes = await pool.query(
@@ -224,7 +234,7 @@ router.get('/products/:slug', async (req, res, next) => {
       sections,
       settings: res.locals.settings,
     });
-    sendThemed(res, html, product.title + ' · Majestic Nailbox');
+    sendThemed(res, html, pageTitle(res, product.title));
   } catch (err) {
     next(err);
   }
@@ -238,7 +248,7 @@ router.get(['/blog', '/blogs/news'], async (req, res, next) => {
       pool.query("SELECT image FROM banners WHERE is_active = true AND image <> '' ORDER BY sort_order, id LIMIT 1"),
       loadSections('blog'),
     ]);
-    sendThemed(res, render.blogPage({ posts: postsRes.rows, bannerImage: bannerRes.rows[0] && bannerRes.rows[0].image, sections }), 'Journal · Majestic Nailbox');
+    sendThemed(res, render.blogPage({ posts: postsRes.rows, bannerImage: bannerRes.rows[0] && bannerRes.rows[0].image, sections }), pageTitle(res, 'Journal'));
   } catch (err) {
     next(err);
   }
@@ -251,7 +261,7 @@ router.get(['/blog/:slug', '/blogs/news/:slug'], async (req, res, next) => {
       'SELECT * FROM posts WHERE slug = $1 AND is_published = true',
       [req.params.slug]
     );
-    if (!rows.length) return sendThemed(res, render.notFound(), 'Post not found · Majestic Nailbox', 404);
+    if (!rows.length) return sendThemed(res, render.notFound(), pageTitle(res, 'Post not found'), 404);
     const [recentRes, sections] = await Promise.all([
       pool.query(
         'SELECT slug, title, excerpt, content, cover_image, published_at FROM posts WHERE is_published = true AND slug <> $1 ORDER BY published_at DESC LIMIT 3',
@@ -259,7 +269,7 @@ router.get(['/blog/:slug', '/blogs/news/:slug'], async (req, res, next) => {
       ),
       loadSections('article'),
     ]);
-    sendThemed(res, render.postPage({ post: rows[0], recent: recentRes.rows, sections }), rows[0].title + ' · Majestic Nailbox', 200, rows[0].excerpt);
+    sendThemed(res, render.postPage({ post: rows[0], recent: recentRes.rows, sections }), pageTitle(res, rows[0].title), 200, rows[0].excerpt);
   } catch (err) {
     next(err);
   }
@@ -269,7 +279,7 @@ router.get(['/blog/:slug', '/blogs/news/:slug'], async (req, res, next) => {
 router.get(['/contact', '/pages/contact'], async (req, res, next) => {
   try {
     const sections = await loadSections('contact');
-    sendThemed(res, render.contactPage({ settings: res.locals.settings, sections, sent: req.query.sent === '1' }), 'Contact · Majestic Nailbox');
+    sendThemed(res, render.contactPage({ settings: res.locals.settings, sections, sent: req.query.sent === '1' }), pageTitle(res, 'Contact'));
   } catch (err) {
     next(err);
   }
@@ -292,7 +302,7 @@ router.post('/contact', async (req, res, next) => {
 // About Us
 router.get(['/pages/about-us', '/about-us'], async (req, res, next) => {
   try {
-    sendThemed(res, render.aboutPage({ sections: await loadSections('about') }), 'About Us · Majestic Nailbox');
+    sendThemed(res, render.aboutPage({ sections: await loadSections('about') }), pageTitle(res, 'About Us'));
   } catch (err) {
     next(err);
   }
@@ -301,14 +311,14 @@ router.get(['/pages/about-us', '/about-us'], async (req, res, next) => {
 // FAQ + tutorial — both as /pages/<slug> and short aliases /faq, /nail-tutorial
 router.get(['/pages/faq', '/faq'], async (req, res, next) => {
   try {
-    sendThemed(res, render.faqPage({ sections: await loadSections('faq') }), 'FAQ · Majestic Nailbox');
+    sendThemed(res, render.faqPage({ sections: await loadSections('faq') }), pageTitle(res, 'FAQ'));
   } catch (err) {
     next(err);
   }
 });
 router.get(['/pages/nail-tutorial', '/nail-tutorial'], async (req, res, next) => {
   try {
-    sendThemed(res, render.tutorialPage({ sections: await loadSections('tutorial') }), 'Nail Tutorial · Majestic Nailbox');
+    sendThemed(res, render.tutorialPage({ sections: await loadSections('tutorial') }), pageTitle(res, 'Nail Tutorial'));
   } catch (err) {
     next(err);
   }
@@ -324,11 +334,11 @@ const POLICY_TITLES = {
 router.get('/pages/:slug', async (req, res, next) => {
   try {
     const slug = req.params.slug;
-    if (!POLICY_TITLES[slug]) return sendThemed(res, render.notFound(), 'Page not found · Majestic Nailbox', 404);
+    if (!POLICY_TITLES[slug]) return sendThemed(res, render.notFound(), pageTitle(res, 'Page not found'), 404);
     const sections = await loadSections('policy');
     const section = sections[slug];
-    if (!section) return sendThemed(res, render.notFound(), 'Page not found · Majestic Nailbox', 404);
-    sendThemed(res, render.policyPage({ section, settings: res.locals.settings }), POLICY_TITLES[slug] + ' · Majestic Nailbox');
+    if (!section) return sendThemed(res, render.notFound(), pageTitle(res, 'Page not found'), 404);
+    sendThemed(res, render.policyPage({ section, settings: res.locals.settings }), pageTitle(res, POLICY_TITLES[slug]));
   } catch (err) {
     next(err);
   }

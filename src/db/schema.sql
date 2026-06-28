@@ -115,11 +115,12 @@ CREATE TABLE IF NOT EXISTS posts (
   excerpt      TEXT,
   content      TEXT,
   cover_image  TEXT,
-  author       VARCHAR(120) DEFAULT 'Majestic Nailbox',
+  author       VARCHAR(120) DEFAULT 'PASTELLE NAILS',
   is_published BOOLEAN NOT NULL DEFAULT true,
   published_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+ALTER TABLE posts ALTER COLUMN author SET DEFAULT 'PASTELLE NAILS';
 
 -- CMS sections used by homepage and all editorial/content pages.
 CREATE TABLE IF NOT EXISTS site_sections (

@@ -8,6 +8,11 @@
   <h2 style="margin-top:0">Store & Contact Settings</h2>
   <div class="form-grid">
     <div class="form-row"><label>Shop name</label><input type="text" name="shop_name" value="<%= settings.shop_name || '' %>" /></div>
+    <div class="form-row">
+      <label>Primary logo URL</label>
+      <input type="text" name="logo_url" value="<%= settings.logo_url || '/images/Logo/Logo.jpeg' %>" />
+      <% if (settings.logo_url) { %><img src="<%= settings.logo_url %>" alt="Current logo" style="width:96px;height:96px;object-fit:contain;margin-top:10px;border:1px solid #ddd;border-radius:8px" /><% } %>
+    </div>
     <div class="form-row"><label>Tagline</label><input type="text" name="tagline" value="<%= settings.tagline || '' %>" /></div>
     <div class="form-row form-row--full"><label>Announcement 1</label><input type="text" name="announcement" value="<%= settings.announcement || '' %>" /></div>
     <div class="form-row form-row--full"><label>Announcement 2</label><input type="text" name="announcement_2" value="<%= settings.announcement_2 || '' %>" /></div>

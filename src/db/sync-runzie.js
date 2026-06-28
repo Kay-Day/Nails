@@ -31,7 +31,7 @@ async function fetchWithRetry(url, options = {}, attempts = 4) {
       const response = await fetch(url, {
         redirect: 'follow',
         headers: {
-          'User-Agent': 'Mozilla/5.0 Majestic-Nailbox-Sync',
+          'User-Agent': 'Mozilla/5.0 Pastelle-Nails-Sync',
           Accept: options.accept || 'application/json,text/plain,*/*',
         },
       });

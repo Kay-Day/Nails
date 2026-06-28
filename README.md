@@ -1,4 +1,4 @@
-# Nails-Shop
+# PASTELLE NAILS
 
 A runzie.ca-inspired nail storefront built for **viewing products + contacting the shop** (no cart / checkout). Includes a full admin panel for managing banners, products, collections, page content, and a blog.
 

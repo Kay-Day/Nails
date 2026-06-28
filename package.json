@@ -1,7 +1,7 @@
 {
-  "name": "nail-runzie-clone",
+  "name": "pastelle-nails",
   "version": "1.0.0",
-  "description": "Nail press-on storefront (view + contact) with admin CRUD and blog",
+  "description": "PASTELLE NAILS press-on storefront with admin CRUD and blog",
   "main": "src/server.js",
   "type": "commonjs",
   "engines": {
