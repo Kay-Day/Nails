@@ -79,3 +79,8 @@ reference/       original scraped index.html (kept for reference)
 ```bash
 npm run check:media
 ```
+
+## Production deployment
+
+Cấu hình Docker Compose cho VPS (PostgreSQL + app + HTTPS tự động) nằm trong
+[DEPLOY.md](DEPLOY.md).

@@ -4,6 +4,9 @@
   "description": "Nail press-on storefront (view + contact) with admin CRUD and blog",
   "main": "src/server.js",
   "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",

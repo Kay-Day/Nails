@@ -9,17 +9,26 @@ async function setup() {
   await pool.query(schema);
   console.log('✓ Schema applied');
 
-  // Default admin
+  // Create the first admin only. Re-running setup during deploy must not reset
+  // a password that was changed through the admin panel.
   const username = process.env.ADMIN_USERNAME || 'admin';
   const password = process.env.ADMIN_PASSWORD;
-  if (!password) throw new Error('ADMIN_PASSWORD is required in .env');
-  const hash = bcrypt.hashSync(password, 10);
-  await pool.query(
-    `INSERT INTO admins (username, password_hash) VALUES ($1, $2)
-     ON CONFLICT (username) DO UPDATE SET password_hash = EXCLUDED.password_hash`,
-    [username, hash]
+  const existingAdmin = await pool.query(
+    'SELECT id FROM admins WHERE username = $1 LIMIT 1',
+    [username]
   );
-  console.log(`✓ Admin ready -> username: ${username}`);
+  if (existingAdmin.rowCount === 0) {
+    if (!password) throw new Error('ADMIN_PASSWORD is required to create the first admin');
+    const hash = bcrypt.hashSync(password, 10);
+    await pool.query(
+      `INSERT INTO admins (username, password_hash) VALUES ($1, $2)
+       ON CONFLICT (username) DO NOTHING`,
+      [username, hash]
+    );
+    console.log(`✓ Admin created -> username: ${username}`);
+  } else {
+    console.log(`✓ Existing admin preserved -> username: ${username}`);
+  }
 
   // Default settings
   const defaults = {
@@ -37,11 +46,11 @@ async function setup() {
   for (const [key, value] of Object.entries(defaults)) {
     await pool.query(
       `INSERT INTO settings (key, value) VALUES ($1, $2)
-       ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value`,
+       ON CONFLICT (key) DO NOTHING`,
       [key, value]
     );
   }
-  console.log('✓ Default settings ready');
+  console.log('✓ Default settings ready (existing values preserved)');
 
   await pool.end();
   console.log('Done.');
