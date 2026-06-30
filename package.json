@@ -1,7 +1,7 @@
 {
-  "name": "pastelle-nails",
+  "name": "majestic-nail-care",
   "version": "1.0.0",
-  "description": "PASTELLE NAILS press-on storefront with admin CRUD and blog",
+  "description": "Majestic Nail Care press-on storefront with admin CRUD and blog",
   "main": "src/server.js",
   "type": "commonjs",
   "engines": {
@@ -13,6 +13,7 @@
     "db:setup": "node src/db/setup.js",
     "db:seed": "node src/db/seed.js",
     "db:seed-content": "node src/db/cms-seed.js",
+    "db:seed-filters": "node src/db/filter-seed.js",
     "db:sync-runzie": "node src/db/sync-runzie.js",
     "check:media": "node scripts/check-media-lifecycle.js"
   },

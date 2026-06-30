@@ -23,6 +23,12 @@ function gallery(baseFile) {
 
 const img = (f) => '/images/' + f;
 const media = (f) => '/media/' + f;
+// Shop's own product photos in public/anhshop — referenced directly as /anhshop/<file>.
+const SHOP_PHOTOS = fs
+  .readdirSync(path.join(__dirname, '..', '..', 'public', 'anhshop'))
+  .filter((f) => /\.(jpe?g|png|webp)$/i.test(f))
+  .sort();
+const shopPhoto = (i) => '/anhshop/' + SHOP_PHOTOS[i % SHOP_PHOTOS.length];
 
 const collections = [
   { slug: 'best-sellers-1', title: 'Best Sellers', image: '0326002.jpg', description: 'Most-loved press-on sets selected by customers.' },
@@ -93,7 +99,7 @@ const names = [
 ];
 
 const siteSettings = {
-  shop_name: 'PASTELLE NAILS',
+  shop_name: 'Majestic Nail Care',
   logo_url: '/images/Logo/Logo.jpeg',
   tagline: 'Handcrafted press-on nails in Ontario.',
   contact_phone: '4379983533',
@@ -216,13 +222,13 @@ const blogPosts = [
   {
     slug: 'how-to-order-press-on-nails-in-ontario',
     title: 'How to Order Press-On Nails in Ontario',
-    excerpt: 'Found a set you love? Here is how to choose your size and contact PASTELLE NAILS before ordering.',
+    excerpt: 'Found a set you love? Here is how to choose your size and contact Majestic Nail Care before ordering.',
     cover_image: '4_e4749313-2ef6-43fd-918f-fe7d2f6b97c3.jpg',
     content: `<p>Our storefront is designed for browsing first. When you find a set you love, open the product page, choose your size, then contact us directly so we can confirm availability, pickup or shipping options, and any sizing questions.</p>
 <h3>What to send us</h3>
 <p>Send the product name, size, and a screenshot if possible. For example: Salazar's Curse, size XS.</p>
 <h3>Where we are</h3>
-<p>PASTELLE NAILS is based in Ontario, Canada. You can reach us by phone, Instagram, or TikTok from the product page.</p>`,
+<p>Majestic Nail Care is based in Ontario, Canada. You can reach us by phone, Instagram, or TikTok from the product page.</p>`,
   },
   {
     slug: 'how-to-apply-press-on-nails',
@@ -307,10 +313,10 @@ const blogPosts = [
   },
   {
     slug: 'runzie-story',
-    title: 'The Story Behind PASTELLE NAILS',
+    title: 'The Story Behind Majestic Nail Care',
     excerpt: 'A small Ontario studio obsessed with hand-finished press-on nails. Here is how it all started.',
     cover_image: 'Fresh.jpg',
-    content: `<p>PASTELLE NAILS started with a simple idea: beautiful, salon-quality nails should be easy, affordable, and kind to the planet.</p>
+    content: `<p>Majestic Nail Care started with a simple idea: beautiful, salon-quality nails should be easy, affordable, and kind to the planet.</p>
 <h3>Handcrafted, not mass-produced</h3>
 <p>Every set is finished by a real nail tech in our Ontario studio. We inspect each one before it goes out, because a small batch is the only way we know every set is right.</p>
 <h3>Reusable by design</h3>
@@ -380,11 +386,11 @@ async function seed() {
 
   // Banners (slideshow)
   const banners = [
-    { title: 'Spring 2026 Collection', subtitle: 'Soft hues, salon-perfect finish — your new everyday set.', image: img('Homepage_Banner_1_-_Desk_Top.jpg'), link: '/collections/spring-2026-collection', button_text: 'Shop Spring 2026' },
-    { title: 'New Arrival', subtitle: 'Fresh handcrafted designs ready to view and reserve.', image: img('Collection_Banner_-_Desktop_1.jpg'), link: '/collections/new-arrival', button_text: 'View New Arrival' },
-    { title: 'Reusable. Cruelty-free. Effortless.', subtitle: 'Press-on nails that last up to two weeks.', image: img('Website_Photos_Square.jpg'), link: '/products', button_text: 'Shop All' },
-    { title: 'NeonNyx Nails', subtitle: 'Bold, statement designs for nights out.', image: img('0326015.jpg'), link: '/collections/neonnyx-nails', button_text: 'Shop NeonNyx' },
-    { title: 'Now on Sale', subtitle: 'Your favourite sets, for less.', image: img('Discount.jpg'), link: '/collections/now-on-sale', button_text: 'Shop the Sale' },
+    { title: 'Spring 2026 Collection', subtitle: 'Soft hues, salon-perfect finish — your new everyday set.', image: shopPhoto(40), link: '/collections/spring-2026-collection', button_text: 'Shop Spring 2026' },
+    { title: 'New Arrival', subtitle: 'Fresh handcrafted designs ready to view and reserve.', image: shopPhoto(41), link: '/collections/new-arrival', button_text: 'View New Arrival' },
+    { title: 'Reusable. Cruelty-free. Effortless.', subtitle: 'Press-on nails that last up to two weeks.', image: shopPhoto(42), link: '/products', button_text: 'Shop All' },
+    { title: 'NeonNyx Nails', subtitle: 'Bold, statement designs for nights out.', image: shopPhoto(43), link: '/collections/neonnyx-nails', button_text: 'Shop NeonNyx' },
+    { title: 'Now on Sale', subtitle: 'Your favourite sets, for less.', image: shopPhoto(44), link: '/collections/now-on-sale', button_text: 'Shop the Sale' },
   ];
   for (let i = 0; i < banners.length; i++) {
     const b = banners[i];
@@ -479,7 +485,7 @@ async function seed() {
     await pool.query(
       `INSERT INTO posts (slug, title, excerpt, content, cover_image, author, is_published, published_at)
        VALUES ($1,$2,$3,$4,$5,$6,true, now() - ($7 || ' days')::interval)`,
-      [p.slug, p.title, p.excerpt, p.content, img(p.cover_image), 'PASTELLE NAILS', i * 5]
+      [p.slug, p.title, p.excerpt, p.content, img(p.cover_image), 'Majestic Nail Care', i * 5]
     );
   }
   console.log(`✓ ${blogPosts.length} blog posts`);

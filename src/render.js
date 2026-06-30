@@ -1,10 +1,20 @@
 // Builds the inner HTML for each storefront page using the runzie theme's own
 // CSS classes (m-section, m-product-card, m-price, m-button…) so DB-driven pages
 // match the scraped homepage. Data comes from Postgres.
+const fs = require('fs');
+const path = require('path');
 const { escapeHtml } = require('./layout');
 const sections = require('./sections');
 
 const e = escapeHtml;
+// Shop's own product photos in public/anhshop — referenced directly as /anhshop/<file>.
+const SHOP_PHOTOS = (() => {
+  try {
+    return fs.readdirSync(path.join(__dirname, '..', 'public', 'anhshop'))
+      .filter((f) => /\.(jpe?g|png|webp)$/i.test(f)).sort();
+  } catch (e) { return []; }
+})();
+const shopPhoto = (i) => (SHOP_PHOTOS.length ? '/anhshop/' + SHOP_PHOTOS[i % SHOP_PHOTOS.length] : PLACEHOLDER);
 const money = (v) => (v == null ? null : '$' + Number(v).toFixed(2));
 const moneyCad = (v) => (v == null ? null : '$' + Number(v).toFixed(2) + ' CAD');
 const PLACEHOLDER = '/images/Website_Photos_Square.jpg';
@@ -140,10 +150,13 @@ function productCard(p, hoverUrl) {
 function asSeenCard(p) {
   const media = p.video_poster || p.image || PLACEHOLDER;
   const thumb = p.image || media;
+  const mediaInner = p.video
+    ? `<video class="db-as-seen-card__video" src="${e(p.video)}" poster="${e(media)}" muted loop playsinline preload="none" aria-label="${e(p.title)}"></video>`
+    : `<img src="${e(media)}" alt="${e(p.title)}" loading="lazy" decoding="async">`;
   return `
-    <a href="/products/${e(p.slug)}" class="db-as-seen-card" aria-label="${e(p.title)}">
+    <a href="/products/${e(p.slug)}" class="db-as-seen-card${p.video ? ' has-video' : ''}" aria-label="${e(p.title)}">
       <div class="db-as-seen-card__media">
-        <img src="${e(media)}" alt="${e(p.title)}" loading="lazy" decoding="async">
+        ${mediaInner}
         ${p.video_poster || p.video ? `<span class="db-as-seen-card__play" aria-hidden="true">
           <svg viewBox="0 0 32 32"><path d="M23.5 15.134a1 1 0 0 1 0 1.732l-11.25 6.495a1 1 0 0 1-1.5-.866V9.505a1 1 0 0 1 1.5-.866l11.25 6.495z"/></svg>
         </span>` : ''}
@@ -173,7 +186,13 @@ function sectionHeading(title, desc) {
 }
 
 // --- Products listing page ---
-function productsPage({ products, collections, shapes, lengths, filters, page, totalPages, total, bannerImage, sections }) {
+const FILTER_CHEVRON = '<svg class="db-filter__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.53 6.53l-5 5a.75.75 0 0 1-1.06 0l-5-5a.75.75 0 1 1 1.06-1.06L8 9.94l4.47-4.47a.75.75 0 1 1 1.06 1.06z" fill="currentColor"/></svg>';
+
+function productsPage({ products, collections, filterGroups, priceRange, inStockCount, filters, page, totalPages, total, bannerImage, sections }) {
+  filterGroups = filterGroups || [];
+  priceRange = priceRange || { min: 0, max: 0 };
+  const selections = filters.selections || {};
+  const availSel = filters.availability || [];
   const col = filters.collection ? collections.find((c) => c.slug === filters.collection) : null;
   const colTitle = col ? col.title : null;
   const hero = cmsSection(sections, 'hero');
@@ -182,43 +201,116 @@ function productsPage({ products, collections, shapes, lengths, filters, page, t
   const bannerImg = (col && col.image) || hero.image || bannerImage || DEFAULT_BANNER;
   const bannerBreadcrumb = `<a href="/">Home</a> / Shop${colTitle ? ' / ' + e(colTitle) : ''}`;
 
-  const filterLink = (key, val) => {
-    const o = Object.assign({}, filters, { [key]: val, page: undefined });
-    const qs = Object.entries(o).filter(([, v]) => v).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&');
-    return '/products' + (qs ? '?' + qs : '');
+  const hasActiveFilters = Object.values(selections).some((a) => a && a.length) || availSel.length || filters.price_min != null || filters.price_max != null;
+  // slug -> label lookup per group (for chip labels)
+  const labelOf = {};
+  filterGroups.forEach((g) => { labelOf[g.slug] = {}; g.values.forEach((v) => { labelOf[g.slug][v.slug] = v.label; }); });
+  const withoutValue = (slug, val) => {
+    const copy = Object.assign({}, selections);
+    copy[slug] = (selections[slug] || []).filter((x) => x !== val);
+    return copy;
   };
-  const pageLink = (p) => {
-    const o = Object.assign({}, filters, { page: p });
-    const qs = Object.entries(o).filter(([, v]) => v).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&');
-    return '/products?' + qs;
+
+  // Build a query string from the current filters, with overrides applied.
+  const buildQS = (overrides) => {
+    const f = Object.assign({}, filters, overrides);
+    const sels = (overrides && overrides.selections) ? overrides.selections : (f.selections || {});
+    const parts = [];
+    const add = (k, v) => { if (v != null && v !== '') parts.push(`${k}=${encodeURIComponent(v)}`); };
+    add('collection', f.collection);
+    add('q', f.q);
+    add('sort', f.sort);
+    Object.keys(sels).forEach((slug) => (sels[slug] || []).forEach((v) => add(slug, v)));
+    (f.availability || []).forEach((v) => add('availability', v));
+    add('price_min', f.price_min);
+    add('price_max', f.price_max);
+    add('page', f.page);
+    return '/products' + (parts.length ? '?' + parts.join('&') : '');
   };
+  const pageLink = (p) => buildQS({ page: p });
+  const clearAllHref = buildQS({ selections: {}, availability: [], price_min: null, price_max: null, page: undefined });
+
+  // One runzie-style accordion group of checkbox options.
+  const checkboxGroup = (group) => {
+    const visible = group.values.filter((v) => v.count > 0 || v.selected);
+    if (!visible.length) return '';
+    return `
+      <details class="db-filter" open>
+        <summary class="db-filter__title">${e(group.title)}${FILTER_CHEVRON}</summary>
+        <div class="db-filter__body">
+          ${visible.map((v) => `
+            <label class="db-filter__opt">
+              <input type="checkbox" name="${e(group.slug)}" value="${e(v.slug)}" ${v.selected ? 'checked' : ''} onchange="this.form.requestSubmit ? this.form.requestSubmit() : this.form.submit()">
+              <span class="db-filter__box" aria-hidden="true"></span>
+              <span class="db-filter__opt-label">${e(v.label)}</span>
+              <span class="db-filter__count">(${v.count})</span>
+            </label>`).join('')}
+        </div>
+      </details>`;
+  };
+
+  const availabilityGroup = `
+    <details class="db-filter" open>
+      <summary class="db-filter__title">Availability${FILTER_CHEVRON}</summary>
+      <div class="db-filter__body">
+        <label class="db-filter__opt">
+          <input type="checkbox" name="availability" value="in" ${availSel.includes('in') ? 'checked' : ''} onchange="this.form.requestSubmit ? this.form.requestSubmit() : this.form.submit()">
+          <span class="db-filter__box" aria-hidden="true"></span>
+          <span class="db-filter__opt-label">In stock</span>
+          <span class="db-filter__count">(${inStockCount || 0})</span>
+        </label>
+        <label class="db-filter__opt">
+          <input type="checkbox" name="availability" value="out" ${availSel.includes('out') ? 'checked' : ''} onchange="this.form.requestSubmit ? this.form.requestSubmit() : this.form.submit()">
+          <span class="db-filter__box" aria-hidden="true"></span>
+          <span class="db-filter__opt-label">Out of stock</span>
+          <span class="db-filter__count">(0)</span>
+        </label>
+      </div>
+    </details>`;
+
+  const pMin = priceRange.min || 0;
+  const pMax = priceRange.max || 0;
+  const curMin = filters.price_min != null ? filters.price_min : pMin;
+  const curMax = filters.price_max != null ? filters.price_max : pMax;
+  const priceGroup = pMax > pMin ? `
+    <details class="db-filter" open>
+      <summary class="db-filter__title">Price${FILTER_CHEVRON}</summary>
+      <div class="db-filter__body">
+        <div class="db-price" data-price-min="${pMin}" data-price-max="${pMax}">
+          <div class="db-price__slider">
+            <div class="db-price__track"></div>
+            <div class="db-price__range" data-price-fill></div>
+            <input type="range" class="db-price__handle" data-price-handle="min" min="${pMin}" max="${pMax}" value="${curMin}" step="1" aria-label="Minimum price">
+            <input type="range" class="db-price__handle" data-price-handle="max" min="${pMin}" max="${pMax}" value="${curMax}" step="1" aria-label="Maximum price">
+          </div>
+          <div class="db-price__fields">
+            <label><span>$</span><input type="number" name="price_min" min="${pMin}" max="${pMax}" value="${filters.price_min != null ? filters.price_min : ''}" placeholder="${pMin}" data-price-input="min"></label>
+            <span class="db-price__to">To</span>
+            <label><span>$</span><input type="number" name="price_max" min="${pMin}" max="${pMax}" value="${filters.price_max != null ? filters.price_max : ''}" placeholder="${pMax}" data-price-input="max"></label>
+          </div>
+        </div>
+      </div>
+    </details>` : '';
 
   const filtersHtml = `
   <button class="db-filter-toggle" type="button" aria-expanded="false" aria-controls="db-product-filters">
-    <span>Filters &amp; categories</span><span aria-hidden="true">+</span>
+    <span>Filters</span><span aria-hidden="true">+</span>
   </button>
   <aside class="db-filters" id="db-product-filters">
-    <form class="db-search" method="get" action="/products">
-      <input type="text" name="q" placeholder="Search…" value="${e(filters.q || '')}">
-      <button class="m-button m-button--primary db-search__submit" type="submit">Go</button>
-    </form>
-    <div class="db-filters__group">
-      <h4>Collections</h4>
-      <a href="/products" class="${!filters.collection ? 'is-active' : ''}">All</a>
-      ${collections.map((c) => `<a href="/products?collection=${e(c.slug)}" class="${filters.collection === c.slug ? 'is-active' : ''}">${e(c.title)}</a>`).join('')}
+    <div class="db-filters__head">
+      <h2 class="db-filters__title">Filters</h2>
+      ${hasActiveFilters ? `<a class="db-filters__clear" href="${clearAllHref}">Clear all</a>` : ''}
     </div>
-    <div class="db-filters__group">
-      <h4>Shape</h4>
-      ${shapes.map((s) => `<a href="${filterLink('shape', s)}" class="${filters.shape === s ? 'is-active' : ''}">${e(s)}</a>`).join('')}
+    <div class="db-search-wrap">
+      <input type="text" name="q" class="db-search__field" placeholder="Search…" value="${e(filters.q || '')}">
     </div>
-    <div class="db-filters__group">
-      <h4>Length</h4>
-      ${lengths.map((l) => `<a href="${filterLink('length', l)}" class="${filters.length === l ? 'is-active' : ''}">${e(l)}</a>`).join('')}
-    </div>
+    ${filterGroups.map(checkboxGroup).join('')}
+    ${availabilityGroup}
+    ${priceGroup}
   </aside>`;
 
   const cards = products.length
-    ? `<div class="db-grid db-grid--4">${products.map((p) => productCard(p, p.hover_image)).join('')}</div>`
+    ? `<div class="db-grid db-grid--4" data-product-grid>${products.map((p) => productCard(p, p.hover_image)).join('')}</div>`
     : '<div class="db-empty"><h3>No products found</h3><p>Try clearing your filters.</p><a class="m-button m-button--primary" href="/products">View all</a></div>';
 
   let pagination = '';
@@ -232,48 +324,139 @@ function productsPage({ products, collections, shapes, lengths, filters, page, t
     pagination = `<div class="db-pagination">${items}</div>`;
   }
 
+  const gridToggle = `
+    <div class="db-grid-toggle" role="group" aria-label="Products per row">
+      <button type="button" data-grid-cols="2" aria-label="2 per row"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg></button>
+      <button type="button" data-grid-cols="3" aria-label="3 per row"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="2" width="6" height="6"/><rect x="9" y="2" width="6" height="6"/><rect x="16" y="2" width="6" height="6"/><rect x="2" y="9" width="6" height="6"/><rect x="9" y="9" width="6" height="6"/><rect x="16" y="9" width="6" height="6"/></svg></button>
+      <button type="button" data-grid-cols="4" class="is-active" aria-label="4 per row"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="1" y="1" width="4.5" height="4.5"/><rect x="6.5" y="1" width="4.5" height="4.5"/><rect x="12" y="1" width="4.5" height="4.5"/><rect x="17.5" y="1" width="4.5" height="4.5"/><rect x="1" y="6.5" width="4.5" height="4.5"/><rect x="6.5" y="6.5" width="4.5" height="4.5"/><rect x="12" y="6.5" width="4.5" height="4.5"/><rect x="17.5" y="6.5" width="4.5" height="4.5"/></svg></button>
+    </div>`;
+
+  // Active-filter chips (runzie shows removable chips + "Clear All" above the grid)
+  const chip = (label, href) => `<a class="db-chip" href="${href}"><span class="db-chip__x" aria-hidden="true">×</span>${e(label)}</a>`;
+  const chips = [];
+  Object.keys(selections).forEach((slug) => (selections[slug] || []).forEach((v) => {
+    const label = (labelOf[slug] && labelOf[slug][v]) || v;
+    chips.push(chip(label, buildQS({ selections: withoutValue(slug, v), page: undefined })));
+  }));
+  availSel.forEach((v) => chips.push(chip(v === 'in' ? 'In stock' : 'Out of stock', buildQS({ availability: availSel.filter((x) => x !== v), page: undefined }))));
+  if (filters.price_min != null || filters.price_max != null) {
+    const lo = filters.price_min != null ? filters.price_min : pMin;
+    const hi = filters.price_max != null ? filters.price_max : pMax;
+    chips.push(chip(`$${lo} - $${hi}`, buildQS({ price_min: null, price_max: null, page: undefined })));
+  }
+  const activeChips = chips.length
+    ? `<div class="db-active-filters">${chips.join('')}<a class="db-active-filters__clear" href="${clearAllHref}">Clear All</a></div>`
+    : '';
+
   return `${header()}
 ${pageBanner({ image: bannerImg, title: bannerTitle, subtitle: bannerSub, breadcrumbHtml: bannerBreadcrumb })}
 ${marquee()}
 <section class="m-section db-page">
   <div class="container m-section-my m-section-py">
-    <div class="db-shop">
+    <form class="db-shop" method="get" action="/products" id="db-filter-form">
+      ${filters.collection ? `<input type="hidden" name="collection" value="${e(filters.collection)}">` : ''}
       ${filtersHtml}
-      <div>
+      <div class="db-shop__main">
         <div class="db-toolbar">
-          <span class="db-count">${total} product${total === 1 ? '' : 's'}</span>
-          <form method="get" action="/products" id="db-sort">
-            ${Object.entries(filters).filter(([k, v]) => v && k !== 'sort').map(([k, v]) => `<input type="hidden" name="${e(k)}" value="${e(v)}">`).join('')}
-            <select name="sort" onchange="document.getElementById('db-sort').submit()">
-              <option value="">Sort: Featured</option>
-              <option value="newest" ${filters.sort === 'newest' ? 'selected' : ''}>Newest</option>
-              <option value="price-asc" ${filters.sort === 'price-asc' ? 'selected' : ''}>Price: Low to High</option>
-              <option value="price-desc" ${filters.sort === 'price-desc' ? 'selected' : ''}>Price: High to Low</option>
+          <label class="db-sort">
+            <select name="sort" onchange="this.form.requestSubmit ? this.form.requestSubmit() : this.form.submit()">
+              <option value="" ${!filters.sort ? 'selected' : ''}>Featured</option>
+              <option value="newest" ${filters.sort === 'newest' ? 'selected' : ''}>Date, new to old</option>
+              <option value="oldest" ${filters.sort === 'oldest' ? 'selected' : ''}>Date, old to new</option>
+              <option value="price-asc" ${filters.sort === 'price-asc' ? 'selected' : ''}>Price, low to high</option>
+              <option value="price-desc" ${filters.sort === 'price-desc' ? 'selected' : ''}>Price, high to low</option>
+              <option value="title-asc" ${filters.sort === 'title-asc' ? 'selected' : ''}>Alphabetically, A-Z</option>
+              <option value="title-desc" ${filters.sort === 'title-desc' ? 'selected' : ''}>Alphabetically, Z-A</option>
             </select>
-          </form>
+          </label>
+          <div class="db-toolbar__right">
+            <span class="db-count">${total} product${total === 1 ? '' : 's'}</span>
+            ${gridToggle}
+          </div>
         </div>
+        ${activeChips}
         ${cards}
         ${pagination}
       </div>
-    </div>
+    </form>
   </div>
 </section>
 <script>
 (() => {
+  // Mobile filters drawer toggle
   const button = document.querySelector('.db-filter-toggle');
   const filtersPanel = document.querySelector('#db-product-filters');
-  if (!button || !filtersPanel) return;
-  button.addEventListener('click', () => {
-    const isOpen = filtersPanel.classList.toggle('is-open');
-    button.setAttribute('aria-expanded', String(isOpen));
-    button.lastElementChild.textContent = isOpen ? '-' : '+';
-  });
+  if (button && filtersPanel) {
+    button.addEventListener('click', () => {
+      const isOpen = filtersPanel.classList.toggle('is-open');
+      button.setAttribute('aria-expanded', String(isOpen));
+      button.lastElementChild.textContent = isOpen ? '−' : '+';
+    });
+  }
+
+  // Submit search on Enter
+  const form = document.getElementById('db-filter-form');
+  const search = form && form.querySelector('.db-search__field');
+  if (search) search.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); form.requestSubmit ? form.requestSubmit() : form.submit(); } });
+
+  // Grid columns toggle (persisted)
+  const grid = document.querySelector('[data-product-grid]');
+  const toggles = document.querySelectorAll('[data-grid-cols]');
+  const applyCols = (cols) => {
+    if (!grid) return;
+    grid.classList.remove('db-grid--2', 'db-grid--3', 'db-grid--4');
+    grid.classList.add('db-grid--' + cols);
+    toggles.forEach((t) => t.classList.toggle('is-active', t.dataset.gridCols === cols));
+  };
+  const saved = (() => { try { return localStorage.getItem('db-grid-cols'); } catch (e) { return null; } })();
+  if (saved) applyCols(saved);
+  toggles.forEach((t) => t.addEventListener('click', () => {
+    applyCols(t.dataset.gridCols);
+    try { localStorage.setItem('db-grid-cols', t.dataset.gridCols); } catch (e) {}
+  }));
+
+  // Dual-handle price slider
+  const price = document.querySelector('.db-price');
+  if (price && form) {
+    const lo = price.querySelector('[data-price-handle="min"]');
+    const hi = price.querySelector('[data-price-handle="max"]');
+    const fill = price.querySelector('[data-price-fill]');
+    const inMin = price.querySelector('[data-price-input="min"]');
+    const inMax = price.querySelector('[data-price-input="max"]');
+    const lim = { min: Number(price.dataset.priceMin), max: Number(price.dataset.priceMax) };
+    const span = Math.max(1, lim.max - lim.min);
+    const paint = () => {
+      let a = Number(lo.value), b = Number(hi.value);
+      if (a > b) { const t = a; a = b; b = t; }
+      fill.style.left = ((a - lim.min) / span * 100) + '%';
+      fill.style.right = (100 - (b - lim.min) / span * 100) + '%';
+    };
+    const sync = (src) => {
+      let a = Number(lo.value), b = Number(hi.value);
+      if (a > b) { if (src === lo) lo.value = b; else hi.value = a; a = Number(lo.value); b = Number(hi.value); }
+      inMin.value = a > lim.min ? a : '';
+      inMax.value = b < lim.max ? b : '';
+      paint();
+    };
+    [lo, hi].forEach((h) => {
+      h.addEventListener('input', () => sync(h));
+      h.addEventListener('change', () => { sync(h); form.requestSubmit ? form.requestSubmit() : form.submit(); });
+    });
+    [inMin, inMax].forEach((f) => f && f.addEventListener('change', () => {
+      if (inMin.value !== '') lo.value = inMin.value;
+      if (inMax.value !== '') hi.value = inMax.value;
+      paint();
+      form.requestSubmit ? form.requestSubmit() : form.submit();
+    }));
+    paint();
+  }
 })();
 </script>`;
 }
 
 // --- Product detail page ---
-function productPage({ product, gallery, variants, collections, related, settings, sections }) {
+function productPage({ product, gallery, variants, collections, related, reviewCards, settings, sections }) {
+  reviewCards = reviewCards || [];
   const sale = onSale(product);
   const images = Array.from(new Set((gallery || []).filter(Boolean)));
   const media = images.map((src) => ({ type: 'image', src, poster: '' }));
@@ -302,7 +485,7 @@ function productPage({ product, gallery, variants, collections, related, setting
   const selectableVariants = productVariants.filter((variant) => !/^default title$/i.test(variant.title));
   const initialVariant = productVariants.find((variant) => variant.is_available !== false) || productVariants[0] || {};
   const sku = initialVariant.sku || product.sku || '';
-  const shopName = settings.shop_name || 'PASTELLE NAILS';
+  const shopName = settings.shop_name || 'Majestic Nail Care';
   const phoneDigits = settings.contact_phone ? settings.contact_phone.replace(/\D/g, '') : '';
   const phoneHref = phoneDigits ? '+' + (phoneDigits.length === 10 ? '1' + phoneDigits : phoneDigits) : '';
 
@@ -345,7 +528,15 @@ function productPage({ product, gallery, variants, collections, related, setting
     </details>`;
 
   const contactSection = cmsSection(sections, 'contact');
-  const promiseItems = cmsSection(sections, 'promises').items || [];
+  const promisesSection = cmsSection(sections, 'promises');
+  const promiseItems = promisesSection.items || [];
+  // Brand feature list shown under the price (matches the reference layout).
+  // Editable via the CMS "promises" section; falls back to sensible defaults.
+  const featureTagline = promisesSection.subtitle || 'No salon needed — just peel, press, and shine!';
+  const defaultFeatures = ['5 minute application', 'Handcrafted by a real nail tech with gel', 'Lasts up to 4 weeks', '100% reusable'];
+  const featureBullets = (promiseItems.map((item) => item.title).filter(Boolean).length
+    ? promiseItems.map((item) => item.title).filter(Boolean)
+    : defaultFeatures);
   const reasonsSection = cmsSection(sections, 'reasons');
   const accordionItems = cmsSection(sections, 'accordions').items || [];
   const reasonItems = (reasonsSection.items || []).map((item) => `
@@ -357,7 +548,7 @@ function productPage({ product, gallery, variants, collections, related, setting
       </div>
     </article>`).join('');
   const productAccordions = [
-    accordion('Product Description', `<p>${e(product.description || '')}</p>`, true),
+    accordion('Product Description', `<p>${e(product.description || '')}</p>`, false),
     ...accordionItems.map((item) => accordion(
       item.title || '',
       `${item.body_html || ''}${item.image ? `<img class="db-size-guide-img" src="${e(item.image)}" alt="${e(item.title || '')}" loading="lazy">` : ''}${item.link ? `<p><a href="${e(item.link)}">Learn more</a></p>` : ''}`
@@ -367,6 +558,40 @@ function productPage({ product, gallery, variants, collections, related, setting
   const relatedHtml = related.length
     ? `<div style="margin-top:72px">${sectionHeading('You May Also Like')}<div class="db-grid db-grid--4">${related.map((p) => productCard(p, p.hover_image)).join('')}</div></div>`
     : '';
+
+  const reviewStars = '<span class="db-review-card__stars" aria-hidden="true">★★★★★</span>';
+  const reviewsHtml = reviewCards.length ? `
+  <section class="db-reviews-product">
+    <div class="db-reviews-product__head">
+      <h2>Customer Reviews</h2>
+      <p>Be the first to write a review for ${e(product.title)}.</p>
+      <a class="m-button m-button--primary db-write-review" href="/contact">Write a review</a>
+    </div>
+    <div class="db-reviews-other">
+      <h3>Reviews for other products (${reviewCards.length})</h3>
+      <div class="db-reviews-carousel" data-review-carousel>
+        <button type="button" class="db-reviews-arrow db-reviews-arrow--prev" data-review-prev aria-label="Previous reviews">‹</button>
+        <div class="db-reviews-track" data-review-track>
+          ${reviewCards.map((c) => `
+            <article class="db-review-card">
+              ${reviewStars}
+              <div class="db-review-card__head">
+                <strong>${e(c.name)}</strong>
+                ${c.verified ? '<span class="db-review-card__verified">Verified</span>' : ''}
+              </div>
+              <div class="db-review-card__date">${e(c.date)}</div>
+              <p class="db-review-card__title">${e(c.title)}</p>
+              <p class="db-review-card__text">${e(c.text)}</p>
+              <a class="db-review-card__product" href="/products/${e(c.product.slug)}">
+                <img src="${e(c.product.image || PLACEHOLDER)}" alt="${e(c.product.title)}" loading="lazy">
+                <span><small>Review for</small>${e(c.product.title)}</span>
+              </a>
+            </article>`).join('')}
+        </div>
+        <button type="button" class="db-reviews-arrow db-reviews-arrow--next" data-review-next aria-label="Next reviews">›</button>
+      </div>
+    </div>
+  </section>` : '';
 
   return `${header(['/css/product.css'])}
 <section class="m-section db-page db-product-clone-section">
@@ -380,20 +605,25 @@ function productPage({ product, gallery, variants, collections, related, setting
       <div class="db-product-panel">
         ${collectionLinks ? `<div class="db-product-kicker">${collectionLinks}</div>` : ''}
         <h1 class="m-product-title">${e(product.title)}</h1>
-        <div class="db-review-line"><span>★★★★★</span><span>No reviews yet</span></div>
+        <hr class="db-product-divider">
         <div class="db-product-price" data-product-price>
           <span data-current-price>${initialVariant.price != null ? moneyCad(initialVariant.price) : (product.price != null ? moneyCad(product.price) : 'Contact for price')}</span>
           <span class="was" data-current-compare${initialVariant.compare_at_price || sale ? '' : ' hidden'}>${initialVariant.compare_at_price ? moneyCad(initialVariant.compare_at_price) : (sale ? moneyCad(product.compare_at_price) : '')}</span>
+          ${sku ? `<span hidden data-selected-sku>${e(sku)}</span>` : ''}
         </div>
-        <div class="db-product-info-row">
-          ${sku ? `<div><span>SKU</span><strong data-selected-sku>${e(sku)}</strong></div>` : ''}
-          ${infoRow('Shape', product.shape)}
-          ${infoRow('Length', product.length)}
+        <div class="db-product-features">
+          <p class="db-product-tagline">${e(featureTagline)}</p>
+          <ul class="db-product-feature-list">
+            ${featureBullets.map((b) => `<li><svg class="db-feature-check" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0L3.3 9.7a1 1 0 1 1 1.4-1.4l3.3 3.3 6.8-6.8a1 1 0 0 1 1.4 0z" fill="#6b4ef0"/></svg><span>${e(b)}</span></li>`).join('')}
+          </ul>
         </div>
         ${selectableVariants.length ? `<div class="db-size-picker">
           <div class="db-size-picker__head">
-            <span>Size:</span>
-            <strong data-selected-size>${e(initialVariant.title || '')}</strong>
+            <span class="db-size-picker__label">Size: <strong data-selected-size>${e(initialVariant.title || '')}</strong></span>
+            <button type="button" class="db-size-guide-trigger" data-size-guide-open aria-haspopup="dialog">
+              <svg viewBox="0 0 640 512" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M608 128H32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h576c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zm0 224H32V160h80v56c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-56h64v56c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-56h64v56c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-56h64v56c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-56h64v56c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-56h80v192z"/></svg>
+              <span>Size guide</span>
+            </button>
           </div>
           <div class="db-size-picker__options">${sizeButtons}</div>
         </div>` : ''}
@@ -406,7 +636,6 @@ function productPage({ product, gallery, variants, collections, related, setting
           </div>
           <div class="db-contact-btns">${contactButtons}</div>
         </div>
-        ${promiseItems.length ? `<ul class="db-product-promises">${promiseItems.map((item) => `<li>${e(item.title || '')}</li>`).join('')}</ul>` : ''}
         <div class="db-product-accordions">${productAccordions}</div>
       </div>
     </div>
@@ -415,11 +644,48 @@ function productPage({ product, gallery, variants, collections, related, setting
       <div class="db-product-reasons">${reasonItems}</div>
     </section>` : ''}
     ${relatedHtml}
+    ${reviewsHtml}
   </div>
 </section>
+<div class="db-size-guide" data-size-guide hidden>
+  <div class="db-size-guide__overlay" data-size-guide-close></div>
+  <div class="db-size-guide__dialog" role="dialog" aria-modal="true" aria-label="Size guide">
+    <button type="button" class="db-size-guide__close" data-size-guide-close aria-label="Close size guide">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 5L5 19M5 5l14 14"/></svg>
+    </button>
+    <div class="db-size-guide__scroll">
+      <div class="db-size-guide__brand">${e(shopName)}</div>
+      <div class="db-size-guide__chart">
+        <img src="/images/size-guide/size-guide.jpg" alt="${e(shopName)} size guide — how to measure your nails and the size chart" loading="lazy">
+      </div>
+      <p class="db-size-guide__note">Still unsure? Message us your measurements and we'll help you pick the perfect fit — or arrange a custom-sized set.</p>
+    </div>
+  </div>
+</div>
 ${marquee()}
 <script>
 (function () {
+  // Size guide modal
+  var sg = document.querySelector('[data-size-guide]');
+  if (sg) {
+    var openSg = function () { sg.hidden = false; document.body.classList.add('db-size-guide-open'); };
+    var closeSg = function () { sg.hidden = true; document.body.classList.remove('db-size-guide-open'); };
+    document.querySelectorAll('[data-size-guide-open]').forEach(function (b) { b.addEventListener('click', openSg); });
+    sg.querySelectorAll('[data-size-guide-close]').forEach(function (b) { b.addEventListener('click', closeSg); });
+    document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && !sg.hidden) closeSg(); });
+  }
+
+  // Reviews carousel arrows
+  var rc = document.querySelector('[data-review-carousel]');
+  if (rc) {
+    var track = rc.querySelector('[data-review-track]');
+    var step = function () { var card = track.querySelector('.db-review-card'); return card ? card.getBoundingClientRect().width + 16 : 320; };
+    var prev = rc.querySelector('[data-review-prev]');
+    var next = rc.querySelector('[data-review-next]');
+    if (prev) prev.addEventListener('click', function () { track.scrollLeft -= step() * 2; });
+    if (next) next.addEventListener('click', function () { track.scrollLeft += step() * 2; });
+  }
+
   var gallery = document.querySelector('[data-db-product-gallery]');
   if (!gallery) return;
   var stage = gallery.querySelector('[data-main-media]');
@@ -550,7 +816,7 @@ ${marquee()}`;
 function postPage({ post, recent, sections }) {
   const cta = cmsSection(sections, 'cta');
   const arrow = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg>';
-  const author = post.author || 'PASTELLE NAILS';
+  const author = post.author || 'Majestic Nail Care';
   const initials = author
     .split(/\s+/)
     .filter(Boolean)
@@ -819,7 +1085,7 @@ function notFound() {
 
 // --- Home page (scraped runzie theme) ---
 function homePageLegacy({ banners, featured, collections, posts, asSeenProducts, settings }) {
-  const shop = settings.shop_name || 'PASTELLE NAILS';
+  const shop = settings.shop_name || 'Majestic Nail Care';
   const instagram = settings.instagram || '#';
   const arrow = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg>';
 
@@ -1098,7 +1364,7 @@ function homePage({ banners, featured, posts, sections: cmsSections, settings })
     ${best.button_link ? `<div class="db-section-action"><a class="m-button m-button--primary" href="${e(best.button_link)}">${e(best.button_text || 'View all')}</a></div>` : ''}
   </div></section>` : '';
 
-  const shapeHtml = (shapeSection.items || []).length ? `<section class="m-section m-section-my m-section-py db-home-soft"><div class="container db-home-container">
+  const shapeHtml = (shapeSection.items || []).length ? `<section class="m-section m-section-my m-section-py db-home-soft db-shape-section"><div class="container db-home-container">
     ${sectionHeading(shapeSection.title || '', shapeSection.subtitle || '')}<div class="db-grid db-grid--5">${shapeSection.items.map((item) => `<a href="${e(item.link || '#')}" class="m-collection-card m-collection-card--round"><div class="m-collection-card__image m-collection-card__image-rounded m:rounded-full m-hover-box m-hover-box--scale-up"><img src="${e(item.image || PLACEHOLDER)}" alt="${e(item.title || '')}" loading="lazy"></div><div class="m-collection-card__content"><h3 class="m-collection-card__title">${e(item.title || '')}</h3><span class="m-collection-card__link">View collection ${arrow}</span></div></a>`).join('')}</div>
   </div></section>` : '';
 
@@ -1106,17 +1372,26 @@ function homePage({ banners, featured, posts, sections: cmsSections, settings })
     ${sectionHeading(curated.title || '', curated.subtitle || '')}<div class="db-curated-grid">${curated.items.map((item) => `<a class="db-curated-card" href="${e(item.link || '#')}"><img src="${e(item.image || PLACEHOLDER)}" alt="${e(item.title || '')}" loading="lazy"><span class="db-curated-card__overlay"></span><span class="db-curated-card__content">${item.label ? `<small>${e(item.label)}</small>` : ''}<strong>${e(item.title || '')}</strong><span class="rte">${item.body_html || ''}</span></span></a>`).join('')}</div>
   </div></section>` : '';
 
-  const seenHtml = (seen.products || []).length ? `<section class="m-section db-as-seen-section"><div class="container-full">${sectionHeading(seen.title || '', seen.subtitle || '')}<div class="db-as-seen-track">${seen.products.map(asSeenCard).join('')}</div></div></section>` : '';
+  const seenHtml = (seen.products || []).length ? `<section class="m-section db-as-seen-section"><div class="container-full">${sectionHeading(seen.title || '', seen.subtitle || '')}<div class="db-as-seen-track">${seen.products.map(asSeenCard).join('')}</div></div>
+    <script>(function(){document.querySelectorAll('.db-as-seen-card.has-video').forEach(function(card){var v=card.querySelector('video');if(!v)return;card.addEventListener('mouseenter',function(){v.play().catch(function(){});});card.addEventListener('mouseleave',function(){v.pause();v.currentTime=0;});});})();</script></section>` : '';
   const storyHtml = story.title ? `<section class="m-section m-section-my m-section-py"><div class="container db-home-container db-split"><div class="db-split__media"><img src="${e(story.image || PLACEHOLDER)}" alt="${e(story.title)}" loading="lazy"></div><div class="db-split__content">${story.eyebrow ? `<span class="m-eyebrow">${e(story.eyebrow)}</span>` : ''}<h2 class="m-section__heading h2">${e(story.title)}</h2>${story.subtitle ? `<p>${e(story.subtitle)}</p>` : ''}<div class="rte">${story.body_html || ''}</div>${story.button_link ? `<a class="m-button m-button--primary" href="${e(story.button_link)}">${e(story.button_text || 'Learn more')}</a>` : ''}</div></div></section>` : '';
   const featureHtml = (features.items || []).length ? `<section class="m-section--tight m-section-py db-home-soft"><div class="container db-home-container"><div class="db-features">${features.items.map((item) => `<div class="db-feature"><div class="db-feature__icon">${homeFeatureIcon(item.label)}</div><h4>${e(item.title || '')}</h4><div class="rte">${item.body_html || ''}</div></div>`).join('')}</div></div></section>` : '';
-  const reviewHtml = (reviews.items || []).length ? `<section class="m-section m-section-my m-section-py"><div class="container db-home-container">${sectionHeading(reviews.title || '', reviews.subtitle || '')}<div class="db-reviews">${reviews.items.map((item) => `<article class="db-review"><div class="db-review__stars" aria-label="${e(item.label || '5')} out of 5 stars">${'&#9733;'.repeat(Math.max(1, Math.min(5, Number(item.label) || 5)))}</div><h3>${e(item.title || '')}</h3><div class="rte">${item.body_html || ''}</div>${item.subtitle ? `<div class="db-review__author">${e(item.subtitle)}</div>` : ''}</article>`).join('')}</div></div></section>` : '';
+  const reviewHtml = (reviews.items || []).length ? `<section class="m-section m-section-my m-section-py"><div class="container db-home-container">${sectionHeading(reviews.title || '', reviews.subtitle || '')}<div class="db-reviews">${reviews.items.map((item) => {
+    const stars = '&#9733;'.repeat(Math.max(1, Math.min(5, Number(item.label) || 5)));
+    const photo = item.image ? `<div class="db-review__media"><img src="${e(item.image)}" alt="${e(item.title || 'Customer review')}" loading="lazy"></div>` : '';
+    return `<article class="db-review${item.image ? ' db-review--photo' : ''}">${photo}<div class="db-review__body"><div class="db-review__stars" aria-label="${e(item.label || '5')} out of 5 stars">${stars}</div><div class="db-review__head">${item.subtitle ? `<span class="db-review__name">${e(item.subtitle)}</span>` : ''}<span class="db-review__verified">Verified</span></div><h3 class="db-review__title">${e(item.title || '')}</h3><div class="db-review__text rte">${item.body_html || ''}</div></div></article>`;
+  }).join('')}</div></div></section>` : '';
 
   const articleCards = (posts || []).slice(0, 3).map((post) => `<a href="/blog/${e(post.slug)}" class="db-journal-card"><div class="db-journal-card__media"><img src="${e(post.cover_image || PLACEHOLDER)}" alt="${e(post.title)}" loading="lazy"></div><div class="db-journal-card__meta">${fmtDate(post.published_at)}<span></span>${readingMinutes(post.content)} min read</div><h2>${e(post.title)}</h2><p>${e(post.excerpt || '')}</p><span class="db-journal-read">Read article ${arrow}</span></a>`).join('');
   const journalHtml = articleCards ? `<section class="m-section m-section-my m-section-py"><div class="container db-home-container">${sectionHeading(journal.title || '', journal.subtitle || '')}<div class="db-journal-grid">${articleCards}</div>${journal.button_link ? `<div class="db-section-action"><a class="m-button m-button--primary" href="${e(journal.button_link)}">${e(journal.button_text || 'View all')}</a></div>` : ''}</div></section>` : '';
-  const socialProducts = (social.products || []).length ? social.products : bestProducts.slice(0, 6);
-  const socialHtml = socialProducts.length ? `<section class="m-section--tight db-home-social"><div class="container db-home-container">${sectionHeading(social.title || '', social.subtitle || '')}<div class="db-insta-grid">${socialProducts.map((product) => `<a href="${e(instagram)}" target="_blank" rel="noopener" class="db-insta-tile"><img src="${e(product.image || PLACEHOLDER)}" alt="${e(product.title)}" loading="lazy"></a>`).join('')}</div></div></section>` : '';
+  // Get Inspired — runzie-style UGC grid: @handle + portrait photo + "Shop the Look"
+  const inspiredImgs = [shopPhoto(10), shopPhoto(11), shopPhoto(12), shopPhoto(13)];
+  const igHandle = '@majestic_nailbox';
+  const socialHtml = `<section class="m-section--tight db-home-social"><div class="container db-home-container">${sectionHeading(social.title || 'Get Inspired by Every Look', social.subtitle || 'Follow our studio for new sets and customer looks.')}<div class="db-insta-grid">${inspiredImgs.map((img) => `<div class="db-insta-tile"><span class="db-insta-tile__handle">${e(igHandle)}</span><a href="${e(instagram)}" target="_blank" rel="noopener" class="db-insta-tile__media"><img src="${img}" alt="Customer nail look" loading="lazy"></a><a class="db-insta-tile__shop" href="/products">Shop the Look</a></div>`).join('')}</div></div></section>`;
 
-  return `${header()}${hero}${heroScript}${marquee()}${bestHtml}${shapeHtml}${curatedHtml}${seenHtml}${storyHtml}${featureHtml}${reviewHtml}${journalHtml}${socialHtml}`;
+  // Note: journalHtml intentionally omitted from the homepage — runzie has no blog teaser on its
+  // home page. The blog itself stays at /blog (linked from nav). Restore by adding ${journalHtml}.
+  return `${header()}${hero}${heroScript}${marquee()}${bestHtml}${shapeHtml}${curatedHtml}${seenHtml}${storyHtml}${featureHtml}${reviewHtml}${socialHtml}`;
 }
 
 // --- Policy / content pages (DRY for shipping/refund/privacy/terms) ---
@@ -1191,7 +1466,7 @@ const POLICY_CONTENT = {
 
 function policyPageLegacy({ kind, title, settings }) {
   const entry = POLICY_CONTENT[kind] || { title, body: '<p>Content coming soon.</p>' };
-  const shop = settings.shop_name || 'PASTELLE NAILS';
+  const shop = settings.shop_name || 'Majestic Nail Care';
   const body = entry.body.replace(/\$\{e\('\{shop_name\}'\)\}/g, e(shop)).replace(/\{shop_name\}/g, shop);
   return `${header()}
 ${pageBanner({ image: DEFAULT_BANNER, title: entry.title, subtitle: 'Last updated: ' + new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }), breadcrumbHtml: '<a href="/">Home</a> / ' + e(entry.title) })}
@@ -1298,7 +1573,7 @@ function accountPage({ mode, settings }) {
   const subtitle = isRegister
     ? 'Save your favourite sets and message us faster next time.'
     : 'Sign in to manage your favourites and message us about an order.';
-  const shop = settings.shop_name || 'PASTELLE NAILS';
+  const shop = settings.shop_name || 'Majestic Nail Care';
   const instagram = settings.instagram || '#';
   const tiktok = settings.tiktok || '#';
   const phone = settings.contact_phone || '';

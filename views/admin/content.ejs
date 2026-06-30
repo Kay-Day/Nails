@@ -1,27 +1,33 @@
 <%- include('partials/head') %>
+<%
+  var PAGE_NAMES = { home: 'Trang chủ', shop: 'Trang Shop', product: 'Trang sản phẩm', about: 'Giới thiệu', faq: 'FAQ', tutorial: 'Hướng dẫn', policy: 'Chính sách', article: 'Bài viết', blog: 'Blog', contact: 'Liên hệ' };
+  function pageName(s) { return PAGE_NAMES[s] || s; }
+  function niceName(sec) {
+    if (sec.title && sec.title.trim()) return sec.title;
+    return (sec.section_key || '').replace(/[-_]+/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  }
+%>
 
 <div class="panel">
-  <div class="panel__head">
-    <h2><%= sections.length %> Content Sections</h2>
-    <a href="/admin/content/new" class="btn btn--accent btn--sm">+ New Section</a>
-  </div>
+  <div class="panel__head"><h2>Page Content</h2></div>
+  <p class="hint" style="margin:-6px 0 16px; max-width:760px">
+    Sửa chữ, ảnh và nút bấm hiển thị trên website. Bấm <strong>Edit</strong> ở phần cần đổi, sửa nội dung rồi lưu.
+    Các phần đã được tạo sẵn theo bố cục web — chị chỉ cần sửa nội dung, không cần tạo mới.
+  </p>
   <table>
-    <thead><tr><th>Page</th><th>Key</th><th>Title</th><th>Type</th><th>Items</th><th>Products</th><th>Order</th><th>Status</th><th></th></tr></thead>
+    <thead><tr><th>Nội dung</th><th>Hiển thị ở</th><th>Trạng thái</th><th></th></tr></thead>
     <tbody>
-      <% if (!sections.length) { %><tr><td colspan="9" class="empty-row">No content sections yet.</td></tr><% } %>
+      <% if (!sections.length) { %><tr><td colspan="4" class="empty-row">Chưa có nội dung.</td></tr><% } %>
       <% sections.forEach(function(section) { %>
         <tr>
-          <td><strong><%= section.page_slug %></strong></td>
-          <td><code><%= section.section_key %></code></td>
-          <td><%= section.title || '-' %></td>
-          <td><%= section.section_type %></td>
-          <td><%= section.item_count %></td>
-          <td><%= section.product_count %></td>
-          <td><%= section.sort_order %></td>
-          <td><span class="badge badge--<%= section.is_active ? 'on' : 'off' %>"><%= section.is_active ? 'Active' : 'Hidden' %></span></td>
+          <td>
+            <strong><%= niceName(section) %></strong>
+            <% if (section.item_count > 0) { %> <span class="hint">(<%= section.item_count %> mục)</span><% } %>
+          </td>
+          <td><%= pageName(section.page_slug) %></td>
+          <td><span class="badge badge--<%= section.is_active ? 'on' : 'off' %>"><%= section.is_active ? 'Hiện' : 'Ẩn' %></span></td>
           <td class="actions">
             <a href="/admin/content/<%= section.id %>/edit" class="btn btn--ghost btn--sm">Edit</a>
-            <form action="/admin/content/<%= section.id %>/delete" method="post" onsubmit="return confirm('Delete this section and all its items?')"><button class="btn btn--danger btn--sm" type="submit">Delete</button></form>
           </td>
         </tr>
       <% }) %>

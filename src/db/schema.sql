@@ -115,12 +115,12 @@ CREATE TABLE IF NOT EXISTS posts (
   excerpt      TEXT,
   content      TEXT,
   cover_image  TEXT,
-  author       VARCHAR(120) DEFAULT 'PASTELLE NAILS',
+  author       VARCHAR(120) DEFAULT 'Majestic Nail Care',
   is_published BOOLEAN NOT NULL DEFAULT true,
   published_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
 );
-ALTER TABLE posts ALTER COLUMN author SET DEFAULT 'PASTELLE NAILS';
+ALTER TABLE posts ALTER COLUMN author SET DEFAULT 'Majestic Nail Care';
 
 -- CMS sections used by homepage and all editorial/content pages.
 CREATE TABLE IF NOT EXISTS site_sections (
@@ -195,3 +195,32 @@ CREATE TABLE IF NOT EXISTS contact_messages (
   is_read    BOOLEAN NOT NULL DEFAULT false,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- Faceted filter system for the collection page (Shop By Color / Style / Trending, etc.).
+-- A group is a heading ("Shop By Color"); a value is a checkbox option ("Blue");
+-- products are mapped to many values. Shape/Length stay as product columns and are
+-- rendered alongside these as their own groups.
+CREATE TABLE IF NOT EXISTS filter_groups (
+  id          SERIAL PRIMARY KEY,
+  slug        VARCHAR(60) UNIQUE NOT NULL,
+  title       VARCHAR(120) NOT NULL,
+  sort_order  INT NOT NULL DEFAULT 0,
+  is_active   BOOLEAN NOT NULL DEFAULT true,
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS filter_values (
+  id          SERIAL PRIMARY KEY,
+  group_id    INT NOT NULL REFERENCES filter_groups(id) ON DELETE CASCADE,
+  label       VARCHAR(120) NOT NULL,
+  slug        VARCHAR(120) NOT NULL,
+  sort_order  INT NOT NULL DEFAULT 0,
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE (group_id, slug)
+);
+CREATE INDEX IF NOT EXISTS idx_filter_values_group ON filter_values(group_id, sort_order, id);
+CREATE TABLE IF NOT EXISTS product_filter_values (
+  product_id INT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+  value_id   INT NOT NULL REFERENCES filter_values(id) ON DELETE CASCADE,
+  PRIMARY KEY (product_id, value_id)
+);
+CREATE INDEX IF NOT EXISTS idx_pfv_value ON product_filter_values(value_id);

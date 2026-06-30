@@ -1,13 +1,20 @@
 const fs = require('fs');
 const path = require('path');
 
+// Shop's own product photos in public/anhshop — referenced directly as /anhshop/<file>.
+const SHOP_PHOTOS = fs
+  .readdirSync(path.join(__dirname, '..', '..', 'public', 'anhshop'))
+  .filter((f) => /\.(jpe?g|png|webp)$/i.test(f))
+  .sort();
+const shopPhoto = (i) => '/anhshop/' + SHOP_PHOTOS[i % SHOP_PHOTOS.length];
+
 const sections = [
   { page: 'home', key: 'best-sellers', type: 'products', title: 'Best Sellers', subtitle: 'Our most-loved sets - hand-finished, ready to wear.', order: 10 },
   { page: 'home', key: 'shop-by-shape', type: 'items', title: 'Shop By Shape', subtitle: 'From soft almond to bold coffin - choose the look that is you.', order: 20 },
   { page: 'home', key: 'curated', type: 'items', title: 'Curated for Your Style', subtitle: 'Fresh edits and customer favourites, selected for every mood.', order: 30 },
   { page: 'home', key: 'as-seen', type: 'products', title: 'As Seen On You', order: 40 },
   {
-    page: 'home', key: 'brand-story', type: 'story', eyebrow: 'Why PASTELLE NAILS',
+    page: 'home', key: 'brand-story', type: 'story', eyebrow: 'Why Majestic Nail Care',
     title: 'A salon manicure, minus the salon.',
     subtitle: 'Each set is hand-finished and built to last up to two weeks. No appointments, no drying time, no damage - just press, wear, and reuse.',
     body: '<p>Our nails are designed in-house for a natural fit and an effortless everyday finish. Browse your favourite look, choose a size, then contact our studio for availability and ordering.</p>',
@@ -18,18 +25,18 @@ const sections = [
   { page: 'home', key: 'journal', type: 'posts', title: 'The Journal', subtitle: 'Tips, tricks and inspiration from our studio.', buttonText: 'View All Articles', buttonLink: '/blog', order: 80 },
   { page: 'home', key: 'instagram', type: 'products', title: 'Get Inspired by Every Look', subtitle: 'Follow our studio for new sets and customer looks.', order: 90 },
 
-  { page: 'about', key: 'intro', type: 'story', title: 'A little About Us', body: '<p>PASTELLE NAILS is an independent Ontario studio creating hand-finished press-on nails for people who want salon detail without the appointment.</p><p>Every set is designed to feel easy, wearable, and reusable. Choose a look that feels like you, then contact us for sizing, availability, pickup, or shipping.</p>', image: '/images/about-runzie-nails.jpg', buttonText: 'Shop All', buttonLink: '/collections/all', order: 10 },
+  { page: 'about', key: 'intro', type: 'story', title: 'A little About Us', body: '<p>Majestic Nail Care is an independent Ontario studio creating hand-finished press-on nails for people who want salon detail without the appointment.</p><p>Every set is designed to feel easy, wearable, and reusable. Choose a look that feels like you, then contact us for sizing, availability, pickup, or shipping.</p>', image: '/images/about-runzie-nails.jpg', buttonText: 'Shop All', buttonLink: '/collections/all', order: 10 },
   { page: 'about', key: 'name', type: 'story-reverse', title: 'Made with intention', body: '<p>We work in small batches so every set gets real attention. Our designs move between everyday neutrals, playful seasonal details, and statement art.</p><p>The goal is simple: give you a polished set you can apply in minutes, remove gently, and wear again.</p>', image: '/images/about-runzie-name.jpg', buttonText: 'View the Collection', buttonLink: '/collections/all', order: 20 },
   { page: 'about', key: 'features', type: 'items', order: 30 },
   { page: 'about', key: 'team', type: 'story', title: 'How it all comes together', body: '<p>Our small team handles design, finishing, quality checks, and customer support from Ontario. Each order starts with a conversation so we can confirm the right size and the best pickup or shipping option.</p><p>That personal process is why the storefront is contact-based instead of using an automatic checkout.</p>', image: '/images/about-runzie-team.jpg', buttonText: 'Contact the Studio', buttonLink: '/contact', order: 40 },
 
   { page: 'contact', key: 'hero', type: 'hero', title: 'Get in Touch', subtitle: "Questions about a set, sizing, or your order? We'd love to help.", image: '/images/Homepage_Banner_1_-_Desk_Top.jpg', order: 10 },
-  { page: 'blog', key: 'hero', type: 'hero', eyebrow: 'PASTELLE NAILS journal', title: 'Ideas for better nail days.', subtitle: 'Application guides, sizing advice, care tips, and fresh inspiration from our Ontario studio.', order: 10 },
+  { page: 'blog', key: 'hero', type: 'hero', eyebrow: 'Majestic Nail Care journal', title: 'Ideas for better nail days.', subtitle: 'Application guides, sizing advice, care tips, and fresh inspiration from our Ontario studio.', order: 10 },
   { page: 'article', key: 'cta', type: 'cta', eyebrow: 'Need help choosing your set?', title: 'Find the look, then talk to our studio.', subtitle: 'Browse the collection and contact us for sizing, availability, pickup, or shipping.', buttonText: 'Browse nail sets', buttonLink: '/collections/all', order: 10 },
   { page: 'shop', key: 'hero', type: 'hero', title: 'Shop All Nails', subtitle: 'Find your perfect press-on set.', order: 10 },
 
   { page: 'product', key: 'contact', type: 'content', title: 'Contact shop to order', subtitle: 'Online cart and checkout are disabled. Choose your size, then contact our studio to confirm availability, sizing, pickup, or shipping.', order: 10 },
-  { page: 'product', key: 'promises', type: 'items', order: 20 },
+  { page: 'product', key: 'promises', type: 'items', subtitle: 'No salon needed — just peel, press, and shine!', order: 20 },
   { page: 'product', key: 'reasons', type: 'items', title: '4 reasons our customers choose press-on nails', order: 30 },
   { page: 'product', key: 'accordions', type: 'items', order: 40 },
 
@@ -39,20 +46,20 @@ const sections = [
   { page: 'policy', key: 'shipping-policy', type: 'policy', title: 'Shipping Policy', subtitle: 'Contact us for current pickup and shipping options.', body: '<p>We currently ship within Canada and to selected international destinations. Because every set is hand-finished, please allow 2-4 business days for production before dispatch.</p><h3>Processing Time</h3><p>Standard processing is 2-4 business days. During collection launches it may take up to 7 business days; we will confirm timing before starting your order.</p><h3>Shipping Options</h3><ul><li><strong>Ontario local pickup</strong> - pickup details are confirmed directly.</li><li><strong>Canada Post standard</strong> - estimated 3-7 business days.</li><li><strong>Canada Post express</strong> - estimated 1-3 business days.</li></ul><h3>International Shipping</h3><p>Contact us with your destination and selected products. We will confirm availability, shipping cost, and any customs information before you order.</p><h3>Lost or Damaged Parcels</h3><p>If your parcel is delayed or arrives damaged, contact us and we will work with the carrier to help.</p>', order: 10 },
   { page: 'policy', key: 'refund-policy', type: 'policy', title: 'Refund & Exchange Policy', subtitle: 'Please review these terms before confirming your order.', body: '<p>Because each set is hand-finished, all confirmed orders are final. We still want you to love your set and will help when something is not right.</p><h3>Sizing Issues</h3><p>Contact us within 7 days of delivery. We will review the sizing details and available replacement options.</p><h3>Manufacturing Defects</h3><p>If a tip arrives damaged, send us a clear photo within 14 days. We will arrange a replacement tip or set when appropriate.</p><h3>Order Changes</h3><p>Changes can be requested before production begins. Once the set is in production, changes may not be possible.</p><h3>Single Nail Replacements</h3><p>Lost a single nail? Message us with the style and size so we can confirm a replacement.</p>', order: 20 },
   { page: 'policy', key: 'privacy-policy', type: 'policy', title: 'Privacy Policy', subtitle: 'How we collect and use your information.', body: '<p>We collect only the information needed to respond to enquiries and prepare an order.</p><h3>Information We Collect</h3><ul><li>Name, email, phone number, or social handle when you contact us.</li><li>Product, sizing, pickup, and shipping details you choose to provide.</li><li>Basic technical data required to operate and secure the website.</li></ul><h3>How We Use It</h3><p>We use your information to answer questions, confirm orders, provide support, and improve the storefront. We do not sell your personal data.</p><h3>Admin Sessions</h3><p>Essential session cookies are used only for the protected admin area.</p><h3>Your Rights</h3><p>You can request access, correction, or deletion of your contact information by contacting the studio.</p>', order: 30 },
-  { page: 'policy', key: 'terms-of-service', type: 'policy', title: 'Terms of Service', subtitle: 'Terms for browsing and ordering from PASTELLE NAILS.', body: '<p>By using this website and confirming an order with PASTELLE NAILS, you agree to these terms.</p><h3>Products</h3><p>Our press-on nails are hand-finished in small batches. Slight variations are part of the handcrafted process.</p><h3>Ordering</h3><p>An order begins when you contact us and is confirmed only after the product, size, price, pickup or shipping details, and timing are agreed in writing.</p><h3>Pricing</h3><p>Prices are shown in CAD. We confirm the final total before production begins.</p><h3>Intellectual Property</h3><p>Product designs, photos, and written content belong to PASTELLE NAILS and may not be copied or resold without permission.</p>', order: 40 },
+  { page: 'policy', key: 'terms-of-service', type: 'policy', title: 'Terms of Service', subtitle: 'Terms for browsing and ordering from Majestic Nail Care.', body: '<p>By using this website and confirming an order with Majestic Nail Care, you agree to these terms.</p><h3>Products</h3><p>Our press-on nails are hand-finished in small batches. Slight variations are part of the handcrafted process.</p><h3>Ordering</h3><p>An order begins when you contact us and is confirmed only after the product, size, price, pickup or shipping details, and timing are agreed in writing.</p><h3>Pricing</h3><p>Prices are shown in CAD. We confirm the final total before production begins.</p><h3>Intellectual Property</h3><p>Product designs, photos, and written content belong to Majestic Nail Care and may not be copied or resold without permission.</p>', order: 40 },
 ];
 
 const items = {
   'home.shop-by-shape': [
-    { title: 'Almond Shape', image: '/images/0326009.jpg', link: '/collections/almond' },
-    { title: 'Coffin Shape', image: '/images/0326015.jpg', link: '/collections/coffin-shape' },
-    { title: 'Round Shape', image: '/images/030150.jpg', link: '/collections/round-shape' },
-    { title: 'Square Shape', image: '/images/050026.jpg', link: '/collections/square-shape' },
-    { title: 'Stiletto Shape', image: '/images/030138.jpg', link: '/collections/stiletto-shape' },
+    { title: 'Almond Shape', image: shopPhoto(35), link: '/collections/almond' },
+    { title: 'Coffin Shape', image: shopPhoto(36), link: '/collections/coffin-shape' },
+    { title: 'Round Shape', image: shopPhoto(37), link: '/collections/round-shape' },
+    { title: 'Stiletto Shape', image: shopPhoto(38), link: '/collections/stiletto-shape' },
+    { title: 'Square Shape', image: shopPhoto(39), link: '/collections/square-shape' },
   ],
   'home.curated': [
-    { label: 'Freshly added', title: 'New Arrivals', body: '<p>Discover the latest hand-finished sets from our studio.</p>', image: '/images/Fresh.jpg', link: '/collections/new-arrival' },
-    { label: 'Customer favourites', title: 'Best Sellers', body: '<p>Start with the shapes and designs our customers return to.</p>', image: '/images/0326002.jpg', link: '/collections/best-sellers-1' },
+    { label: 'Freshly added', title: 'New Arrivals', body: '<p>Discover the latest hand-finished sets from our studio.</p>', image: shopPhoto(30), link: '/collections/new-arrival' },
+    { label: 'Limited time', title: 'Now on Sale', body: '<p>Selected handmade sets at special prices — while they last.</p>', image: shopPhoto(31), link: '/collections/now-on-sale' },
   ],
   'home.features': [
     { label: 'leaf', title: 'Salon Quality', body: '<p>Hand-finished, glossy, durable.</p>' },
@@ -61,9 +68,10 @@ const items = {
     { label: 'heart', title: 'Cruelty-Free', body: '<p>Always kind, never tested.</p>' },
   ],
   'home.reviews': [
-    { label: '5', title: 'Beautiful and easy to wear', body: '<p>The finish looked polished and the sizing help made ordering simple.</p>', subtitle: 'Verified studio customer' },
-    { label: '5', title: 'Great quality for repeat wear', body: '<p>I removed the set gently, cleaned the tips, and wore them again.</p>', subtitle: 'Verified studio customer' },
-    { label: '5', title: 'Helpful sizing support', body: '<p>The studio answered my questions before I chose a set and size.</p>', subtitle: 'Verified studio customer' },
+    { label: '5', title: 'Beautiful and easy to wear', body: '<p>The finish looked polished and the sizing help made ordering simple.</p>', subtitle: 'Riley E.', image: shopPhoto(20) },
+    { label: '5', title: 'Great quality for repeat wear', body: '<p>I removed the set gently, cleaned the tips, and wore them again.</p>', subtitle: 'Gabby', image: shopPhoto(21) },
+    { label: '5', title: 'Helpful sizing support', body: '<p>The studio answered my questions before I chose a set and size.</p>', subtitle: 'Cecilia S.', image: shopPhoto(22) },
+    { label: '5', title: 'Incredible detail', body: '<p>I am debating which set is my favourite — the attention to detail on each nail is unreal.</p>', subtitle: 'Wen', image: shopPhoto(23) },
   ],
   'about.features': [
     { label: 'heart', title: 'Premium', body: '<p>Handcrafted with salon-quality gel.</p>' },
@@ -72,9 +80,10 @@ const items = {
     { label: 'truck', title: 'Pickup & Shipping', body: '<p>Options are confirmed directly with the studio.</p>' },
   ],
   'product.promises': [
-    { title: '24 tips across 12 sizes' },
-    { title: 'Prep kit and adhesive included' },
-    { title: 'Reusable salon-quality finish' },
+    { title: '5 minute application' },
+    { title: 'Handcrafted by a real nail tech with gel' },
+    { title: 'Lasts up to 4 weeks' },
+    { title: '100% reusable' },
   ],
   'product.reasons': [
     { title: 'Handcrafted by real nail techs', body: '<p>Each set is made with care and inspected before it reaches you.</p>', image: '/images/16_1024x1024.jpg' },
@@ -122,7 +131,7 @@ const settings = {
   announcement_2: 'Free shipping over $100 CAD / $70 USD',
   announcement_3: 'Message us for sizing and availability',
   announcement_4: 'Handcrafted press-on nails in Ontario, Canada',
-  seo_description: 'PASTELLE NAILS creates handcrafted press-on nails in Ontario for reusable, salon-quality wear.',
+  seo_description: 'Majestic Nail Care creates handcrafted press-on nails in Ontario for reusable, salon-quality wear.',
   og_image: '/images/Homepage_Banner_1_-_Desk_Top.jpg',
   site_url: 'http://localhost:3000',
   contact_banner: '/images/Homepage_Banner_1_-_Desk_Top.jpg',

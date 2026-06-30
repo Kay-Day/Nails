@@ -9,7 +9,7 @@ const path = require('path');
 const HOME_FILE = path.join(__dirname, '..', 'public', 'home', 'index.html');
 const MAIN_OPEN = '<main role="main" id="MainContent">';
 const MAIN_CLOSE = '</main>';
-const DEFAULT_SHOP_NAME = 'PASTELLE NAILS';
+const DEFAULT_SHOP_NAME = 'Majestic Nail Care';
 const DEFAULT_LOGO_URL = '/images/Logo/Logo.jpeg';
 
 let TOP = '';
@@ -19,6 +19,9 @@ function stripCommerce(html) {
   return html
     .replace(/<a href="\/cart" class="m-cart-icon-bubble"[\s\S]*?<\/m-cart-count>/g, '')
     .replace(/<m-cart-drawer[\s\S]*?<\/m-cart-drawer>/g, '')
+    // Shopify "Follow on shop" widget — irrelevant to this view+contact clone.
+    .replace(/<shop-follow-button\b[\s\S]*?<\/shop-follow-button>/gi, '')
+    .replace(/<shop-follow-button\b[^>]*\/?>/gi, '')
     .replace(/href="\/account(?:\/login|\/register)?"/g, 'href="/contact"');
 }
 
@@ -69,27 +72,82 @@ const FOOTER_ICONS = {
   tiktok: '<svg aria-hidden="true" viewBox="0 0 24 24"><path class="db-icon-fill" d="M15.6 3c.4 2.2 1.7 3.6 4.1 3.8v3.1c-1.5.1-2.8-.3-4.1-1.1v6.3a6.1 6.1 0 1 1-5.3-6V12a3.2 3.2 0 1 0 2.2 3.1V3h3.1z"/></svg>',
 };
 
-function footerContact(settings = {}) {
+// Footer = a distinct "Contact <shop>" band (kept prominent) + a runzie-style
+// dark footer (Explore links + social + copyright) below it.
+function siteFooter(settings = {}, navItems = []) {
   const shopName = settings.shop_name || DEFAULT_SHOP_NAME;
   const phoneDigits = settings.contact_phone ? settings.contact_phone.replace(/\D/g, '') : '';
   const phoneHref = phoneDigits ? '+' + (phoneDigits.length === 10 ? '1' + phoneDigits : phoneDigits) : '';
-  const item = (icon, label, value, href, external) => {
+
+  const contactCard = (icon, label, value, href, external) => {
     if (!value) return '';
-    const content = `<span class="db-site-contact-strip__icon">${FOOTER_ICONS[icon]}</span><span><small>${label}</small><strong>${escapeHtml(value)}</strong></span>`;
+    const inner = `<span class="db-contact-band__icon">${FOOTER_ICONS[icon]}</span><span class="db-contact-band__text"><small>${label}</small><strong>${escapeHtml(value)}</strong></span>`;
     return href
-      ? `<a href="${escapeHtml(href)}"${external ? ' target="_blank" rel="noopener"' : ''}>${content}</a>`
-      : `<div>${content}</div>`;
+      ? `<a href="${escapeHtml(href)}"${external ? ' target="_blank" rel="noopener"' : ''} class="db-contact-band__item">${inner}</a>`
+      : `<div class="db-contact-band__item">${inner}</div>`;
   };
 
-  const content = [
-    item('location', 'Address', settings.contact_address),
-    item('phone', 'Phone', settings.contact_phone, phoneHref ? `tel:${phoneHref}` : ''),
-    item('instagram', 'Instagram', '@majestic_nailbox', settings.instagram, true),
-    item('tiktok', 'TikTok', '@majestic_press_on_nails', settings.tiktok, true),
+  const contactCards = [
+    contactCard('location', 'Address', settings.contact_address),
+    contactCard('phone', 'Phone', settings.contact_phone, phoneHref ? `tel:${phoneHref}` : ''),
+    contactCard('instagram', 'Instagram', '@majestic_nailbox', settings.instagram, true),
+    contactCard('tiktok', 'TikTok', '@majestic_press_on_nails', settings.tiktok, true),
   ].filter(Boolean).join('');
 
-  if (!content) return '';
-  return `<section class="db-site-contact-strip" aria-label="Store contact information"><div class="container"><h2>Contact ${escapeHtml(shopName)}</h2><div class="db-site-contact-strip__grid">${content}</div></div></section>`;
+  // 1) Distinct, prominent contact band (its own section)
+  const contactBand = contactCards
+    ? `<section class="db-contact-band" aria-label="Store contact information"><div class="container">
+        <h2 class="db-contact-band__title">Contact ${escapeHtml(shopName)}</h2>
+        <div class="db-contact-band__grid">${contactCards}</div>
+      </div></section>`
+    : '';
+
+  // 2) Runzie-style dark footer: 4 columns (Shop / Customer Support / Policies / Follow)
+  const linkCol = (heading, links) => `<div class="db-site-footer__col">
+        <h2 class="db-site-footer__heading">${escapeHtml(heading)}</h2>
+        <nav class="db-site-footer__links">${links.map((l) => `<a href="${escapeHtml(l.url)}">${escapeHtml(l.label)}</a>`).join('')}</nav>
+      </div>`;
+
+  const shopCol = linkCol('Shop', [
+    { label: 'Shop All', url: '/products' },
+    { label: 'Best Sellers', url: '/collections/best-sellers-1' },
+    { label: 'New Arrivals', url: '/collections/new-arrival' },
+    { label: 'On Sale', url: '/collections/now-on-sale' },
+  ]);
+
+  const supportCol = linkCol('Customer Support', [
+    { label: 'Contact Us', url: '/contact' },
+    { label: 'About Us', url: '/about-us' },
+    { label: 'FAQ', url: '/faq' },
+    { label: 'Nail Tutorial', url: '/nail-tutorial' },
+    { label: 'Blog', url: '/blog' },
+  ]);
+
+  const policiesCol = linkCol('Policies', [
+    { label: 'Shipping Policy', url: '/pages/shipping-policy' },
+    { label: 'Refund Policy', url: '/pages/refund-policy' },
+    { label: 'Privacy Policy', url: '/pages/privacy-policy' },
+    { label: 'Terms of Service', url: '/pages/terms-of-service' },
+  ]);
+
+  const socials = [
+    settings.instagram ? `<a href="${escapeHtml(settings.instagram)}" target="_blank" rel="noopener" aria-label="Instagram">${FOOTER_ICONS.instagram}</a>` : '',
+    settings.tiktok ? `<a href="${escapeHtml(settings.tiktok)}" target="_blank" rel="noopener" aria-label="TikTok">${FOOTER_ICONS.tiktok}</a>` : '',
+  ].filter(Boolean).join('');
+
+  const followCol = `<div class="db-site-footer__col db-site-footer__col--follow">
+        <h2 class="db-site-footer__heading">Stay in Touch</h2>
+        <p class="db-site-footer__note">Message us on Instagram or TikTok to reserve your set, then we confirm sizing &amp; pickup or shipping.</p>
+        ${socials ? `<div class="db-site-footer__social">${socials}</div>` : ''}
+        <a class="db-site-footer__cta" href="/contact">Contact the studio</a>
+      </div>`;
+
+  const darkFooter = `<footer class="db-site-footer" aria-label="Site footer"><div class="container">
+        <div class="db-site-footer__grid">${shopCol}${supportCol}${policiesCol}${followCol}</div>
+        <div class="db-site-footer__bottom">© ${new Date().getFullYear()} ${escapeHtml(shopName)}, All rights reserved.</div>
+      </div></footer>`;
+
+  return contactBand + darkFooter;
 }
 
 function addBlogNavigation(html) {
@@ -394,14 +452,10 @@ function personalizeHtml(html, { title, description, url, settings, navigation, 
       `© 2026 ${escapeHtml(settings?.shop_name || DEFAULT_SHOP_NAME)}, All rights reserved.`
     );
 
-  const contact = footerContact(settings);
-  const footer = footerNavigation(navigation?.footer || []);
-  if (footer && !output.includes('db-dynamic-footer-nav')) {
+  const footer = siteFooter(settings, navigation?.footer || []);
+  if (footer && !output.includes('db-site-footer')) {
     output = addBodyClass(output, 'db-dynamic-footer-enabled');
     output = output.replace('<m-footer', `${footer}\n<m-footer`);
-  }
-  if (contact && !output.includes('db-site-contact-strip')) {
-    output = output.replace('<m-footer', `${contact}\n<m-footer`);
   }
   if (!output.includes('/js/db-site.js')) {
     output = output.replace(/<\/body>/i, '<script src="/js/db-site.js" defer></script>\n</body>');

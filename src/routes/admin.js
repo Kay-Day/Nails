@@ -132,6 +132,37 @@ async function syncProductVariants(productId, body) {
   }
 }
 
+// ---- Filter system helpers ----
+const slugifyFilter = (s) => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+  .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+async function loadFilterGroupsWithValues() {
+  const rows = (await pool.query(
+    `SELECT fg.id AS g_id, fg.slug AS g_slug, fg.title AS g_title, fg.sort_order AS g_sort, fg.is_active AS g_active,
+            fv.id AS v_id, fv.label AS v_label, fv.slug AS v_slug, fv.sort_order AS v_sort
+     FROM filter_groups fg
+     LEFT JOIN filter_values fv ON fv.group_id = fg.id
+     ORDER BY fg.sort_order, fg.id, fv.sort_order, fv.id`
+  )).rows;
+  const map = new Map();
+  rows.forEach((r) => {
+    if (!map.has(r.g_id)) map.set(r.g_id, { id: r.g_id, slug: r.g_slug, title: r.g_title, sort_order: r.g_sort, is_active: r.g_active, values: [] });
+    if (r.v_id) map.get(r.g_id).values.push({ id: r.v_id, label: r.v_label, slug: r.v_slug, sort_order: r.v_sort });
+  });
+  return [...map.values()];
+}
+
+async function syncProductFilterValues(productId, body) {
+  const ids = selectedIds(body.filter_value_ids);
+  await pool.query('DELETE FROM product_filter_values WHERE product_id = $1', [productId]);
+  for (const vid of ids) {
+    await pool.query(
+      'INSERT INTO product_filter_values (product_id, value_id) VALUES ($1,$2) ON CONFLICT DO NOTHING',
+      [productId, vid]
+    );
+  }
+}
+
 // ---- Login / Logout ----
 router.get('/login', (req, res) => {
   if (req.session.admin) return res.redirect('/admin');
@@ -167,9 +198,7 @@ router.get('/', async (req, res, next) => {
         (SELECT COUNT(*) FROM products) AS products,
         (SELECT COUNT(*) FROM collections) AS collections,
         (SELECT COUNT(*) FROM banners) AS banners,
-        (SELECT COUNT(*) FROM posts) AS posts,
-        (SELECT COUNT(*) FROM site_sections) AS sections,
-        (SELECT COUNT(*) FROM contact_messages WHERE is_read = false) AS messages`);
+        (SELECT COUNT(*) FROM posts) AS posts`);
     const recent = await pool.query('SELECT id, title, image, price, is_active FROM products ORDER BY created_at DESC LIMIT 6');
     res.render('admin/dashboard', { title: 'Dashboard', counts: counts.rows[0], recent: recent.rows, active: 'dashboard' });
   } catch (err) {
@@ -195,12 +224,13 @@ router.get('/products', async (req, res, next) => {
 
 router.get('/products/new', async (req, res, next) => {
   try {
-    const [collections, shapes, lengths] = await Promise.all([
+    const [collections, shapes, lengths, filterGroups] = await Promise.all([
       pool.query('SELECT * FROM collections ORDER BY title'),
       pool.query("SELECT DISTINCT shape FROM products WHERE shape IS NOT NULL AND shape <> '' ORDER BY shape"),
       pool.query("SELECT DISTINCT length FROM products WHERE length IS NOT NULL AND length <> '' ORDER BY length"),
+      loadFilterGroupsWithValues(),
     ]);
-    res.render('admin/product-form', { title: 'New Product', product: {}, images: [], variants: [], collectionIds: [], collections: collections.rows, shapes: shapes.rows.map((row) => row.shape), lengths: lengths.rows.map((row) => row.length), active: 'products', formAction: '/admin/products' });
+    res.render('admin/product-form', { title: 'New Product', product: {}, images: [], variants: [], collectionIds: [], collections: collections.rows, shapes: shapes.rows.map((row) => row.shape), lengths: lengths.rows.map((row) => row.length), filterGroups, assignedValueIds: [], active: 'products', formAction: '/admin/products' });
   } catch (err) {
     next(err);
   }
@@ -228,6 +258,7 @@ router.post('/products', upload.fields([{ name: 'image', maxCount: 1 }, { name: 
     const pid = rows[0].id;
     await syncProductCollections(pid, b);
     await syncProductVariants(pid, b);
+    await syncProductFilterValues(pid, b);
     const galleryFiles = req.files?.gallery || [];
     for (let i = 0; i < galleryFiles.length; i++) {
       await pool.query('INSERT INTO product_images (product_id, url, sort_order) VALUES ($1,$2,$3)', [pid, fileUrl(galleryFiles[i]), i]);
@@ -242,13 +273,15 @@ router.get('/products/:id/edit', async (req, res, next) => {
   try {
     const { rows } = await pool.query('SELECT * FROM products WHERE id = $1', [req.params.id]);
     if (!rows.length) return res.redirect('/admin/products');
-    const [collections, images, variants, membership, shapes, lengths] = await Promise.all([
+    const [collections, images, variants, membership, shapes, lengths, filterGroups, assigned] = await Promise.all([
       pool.query('SELECT * FROM collections ORDER BY title'),
       pool.query('SELECT * FROM product_images WHERE product_id = $1 ORDER BY sort_order, id', [req.params.id]),
       pool.query('SELECT * FROM product_variants WHERE product_id = $1 ORDER BY sort_order, id', [req.params.id]),
       pool.query('SELECT collection_id FROM product_collections WHERE product_id = $1 ORDER BY sort_order', [req.params.id]),
       pool.query("SELECT DISTINCT shape FROM products WHERE shape IS NOT NULL AND shape <> '' ORDER BY shape"),
       pool.query("SELECT DISTINCT length FROM products WHERE length IS NOT NULL AND length <> '' ORDER BY length"),
+      loadFilterGroupsWithValues(),
+      pool.query('SELECT value_id FROM product_filter_values WHERE product_id = $1', [req.params.id]),
     ]);
     res.render('admin/product-form', {
       title: 'Edit Product',
@@ -259,6 +292,8 @@ router.get('/products/:id/edit', async (req, res, next) => {
       collections: collections.rows,
       shapes: shapes.rows.map((row) => row.shape),
       lengths: lengths.rows.map((row) => row.length),
+      filterGroups,
+      assignedValueIds: assigned.rows.map((row) => row.value_id),
       active: 'products',
       formAction: `/admin/products/${req.params.id}?_method=PUT`,
     });
@@ -291,6 +326,7 @@ router.post('/products/:id', upload.fields([{ name: 'image', maxCount: 1 }, { na
     );
     await syncProductCollections(req.params.id, b);
     await syncProductVariants(req.params.id, b);
+    await syncProductFilterValues(req.params.id, b);
     const galleryFiles = req.files?.gallery || [];
     const startOrder = (await pool.query('SELECT COALESCE(MAX(sort_order),-1)+1 AS n FROM product_images WHERE product_id=$1', [req.params.id])).rows[0].n;
     for (let i = 0; i < galleryFiles.length; i++) {
@@ -327,6 +363,88 @@ router.post('/product-images/:id/delete', async (req, res, next) => {
     await cleanupMediaUrls([img.rows[0]?.url]);
     const pid = img.rows[0]?.product_id;
     res.redirect(pid ? `/admin/products/${pid}/edit` : '/admin/products');
+  } catch (err) {
+    next(err);
+  }
+});
+
+// =================== FILTERS (Shop sidebar facets) ===================
+router.get('/filters', async (req, res, next) => {
+  try {
+    const groups = await loadFilterGroupsWithValues();
+    res.render('admin/filters', { title: 'Categories', groups, active: 'filters' });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/filters/groups', async (req, res, next) => {
+  try {
+    const title = String(req.body.title || '').trim();
+    if (!title) return res.redirect('/admin/filters');
+    const slug = await uniqueSlug('filter_groups', req.body.slug || title);
+    const maxSort = (await pool.query('SELECT COALESCE(MAX(sort_order),0)+10 AS n FROM filter_groups')).rows[0].n;
+    await pool.query('INSERT INTO filter_groups (slug, title, sort_order) VALUES ($1,$2,$3)', [slug, title, maxSort]);
+    res.redirect('/admin/filters');
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Rename a category (keeps its order/visibility — no technical fields in the UI).
+router.post('/filters/groups/:id', async (req, res, next) => {
+  try {
+    const title = String(req.body.title || '').trim();
+    if (title) await pool.query('UPDATE filter_groups SET title=$1 WHERE id=$2', [title, req.params.id]);
+    res.redirect('/admin/filters');
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/filters/groups/:id/delete', async (req, res, next) => {
+  try {
+    await pool.query('DELETE FROM filter_groups WHERE id=$1', [req.params.id]);
+    res.redirect('/admin/filters');
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/filters/values', async (req, res, next) => {
+  try {
+    const groupId = parseInt(req.body.group_id);
+    const label = String(req.body.label || '').trim();
+    if (!groupId || !label) return res.redirect('/admin/filters');
+    const baseSlug = slugifyFilter(req.body.slug || label) || 'value';
+    // Ensure slug is unique within the group.
+    let slug = baseSlug; let n = 2;
+    while ((await pool.query('SELECT 1 FROM filter_values WHERE group_id=$1 AND slug=$2', [groupId, slug])).rowCount) {
+      slug = `${baseSlug}-${n++}`;
+    }
+    const maxSort = (await pool.query('SELECT COALESCE(MAX(sort_order),-1)+1 AS n FROM filter_values WHERE group_id=$1', [groupId])).rows[0].n;
+    await pool.query('INSERT INTO filter_values (group_id, label, slug, sort_order) VALUES ($1,$2,$3,$4)', [groupId, label, slug, parseInt(req.body.sort_order) || maxSort]);
+    res.redirect('/admin/filters');
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Rename a sub-category (label only).
+router.post('/filters/values/:id', async (req, res, next) => {
+  try {
+    const label = String(req.body.label || '').trim();
+    if (label) await pool.query('UPDATE filter_values SET label=$1 WHERE id=$2', [label, req.params.id]);
+    res.redirect('/admin/filters');
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/filters/values/:id/delete', async (req, res, next) => {
+  try {
+    await pool.query('DELETE FROM filter_values WHERE id=$1', [req.params.id]);
+    res.redirect('/admin/filters');
   } catch (err) {
     next(err);
   }
@@ -497,7 +615,7 @@ router.post('/posts', upload.single('cover_image'), async (req, res, next) => {
     await pool.query(
       `INSERT INTO posts (slug, title, excerpt, content, cover_image, author, is_published, published_at)
        VALUES ($1,$2,$3,$4,$5,$6,$7, COALESCE($8::timestamptz, now()))`,
-      [slug, b.title, b.excerpt || null, b.content || null, cover, b.author || 'PASTELLE NAILS', b.is_published === 'on', b.published_at || null]
+      [slug, b.title, b.excerpt || null, b.content || null, cover, b.author || 'Majestic Nail Care', b.is_published === 'on', b.published_at || null]
     );
     res.redirect('/admin/posts');
   } catch (err) {
@@ -525,7 +643,7 @@ router.post('/posts/:id', upload.single('cover_image'), async (req, res, next) =
     const slug = await uniqueSlug('posts', b.slug || b.title, req.params.id);
     await pool.query(
       `UPDATE posts SET slug=$1, title=$2, excerpt=$3, content=$4, cover_image=$5, author=$6, is_published=$7, published_at=COALESCE($8::timestamptz, published_at) WHERE id=$9`,
-      [slug, b.title, b.excerpt || null, b.content || null, cover, b.author || 'PASTELLE NAILS', b.is_published === 'on', b.published_at || null, req.params.id]
+      [slug, b.title, b.excerpt || null, b.content || null, cover, b.author || 'Majestic Nail Care', b.is_published === 'on', b.published_at || null, req.params.id]
     );
     await cleanupMediaUrls([oldCover]);
     res.redirect('/admin/posts');
@@ -545,222 +663,15 @@ router.post('/posts/:id/delete', async (req, res, next) => {
   }
 });
 
-// =================== PAGE CONTENT ===================
-router.get('/content', async (req, res, next) => {
-  try {
-    const { rows } = await pool.query(
-      `SELECT s.*,
-        (SELECT COUNT(*) FROM section_items i WHERE i.section_id = s.id)::int AS item_count,
-        (SELECT COUNT(*) FROM section_products sp WHERE sp.section_id = s.id)::int AS product_count
-       FROM site_sections s ORDER BY s.page_slug, s.sort_order, s.id`
-    );
-    res.render('admin/content', { title: 'Page Content', sections: rows, active: 'content' });
-  } catch (err) {
-    next(err);
-  }
-});
-
-async function renderContentForm(res, section, title, formAction) {
-  const [products, selected] = await Promise.all([
-    pool.query('SELECT id, title, image FROM products WHERE is_active = true ORDER BY title'),
-    section.id
-      ? pool.query('SELECT product_id FROM section_products WHERE section_id = $1 ORDER BY sort_order', [section.id])
-      : Promise.resolve({ rows: [] }),
-  ]);
-  res.render('admin/content-form', {
-    title,
-    section,
-    products: products.rows,
-    productIds: selected.rows.map((row) => row.product_id),
-    active: 'content',
-    formAction,
-  });
-}
-
-router.get('/content/new', async (req, res, next) => {
-  try {
-    await renderContentForm(res, {}, 'New Content Section', '/admin/content');
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.post('/content', upload.single('image'), async (req, res, next) => {
-  try {
-    const b = req.body;
-    const image = resolveMedia(req.file, b.image_url, null, b.remove_image === 'on');
-    const key = slugify(b.section_key || b.title || 'section', { lower: true, strict: true });
-    const { rows } = await pool.query(
-      `INSERT INTO site_sections
-        (page_slug, section_key, section_type, eyebrow, title, subtitle, body_html, image, button_text, button_link, sort_order, is_active)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING id`,
-      [b.page_slug, key, b.section_type || 'content', b.eyebrow || null, b.title || null, b.subtitle || null,
-        b.body_html || null, image, b.button_text || null, b.button_link || null, parseInt(b.sort_order) || 0, b.is_active === 'on']
-    );
-    await syncSectionProducts(rows[0].id, b.product_ids);
-    res.redirect(`/admin/content/${rows[0].id}/edit`);
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get('/content/items/:id/edit', async (req, res, next) => {
-  try {
-    const { rows } = await pool.query(
-      `SELECT i.*, s.title AS section_title, s.page_slug, s.section_key
-       FROM section_items i JOIN site_sections s ON s.id = i.section_id WHERE i.id = $1`,
-      [req.params.id]
-    );
-    if (!rows.length) return res.redirect('/admin/content');
-    res.render('admin/content-item-form', {
-      title: 'Edit Content Item',
-      item: rows[0],
-      section: { id: rows[0].section_id, page_slug: rows[0].page_slug, section_key: rows[0].section_key },
-      active: 'content',
-      formAction: `/admin/content/items/${req.params.id}`,
-    });
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.post('/content/items/:id', upload.single('image'), async (req, res, next) => {
-  try {
-    const b = req.body;
-    const existing = await pool.query('SELECT * FROM section_items WHERE id = $1', [req.params.id]);
-    if (!existing.rows.length) return res.redirect('/admin/content');
-    const oldImage = existing.rows[0].image;
-    const image = resolveMedia(req.file, b.image_url, oldImage, b.remove_image === 'on');
-    await pool.query(
-      `UPDATE section_items SET label=$1, title=$2, subtitle=$3, body_html=$4, image=$5, link=$6, sort_order=$7, is_active=$8 WHERE id=$9`,
-      [b.label || null, b.title || null, b.subtitle || null, b.body_html || null, image, b.link || null,
-        parseInt(b.sort_order) || 0, b.is_active === 'on', req.params.id]
-    );
-    await cleanupMediaUrls([oldImage]);
-    res.redirect(`/admin/content/${existing.rows[0].section_id}/edit`);
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.post('/content/items/:id/delete', async (req, res, next) => {
-  try {
-    const existing = await pool.query('SELECT section_id, image FROM section_items WHERE id = $1', [req.params.id]);
-    await pool.query('DELETE FROM section_items WHERE id = $1', [req.params.id]);
-    await cleanupMediaUrls([existing.rows[0]?.image]);
-    res.redirect(existing.rows[0] ? `/admin/content/${existing.rows[0].section_id}/edit` : '/admin/content');
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get('/content/:sectionId/items/new', async (req, res, next) => {
-  try {
-    const { rows } = await pool.query('SELECT * FROM site_sections WHERE id = $1', [req.params.sectionId]);
-    if (!rows.length) return res.redirect('/admin/content');
-    res.render('admin/content-item-form', { title: 'New Content Item', item: {}, section: rows[0], active: 'content', formAction: `/admin/content/${req.params.sectionId}/items` });
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.post('/content/:sectionId/items', upload.single('image'), async (req, res, next) => {
-  try {
-    const b = req.body;
-    const image = resolveMedia(req.file, b.image_url, null, b.remove_image === 'on');
-    await pool.query(
-      `INSERT INTO section_items (section_id, label, title, subtitle, body_html, image, link, sort_order, is_active)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
-      [req.params.sectionId, b.label || null, b.title || null, b.subtitle || null, b.body_html || null,
-        image, b.link || null, parseInt(b.sort_order) || 0, b.is_active === 'on']
-    );
-    res.redirect(`/admin/content/${req.params.sectionId}/edit`);
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get('/content/:id/edit', async (req, res, next) => {
-  try {
-    const { rows } = await pool.query('SELECT * FROM site_sections WHERE id = $1', [req.params.id]);
-    if (!rows.length) return res.redirect('/admin/content');
-    const items = await pool.query('SELECT * FROM section_items WHERE section_id = $1 ORDER BY sort_order, id', [req.params.id]);
-    rows[0].items = items.rows;
-    await renderContentForm(res, rows[0], 'Edit Content Section', `/admin/content/${req.params.id}`);
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.post('/content/:id', upload.single('image'), async (req, res, next) => {
-  try {
-    const b = req.body;
-    const existing = await pool.query('SELECT * FROM site_sections WHERE id = $1', [req.params.id]);
-    if (!existing.rows.length) return res.redirect('/admin/content');
-    const oldImage = existing.rows[0].image;
-    const image = resolveMedia(req.file, b.image_url, oldImage, b.remove_image === 'on');
-    const key = slugify(b.section_key || b.title || 'section', { lower: true, strict: true });
-    await pool.query(
-      `UPDATE site_sections SET page_slug=$1, section_key=$2, section_type=$3, eyebrow=$4, title=$5, subtitle=$6,
-       body_html=$7, image=$8, button_text=$9, button_link=$10, sort_order=$11, is_active=$12 WHERE id=$13`,
-      [b.page_slug, key, b.section_type || 'content', b.eyebrow || null, b.title || null, b.subtitle || null,
-        b.body_html || null, image, b.button_text || null, b.button_link || null, parseInt(b.sort_order) || 0,
-        b.is_active === 'on', req.params.id]
-    );
-    await syncSectionProducts(req.params.id, b.product_ids);
-    await cleanupMediaUrls([oldImage]);
-    res.redirect(`/admin/content/${req.params.id}/edit`);
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.post('/content/:id/delete', async (req, res, next) => {
-  try {
-    const media = await pool.query(
-      `SELECT image AS url FROM site_sections WHERE id = $1
-       UNION ALL SELECT image FROM section_items WHERE section_id = $1`,
-      [req.params.id]
-    );
-    await pool.query('DELETE FROM site_sections WHERE id = $1', [req.params.id]);
-    await cleanupMediaUrls(media.rows.map((row) => row.url));
-    res.redirect('/admin/content');
-  } catch (err) {
-    next(err);
-  }
-});
-
 // Navigation structure is defined in code; keep old admin URLs from exposing stale CRUD screens.
 router.all(/^\/navigation(?:\/.*)?$/, (req, res) => {
   res.redirect('/admin');
 });
 
-// =================== CONTACT MESSAGES ===================
-router.get('/messages', async (req, res, next) => {
-  try {
-    const { rows } = await pool.query('SELECT * FROM contact_messages ORDER BY is_read, created_at DESC');
-    res.render('admin/messages', { title: 'Contact Messages', messages: rows, active: 'messages' });
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.post('/messages/:id/read', async (req, res, next) => {
-  try {
-    await pool.query('UPDATE contact_messages SET is_read = NOT is_read WHERE id = $1', [req.params.id]);
-    res.redirect('/admin/messages');
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.post('/messages/:id/delete', async (req, res, next) => {
-  try {
-    await pool.query('DELETE FROM contact_messages WHERE id = $1', [req.params.id]);
-    res.redirect('/admin/messages');
-  } catch (err) {
-    next(err);
-  }
+// Page Content editor removed from the admin (too technical for shop owners); section
+// content is seeded and edited in code. Redirect any old links to the dashboard.
+router.all(/^\/content(?:\/.*)?$/, (req, res) => {
+  res.redirect('/admin');
 });
 
 // =================== SETTINGS ===================

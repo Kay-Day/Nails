@@ -92,21 +92,21 @@ app.use('/admin', require('./routes/admin'));
 const { renderPage } = require('./layout');
 const render = require('./render');
 app.use((req, res) => {
-  const shopName = res.locals.settings?.shop_name || 'PASTELLE NAILS';
+  const shopName = res.locals.settings?.shop_name || 'Majestic Nail Care';
   res.status(404).type('html').send(renderPage(render.notFound(), { title: `Page not found · ${shopName}`, url: req.originalUrl, settings: res.locals.settings, navigation: res.locals.navigation }));
 });
 
 // Error handler
 app.use((err, req, res, next) => {
   console.error(err);
-  const shopName = res.locals.settings?.shop_name || 'PASTELLE NAILS';
+  const shopName = res.locals.settings?.shop_name || 'Majestic Nail Care';
   res.status(500).type('html').send(renderPage(render.notFound(), { title: `Error · ${shopName}`, url: req.originalUrl, settings: res.locals.settings, navigation: res.locals.navigation }));
 });
 
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
 const server = app.listen(PORT, HOST, () => {
-  console.log(`\n  PASTELLE NAILS running -> http://${HOST}:${PORT}`);
+  console.log(`\n  Majestic Nail Care running -> http://${HOST}:${PORT}`);
   console.log(`  admin panel           -> http://${HOST}:${PORT}/admin\n`);
 });
 

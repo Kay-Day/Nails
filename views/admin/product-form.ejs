@@ -63,6 +63,27 @@
         <% }) %>
       </div>
     </div>
+    <% if (typeof filterGroups !== 'undefined' && filterGroups.length) { %>
+    <div class="form-row form-row--full">
+      <label>Categories <span class="hint">Tick the sub-categories this product belongs to — these power the Shop filters (Shape &amp; Length use the fields above)</span></label>
+      <% filterGroups.forEach(function(g){ %>
+        <% if (g.values.length) { %>
+          <div class="filter-assign">
+            <div class="filter-assign__title"><%= g.title %></div>
+            <div class="collection-checks">
+              <% g.values.forEach(function(v){ %>
+                <label class="check">
+                  <input type="checkbox" name="filter_value_ids" value="<%= v.id %>" <%= (assignedValueIds || []).includes(v.id) ? 'checked' : '' %> />
+                  <%= v.label %>
+                </label>
+              <% }) %>
+            </div>
+          </div>
+        <% } %>
+      <% }) %>
+    </div>
+    <% } %>
+
     <div class="form-row">
       <label>Sort order</label>
       <input type="number" name="sort_order" value="<%= product.sort_order || 0 %>" />

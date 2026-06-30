@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.runzie.ca)",
+      "Bash(dir /B)",
+      "WebSearch",
+      "Bash(grep -oE 'href=\"/policies/[^\"]*\"' /tmp/runzie-home.html | sort -u)",
+      "Read(//tmp/**)",
+      "Bash(grep -oE 'href=\"/blogs/[^\"]*\"' /tmp/runzie-home.html | sort -u)",
+      "Bash(grep -oE '<nav[^>]*>.*?</nav>' /tmp/runzie-home.html | head -5 | wc -l; echo \"---\"; grep -c '<nav' /tmp/runzie-home.html)"
+    ]
+  },
+  "mcpServers": {
+    "chrome-devtools": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ],
+      "env": {}
+    }
+  }
+}

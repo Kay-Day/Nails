@@ -12,25 +12,24 @@
 <div class="admin">
   <aside class="sidebar">
     <div class="sidebar__mobile-head">
-      <div class="sidebar__brand"><%= settings.shop_name || 'PASTELLE NAILS' %> admin</div>
+      <div class="sidebar__brand"><%= settings.shop_name || 'Majestic Nail Care' %> admin</div>
       <button class="sidebar__toggle" type="button" aria-controls="admin-navigation" aria-expanded="false" aria-label="Open admin menu">
         <span></span><span></span><span></span>
       </button>
     </div>
     <nav id="admin-navigation">
-      <a href="/admin" class="<%= active==='dashboard'?'active':'' %>">▦ Dashboard</a>
-      <a href="/admin/products" class="<%= active==='products'?'active':'' %>">💅 Products</a>
-      <a href="/admin/collections" class="<%= active==='collections'?'active':'' %>">🗂 Collections</a>
-      <a href="/admin/banners" class="<%= active==='banners'?'active':'' %>">🖼 Banners</a>
-      <a href="/admin/posts" class="<%= active==='posts'?'active':'' %>">📝 Blog</a>
-      <a href="/admin/content" class="<%= active==='content'?'active':'' %>">▤ Page Content</a>
-      <a href="/admin/messages" class="<%= active==='messages'?'active':'' %>">✉ Messages</a>
-      <a href="/admin/settings" class="<%= active==='settings'?'active':'' %>">⚙ Settings</a>
+      <a href="/admin" class="<%= active==='dashboard'?'active':'' %>"><%- include('icon', { name: 'dashboard' }) %><span>Dashboard</span></a>
+      <a href="/admin/products" class="<%= active==='products'?'active':'' %>"><%- include('icon', { name: 'products' }) %><span>Products</span></a>
+      <a href="/admin/collections" class="<%= active==='collections'?'active':'' %>"><%- include('icon', { name: 'collections' }) %><span>Collections</span></a>
+      <a href="/admin/filters" class="<%= active==='filters'?'active':'' %>"><%- include('icon', { name: 'collections' }) %><span>Categories</span></a>
+      <a href="/admin/banners" class="<%= active==='banners'?'active':'' %>"><%- include('icon', { name: 'banners' }) %><span>Banners</span></a>
+      <a href="/admin/posts" class="<%= active==='posts'?'active':'' %>"><%- include('icon', { name: 'blog' }) %><span>Blog</span></a>
+      <a href="/admin/settings" class="<%= active==='settings'?'active':'' %>"><%- include('icon', { name: 'settings' }) %><span>Settings</span></a>
     </nav>
     <div class="sidebar__foot">
-      <a href="/" target="_blank">↗ View store</a><br/><br/>
+      <a href="/" target="_blank" class="sidebar__store-link"><%- include('icon', { name: 'store', size: 16 }) %><span>View store</span></a><br/><br/>
       <span style="color:#fff"><%= admin ? admin.username : '' %></span> ·
-      <form action="/admin/logout" method="post" style="display:inline"><button type="submit" style="background:none;border:none;color:#aeb8c6;cursor:pointer;font-family:inherit">Logout</button></form>
+      <form action="/admin/logout" method="post" style="display:inline"><button type="submit" class="sidebar__logout"><%- include('icon', { name: 'logout', size: 15 }) %><span>Logout</span></button></form>
     </div>
   </aside>
   <main class="main">

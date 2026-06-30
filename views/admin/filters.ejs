@@ -1,0 +1,81 @@
+<%- include('partials/head') %>
+
+<div class="panel">
+  <div class="panel__head">
+    <h2>Product categories</h2>
+  </div>
+  <p class="hint" style="margin:-6px 0 20px; max-width:760px">
+    These are the categories shoppers filter by on the Shop page (Color, Style, Trending…).
+    Each <strong>category</strong> holds <strong>sub-categories</strong> (e.g. Color → Pink, Blue).
+    Add or rename them here, then tick the ones that apply to each product on its edit page.
+    <em>Shape &amp; Length come from the product's own fields.</em>
+  </p>
+
+  <div class="cats">
+    <% groups.forEach(function(g){ %>
+      <div class="cat">
+        <div class="cat__head">
+          <form class="cat__rename" action="/admin/filters/groups/<%= g.id %>" method="post">
+            <span class="cat__tag">Category</span>
+            <input name="title" value="<%= g.title %>" aria-label="Category name" />
+            <button class="btn btn--ghost btn--sm" type="submit">Rename</button>
+          </form>
+          <form action="/admin/filters/groups/<%= g.id %>/delete" method="post" onsubmit="return confirm('Delete the “<%= g.title %>” category and all its sub-categories?')">
+            <button class="btn btn--danger btn--sm" type="submit">Delete category</button>
+          </form>
+        </div>
+
+        <div class="cat__subs">
+          <% if (!g.values.length) { %>
+            <p class="hint" style="margin:0">No sub-categories yet — add the first one below.</p>
+          <% } %>
+          <% g.values.forEach(function(v){ %>
+            <div class="sub">
+              <form class="sub__rename" action="/admin/filters/values/<%= v.id %>" method="post">
+                <input name="label" value="<%= v.label %>" aria-label="Sub-category name" />
+                <button class="btn btn--ghost btn--xs" type="submit">Save</button>
+              </form>
+              <form action="/admin/filters/values/<%= v.id %>/delete" method="post" onsubmit="return confirm('Delete sub-category “<%= v.label %>”?')">
+                <button class="sub__del" type="submit" title="Delete">×</button>
+              </form>
+            </div>
+          <% }) %>
+        </div>
+
+        <form class="cat__add" action="/admin/filters/values" method="post">
+          <input type="hidden" name="group_id" value="<%= g.id %>" />
+          <input name="label" placeholder="Add a sub-category, e.g. Pink" required />
+          <button class="btn btn--accent btn--sm" type="submit">+ Add sub-category</button>
+        </form>
+      </div>
+    <% }) %>
+  </div>
+
+  <form class="cat-add" action="/admin/filters/groups" method="post">
+    <input name="title" placeholder="New category name, e.g. Shop By Finish" required />
+    <button class="btn btn--primary btn--sm" type="submit">+ Add category</button>
+  </form>
+</div>
+
+<style>
+  .cats { display: flex; flex-direction: column; gap: 16px; }
+  .cat { border: 1px solid rgba(0,0,0,.12); border-radius: 10px; padding: 16px 18px; background: #fff; }
+  .cat__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1px solid rgba(0,0,0,.08); }
+  .cat__rename { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .cat__tag { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: #1c1c1c; padding: 3px 9px; border-radius: 20px; }
+  .cat__rename input { font-size: 17px; font-weight: 700; padding: 7px 11px; min-width: 220px; border: 1px solid rgba(0,0,0,.18); border-radius: 6px; }
+  .cat__subs { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+  .sub { display: inline-flex; align-items: center; gap: 4px; background: #f5f5f5; border-radius: 8px; padding: 4px 4px 4px 10px; }
+  .sub__rename { display: inline-flex; align-items: center; gap: 6px; }
+  .sub__rename input { border: 0; background: transparent; font: inherit; font-size: 14px; width: 110px; padding: 4px 2px; }
+  .sub__rename input:focus { background: #fff; border-radius: 4px; outline: 1px solid rgba(0,0,0,.2); }
+  .sub__del { border: 0; background: transparent; cursor: pointer; font-size: 18px; line-height: 1; color: #b00; padding: 0 6px; }
+  .sub__del:hover { color: #f00; }
+  .cat__add { display: flex; gap: 10px; }
+  .cat__add input { flex: 1; max-width: 320px; padding: 8px 11px; border: 1px solid rgba(0,0,0,.18); border-radius: 6px; font: inherit; }
+  .cat-add { display: flex; gap: 10px; margin-top: 20px; padding-top: 18px; border-top: 1px dashed rgba(0,0,0,.18); }
+  .cat-add input { min-width: 320px; padding: 10px 12px; border: 1px solid rgba(0,0,0,.2); border-radius: 6px; font: inherit; }
+  .btn--xs { padding: 3px 8px; font-size: 12px; }
+</style>
+
+<%- include('partials/foot') %>

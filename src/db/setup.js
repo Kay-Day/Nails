@@ -32,7 +32,7 @@ async function setup() {
 
   // Default settings
   const defaults = {
-    shop_name: 'PASTELLE NAILS',
+    shop_name: 'Majestic Nail Care',
     logo_url: '/images/Logo/Logo.jpeg',
     tagline: 'Handcrafted press-on nails in Ontario.',
     contact_phone: '4379983533',
@@ -53,29 +53,34 @@ async function setup() {
   }
   console.log('✓ Default settings ready (existing values preserved)');
 
-  // One-time-safe brand migration for databases created before the rename.
-  await pool.query(
-    `UPDATE settings
-     SET value = REPLACE(value, 'Majestic Nailbox', 'PASTELLE NAILS')
-     WHERE value LIKE '%Majestic Nailbox%'`
-  );
-  await pool.query(
-    `UPDATE site_sections
-     SET eyebrow = REPLACE(eyebrow, 'Majestic Nailbox', 'PASTELLE NAILS'),
-         title = REPLACE(title, 'Majestic Nailbox', 'PASTELLE NAILS'),
-         subtitle = REPLACE(subtitle, 'Majestic Nailbox', 'PASTELLE NAILS'),
-         body_html = REPLACE(body_html, 'Majestic Nailbox', 'PASTELLE NAILS')
-     WHERE CONCAT_WS(' ', eyebrow, title, subtitle, body_html) LIKE '%Majestic Nailbox%'`
-  );
-  await pool.query(
-    `UPDATE posts
-     SET title = REPLACE(title, 'Majestic Nailbox', 'PASTELLE NAILS'),
-         excerpt = REPLACE(excerpt, 'Majestic Nailbox', 'PASTELLE NAILS'),
-         content = REPLACE(content, 'Majestic Nailbox', 'PASTELLE NAILS'),
-         author = REPLACE(author, 'Majestic Nailbox', 'PASTELLE NAILS')
-     WHERE CONCAT_WS(' ', title, excerpt, content, author) LIKE '%Majestic Nailbox%'`
-  );
-  console.log('✓ PASTELLE NAILS branding ready');
+  // One-time-safe brand migration for databases created under an older name.
+  for (const oldName of ['Majestic Nailbox', 'PASTELLE NAILS']) {
+    await pool.query(
+      `UPDATE settings
+       SET value = REPLACE(value, $1, 'Majestic Nail Care')
+       WHERE value LIKE '%' || $1 || '%'`,
+      [oldName]
+    );
+    await pool.query(
+      `UPDATE site_sections
+       SET eyebrow = REPLACE(eyebrow, $1, 'Majestic Nail Care'),
+           title = REPLACE(title, $1, 'Majestic Nail Care'),
+           subtitle = REPLACE(subtitle, $1, 'Majestic Nail Care'),
+           body_html = REPLACE(body_html, $1, 'Majestic Nail Care')
+       WHERE CONCAT_WS(' ', eyebrow, title, subtitle, body_html) LIKE '%' || $1 || '%'`,
+      [oldName]
+    );
+    await pool.query(
+      `UPDATE posts
+       SET title = REPLACE(title, $1, 'Majestic Nail Care'),
+           excerpt = REPLACE(excerpt, $1, 'Majestic Nail Care'),
+           content = REPLACE(content, $1, 'Majestic Nail Care'),
+           author = REPLACE(author, $1, 'Majestic Nail Care')
+       WHERE CONCAT_WS(' ', title, excerpt, content, author) LIKE '%' || $1 || '%'`,
+      [oldName]
+    );
+  }
+  console.log('✓ Majestic Nail Care branding ready');
 
   await pool.end();
   console.log('Done.');

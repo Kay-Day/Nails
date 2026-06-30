@@ -5,7 +5,21 @@ const { renderPage } = require('../layout');
 const render = require('../render');
 const { loadSections } = require('../content');
 
-const DEFAULT_SHOP_NAME = 'PASTELLE NAILS';
+const DEFAULT_SHOP_NAME = 'Majestic Nail Care';
+
+// Store-owned testimonials shown in the product "Customer Reviews" carousel.
+// Original copy — paired with real products at request time.
+const REVIEW_POOL = [
+  { name: 'Riley E.', verified: true, date: '05/23/2026', title: 'Beautiful and easy to wear', text: 'The finish looked salon-polished and the sizing chart made ordering simple. Got so many compliments.' },
+  { name: 'Gabby', verified: true, date: '05/21/2026', title: 'Great for repeat wear', text: 'I removed the set gently, cleaned the tips, and wore them again. Still looked brand new.' },
+  { name: 'Cecilia S.', verified: true, date: '05/10/2026', title: 'Helpful sizing support', text: 'The studio answered all my questions before I picked a set and a size. Lovely service.' },
+  { name: 'Wen', verified: false, date: '05/09/2026', title: 'So different from drugstore nails', text: 'The detail on each nail is unreal and they feel sturdy but comfortable. My new favourite.' },
+  { name: 'Bailey', verified: true, date: '05/06/2026', title: 'Very well made', text: 'All the little charms feel secure and the shape is so flattering. Thoughtful packaging too.' },
+  { name: 'Aili D.', verified: false, date: '05/09/2026', title: 'Obsessed with these', text: 'Even prettier in person — the colours are rich and they lasted weeks without lifting.' },
+  { name: 'Mary', verified: true, date: '05/29/2026', title: 'Love these', text: 'Super realistic look and I have had no problems after a week of wear. Will order more sets.' },
+  { name: 'Christina D.', verified: true, date: '06/01/2026', title: 'Highly recommend', text: 'The details are amazing and the nails are durable. Handcrafted quality really shows.' },
+  { name: 'Iris', verified: false, date: '05/09/2026', title: 'Lowkey but so pretty', text: 'Subtle, elegant and exactly what I wanted for everyday. Application was quick and clean.' },
+];
 
 function shopName(res) {
   return res.locals.settings.shop_name || DEFAULT_SHOP_NAME;
@@ -63,48 +77,85 @@ router.get('/home-dynamic', showHome);
 
 // Product listing with filters. Collection membership comes from the join table
 // so one product can correctly appear in several collections.
+// Pseudo-groups for the column-based attributes, interleaved with the DB tag groups
+// by sort_order so the sidebar order is Color(10) Style(20) Shape(30) Length(40) Trending(50).
+const COLUMN_GROUPS = [
+  { slug: 'shape', title: 'Shop By Shape', column: 'shape', sort: 30 },
+  { slug: 'length', title: 'Shop By Length', column: 'length', sort: 40 },
+];
+
 async function showProducts(req, res, next) {
   try {
-    const { collection, shape, length, q, sort } = req.query;
+    const { collection, q, sort } = req.query;
+    const toArr = (v) => (v == null ? [] : (Array.isArray(v) ? v : [v])).map((x) => String(x).trim()).filter(Boolean);
+    const availabilitySel = toArr(req.query.availability); // 'in' / 'out'
+    const numOrNull = (v) => (v === undefined || v === null || v === '' || Number.isNaN(Number(v)) ? null : Number(v));
+    const priceMin = numOrNull(req.query.price_min);
+    const priceMax = numOrNull(req.query.price_max);
     const page = Math.max(1, parseInt(req.query.page) || 1);
     const perPage = 12;
 
-    const where = ['p.is_active = true'];
-    const params = [];
+    // DB-driven tag groups (Color / Style / Trending) and their values.
+    const tagGroups = (await pool.query(
+      'SELECT id, slug, title, sort_order FROM filter_groups WHERE is_active = true ORDER BY sort_order, id'
+    )).rows;
+    const tagGroupIds = tagGroups.map((g) => g.id);
+
+    // Selections per group param (group slug). Column groups use shape/length.
+    const selections = {};
+    tagGroups.forEach((g) => { selections[g.slug] = toArr(req.query[g.slug]); });
+    COLUMN_GROUPS.forEach((g) => { selections[g.slug] = toArr(req.query[g.slug]); });
+
+    // Base scope = collection + search only (drives facet counts + price range so
+    // each option's count stays stable as boxes in other groups are ticked).
+    const baseWhere = ['p.is_active = true'];
+    const baseParams = [];
     if (collection) {
-      params.push(collection);
-      where.push(`EXISTS (
-        SELECT 1
-        FROM product_collections pc_filter
+      baseParams.push(collection);
+      baseWhere.push(`EXISTS (SELECT 1 FROM product_collections pc_filter
         JOIN collections c_filter ON c_filter.id = pc_filter.collection_id
-        WHERE pc_filter.product_id = p.id AND c_filter.slug = $${params.length}
-      )`);
-    }
-    if (shape) {
-      params.push(shape);
-      where.push(`p.shape ILIKE $${params.length}`);
-    }
-    if (length) {
-      params.push(length);
-      where.push(`p.length ILIKE $${params.length}`);
+        WHERE pc_filter.product_id = p.id AND c_filter.slug = $${baseParams.length})`);
     }
     if (q) {
-      params.push(`%${q}%`);
-      where.push(`(p.title ILIKE $${params.length} OR p.description ILIKE $${params.length})`);
+      baseParams.push(`%${q}%`);
+      baseWhere.push(`(p.title ILIKE $${baseParams.length} OR p.description ILIKE $${baseParams.length})`);
     }
+    const baseWhereSql = baseWhere.join(' AND ');
+
+    // Full scope = base + active facet selections (drives product list + total).
+    const where = [...baseWhere];
+    const params = [...baseParams];
+    COLUMN_GROUPS.forEach((g) => {
+      const sel = selections[g.slug];
+      if (sel.length) {
+        params.push(sel);
+        where.push(`BTRIM(p.${g.column}) = ANY($${params.length}::text[])`);
+      }
+    });
+    tagGroups.forEach((g) => {
+      const sel = selections[g.slug];
+      if (sel.length) {
+        params.push(g.id); const gi = params.length;
+        params.push(sel); const si = params.length;
+        where.push(`EXISTS (SELECT 1 FROM product_filter_values pfv
+          JOIN filter_values fv ON fv.id = pfv.value_id
+          WHERE pfv.product_id = p.id AND fv.group_id = $${gi} AND fv.slug = ANY($${si}::text[]))`);
+      }
+    });
+    if (priceMin != null) { params.push(priceMin); where.push(`p.price >= $${params.length}`); }
+    if (priceMax != null) { params.push(priceMax); where.push(`p.price <= $${params.length}`); }
+    if (availabilitySel.length === 1 && availabilitySel[0] === 'out') where.push('false');
+    const whereSql = where.join(' AND ');
 
     let orderBy = 'p.sort_order, p.id';
     if (sort === 'price-asc') orderBy = 'p.price ASC NULLS LAST';
     else if (sort === 'price-desc') orderBy = 'p.price DESC NULLS LAST';
     else if (sort === 'newest') orderBy = 'p.created_at DESC';
+    else if (sort === 'oldest') orderBy = 'p.created_at ASC';
+    else if (sort === 'title-asc') orderBy = 'p.title ASC';
+    else if (sort === 'title-desc') orderBy = 'p.title DESC';
 
-    const whereSql = where.join(' AND ');
-
-    const countRes = await pool.query(
-      `SELECT COUNT(*)::int AS total FROM products p
-       WHERE ${whereSql}`,
-      params
-    );
+    const countRes = await pool.query(`SELECT COUNT(*)::int AS total FROM products p WHERE ${whereSql}`, params);
     const total = countRes.rows[0].total;
     const totalPages = Math.max(1, Math.ceil(total / perPage));
     const offset = (page - 1) * perPage;
@@ -116,38 +167,69 @@ async function showProducts(req, res, next) {
       params
     );
 
-    const [collectionsRes, facetsRes, bannerRes, sections] = await Promise.all([
+    const [collectionsRes, colFacetsRes, tagFacetsRes, statsRes, bannerRes, sections] = await Promise.all([
       pool.query('SELECT * FROM collections WHERE is_active = true ORDER BY sort_order, id'),
-      pool.query(`
-        SELECT facet, value
-        FROM (
-          SELECT 'shape'::text AS facet, BTRIM(shape) AS value, MIN(sort_order) AS first_position
-          FROM products
-          WHERE is_active = true AND NULLIF(BTRIM(shape), '') IS NOT NULL
-          GROUP BY BTRIM(shape)
-          UNION ALL
-          SELECT 'length'::text AS facet, BTRIM(length) AS value, MIN(sort_order) AS first_position
-          FROM products
-          WHERE is_active = true AND NULLIF(BTRIM(length), '') IS NOT NULL
-          GROUP BY BTRIM(length)
-        ) facets
-        ORDER BY facet, first_position, value
-      `),
+      // Column facets (shape/length) counted over the base scope.
+      pool.query(
+        `SELECT facet, value, COUNT(*)::int AS count FROM (
+           SELECT 'shape'::text AS facet, BTRIM(shape) AS value, sort_order FROM products p WHERE ${baseWhereSql} AND NULLIF(BTRIM(shape), '') IS NOT NULL
+           UNION ALL
+           SELECT 'length'::text AS facet, BTRIM(length) AS value, sort_order FROM products p WHERE ${baseWhereSql} AND NULLIF(BTRIM(length), '') IS NOT NULL
+         ) f GROUP BY facet, value ORDER BY facet, MIN(sort_order), value`,
+        baseParams
+      ),
+      // Tag-group value counts over the base scope (0-count values still returned).
+      tagGroupIds.length ? pool.query(
+        `SELECT fv.group_id, fv.label, fv.slug, fv.sort_order, COUNT(p.id)::int AS count
+         FROM filter_values fv
+         LEFT JOIN product_filter_values pfv ON pfv.value_id = fv.id
+         LEFT JOIN products p ON p.id = pfv.product_id AND ${baseWhereSql}
+         WHERE fv.group_id = ANY($${baseParams.length + 1}::int[])
+         GROUP BY fv.id, fv.group_id, fv.label, fv.slug, fv.sort_order
+         ORDER BY fv.sort_order, fv.label`,
+        [...baseParams, tagGroupIds]
+      ) : { rows: [] },
+      pool.query(
+        `SELECT COUNT(*)::int AS in_stock, MIN(price)::float AS min_price, MAX(price)::float AS max_price
+         FROM products p WHERE ${baseWhereSql}`,
+        baseParams
+      ),
       pool.query("SELECT image FROM banners WHERE is_active = true AND image <> '' ORDER BY sort_order, id LIMIT 1"),
       loadSections('shop'),
     ]);
-    const shapes = facetsRes.rows.filter((row) => row.facet === 'shape').map((row) => row.value);
-    const lengths = facetsRes.rows.filter((row) => row.facet === 'length').map((row) => row.value);
+
     if (collection && !collectionsRes.rows.some((item) => item.slug === collection)) {
       return sendThemed(res, render.notFound(), pageTitle(res, 'Collection not found'), 404);
     }
 
+    // Assemble the ordered list of filter groups for the sidebar.
+    const colFacet = (facet) => colFacetsRes.rows
+      .filter((r) => r.facet === facet)
+      .map((r) => ({ label: r.value, slug: r.value, count: r.count, selected: selections[facet].includes(r.value) }));
+    const tagByGroup = {};
+    tagFacetsRes.rows.forEach((r) => { (tagByGroup[r.group_id] = tagByGroup[r.group_id] || []).push(r); });
+
+    const filterGroups = [];
+    tagGroups.forEach((g) => filterGroups.push({
+      slug: g.slug, title: g.title, sort: g.sort_order,
+      values: (tagByGroup[g.id] || []).map((r) => ({ label: r.label, slug: r.slug, count: r.count, selected: selections[g.slug].includes(r.slug) })),
+    }));
+    COLUMN_GROUPS.forEach((g) => filterGroups.push({ slug: g.slug, title: g.title, sort: g.sort, values: colFacet(g.slug) }));
+    filterGroups.sort((a, b) => a.sort - b.sort);
+
+    const stats = statsRes.rows[0] || {};
+    const priceRange = {
+      min: stats.min_price != null ? Math.floor(stats.min_price) : 0,
+      max: stats.max_price != null ? Math.ceil(stats.max_price) : 0,
+    };
+
     const html = render.productsPage({
       products: productsRes.rows,
       collections: collectionsRes.rows,
-      shapes,
-      lengths,
-      filters: { collection, shape, length, q, sort },
+      filterGroups,
+      priceRange,
+      inStockCount: stats.in_stock || 0,
+      filters: { collection, q, sort, selections, availability: availabilitySel, price_min: priceMin, price_max: priceMax },
       page,
       totalPages,
       total,
@@ -204,7 +286,7 @@ router.get('/products/:slug', async (req, res, next) => {
       [product.id]
     );
 
-    const [relatedRes, sections] = await Promise.all([
+    const [relatedRes, reviewProductsRes, sections] = await Promise.all([
       pool.query(
         `SELECT p.*, ${HOVER_SELECT}
          FROM products p
@@ -222,8 +304,18 @@ router.get('/products/:slug', async (req, res, next) => {
          ORDER BY random() LIMIT 4`,
         [product.id, product.shape]
       ),
+      pool.query(
+        `SELECT slug, title, image FROM products WHERE is_active = true ORDER BY random() LIMIT 9`
+      ),
       loadSections('product'),
     ]);
+
+    // Review cards for the "Customer Reviews" carousel — store-owned testimonials
+    // paired with real products so the "Review for …" links resolve.
+    const reviewCards = reviewProductsRes.rows.map((p, i) => {
+      const r = REVIEW_POOL[i % REVIEW_POOL.length];
+      return { ...r, product: p };
+    });
 
     const html = render.productPage({
       product,
@@ -231,6 +323,7 @@ router.get('/products/:slug', async (req, res, next) => {
       variants: variantsRes.rows,
       collections: collectionsRes.rows,
       related: relatedRes.rows,
+      reviewCards,
       sections,
       settings: res.locals.settings,
     });
