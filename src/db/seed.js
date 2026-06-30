@@ -378,7 +378,9 @@ async function seed() {
     const { rows } = await pool.query(
       `INSERT INTO collections (slug, title, description, image, sort_order, is_active)
        VALUES ($1,$2,$3,$4,$5,true) RETURNING id`,
-      [c.slug, c.title, c.description, img(c.image), i]
+      // Collection banners use the shop's own photos (public/anhshop), never a
+      // competitor's image — one distinct photo per collection, by index.
+      [c.slug, c.title, c.description, shopPhoto(i), i]
     );
     colIds[c.slug] = rows[0].id;
   }
