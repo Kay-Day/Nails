@@ -31,14 +31,14 @@ const SHOP_PHOTOS = fs
 const shopPhoto = (i) => '/anhshop/' + SHOP_PHOTOS[i % SHOP_PHOTOS.length];
 
 const collections = [
-  { slug: 'best-sellers-1', title: 'Best Sellers', image: '0326002.jpg', description: 'Most-loved press-on sets selected by customers.' },
+  { slug: 'best-sellers-1', title: 'Best Sellers', image: 'Collection_Banner_-_Desktop_1.jpg', description: 'Most-loved press-on sets selected by customers.' },
   { slug: 'new-arrival', title: 'New Arrival', image: 'Fresh.jpg', description: 'Fresh designs and seasonal sets just added.' },
   { slug: 'spring-2026-collection', title: 'Spring 2026 Collection', image: 'Collection_Banner_-_Desktop_1.jpg', description: 'Soft colors, playful details, and handcrafted salon-quality finish.' },
   { slug: 'almond', title: 'Almond Shape', image: '0326009.jpg', description: 'Soft, tapered tips for an elegant everyday look.' },
   { slug: 'coffin-shape', title: 'Coffin Shape', image: '0326015.jpg', description: 'Bold, flat-tipped glam that turns heads.' },
-  { slug: 'round-shape', title: 'Round Shape', image: '030150.jpg', description: 'Gentle curves that flatter every hand.' },
+  { slug: 'round-shape', title: 'Round Shape', image: 'Collection_Banner_-_Desktop_1.jpg', description: 'Gentle curves that flatter every hand.' },
   { slug: 'square-shape', title: 'Square Shape', image: '050026.jpg', description: 'Clean, classic edges with a modern feel.' },
-  { slug: 'stiletto-shape', title: 'Stiletto Shape', image: '030138.jpg', description: 'Sharp, dramatic points for a fierce statement.' },
+  { slug: 'stiletto-shape', title: 'Stiletto Shape', image: 'Collection_Banner_-_Desktop_1.jpg', description: 'Sharp, dramatic points for a fierce statement.' },
   { slug: 'short-length', title: 'Short Length', image: '050026.jpg', description: 'Easy everyday length with a natural feel.' },
   { slug: 'medium-length', title: 'Medium Length', image: '0326009.jpg', description: 'Balanced length for everyday styling.' },
   { slug: 'long-length', title: 'Long Length', image: '0326015.jpg', description: 'Statement length for detailed nail art.' },
@@ -46,10 +46,10 @@ const collections = [
   { slug: 'neonnyx-nails', title: 'NeonNyx Nails', image: '0326015.jpg', description: 'Bold, statement designs for nights out.' },
   { slug: 'bare-edit', title: 'Bare Edit', image: '050026.jpg', description: 'Nude and natural — your everyday go-to.' },
   { slug: 'the-bloom-edit', title: 'The Bloom Edit', image: '0326009.jpg', description: 'Soft, floral-inspired press-on sets.' },
-  { slug: 'play-colletion', title: 'Play Collection', image: '0326002.jpg', description: 'Fun, colorful sets to mix and match.' },
-  { slug: 'dark-edit', title: 'Dark Edit', image: '030138.jpg', description: 'Moody and dramatic for a fierce statement.' },
-  { slug: 'the-blush-collection', title: 'The Blush Collection', image: '0326002.jpg', description: 'Soft pink hues and romantic tones.' },
-  { slug: 'glow-colletion', title: 'Glow Collection', image: '030150.jpg', description: 'Shimmer, chrome, and a little extra shine.' },
+  { slug: 'play-colletion', title: 'Play Collection', image: 'Collection_Banner_-_Desktop_1.jpg', description: 'Fun, colorful sets to mix and match.' },
+  { slug: 'dark-edit', title: 'Dark Edit', image: 'Collection_Banner_-_Desktop_1.jpg', description: 'Moody and dramatic for a fierce statement.' },
+  { slug: 'the-blush-collection', title: 'The Blush Collection', image: 'Collection_Banner_-_Desktop_1.jpg', description: 'Soft pink hues and romantic tones.' },
+  { slug: 'glow-colletion', title: 'Glow Collection', image: 'Collection_Banner_-_Desktop_1.jpg', description: 'Shimmer, chrome, and a little extra shine.' },
   { slug: 'bundle-sales', title: 'Bundle Sales', image: 'Discount.jpg', description: 'Curated bundles — best value, salon-ready.' },
   { slug: 'nail-essentials', title: 'Nail Essentials', image: '0326009_1.jpg', description: 'Prep kits, glue, files, and tools.' },
 ];

@@ -8,14 +8,14 @@ const PRODUCT_IMAGE_ROOT = path.join(ROOT, 'public', 'images', 'products');
 const STORE_URL = 'https://www.runzie.ca';
 
 const collectionDefinitions = [
-  { slug: 'best-sellers-1', title: 'Best Sellers', kind: 'core', image: '/images/0326002.jpg', description: 'Most-loved press-on sets selected by customers.' },
+  { slug: 'best-sellers-1', title: 'Best Sellers', kind: 'core', image: '/images/Collection_Banner_-_Desktop_1.jpg', description: 'Most-loved press-on sets selected by customers.' },
   { slug: 'new-arrival', title: 'New Arrival', kind: 'core', image: '/images/Fresh.jpg', description: 'Fresh designs and seasonal sets just added.' },
   { slug: 'spring-2026-collection', title: 'Spring 2026 Collection', kind: 'core', image: '/images/Collection_Banner_-_Desktop_1.jpg', description: 'Soft colors, playful details, and handcrafted salon-quality finish.' },
   { slug: 'almond', title: 'Almond Shape', kind: 'shape', value: 'Almond', image: '/images/0326009.jpg' },
   { slug: 'coffin-shape', title: 'Coffin Shape', kind: 'shape', value: 'Coffin', image: '/images/0326015.jpg' },
-  { slug: 'round-shape', title: 'Round Shape', kind: 'shape', value: 'Round', image: '/images/030150.jpg' },
+  { slug: 'round-shape', title: 'Round Shape', kind: 'shape', value: 'Round', image: '/images/Collection_Banner_-_Desktop_1.jpg' },
   { slug: 'square-shape', title: 'Square Shape', kind: 'shape', value: 'Square', image: '/images/050026.jpg' },
-  { slug: 'stiletto-shape', title: 'Stiletto Shape', kind: 'shape', value: 'Stiletto', image: '/images/030138.jpg' },
+  { slug: 'stiletto-shape', title: 'Stiletto Shape', kind: 'shape', value: 'Stiletto', image: '/images/Collection_Banner_-_Desktop_1.jpg' },
   { slug: 'short-length', title: 'Short Length', kind: 'length', value: 'Short', image: '/images/050026.jpg' },
   { slug: 'medium-length', title: 'Medium Length', kind: 'length', value: 'Medium', image: '/images/0326009.jpg' },
   { slug: 'long-length', title: 'Long Length', kind: 'length', value: 'Long', image: '/images/0326015.jpg' },
