@@ -17,6 +17,14 @@ function slice(startMarker, endMarker) {
 // Scrolling promotion ("chạy chữ"): from its CSS link through the closing tag.
 let SCROLLING_PROMOTION = slice('<link href="css/scrolling-promotion.css"', '</m-scrolling-promotion>') + '\n  </div>\n</section>';
 
+// The scraped markup uses page-relative asset paths (images/x.svg, css/x.css)
+// that only resolve on the homepage. Promote them to root-absolute so the
+// marquee icons render on every page that injects this section.
+SCROLLING_PROMOTION = SCROLLING_PROMOTION
+  .replace(/(["\s])images\//g, '$1/images/')
+  .replace(/(["\s])css\//g, '$1/css/')
+  .replace(/(["\s])js\//g, '$1/js/');
+
 // Safety fallback if markers ever change
 if (!SCROLLING_PROMOTION.includes('m-scrolling-promotion')) {
   SCROLLING_PROMOTION = '';
