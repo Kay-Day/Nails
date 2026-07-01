@@ -3369,6 +3369,13 @@ body.mnc-signup-open { overflow: hidden; }
 
 /* Sale pricing on product cards — "From <new price>" in red, original price
    struck through in black (like the reference). */
+.m-product-card .m-price__sale {
+  display: flex !important; /* theme hides this by default; always show on cards */
+  flex-wrap: wrap;
+  gap: 2px 8px;
+  align-items: center;
+  justify-content: center;
+}
 .m-product-card .m-price__sale .m-price-item--last,
 .m-product-card .m-price__sale .m-price-item--sale {
   color: #d0021b !important;
