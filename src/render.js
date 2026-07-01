@@ -138,7 +138,7 @@ function productCard(p, hoverUrl) {
       <div class="m-product-card__price">
         <div class="m-price m:inline-flex m:items-center m:flex-wrap">
           ${sale
-            ? `<div class="m-price__sale"><span class="m-price-item m-price-item--sale m-price-item--last">${money(p.price)}</span> <s class="m-price-item m-price-item--regular">${money(p.compare_at_price)}</s></div>`
+            ? `<div class="m-price__sale"><span class="m-price-item m-price-item--sale m-price-item--last">From ${money(p.price)}</span> <s class="m-price-item m-price-item--regular">${money(p.compare_at_price)}</s></div>`
             : `<div class="m-price__regular"><span class="m-price-item m-price-item--regular">${p.price != null ? money(p.price) : 'Contact for price'}</span></div>`}
         </div>
       </div>

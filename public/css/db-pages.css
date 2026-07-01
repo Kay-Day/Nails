@@ -3367,8 +3367,14 @@ body.mnc-signup-open { overflow: hidden; }
   .db-bundle-track__item { flex-basis: 62%; }
 }
 
-/* Sale price shown in red on product cards (old price stays struck grey) */
+/* Sale pricing on product cards — "From <new price>" in red, original price
+   struck through in black (like the reference). */
 .m-product-card .m-price__sale .m-price-item--last,
 .m-product-card .m-price__sale .m-price-item--sale {
   color: #d0021b !important;
+}
+.m-product-card .m-price__sale .m-price-item--regular {
+  color: #111 !important;
+  opacity: 1 !important;
+  text-decoration: line-through;
 }
