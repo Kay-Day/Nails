@@ -10,7 +10,7 @@ const HOME_FILE = path.join(__dirname, '..', 'public', 'home', 'index.html');
 const MAIN_OPEN = '<main role="main" id="MainContent">';
 const MAIN_CLOSE = '</main>';
 const DEFAULT_SHOP_NAME = 'Majestic Nail Care';
-const DEFAULT_LOGO_URL = '/images/Logo/Logo.jpeg';
+const DEFAULT_LOGO_URL = '/images/Logo/Logo.jpg';
 
 let TOP = '';
 let BOTTOM = '';

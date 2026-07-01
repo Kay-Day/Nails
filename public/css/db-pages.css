@@ -22,12 +22,11 @@
 
 .db-brand-logo-frame img {
   position: absolute;
-  top: -3px;
-  left: -6px;
-  width: 74px !important;
+  inset: 0;
+  width: 100% !important;
   max-width: none !important;
-  height: 74px !important;
-  object-fit: cover;
+  height: 100% !important;
+  object-fit: contain;
 }
 
 .db-brand-name {
@@ -49,10 +48,9 @@
 }
 
 .m-logo--mobile .db-brand-logo-frame img {
-  top: -2px;
-  left: -5px;
-  width: 58px !important;
-  height: 58px !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .m-logo--mobile .db-brand-name {

@@ -33,7 +33,7 @@ async function setup() {
   // Default settings
   const defaults = {
     shop_name: 'Majestic Nail Care',
-    logo_url: '/images/Logo/Logo.jpeg',
+    logo_url: '/images/Logo/Logo.jpg',
     tagline: 'Handcrafted press-on nails in Ontario.',
     contact_phone: '4379983533',
     contact_email: '',
