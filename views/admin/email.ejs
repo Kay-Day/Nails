@@ -1,0 +1,49 @@
+<%- include('partials/head') %>
+
+<% if (saved === '1') { %><div class="flash">Popup settings saved.</div><% } %>
+
+<div class="form-card" style="margin-bottom:24px">
+  <h2 style="margin-top:0">Signup popup &amp; discount</h2>
+  <form method="post" action="/admin/email/config">
+    <div class="form-grid">
+      <div class="form-row"><label class="check"><input type="checkbox" name="signup_popup_enabled" <%= settings.signup_popup_enabled !== 'false' ? 'checked' : '' %> /> Show the popup on the homepage</label></div>
+      <div class="form-row"><label>Discount percent (%)</label><input type="number" name="signup_discount_percent" min="1" max="90" value="<%= settings.signup_discount_percent || '10' %>" /></div>
+      <div class="form-row form-row--full"><label>Popup title</label><input type="text" name="signup_popup_title" value="<%= settings.signup_popup_title || '' %>" /></div>
+      <div class="form-row form-row--full"><label>Popup subtitle</label><input type="text" name="signup_popup_subtitle" value="<%= settings.signup_popup_subtitle || '' %>" /></div>
+    </div>
+    <div class="form-actions"><button class="btn btn--primary" type="submit">Save popup settings</button></div>
+  </form>
+</div>
+
+<div class="panel">
+  <div class="panel__head">
+    <h2><%= stats.total %> Subscribers <small style="font-weight:400;color:#888">(<%= stats.used %> used)</small></h2>
+    <a href="/admin/email/export.csv" class="btn btn--ghost btn--sm">Export CSV</a>
+  </div>
+  <form method="get" action="/admin/email" style="display:flex;gap:8px;margin:0 4px 16px">
+    <input type="text" name="q" value="<%= q || '' %>" placeholder="Search email or code…" style="flex:1;padding:9px 12px;border:1px solid #ddd;border-radius:8px" />
+    <button class="btn btn--primary btn--sm" type="submit">Search</button>
+    <% if (q) { %><a href="/admin/email" class="btn btn--ghost btn--sm">Clear</a><% } %>
+  </form>
+  <table>
+    <thead><tr><th>Email</th><th>Code</th><th>Discount</th><th>Status</th><th>Date</th><th></th></tr></thead>
+    <tbody>
+      <% if (!subscribers.length) { %><tr><td colspan="6" class="empty-row"><%= q ? 'No matching subscribers.' : 'No subscribers yet.' %></td></tr><% } %>
+      <% subscribers.forEach(function(s) { %>
+        <tr>
+          <td><a href="mailto:<%= s.email %>"><%= s.email %></a></td>
+          <td><code style="font-weight:700;letter-spacing:.05em"><%= s.discount_code %></code></td>
+          <td><%= s.discount_percent %>%</td>
+          <td><span class="badge badge--<%= s.is_used ? 'off' : 'on' %>"><%= s.is_used ? 'Used' : 'Active' %></span></td>
+          <td><small><%= new Date(s.created_at).toLocaleDateString() %></small></td>
+          <td class="actions">
+            <form action="/admin/email/<%= s.id %>/used" method="post"><button class="btn btn--ghost btn--sm" type="submit"><%= s.is_used ? 'Mark active' : 'Mark used' %></button></form>
+            <form action="/admin/email/<%= s.id %>/delete" method="post" onsubmit="return confirm('Delete this subscriber?')"><button class="btn btn--danger btn--sm" type="submit">Delete</button></form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/foot') %>

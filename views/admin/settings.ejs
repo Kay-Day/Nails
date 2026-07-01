@@ -49,6 +49,17 @@
       placeholder: 'https://example.com/contact-banner.jpg',
       hint: 'Used on the contact page when no other banner is selected.'
     }) %>
+    <%- include('partials/media-field', {
+      label: 'Size guide image',
+      kind: 'image',
+      currentUrl: settings.size_guide_image || '/images/size-guide/size-guide.jpg',
+      fileName: 'size_guide_image_file',
+      urlName: 'size_guide_image_url',
+      removeName: 'remove_size_guide_image',
+      accept: 'image/*',
+      placeholder: 'https://example.com/size-guide.jpg',
+      hint: 'Shown in the “Size guide” popup on every product page. Upload a tall chart image.'
+    }) %>
   </div>
   <div class="form-actions">
     <button type="submit" class="btn btn--primary">Save Settings</button>

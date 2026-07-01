@@ -135,11 +135,18 @@ function siteFooter(settings = {}, navItems = []) {
     settings.tiktok ? `<a href="${escapeHtml(settings.tiktok)}" target="_blank" rel="noopener" aria-label="TikTok">${FOOTER_ICONS.tiktok}</a>` : '',
   ].filter(Boolean).join('');
 
+  const signupPercent = parseInt(settings.signup_discount_percent, 10) || 10;
   const followCol = `<div class="db-site-footer__col db-site-footer__col--follow">
-        <h2 class="db-site-footer__heading">Stay in Touch</h2>
-        <p class="db-site-footer__note">Message us on Instagram or TikTok to reserve your set, then we confirm sizing &amp; pickup or shipping.</p>
+        <h2 class="db-site-footer__heading">Join Our Email List</h2>
+        <p class="db-site-footer__note">Sign up for our newsletter and receive ${signupPercent}% off your first order.</p>
+        <form class="db-footer-signup" data-footer-signup novalidate>
+          <input type="email" name="email" class="db-footer-signup__input" placeholder="Enter your email" autocomplete="email" aria-label="Email address" required>
+          <button type="submit" class="db-footer-signup__btn" aria-label="Subscribe">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+        <div class="db-footer-signup__msg" data-footer-signup-msg hidden></div>
         ${socials ? `<div class="db-site-footer__social">${socials}</div>` : ''}
-        <a class="db-site-footer__cta" href="/contact">Contact the studio</a>
       </div>`;
 
   const darkFooter = `<footer class="db-site-footer" aria-label="Site footer"><div class="container">
@@ -457,6 +464,15 @@ function personalizeHtml(html, { title, description, url, settings, navigation, 
     output = addBodyClass(output, 'db-dynamic-footer-enabled');
     output = output.replace('<m-footer', `${footer}\n<m-footer`);
   }
+  // Config for the homepage email-signup popup (read by db-site.js).
+  const signupConfig = {
+    enabled: (settings?.signup_popup_enabled ?? 'true') !== 'false',
+    percent: parseInt(settings?.signup_discount_percent, 10) || 10,
+    title: settings?.signup_popup_title || 'Get a discount on your first set',
+    subtitle: settings?.signup_popup_subtitle || 'Enter your email and we’ll send your personal discount code.',
+  };
+  const signupJson = JSON.stringify(signupConfig).replace(/</g, '\\u003c');
+  output = output.replace(/<\/body>/i, `<script>window.__mncSignup=${signupJson};</script>\n</body>`);
   if (!output.includes('/js/db-site.js')) {
     output = output.replace(/<\/body>/i, '<script src="/js/db-site.js" defer></script>\n</body>');
   }

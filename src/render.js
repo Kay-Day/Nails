@@ -15,7 +15,7 @@ const SHOP_PHOTOS = (() => {
   } catch (e) { return []; }
 })();
 const shopPhoto = (i) => (SHOP_PHOTOS.length ? '/anhshop/' + SHOP_PHOTOS[i % SHOP_PHOTOS.length] : PLACEHOLDER);
-const money = (v) => (v == null ? null : '$' + Number(v).toFixed(2));
+const money = (v) => (v == null ? null : '$' + Number(v).toFixed(2) + ' CAD');
 const moneyCad = (v) => (v == null ? null : '$' + Number(v).toFixed(2) + ' CAD');
 const PLACEHOLDER = '/images/Website_Photos_Square.jpg';
 const DEFAULT_BANNER = '/images/Homepage_Banner_1_-_Desk_Top.jpg';
@@ -125,7 +125,7 @@ function productCard(p, hoverUrl) {
       </div>
     </a>
     <div class="m-product-card__tags">
-      ${sale ? '<span class="m-product-card__tag-name m-product-tag m-product-tag--sale m-gradient m-color-badge-sale">Sale</span>' : ''}
+      ${sale ? `<span class="m-product-card__tag-name m-product-tag m-product-tag--sale m-gradient m-color-badge-sale">${money(Number(p.compare_at_price) - Number(p.price))} OFF</span>` : ''}
       ${!sale && p.is_featured ? '<span class="m-product-card__tag-name m-product-tag m-product-tag--new m-gradient m-color-dark">Best Seller</span>' : ''}
     </div>
   </div>
@@ -654,9 +654,8 @@ function productPage({ product, gallery, variants, collections, related, reviewC
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 5L5 19M5 5l14 14"/></svg>
     </button>
     <div class="db-size-guide__scroll">
-      <div class="db-size-guide__brand">${e(shopName)}</div>
       <div class="db-size-guide__chart">
-        <img src="/images/size-guide/size-guide.jpg" alt="${e(shopName)} size guide — how to measure your nails and the size chart" loading="lazy">
+        <img src="${e(settings.size_guide_image || '/images/size-guide/size-guide.jpg')}" alt="${e(shopName)} size guide — how to measure your nails and the size chart" loading="lazy">
       </div>
       <p class="db-size-guide__note">Still unsure? Message us your measurements and we'll help you pick the perfect fit — or arrange a custom-sized set.</p>
     </div>
@@ -1327,7 +1326,10 @@ function homePage({ banners, featured, posts, sections: cmsSections, settings })
   const instagram = settings.instagram || '/contact';
   const arrow = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg>';
   const best = cmsSection(cmsSections, 'best-sellers');
+  const shopByCollection = cmsSection(cmsSections, 'shop-by-collection');
   const shapeSection = cmsSection(cmsSections, 'shop-by-shape');
+  const shopByLength = cmsSection(cmsSections, 'shop-by-length');
+  const bundleDeals = cmsSection(cmsSections, 'bundle-deals');
   const curated = cmsSection(cmsSections, 'curated');
   const seen = cmsSection(cmsSections, 'as-seen');
   const story = cmsSection(cmsSections, 'brand-story');
@@ -1360,12 +1362,32 @@ function homePage({ banners, featured, posts, sections: cmsSections, settings })
   const heroScript = (banners || []).length > 1 ? `<script>(()=>{const root=document.querySelector('[data-slideshow]');if(!root)return;const track=root.querySelector('.m-slideshow__track');const slides=[...root.querySelectorAll('.m-slide')];const dots=[...root.querySelectorAll('.m-slideshow__dot')];let index=0,timer;const go=n=>{index=(n+slides.length)%slides.length;track.style.transform='translateX('+(-index*100)+'%)';dots.forEach((dot,i)=>dot.classList.toggle('is-active',i===index));};const restart=()=>{clearInterval(timer);timer=setInterval(()=>go(index+1),5000);};root.querySelector('.m-slideshow__arrow--prev')?.addEventListener('click',()=>{go(index-1);restart();});root.querySelector('.m-slideshow__arrow--next')?.addEventListener('click',()=>{go(index+1);restart();});dots.forEach((dot,i)=>dot.addEventListener('click',()=>{go(i);restart();}));restart();})();</script>` : '';
 
   const bestHtml = bestProducts.length ? `<section class="m-section m-section-my m-section-py"><div class="container db-home-container">
-    ${sectionHeading(best.title || '', best.subtitle || '')}<div class="db-grid db-grid--4">${bestProducts.map((product) => productCard(product, product.hover_image)).join('')}</div>
+    ${sectionHeading(best.title || '', best.subtitle || '')}<div class="db-grid db-grid--5">${bestProducts.slice(0, 5).map((product) => productCard(product, product.hover_image)).join('')}</div>
     ${best.button_link ? `<div class="db-section-action"><a class="m-button m-button--primary" href="${e(best.button_link)}">${e(best.button_text || 'View all')}</a></div>` : ''}
   </div></section>` : '';
 
-  const shapeHtml = (shapeSection.items || []).length ? `<section class="m-section m-section-my m-section-py db-home-soft db-shape-section"><div class="container db-home-container">
-    ${sectionHeading(shapeSection.title || '', shapeSection.subtitle || '')}<div class="db-grid db-grid--5">${shapeSection.items.map((item) => `<a href="${e(item.link || '#')}" class="m-collection-card m-collection-card--round"><div class="m-collection-card__image m-collection-card__image-rounded m:rounded-full m-hover-box m-hover-box--scale-up"><img src="${e(item.image || PLACEHOLDER)}" alt="${e(item.title || '')}" loading="lazy"></div><div class="m-collection-card__content"><h3 class="m-collection-card__title">${e(item.title || '')}</h3><span class="m-collection-card__link">View collection ${arrow}</span></div></a>`).join('')}</div>
+  // Shop By Collection / Shape / Length render as 5-up round cards. `variant`
+  // 'nail' = single-nail PNG (object-fit contain), 'photo' = collection cover (cover).
+  const roundCardsSection = (section, soft, variant) => (section.items || []).length ? `<section class="m-section m-section-my m-section-py${soft ? ' db-home-soft' : ''} db-shape-section db-round-${variant}"><div class="container db-home-container">
+    ${sectionHeading(section.title || '', section.subtitle || '')}<div class="db-grid db-grid--5">${section.items.map((item) => `<a href="${e(item.link || '#')}" class="m-collection-card m-collection-card--round"><div class="m-collection-card__image m-collection-card__image-rounded m:rounded-full m-hover-box m-hover-box--scale-up"><img src="${e(item.image || PLACEHOLDER)}" alt="${e(item.title || '')}" loading="lazy"></div><div class="m-collection-card__content"><h3 class="m-collection-card__title">${e(item.title || '')}</h3><span class="m-collection-card__link">View collection ${arrow}</span></div></a>`).join('')}</div>
+  </div></section>` : '';
+  const collectionHtml = roundCardsSection(shopByCollection, false, 'photo');
+  const shapeHtml = roundCardsSection(shapeSection, true, 'nail');
+  const lengthHtml = roundCardsSection(shopByLength, false, 'nail');
+
+  // Curated Bundle Deals — promo banner + horizontal product carousel (runzie-style).
+  const bundleLink = bundleDeals.button_link || '/products?sale=1';
+  const bundleHtml = (bundleDeals.products || []).length ? `<section class="m-section m-section-my m-section-py db-bundle-section"><div class="container db-home-container">
+    <a class="db-bundle-banner" href="${e(bundleLink)}">
+      <img class="db-bundle-banner__bg" src="${e(bundleDeals.image || DEFAULT_BANNER)}" alt="" loading="lazy">
+      <span class="db-bundle-banner__overlay"></span>
+      <span class="db-bundle-banner__content">
+        <small class="db-bundle-banner__eyebrow">${e(bundleDeals.eyebrow || 'Limited Time Offer')}</small>
+        <strong class="db-bundle-banner__title">${e(bundleDeals.title || 'Curated Bundle Deals')}</strong>
+        <span class="db-bundle-banner__btn">${e(bundleDeals.button_text || 'Shop More')}</span>
+      </span>
+    </a>
+    <div class="db-bundle-track">${bundleDeals.products.map((product) => `<div class="db-bundle-track__item">${productCard(product, product.hover_image)}</div>`).join('')}</div>
   </div></section>` : '';
 
   const curatedHtml = (curated.items || []).length ? `<section class="m-section m-section-my m-section-py"><div class="container db-home-container">
@@ -1391,7 +1413,7 @@ function homePage({ banners, featured, posts, sections: cmsSections, settings })
 
   // Note: journalHtml intentionally omitted from the homepage — runzie has no blog teaser on its
   // home page. The blog itself stays at /blog (linked from nav). Restore by adding ${journalHtml}.
-  return `${header()}${hero}${heroScript}${marquee()}${bestHtml}${shapeHtml}${curatedHtml}${seenHtml}${storyHtml}${featureHtml}${reviewHtml}${socialHtml}`;
+  return `${header()}${hero}${heroScript}${marquee()}${bestHtml}${collectionHtml}${shapeHtml}${lengthHtml}${bundleHtml}${curatedHtml}${seenHtml}${storyHtml}${featureHtml}${reviewHtml}${socialHtml}`;
 }
 
 // --- Policy / content pages (DRY for shipping/refund/privacy/terms) ---

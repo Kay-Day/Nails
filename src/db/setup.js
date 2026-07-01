@@ -43,6 +43,11 @@ async function setup() {
     tiktok: 'https://www.tiktok.com/@majestic_press_on_nails?_r=1&_t=ZS-97Rx00o1YWq',
     facebook: '',
     announcement: 'Handcrafted press-on nails in Ontario, Canada',
+    // Homepage email-signup popup (per-email discount code).
+    signup_popup_enabled: 'true',
+    signup_discount_percent: '10',
+    signup_popup_title: 'Get 10% off your first set',
+    signup_popup_subtitle: 'Enter your email and we’ll send your personal discount code instantly.',
   };
   for (const [key, value] of Object.entries(defaults)) {
     await pool.query(

@@ -1,0 +1,47 @@
+<%- include('partials/head') %>
+
+<form class="form-card" method="post" action="<%= formAction %>">
+  <div class="form-grid">
+    <div class="form-row">
+      <label>Location</label>
+      <select name="location">
+        <option value="header" <%= item.location === 'header' ? 'selected' : '' %>>Header menu</option>
+        <option value="footer" <%= item.location === 'footer' ? 'selected' : '' %>>Footer menu</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label>Parent item <span class="hint">(leave empty for a top-level item)</span></label>
+      <select name="parent_id">
+        <option value="">— None (top level) —</option>
+        <% (parents || []).forEach(function(p) { %>
+          <option value="<%= p.id %>" <%= String(item.parent_id || '') === String(p.id) ? 'selected' : '' %>><%= p.label %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-row form-row--full">
+      <label>Label</label>
+      <input type="text" name="label" value="<%= item.label || '' %>" placeholder="Shop All" required />
+    </div>
+    <div class="form-row">
+      <label>Link (URL)</label>
+      <input type="text" name="url" value="<%= item.url || '' %>" placeholder="/products" />
+    </div>
+    <div class="form-row">
+      <label>Badge <span class="hint">(optional, e.g. HOT)</span></label>
+      <input type="text" name="badge" value="<%= item.badge || '' %>" placeholder="HOT" />
+    </div>
+    <div class="form-row">
+      <label>Sort order</label>
+      <input type="number" name="sort_order" value="<%= item.sort_order || 0 %>" />
+    </div>
+    <div class="form-row">
+      <label class="check"><input type="checkbox" name="is_active" <%= (item.is_active === undefined || item.is_active) ? 'checked' : '' %> /> Active</label>
+    </div>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn--primary">Save menu item</button>
+    <a href="/admin/navigation" class="btn btn--ghost">Cancel</a>
+  </div>
+</form>
+
+<%- include('partials/foot') %>

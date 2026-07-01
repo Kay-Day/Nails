@@ -92,6 +92,7 @@ async function showProducts(req, res, next) {
     const numOrNull = (v) => (v === undefined || v === null || v === '' || Number.isNaN(Number(v)) ? null : Number(v));
     const priceMin = numOrNull(req.query.price_min);
     const priceMax = numOrNull(req.query.price_max);
+    const saleOnly = String(req.query.sale || '') === '1';
     const page = Math.max(1, parseInt(req.query.page) || 1);
     const perPage = 12;
 
@@ -144,6 +145,7 @@ async function showProducts(req, res, next) {
     });
     if (priceMin != null) { params.push(priceMin); where.push(`p.price >= $${params.length}`); }
     if (priceMax != null) { params.push(priceMax); where.push(`p.price <= $${params.length}`); }
+    if (saleOnly) where.push('p.compare_at_price IS NOT NULL AND p.compare_at_price > p.price');
     if (availabilitySel.length === 1 && availabilitySel[0] === 'out') where.push('false');
     const whereSql = where.join(' AND ');
 
@@ -229,14 +231,14 @@ async function showProducts(req, res, next) {
       filterGroups,
       priceRange,
       inStockCount: stats.in_stock || 0,
-      filters: { collection, q, sort, selections, availability: availabilitySel, price_min: priceMin, price_max: priceMax },
+      filters: { collection, q, sort, selections, availability: availabilitySel, price_min: priceMin, price_max: priceMax, sale: saleOnly },
       page,
       totalPages,
       total,
       bannerImage: bannerRes.rows[0] && bannerRes.rows[0].image,
       sections,
     });
-    sendThemed(res, html, pageTitle(res, collection ? 'Shop' : 'Shop All'));
+    sendThemed(res, html, pageTitle(res, saleOnly ? 'Sale' : (collection ? 'Shop' : 'Shop All')));
   } catch (err) {
     next(err);
   }
@@ -387,6 +389,38 @@ router.post('/contact', async (req, res, next) => {
       [String(name).trim(), String(email).trim(), String(phone || '').trim() || null, String(message).trim()]
     );
     res.redirect('/contact?sent=1');
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Email signup popup — stores the email and returns a unique per-email discount code.
+router.post('/subscribe', async (req, res, next) => {
+  try {
+    const settings = res.locals.settings || {};
+    // Note: signup_popup_enabled only controls the auto homepage popup; the footer
+    // newsletter form always collects emails and issues a code.
+    const email = String(req.body.email || '').trim().toLowerCase();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return res.status(400).json({ error: 'invalid_email' });
+    const percent = Math.max(1, Math.min(90, parseInt(settings.signup_discount_percent) || 10));
+
+    const existing = await pool.query('SELECT discount_code, discount_percent FROM email_subscribers WHERE email = $1', [email]);
+    if (existing.rows.length) {
+      return res.json({ code: existing.rows[0].discount_code, percent: existing.rows[0].discount_percent, existing: true });
+    }
+    // Generate a unique code (retry on the rare collision).
+    let code = '';
+    for (let attempt = 0; attempt < 8; attempt++) {
+      const candidate = 'MNC' + Math.random().toString(36).slice(2, 8).toUpperCase();
+      const dup = await pool.query('SELECT 1 FROM email_subscribers WHERE discount_code = $1', [candidate]);
+      if (!dup.rows.length) { code = candidate; break; }
+    }
+    if (!code) return res.status(500).json({ error: 'code_generation_failed' });
+    await pool.query(
+      'INSERT INTO email_subscribers (email, discount_code, discount_percent, source) VALUES ($1,$2,$3,$4)',
+      [email, code, percent, 'popup']
+    );
+    res.json({ code, percent });
   } catch (err) {
     next(err);
   }

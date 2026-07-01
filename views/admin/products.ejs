@@ -3,7 +3,10 @@
 <div class="panel">
   <div class="panel__head">
     <h2><%= products.length %> Products</h2>
-    <a href="/admin/products/new" class="btn btn--accent btn--sm">+ New Product</a>
+    <div style="display:flex;gap:8px;align-items:center">
+      <a href="/admin/products/export.xlsx" class="btn btn--ghost btn--sm">⤓ Export Excel</a>
+      <a href="/admin/products/new" class="btn btn--accent btn--sm">+ New Product</a>
+    </div>
   </div>
   <table>
     <thead><tr><th></th><th>Title</th><th>Collection</th><th>Shape</th><th>Price</th><th>Featured</th><th>Status</th><th></th></tr></thead>

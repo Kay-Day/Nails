@@ -275,22 +275,61 @@ body.db-overlay-open {
   color: #174733;
 }
 
-/* Shop By Shape — runzie shows a single full nail per shape (no circular crop) */
+/* Shop By Shape / Collection / Length — runzie-style round cards */
 .db-shape-section .m-collection-card__image,
 .db-shape-section .m-collection-card__image-rounded {
-  border-radius: 0 !important;
-  background: transparent !important;
+  border-radius: 50% !important;
   aspect-ratio: 1 / 1;
+  overflow: hidden;
 }
 .db-shape-section .m-collection-card__image img {
-  object-fit: contain !important;
+  width: 100%;
+  height: 100%;
   transform: none !important;
 }
 .db-shape-section .m-collection-card:hover .m-collection-card__image img {
   transform: scale(1.04) !important;
 }
-.db-shape-section .m-collection-card__title {
-  margin-top: 4px;
+.db-shape-section .m-collection-card__title { margin-top: 4px; }
+
+/* Single-nail PNG (transparent) — show the full nail floating in a soft disc */
+.db-round-nail .m-collection-card__image,
+.db-round-nail .m-collection-card__image-rounded {
+  background: #f5eeee !important;
+}
+.db-round-nail .m-collection-card__image img {
+  object-fit: contain !important;
+  padding: 6%;
+}
+
+/* Shape / Collection / Length become a horizontal scroll row on tablet & mobile
+   (like the runzie sample) instead of wrapping into a 2-column grid. */
+@media (max-width: 1100px) {
+  .db-shape-section .db-grid {
+    display: flex !important;
+    grid-template-columns: none !important;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    gap: 14px;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+    scroll-padding-left: 4px;
+  }
+  .db-shape-section .db-grid::-webkit-scrollbar { display: none; }
+  .db-shape-section .db-grid > * {
+    flex: 0 0 30%;
+    max-width: none;
+    scroll-snap-align: start;
+  }
+}
+@media (max-width: 600px) {
+  .db-shape-section .db-grid > * { flex-basis: 40%; }
+}
+/* Collection cover photos — fill the circle */
+.db-round-photo .m-collection-card__image img {
+  object-fit: cover !important;
 }
 
 /* Homepage UGC strip */
@@ -3154,6 +3193,53 @@ a.db-contact-band__item:hover { box-shadow: 0 6px 20px rgba(0, 0, 0, .08); trans
 }
 .db-site-footer__cta:hover { opacity: .8; }
 
+/* Footer "Join Our Email List" form */
+.db-footer-signup {
+  display: flex;
+  align-items: stretch;
+  max-width: 340px;
+  border: 1px solid rgba(255, 255, 255, .45);
+  border-radius: 8px;
+  overflow: hidden;
+  background: transparent;
+}
+.db-footer-signup__input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  padding: 13px 16px;
+  color: #fff;
+  font-family: Nunito, sans-serif;
+  font-size: 14px;
+}
+.db-footer-signup__input::placeholder { color: rgba(255, 255, 255, .55); }
+.db-footer-signup__input:focus { outline: none; }
+.db-footer-signup__btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  background: transparent;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, .3);
+  color: #fff;
+  cursor: pointer;
+  transition: background .15s;
+}
+.db-footer-signup__btn:hover { background: rgba(255, 255, 255, .12); }
+.db-footer-signup__btn:disabled { opacity: .5; cursor: default; }
+.db-footer-signup__msg {
+  font-family: Nunito, sans-serif;
+  font-size: 13.5px;
+  line-height: 1.5;
+  margin-top: 12px;
+}
+.db-footer-signup__msg.is-success { color: #b6e3c6; }
+.db-footer-signup__msg.is-success strong { color: #fff; letter-spacing: .04em; }
+.db-footer-signup__msg.is-error { color: #f2b8b8; }
+
 .db-site-footer__contact { display: grid; gap: 14px; }
 .db-site-footer__contact a,
 .db-site-footer__contact > div {
@@ -3239,4 +3325,46 @@ a.db-contact-band__item:hover { box-shadow: 0 6px 20px rgba(0, 0, 0, .08); trans
   .db-review-card { flex-basis: 82%; padding: 18px; }
   .db-reviews-arrow { display: none; }
   .db-reviews-carousel { padding-top: 0; }
+}
+
+/* ---- Homepage email signup popup ---- */
+.mnc-signup { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px; }
+.mnc-signup.is-open { display: flex; }
+.mnc-signup__backdrop { position: absolute; inset: 0; background: rgba(20,16,18,.55); backdrop-filter: blur(2px); }
+.mnc-signup__card { position: relative; width: 100%; max-width: 440px; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.35); animation: mncSignupIn .35s ease; }
+@keyframes mncSignupIn { from { opacity: 0; transform: translateY(16px) scale(.98); } to { opacity: 1; transform: none; } }
+.mnc-signup__close { position: absolute; top: 10px; right: 12px; background: none; border: none; font-size: 28px; line-height: 1; color: #9a8f92; cursor: pointer; z-index: 2; }
+.mnc-signup__close:hover { color: #333; }
+.mnc-signup__body, .mnc-signup__success { padding: 40px 34px 34px; text-align: center; }
+.mnc-signup__title { font-family: 'Gilda Display', serif; font-size: 27px; line-height: 1.15; margin: 0 0 10px; color: #2b2226; }
+.mnc-signup__subtitle { font-size: 14.5px; color: #6b6167; margin: 0 0 22px; }
+.mnc-signup__form { display: flex; flex-direction: column; gap: 10px; }
+.mnc-signup__input { width: 100%; padding: 13px 16px; border: 1px solid #d9d2d5; border-radius: 10px; font-size: 15px; font-family: inherit; }
+.mnc-signup__input:focus { outline: none; border-color: #c98b8b; box-shadow: 0 0 0 3px rgba(201,139,139,.18); }
+.mnc-signup__submit { width: 100%; padding: 13px 16px; border: none; border-radius: 10px; background: #2b2226; color: #fff; font-size: 15px; font-weight: 600; letter-spacing: .02em; cursor: pointer; transition: background .15s; font-family: inherit; }
+.mnc-signup__submit:hover { background: #c98b8b; }
+.mnc-signup__submit:disabled { opacity: .6; cursor: default; }
+.mnc-signup__error { color: #c0392b; font-size: 13px; margin-top: 12px; }
+.mnc-signup__badge { text-transform: uppercase; letter-spacing: .18em; font-size: 11px; color: #a08; color: #b07f86; margin-bottom: 6px; }
+.mnc-signup__percent { font-family: 'Gilda Display', serif; font-size: 44px; color: #2b2226; margin-bottom: 10px; }
+.mnc-signup__note { font-size: 14px; color: #6b6167; margin: 0 0 12px; }
+.mnc-signup__code { font-size: 26px; font-weight: 700; letter-spacing: .12em; padding: 14px; border: 2px dashed #c98b8b; border-radius: 12px; color: #2b2226; margin-bottom: 18px; background: #faf4f4; }
+body.mnc-signup-open { overflow: hidden; }
+@media (max-width: 480px) { .mnc-signup__body, .mnc-signup__success { padding: 36px 22px 26px; } .mnc-signup__title { font-size: 23px; } }
+
+/* ---- Curated Bundle Deals (promo banner + product carousel) ---- */
+.db-bundle-banner { position: relative; display: block; border-radius: 16px; overflow: hidden; aspect-ratio: 16 / 6; margin-bottom: 30px; }
+.db-bundle-banner__bg { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s cubic-bezier(.19,1,.22,1); }
+.db-bundle-banner:hover .db-bundle-banner__bg { transform: scale(1.04); }
+.db-bundle-banner__overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,16,18,.12), rgba(20,16,18,.42)); }
+.db-bundle-banner__content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #fff; gap: 12px; padding: 20px; }
+.db-bundle-banner__eyebrow { text-transform: uppercase; letter-spacing: .22em; font-size: 12.5px; font-family: Nunito, sans-serif; }
+.db-bundle-banner__title { font-family: 'Gilda Display', serif; font-size: clamp(28px, 4.2vw, 54px); line-height: 1.08; }
+.db-bundle-banner__btn { margin-top: 8px; background: #fff; color: #2b2226; padding: 12px 28px; border-radius: 6px; font-weight: 600; font-size: 14px; letter-spacing: .04em; font-family: Nunito, sans-serif; }
+.db-bundle-track { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 6px; }
+.db-bundle-track::-webkit-scrollbar { display: none; }
+.db-bundle-track__item { flex: 0 0 clamp(220px, 24%, 300px); scroll-snap-align: start; }
+@media (max-width: 768px) {
+  .db-bundle-banner { aspect-ratio: 3 / 2; }
+  .db-bundle-track__item { flex-basis: 62%; }
 }

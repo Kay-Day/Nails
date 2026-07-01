@@ -10,7 +10,10 @@ const shopPhoto = (i) => '/anhshop/' + SHOP_PHOTOS[i % SHOP_PHOTOS.length];
 
 const sections = [
   { page: 'home', key: 'best-sellers', type: 'products', title: 'Best Sellers', subtitle: 'Our most-loved sets - hand-finished, ready to wear.', order: 10 },
+  { page: 'home', key: 'shop-by-collection', type: 'items', title: 'Shop By Collection', subtitle: 'Curated edits — find the collection that fits your mood.', order: 15 },
   { page: 'home', key: 'shop-by-shape', type: 'items', title: 'Shop By Shape', subtitle: 'From soft almond to bold coffin - choose the look that is you.', order: 20 },
+  { page: 'home', key: 'shop-by-length', type: 'items', title: 'Shop By Length', subtitle: 'Short, medium, or long — pick the length that suits your day.', order: 25 },
+  { page: 'home', key: 'bundle-deals', type: 'products', eyebrow: 'Limited Time Offer', title: 'Curated Bundle Deals', buttonText: 'Shop More', buttonLink: '/products?sale=1', image: '/images/Homepage_Banner_1_-_Desk_Top.jpg', order: 27 },
   { page: 'home', key: 'curated', type: 'items', title: 'Curated for Your Style', subtitle: 'Fresh edits and customer favourites, selected for every mood.', order: 30 },
   { page: 'home', key: 'as-seen', type: 'products', title: 'As Seen On You', order: 40 },
   {
@@ -50,12 +53,24 @@ const sections = [
 ];
 
 const items = {
+  'home.shop-by-collection': [
+    { title: 'Spring 2026', image: shopPhoto(25), link: '/products?collection=spring-2026-collection' },
+    { title: 'Best Sellers', image: shopPhoto(26), link: '/products?collection=best-sellers-1' },
+    { title: 'New Arrival', image: shopPhoto(27), link: '/products?collection=new-arrival' },
+    { title: 'Bundle Sales', image: shopPhoto(28), link: '/products?collection=bundle-sales' },
+    { title: 'Nail Essentials', image: shopPhoto(29), link: '/products?collection=nail-essentials' },
+  ],
   'home.shop-by-shape': [
-    { title: 'Almond Shape', image: shopPhoto(35), link: '/collections/almond' },
-    { title: 'Coffin Shape', image: shopPhoto(36), link: '/collections/coffin-shape' },
-    { title: 'Round Shape', image: shopPhoto(37), link: '/collections/round-shape' },
-    { title: 'Stiletto Shape', image: shopPhoto(38), link: '/collections/stiletto-shape' },
-    { title: 'Square Shape', image: shopPhoto(39), link: '/collections/square-shape' },
+    { title: 'Almond', image: '/images/shapes/almond.png', link: '/collections/almond' },
+    { title: 'Coffin', image: '/images/shapes/coffin.png', link: '/collections/coffin-shape' },
+    { title: 'Round', image: '/images/shapes/round.png', link: '/collections/round-shape' },
+    { title: 'Stiletto', image: '/images/shapes/stiletto.png', link: '/collections/stiletto-shape' },
+    { title: 'Square', image: '/images/shapes/square.png', link: '/collections/square-shape' },
+  ],
+  'home.shop-by-length': [
+    { title: 'Short', image: '/images/shapes/round.png', link: '/products?length=Short' },
+    { title: 'Medium', image: '/images/shapes/almond.png', link: '/products?length=Medium' },
+    { title: 'Long', image: '/images/shapes/stiletto.png', link: '/products?length=Long' },
   ],
   'home.curated': [
     { label: 'Freshly added', title: 'New Arrivals', body: '<p>Discover the latest hand-finished sets from our studio.</p>', image: shopPhoto(30), link: '/collections/new-arrival' },
@@ -121,6 +136,7 @@ const items = {
 
 const sectionProducts = {
   'home.best-sellers': ['dual-dots', 'midnight-marble', 'mocha-dots', 'starfish-shore', 'blue-enchante', 'sacred-armor', 'island-glow-edit', '030102'],
+  'home.bundle-deals': ['sacred-armor', 'totoros-garden', 'silk-road-petals', 'astral-crown-tips', 'mocha-dots', 'starfish-shore', 'island-glow-edit', 'mocha-muse'],
   'home.as-seen': ['coquette-noir-bites', '030102', 'island-glow-edit', 'golden-tide'],
   'home.instagram': ['dual-dots', 'midnight-marble', 'island-glow-edit', 'golden-tide', 'blue-enchante', 'starfish-shore'],
 };
@@ -138,7 +154,15 @@ const settings = {
 };
 
 async function seedCms(pool) {
-  await pool.query('TRUNCATE section_products, section_items, site_sections, navigation_items RESTART IDENTITY CASCADE');
+  // Content sections are now editable in the admin panel. Skip reseeding when data
+  // already exists so admin edits are never clobbered (set SEED_FORCE=1 to override).
+  // Navigation is managed separately (navigation_items) and is intentionally left untouched.
+  const existing = await pool.query('SELECT COUNT(*)::int AS n FROM site_sections');
+  if (existing.rows[0].n > 0 && process.env.SEED_FORCE !== '1') {
+    console.log(`Skipped: ${existing.rows[0].n} sections already exist. Use SEED_FORCE=1 to reseed.`);
+    return { sections: 0, skipped: true };
+  }
+  await pool.query('TRUNCATE section_products, section_items, site_sections RESTART IDENTITY CASCADE');
   for (const [key, value] of Object.entries(settings)) {
     await pool.query(
       `INSERT INTO settings (key, value) VALUES ($1,$2)

@@ -38,42 +38,28 @@ async function loadSections(pageSlug) {
   return sections;
 }
 
-async function loadNavigation() {
-  const [collectionsRes, shapesRes, lengthsRes] = await Promise.all([
-    pool.query('SELECT slug, title FROM collections WHERE is_active = true ORDER BY sort_order, id'),
-    pool.query("SELECT DISTINCT shape FROM products WHERE is_active = true AND shape IS NOT NULL AND shape <> '' ORDER BY shape"),
-    pool.query("SELECT DISTINCT length FROM products WHERE is_active = true AND length IS NOT NULL AND length <> '' ORDER BY length"),
-  ]);
-
-  const collections = collectionsRes.rows.map((collection) => ({
+// Default (code-defined) menu, used when the navigation_items table is empty.
+// `collections` is the live list so the COLLECTIONS dropdown stays in sync.
+function defaultNavigation(collections = []) {
+  const collectionChildren = collections.map((collection) => ({
     label: collection.title,
     url: `/products?collection=${encodeURIComponent(collection.slug)}`,
   }));
-  const shapes = shapesRes.rows.map((row) => ({
-    label: row.shape,
-    url: `/products?shape=${encodeURIComponent(row.shape)}`,
-  }));
-  const lengths = lengthsRes.rows.map((row) => ({
-    label: row.length,
-    url: `/products?length=${encodeURIComponent(row.length)}`,
-  }));
-
   return {
     header: [
+      { label: 'Shop All', url: '/products' },
+      { label: 'New Arrivals', url: '/products?collection=new-arrival' },
+      { label: 'Best Sellers', url: '/products?collection=best-sellers-1' },
+      { label: 'Collections', url: '/products', children: collectionChildren },
       {
-        label: 'Shop',
+        label: 'Bundles & Accessories',
         url: '/products',
-        badge: 'HOT',
         children: [
-          { label: 'All', url: '/products' },
-          { label: 'Shop by Collection', url: '/products', children: collections },
-          { label: 'Shape', url: '/products', children: shapes },
-          { label: 'Length', url: '/products', children: lengths },
+          { label: 'Bundle Sales', url: '/products?collection=bundle-sales' },
+          { label: 'Nail Essentials', url: '/products?collection=nail-essentials' },
         ],
       },
-      { label: 'Best Sellers', url: '/products?collection=best-sellers-1' },
-      { label: 'New Arrivals', url: '/products?collection=new-arrival' },
-      { label: 'Blog', url: '/blog' },
+      { label: 'Sale', url: '/products?sale=1', badge: 'HOT' },
       { label: 'About Us', url: '/pages/about-us' },
       { label: 'Contact', url: '/contact' },
     ],
@@ -81,13 +67,51 @@ async function loadNavigation() {
       { label: 'Shop All', url: '/products' },
       { label: 'Best Sellers', url: '/products?collection=best-sellers-1' },
       { label: 'New Arrivals', url: '/products?collection=new-arrival' },
+      { label: 'Sale', url: '/products?sale=1' },
       { label: 'Blog', url: '/blog' },
       { label: 'About Us', url: '/pages/about-us' },
       { label: 'Contact', url: '/contact' },
       { label: 'FAQ', url: '/pages/faq' },
-      { label: 'Nail Tutorial', url: '/pages/nail-tutorial' },
     ],
   };
 }
 
-module.exports = { loadSections, loadNavigation };
+// Build the header/footer trees from the navigation_items table (parent -> children).
+function buildTreeFromRows(rows) {
+  const byId = new Map();
+  rows.forEach((row) => byId.set(row.id, {
+    label: row.label,
+    url: row.url || '#',
+    badge: row.badge || undefined,
+    _location: row.location,
+    _parent: row.parent_id,
+    children: [],
+  }));
+  const header = [];
+  const footer = [];
+  byId.forEach((node) => {
+    if (node._parent && byId.has(node._parent)) {
+      byId.get(node._parent).children.push(node);
+    } else if (node._location === 'footer') {
+      footer.push(node);
+    } else {
+      header.push(node);
+    }
+  });
+  const clean = (nodes) => nodes.map(({ _location, _parent, children, ...rest }) =>
+    (children && children.length ? { ...rest, children: clean(children) } : rest));
+  return { header: clean(header), footer: clean(footer) };
+}
+
+async function loadNavigation() {
+  const [collectionsRes, navRes] = await Promise.all([
+    pool.query('SELECT slug, title FROM collections WHERE is_active = true ORDER BY sort_order, id'),
+    pool.query('SELECT id, location, parent_id, label, url, badge, sort_order FROM navigation_items WHERE is_active = true ORDER BY location, parent_id NULLS FIRST, sort_order, id'),
+  ]);
+
+  // Admin-managed menu takes priority; fall back to the code-defined default.
+  if (navRes.rows.length) return buildTreeFromRows(navRes.rows);
+  return defaultNavigation(collectionsRes.rows);
+}
+
+module.exports = { loadSections, loadNavigation, defaultNavigation };

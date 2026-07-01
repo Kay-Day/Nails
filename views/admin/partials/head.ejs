@@ -24,6 +24,9 @@
       <a href="/admin/filters" class="<%= active==='filters'?'active':'' %>"><%- include('icon', { name: 'collections' }) %><span>Categories</span></a>
       <a href="/admin/banners" class="<%= active==='banners'?'active':'' %>"><%- include('icon', { name: 'banners' }) %><span>Banners</span></a>
       <a href="/admin/posts" class="<%= active==='posts'?'active':'' %>"><%- include('icon', { name: 'blog' }) %><span>Blog</span></a>
+      <%# Page Content & Navigation editors are hidden from the sidebar (too technical for shop owners). Routes still work at /admin/content and /admin/navigation for the developer. %>
+      <a href="/admin/messages" class="<%= active==='messages'?'active':'' %>"><%- include('icon', { name: 'messages' }) %><span>Messages</span></a>
+      <a href="/admin/email" class="<%= active==='email'?'active':'' %>"><%- include('icon', { name: 'email' }) %><span>Email &amp; Discounts</span></a>
       <a href="/admin/settings" class="<%= active==='settings'?'active':'' %>"><%- include('icon', { name: 'settings' }) %><span>Settings</span></a>
     </nav>
     <div class="sidebar__foot">

@@ -1,0 +1,67 @@
+<%- include('partials/head') %>
+
+<% function itemRow(node, isChild) { %>
+  <tr<%= isChild ? ' class="nav-row--child"' : '' %>>
+    <td>
+      <% if (isChild) { %><span class="nav-row__indent">↳</span><% } %>
+      <strong><%= node.label %></strong>
+      <% if (node.badge) { %> <span class="badge badge--on"><%= node.badge %></span><% } %>
+    </td>
+    <td><small><%= node.url %></small></td>
+    <td><%= node.sort_order %></td>
+    <td><span class="badge badge--<%= node.is_active ? 'on' : 'off' %>"><%= node.is_active ? 'Active' : 'Hidden' %></span></td>
+    <td class="actions">
+      <% if (!isChild) { %><a href="/admin/navigation/new?location=<%= node.location %>&parent=<%= node.id %>" class="btn btn--ghost btn--sm">+ Sub-item</a><% } %>
+      <a href="/admin/navigation/<%= node.id %>/edit" class="btn btn--ghost btn--sm">Edit</a>
+      <form action="/admin/navigation/<%= node.id %>/delete" method="post" onsubmit="return confirm('Delete this menu item<%= node.children && node.children.length ? ' and its sub-items' : '' %>?')">
+        <button class="btn btn--danger btn--sm" type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+<% } %>
+
+<% if (!count) { %>
+  <div class="panel">
+    <div class="panel__head"><h2>Navigation menu</h2></div>
+    <p style="padding:4px 4px 16px;color:#555">The menu is currently using the built-in default. Load it here to start editing, then add / edit / remove items freely.</p>
+    <form action="/admin/navigation/seed-default" method="post" style="padding:0 4px 8px">
+      <button class="btn btn--primary" type="submit">Load current menu to edit</button>
+    </form>
+  </div>
+<% } else { %>
+  <div class="panel">
+    <div class="panel__head">
+      <h2>Header menu</h2>
+      <a href="/admin/navigation/new?location=header" class="btn btn--accent btn--sm">+ New header item</a>
+    </div>
+    <table>
+      <thead><tr><th>Label</th><th>Link</th><th>Order</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        <% if (!header.length) { %><tr><td colspan="5" class="empty-row">No header items.</td></tr><% } %>
+        <% header.forEach(function(node) { %>
+          <%- itemRow(node, false) %>
+          <% (node.children || []).forEach(function(child) { %><%- itemRow(child, true) %><% }) %>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel" style="margin-top:24px">
+    <div class="panel__head">
+      <h2>Footer menu</h2>
+      <a href="/admin/navigation/new?location=footer" class="btn btn--accent btn--sm">+ New footer item</a>
+    </div>
+    <table>
+      <thead><tr><th>Label</th><th>Link</th><th>Order</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        <% if (!footer.length) { %><tr><td colspan="5" class="empty-row">No footer items.</td></tr><% } %>
+        <% footer.forEach(function(node) { %>
+          <%- itemRow(node, false) %>
+          <% (node.children || []).forEach(function(child) { %><%- itemRow(child, true) %><% }) %>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
+
+<%- include('partials/foot') %>

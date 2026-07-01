@@ -196,6 +196,18 @@ CREATE TABLE IF NOT EXISTS contact_messages (
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
+-- Email subscribers captured by the homepage signup popup. Each email gets one
+-- unique discount code; the admin looks the email up to honour the discount.
+CREATE TABLE IF NOT EXISTS email_subscribers (
+  id               SERIAL PRIMARY KEY,
+  email            VARCHAR(240) UNIQUE NOT NULL,
+  discount_code    VARCHAR(32) UNIQUE NOT NULL,
+  discount_percent INT NOT NULL DEFAULT 10,
+  is_used          BOOLEAN NOT NULL DEFAULT false,
+  source           VARCHAR(60) DEFAULT 'popup',
+  created_at       TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
 -- Faceted filter system for the collection page (Shop By Color / Style / Trending, etc.).
 -- A group is a heading ("Shop By Color"); a value is a checkbox option ("Blue");
 -- products are mapped to many values. Shape/Length stay as product columns and are
