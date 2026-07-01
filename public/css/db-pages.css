@@ -3366,3 +3366,9 @@ body.mnc-signup-open { overflow: hidden; }
   .db-bundle-banner { aspect-ratio: 3 / 2; }
   .db-bundle-track__item { flex-basis: 62%; }
 }
+
+/* Sale price shown in red on product cards (old price stays struck grey) */
+.m-product-card .m-price__sale .m-price-item--last,
+.m-product-card .m-price__sale .m-price-item--sale {
+  color: #d0021b !important;
+}
