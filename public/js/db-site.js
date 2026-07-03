@@ -32,8 +32,16 @@
       drawer.style.height = Math.max(0, window.innerHeight - top) + 'px';
     }
 
+    var savedScrollY = 0;
     function setMenu(open) {
       if (!drawer || !menuButton) return;
+      // The header isn't sticky, so the absolutely-positioned drawer only lines
+      // up with the viewport at the top of the page. Jump to top on open (and
+      // restore the position on close) so the menu always covers the screen.
+      if (open) {
+        savedScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        window.scrollTo(0, 0);
+      }
       drawer.classList.toggle('open', open);
       hamburger && hamburger.classList.toggle('active', open);
       mobileHeader && mobileHeader.classList.toggle('header-drawer-open', open);
@@ -42,13 +50,14 @@
         sizeDrawer();
         var firstLink = drawer.querySelector('.m-menu-mobile__link');
         window.setTimeout(function () {
-          firstLink && firstLink.focus();
+          try { firstLink && firstLink.focus({ preventScroll: true }); } catch (e) { firstLink && firstLink.focus(); }
         }, 180);
       } else {
         drawer.querySelectorAll('.m-megamenu-mobile.open').forEach(function (submenu) {
           submenu.classList.remove('open');
         });
         drawer.style.height = '';
+        window.scrollTo(0, savedScrollY);
       }
       syncBodyLock();
     }
