@@ -20,6 +20,24 @@
       document.body.appendChild(searchPopup);
     }
 
+    // The mobile menu drawer lives inside a transformed ancestor
+    // (.m-header__wrapper), which breaks position:fixed. Move it to <body> so
+    // the open drawer covers the full viewport regardless of scroll, and add a
+    // close (X) button since the header hamburger scrolls out of view.
+    if (drawer && drawer.parentElement !== document.body) {
+      document.body.appendChild(drawer);
+      var drawerWrap = drawer.querySelector('.m-menu-drawer__wrapper');
+      if (drawerWrap && !drawerWrap.querySelector('.db-menu-close')) {
+        var closeBtn = document.createElement('button');
+        closeBtn.type = 'button';
+        closeBtn.className = 'db-menu-close';
+        closeBtn.setAttribute('aria-label', 'Close menu');
+        closeBtn.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+        closeBtn.addEventListener('click', function () { setMenu(false); });
+        drawerWrap.insertBefore(closeBtn, drawerWrap.firstChild);
+      }
+    }
+
     function syncBodyLock() {
       var menuOpen = drawer && drawer.classList.contains('open');
       var searchOpen = searchPopup && searchPopup.classList.contains('db-is-open');
@@ -32,32 +50,24 @@
       drawer.style.height = Math.max(0, window.innerHeight - top) + 'px';
     }
 
-    var savedScrollY = 0;
     function setMenu(open) {
       if (!drawer || !menuButton) return;
-      // The header isn't sticky, so the absolutely-positioned drawer only lines
-      // up with the viewport at the top of the page. Jump to top on open (and
-      // restore the position on close) so the menu always covers the screen.
-      if (open) {
-        savedScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-        window.scrollTo(0, 0);
-      }
       drawer.classList.toggle('open', open);
       hamburger && hamburger.classList.toggle('active', open);
       mobileHeader && mobileHeader.classList.toggle('header-drawer-open', open);
       menuButton.setAttribute('aria-expanded', String(open));
       if (open) {
-        sizeDrawer();
+        // Drawer is pinned via CSS (position: fixed) so it covers the viewport
+        // regardless of scroll; focus without scrolling the page.
         var firstLink = drawer.querySelector('.m-menu-mobile__link');
         window.setTimeout(function () {
-          try { firstLink && firstLink.focus({ preventScroll: true }); } catch (e) { firstLink && firstLink.focus(); }
+          try { firstLink && firstLink.focus({ preventScroll: true }); } catch (e) {}
         }, 180);
       } else {
         drawer.querySelectorAll('.m-megamenu-mobile.open').forEach(function (submenu) {
           submenu.classList.remove('open');
         });
         drawer.style.height = '';
-        window.scrollTo(0, savedScrollY);
       }
       syncBodyLock();
     }

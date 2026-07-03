@@ -176,6 +176,48 @@ body.db-overlay-open {
   .m-header__mobile.header-drawer-open .m-menu-bar {
     background-color: #f8a9ad !important;
   }
+
+  /* Drawer is moved to <body> in db-site.js (the theme header sits in a
+     transformed ancestor that breaks position:fixed). It now covers the full
+     viewport regardless of scroll, with its own close (X) button. */
+  #m-menu-drawer.open {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    height: 100dvh !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    z-index: 100 !important;
+  }
+  #m-menu-drawer.open .m-menu-drawer__wrapper {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    transform: none !important;
+  }
+  #m-menu-drawer.open .m-menu-drawer__content {
+    height: 100% !important;
+    padding-top: 56px !important;
+  }
+  .db-menu-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #2b2226;
+    cursor: pointer;
+    z-index: 3;
+  }
 }
 
 /* Collection / page hero banner (theme-style) */
