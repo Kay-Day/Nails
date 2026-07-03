@@ -3396,3 +3396,13 @@ body.mnc-signup-open { overflow: hidden; }
   opacity: 1 !important;
   text-decoration: line-through;
 }
+
+/* Page background = brand light pink #fdedf0 instead of white (client request).
+   Form fields keep their own (white) variable, so inputs stay readable. */
+:root,
+.m-color-default,
+.m-color-scheme-cee058e4-58e3-46aa-9af9-219dadc79066 {
+  --color-background: 253, 237, 240 !important;
+}
+/* Keep soft-tinted sections a touch deeper so the page still has rhythm */
+.db-home-soft { background-color: #fbe3e8 !important; }
