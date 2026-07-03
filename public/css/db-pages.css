@@ -165,6 +165,17 @@ body.db-overlay-open {
   .m-search-popup input[type="search"] {
     font-size: 16px;
   }
+
+  /* Mobile menu — brand pink background (client request) */
+  .m-menu-drawer__wrapper,
+  .m-menu-drawer__content,
+  .m-megamenu-mobile {
+    background-color: #f8a9ad !important;
+  }
+  .m-header__mobile.header-drawer-open,
+  .m-header__mobile.header-drawer-open .m-menu-bar {
+    background-color: #f8a9ad !important;
+  }
 }
 
 /* Collection / page hero banner (theme-style) */
