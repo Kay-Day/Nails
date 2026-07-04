@@ -3502,6 +3502,12 @@ body.mnc-signup-open { overflow: hidden; }
 .db-bundle-track { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 6px; }
 .db-bundle-track::-webkit-scrollbar { display: none; }
 .db-bundle-track__item { flex: 0 0 clamp(220px, 24%, 300px); scroll-snap-align: start; }
+/* Force uniform square media so cards line up — portrait product images were
+   making some cards taller, leaving a big empty gap under the shorter ones. */
+.db-bundle-track__item .m-product-card__media { position: relative; aspect-ratio: 1 / 1; overflow: hidden; }
+.db-bundle-track__item .m-product-card__main-image,
+.db-bundle-track__item .m-product-card__hover-image { position: absolute; inset: 0; width: 100%; height: 100%; }
+.db-bundle-track__item .m-product-card__media img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
 @media (max-width: 768px) {
   .db-bundle-banner { aspect-ratio: 3 / 2; }
   .db-bundle-track__item { flex-basis: 62%; }
