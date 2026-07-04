@@ -74,10 +74,10 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  height: 56px;
-  padding: 4px 10px;
+  height: 66px;
+  padding: 5px 12px;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 13px;
   background: #fff;
   box-shadow:
     0 2px 5px rgba(0, 0, 0, .14),
@@ -106,9 +106,9 @@
 .db-brand-name { display: none; }
 
 .m-logo--mobile .db-brand-logo-frame {
-  height: 46px;
-  padding: 3px 8px;
-  border-radius: 10px;
+  height: 56px;
+  padding: 4px 9px;
+  border-radius: 11px;
 }
 
 .m-logo--mobile .db-brand-name {
@@ -585,7 +585,10 @@ body.db-overlay-open {
     overflow-x: auto;
     scroll-snap-type: x proximity;
     padding: 0 16px 6px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
+  .db-as-seen-track::-webkit-scrollbar { display: none; }
 
   .db-as-seen-card {
     /* Show 2 cards per view on mobile (was ~1 large card). */
