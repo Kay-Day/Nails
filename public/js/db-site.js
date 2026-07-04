@@ -8,6 +8,26 @@
   }
 
   ready(function () {
+    // ---- Sticky header: pin the header to the top of the screen while scrolling.
+    // The theme already styles `.m-header.stuck` (fixed wrapper, solid background);
+    // it just needs the class toggled on scroll, which the clone was missing. ----
+    (function initStickyHeader() {
+      var header = document.querySelector('m-header, .m-header');
+      if (!header) return;
+      var ticking = false;
+      function apply() {
+        ticking = false;
+        var y = window.scrollY || document.documentElement.scrollTop || 0;
+        header.classList.toggle('stuck', y > 4);
+      }
+      function onScroll() {
+        if (!ticking) { ticking = true; window.requestAnimationFrame(apply); }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      apply();
+    })();
+
     var drawer = document.querySelector('#m-menu-drawer');
     var menuButton = document.querySelector('.m-menu-button');
     var hamburger = menuButton && menuButton.querySelector('.m-hamburger-box');
