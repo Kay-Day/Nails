@@ -1,15 +1,18 @@
 <%- include('partials/head') %>
 
+<div class="admin-intro">
+  <strong>Bộ lọc sản phẩm</strong> — các nhóm phân loại để khách lọc hàng ở trang Shop (Màu, Kiểu, Trending…).
+  <ul class="admin-intro__tips">
+    <li>Mỗi <strong>nhóm</strong> chứa nhiều <strong>lựa chọn con</strong> (VD: Màu → Hồng, Xanh). Thêm/đổi tên tại đây.</li>
+    <li>Sau đó vào trang sửa sản phẩm để tick lựa chọn phù hợp cho từng sản phẩm.</li>
+    <li><em>Riêng Hình dáng (Shape) &amp; Độ dài (Length) lấy từ chính field của sản phẩm.</em></li>
+  </ul>
+</div>
+
 <div class="panel">
   <div class="panel__head">
     <h2>Product categories</h2>
   </div>
-  <p class="hint" style="margin:-6px 0 20px; max-width:760px">
-    These are the categories shoppers filter by on the Shop page (Color, Style, Trending…).
-    Each <strong>category</strong> holds <strong>sub-categories</strong> (e.g. Color → Pink, Blue).
-    Add or rename them here, then tick the ones that apply to each product on its edit page.
-    <em>Shape &amp; Length come from the product's own fields.</em>
-  </p>
 
   <div class="cats">
     <% groups.forEach(function(g){ %>

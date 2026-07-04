@@ -177,7 +177,86 @@
     initSignupPopup();
     // ---- Footer "Join Our Email List" form ----
     initFooterSignup();
+    // ---- Dot indicators for horizontal sliders ----
+    initSliders();
   });
+
+  // Adds page dots under any [data-slider-track] that overflows horizontally.
+  function initSliders() {
+    document.querySelectorAll('[data-slider-track]').forEach(function (track) {
+      var dots = document.createElement('div');
+      dots.className = 'db-slider-dots';
+      track.parentNode.insertBefore(dots, track.nextSibling);
+
+      function pages() {
+        var w = track.clientWidth;
+        if (!w || track.scrollWidth <= w + 4) return 1; // not scrollable
+        return Math.max(2, Math.round(track.scrollWidth / w));
+      }
+      function update() {
+        var w = track.clientWidth || 1;
+        var active = Math.round(track.scrollLeft / w);
+        for (var i = 0; i < dots.children.length; i++) {
+          dots.children[i].classList.toggle('is-active', i === active);
+        }
+      }
+      function build() {
+        var n = pages();
+        if (n <= 1) { dots.innerHTML = ''; dots.style.display = 'none'; return; }
+        dots.style.display = '';
+        if (dots.children.length !== n) {
+          dots.innerHTML = '';
+          for (var i = 0; i < n; i++) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'db-slider-dot';
+            b.setAttribute('aria-label', 'Slide ' + (i + 1));
+            (function (idx) {
+              b.addEventListener('click', function () {
+                track.scrollTo({ left: idx * track.clientWidth, behavior: 'smooth' });
+              });
+            })(i);
+            dots.appendChild(b);
+          }
+        }
+        update();
+      }
+
+      var raf;
+      track.addEventListener('scroll', function () {
+        if (raf) return;
+        raf = window.requestAnimationFrame(function () { raf = 0; update(); });
+      }, { passive: true });
+      window.addEventListener('resize', build);
+      // Rebuild after images load (widths change).
+      window.setTimeout(build, 300);
+      build();
+
+      // Drag / swipe to scroll. Touch uses native overflow scrolling; here we
+      // add pointer(mouse)-drag so it can be dragged on desktop too, and keep a
+      // guard so a drag doesn't trigger a click on the card underneath.
+      var down = false, startX = 0, startLeft = 0, moved = false;
+      track.addEventListener('pointerdown', function (e) {
+        if (e.pointerType === 'touch') return; // let the browser handle touch
+        down = true; moved = false;
+        startX = e.clientX; startLeft = track.scrollLeft;
+        track.classList.add('is-dragging');
+      });
+      track.addEventListener('pointermove', function (e) {
+        if (!down) return;
+        var dx = e.clientX - startX;
+        if (Math.abs(dx) > 4) moved = true;
+        track.scrollLeft = startLeft - dx;
+      });
+      function endDrag() { if (!down) return; down = false; track.classList.remove('is-dragging'); }
+      track.addEventListener('pointerup', endDrag);
+      track.addEventListener('pointerleave', endDrag);
+      track.addEventListener('pointercancel', endDrag);
+      track.addEventListener('click', function (e) {
+        if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+      }, true);
+    });
+  }
 
   function initFooterSignup() {
     document.querySelectorAll('[data-footer-signup]').forEach(function (form) {

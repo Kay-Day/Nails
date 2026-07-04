@@ -71,9 +71,26 @@ table { width: 100%; border-collapse: collapse; }
 th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--a-soft); padding: 12px 22px; border-bottom: 1px solid var(--a-line); }
 td { padding: 12px 22px; border-bottom: 1px solid var(--a-line); font-size: 14px; vertical-align: middle; }
 tr:last-child td { border-bottom: none; }
-.thumb { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; background: var(--a-bg); }
-.thumb--wide { width: 80px; height: 48px; }
+.thumb { width: 52px; height: 52px; border-radius: 8px; object-fit: cover; background: var(--a-bg); border: 1px solid var(--a-line); transition: transform .18s ease, box-shadow .18s ease; cursor: zoom-in; }
+.thumb--wide { width: 84px; height: 52px; }
+.thumb:hover { transform: scale(1.9); box-shadow: 0 10px 26px rgba(0,0,0,.22); position: relative; z-index: 5; }
 .actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+/* Vietnamese help / intro box shown at the top of admin pages */
+.admin-intro { background: #fff; border: 1px solid var(--a-line); border-left: 3px solid var(--a-accent); border-radius: 10px; padding: 13px 16px; margin: 0 0 18px; font-size: 13.5px; color: var(--a-ink); line-height: 1.6; max-width: 960px; }
+.admin-intro strong { color: var(--a-accent-deep); }
+.admin-intro .admin-intro__tips { margin: 6px 0 0; padding-left: 18px; color: var(--a-soft); }
+.admin-intro .admin-intro__tips li { margin: 2px 0; }
+
+/* Pagination */
+.admin-pagination { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 16px 22px; border-top: 1px solid var(--a-line); }
+.admin-pagination__info { font-size: 13px; color: var(--a-soft); }
+.admin-pagination__pages { display: flex; align-items: center; gap: 6px; }
+.admin-pagination__btn { min-width: 34px; height: 34px; padding: 0 8px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--a-line); border-radius: 8px; font-size: 14px; font-weight: 700; color: var(--a-ink); background: #fff; transition: background .15s ease, border-color .15s ease; }
+.admin-pagination__btn:hover { background: var(--a-bg); border-color: var(--a-accent); }
+.admin-pagination__btn.is-current { background: var(--a-accent); border-color: var(--a-accent); color: #fff; }
+.admin-pagination__btn.is-disabled { opacity: .4; pointer-events: none; }
+.admin-pagination__gap { color: var(--a-soft); padding: 0 2px; }
 
 /* Badges */
 .badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }

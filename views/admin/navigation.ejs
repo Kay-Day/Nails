@@ -1,5 +1,13 @@
 <%- include('partials/head') %>
 
+<div class="admin-intro">
+  <strong>Menu điều hướng</strong> — quản lý các mục menu ở đầu trang (Header) và chân trang (Footer) của website.
+  <ul class="admin-intro__tips">
+    <li>Thêm mục con: chọn <strong>Parent item</strong> là mục cha (VD "Collections").</li>
+    <li>Link tới bộ sưu tập: dùng ô <strong>"Link to a collection"</strong> để tự điền đúng URL — tránh gõ sai gây lỗi 404.</li>
+  </ul>
+</div>
+
 <% function itemRow(node, isChild) { %>
   <tr<%= isChild ? ' class="nav-row--child"' : '' %>>
     <td>

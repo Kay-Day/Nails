@@ -1,8 +1,16 @@
 <%- include('partials/head') %>
 
+<div class="admin-intro">
+  <strong>Banner</strong> — ảnh/slide lớn hiển thị đầu trang chủ. Bấm <strong>+ New Banner</strong> để thêm.
+  <ul class="admin-intro__tips">
+    <li>Thứ tự (Order) nhỏ hiện trước; có thể dùng ảnh hoặc video.</li>
+    <li>Bỏ tick Active để tạm ẩn banner mà không cần xóa.</li>
+  </ul>
+</div>
+
 <div class="panel">
   <div class="panel__head">
-    <h2><%= banners.length %> Banners</h2>
+    <h2><%= (typeof pagination !== 'undefined' ? pagination.total : banners.length) %> Banners</h2>
     <a href="/admin/banners/new" class="btn btn--accent btn--sm">+ New Banner</a>
   </div>
   <table>
@@ -26,6 +34,7 @@
       <% }) %>
     </tbody>
   </table>
+  <%- include('partials/pagination', { pagination: typeof pagination !== 'undefined' ? pagination : null }) %>
 </div>
 
 <%- include('partials/foot') %>

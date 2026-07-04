@@ -18,6 +18,20 @@ function requireAuth(req, res, next) {
   return res.redirect('/admin/login');
 }
 
+// ---- Pagination helper for admin list pages ----
+// Runs the COUNT first so the requested page can be clamped, then returns the
+// LIMIT/OFFSET to slice the list plus a `pagination` object for the view.
+async function paginate(req, { perPage, countSql, countParams = [], path, extraParams = {} }) {
+  const total = parseInt((await pool.query(countSql, countParams)).rows[0].n, 10) || 0;
+  const totalPages = Math.max(1, Math.ceil(total / perPage));
+  const page = Math.min(totalPages, Math.max(1, parseInt(req.query.page, 10) || 1));
+  const offset = (page - 1) * perPage;
+  const qs = new URLSearchParams(extraParams);
+  const qsStr = qs.toString();
+  const base = `${path}?${qsStr ? qsStr + '&' : ''}`;
+  return { limit: perPage, offset, pagination: { page, totalPages, total, perPage, base } };
+}
+
 // Uploaded file > pasted URL > remove request > existing value.
 function resolveMedia(file, textValue, existing, removeRequested) {
   if (file) return fileUrl(file);
@@ -211,14 +225,19 @@ router.get('/', async (req, res, next) => {
 // =================== PRODUCTS ===================
 router.get('/products', async (req, res, next) => {
   try {
+    const { limit, offset, pagination } = await paginate(req, {
+      perPage: 20, path: '/admin/products',
+      countSql: 'SELECT COUNT(*)::int AS n FROM products',
+    });
     const { rows } = await pool.query(
       `SELECT p.*, COALESCE(string_agg(DISTINCT c.title, ', '), '') AS collection_title
        FROM products p
        LEFT JOIN product_collections pc ON pc.product_id = p.id
        LEFT JOIN collections c ON c.id = pc.collection_id
-       GROUP BY p.id ORDER BY p.created_at DESC`
+       GROUP BY p.id ORDER BY p.created_at DESC LIMIT $1 OFFSET $2`,
+      [limit, offset]
     );
-    res.render('admin/products', { title: 'Products', products: rows, active: 'products' });
+    res.render('admin/products', { title: 'Products', products: rows, pagination, active: 'products' });
   } catch (err) {
     next(err);
   }
@@ -511,11 +530,16 @@ router.post('/filters/values/:id/delete', async (req, res, next) => {
 // =================== COLLECTIONS ===================
 router.get('/collections', async (req, res, next) => {
   try {
+    const { limit, offset, pagination } = await paginate(req, {
+      perPage: 20, path: '/admin/collections',
+      countSql: 'SELECT COUNT(*)::int AS n FROM collections',
+    });
     const { rows } = await pool.query(
       `SELECT c.*, (SELECT COUNT(*) FROM product_collections pc WHERE pc.collection_id = c.id)::int AS product_count
-       FROM collections c ORDER BY sort_order, id`
+       FROM collections c ORDER BY sort_order, id LIMIT $1 OFFSET $2`,
+      [limit, offset]
     );
-    res.render('admin/collections', { title: 'Collections', collections: rows, active: 'collections' });
+    res.render('admin/collections', { title: 'Collections', collections: rows, pagination, active: 'collections' });
   } catch (err) {
     next(err);
   }
@@ -584,8 +608,12 @@ router.post('/collections/:id/delete', async (req, res, next) => {
 // =================== BANNERS ===================
 router.get('/banners', async (req, res, next) => {
   try {
-    const { rows } = await pool.query('SELECT * FROM banners ORDER BY sort_order, id');
-    res.render('admin/banners', { title: 'Banners', banners: rows, active: 'banners' });
+    const { limit, offset, pagination } = await paginate(req, {
+      perPage: 20, path: '/admin/banners',
+      countSql: 'SELECT COUNT(*)::int AS n FROM banners',
+    });
+    const { rows } = await pool.query('SELECT * FROM banners ORDER BY sort_order, id LIMIT $1 OFFSET $2', [limit, offset]);
+    res.render('admin/banners', { title: 'Banners', banners: rows, pagination, active: 'banners' });
   } catch (err) {
     next(err);
   }
@@ -654,8 +682,12 @@ router.post('/banners/:id/delete', async (req, res, next) => {
 // =================== BLOG ===================
 router.get('/posts', async (req, res, next) => {
   try {
-    const { rows } = await pool.query('SELECT * FROM posts ORDER BY published_at DESC');
-    res.render('admin/posts', { title: 'Blog', posts: rows, active: 'posts' });
+    const { limit, offset, pagination } = await paginate(req, {
+      perPage: 20, path: '/admin/posts',
+      countSql: 'SELECT COUNT(*)::int AS n FROM posts',
+    });
+    const { rows } = await pool.query('SELECT * FROM posts ORDER BY published_at DESC LIMIT $1 OFFSET $2', [limit, offset]);
+    res.render('admin/posts', { title: 'Blog', posts: rows, pagination, active: 'posts' });
   } catch (err) {
     next(err);
   }
@@ -784,12 +816,20 @@ router.post('/navigation/seed-default', async (req, res, next) => {
   }
 });
 
+async function navLinkOptions() {
+  const collections = (await pool.query(
+    'SELECT slug, title FROM collections WHERE is_active = true ORDER BY sort_order, id'
+  )).rows;
+  return collections.map((c) => ({ label: c.title, url: `/products?collection=${c.slug}` }));
+}
+
 router.get('/navigation/new', async (req, res, next) => {
   try {
     const location = req.query.location === 'footer' ? 'footer' : 'header';
     res.render('admin/navigation-form', {
       title: 'New menu item', item: { location, parent_id: req.query.parent || '' },
-      parents: await navParents(location), active: 'navigation', formAction: '/admin/navigation',
+      parents: await navParents(location), collectionLinks: await navLinkOptions(),
+      active: 'navigation', formAction: '/admin/navigation',
     });
   } catch (err) {
     next(err);
@@ -818,8 +858,8 @@ router.get('/navigation/:id/edit', async (req, res, next) => {
     if (!rows.length) return res.redirect('/admin/navigation');
     res.render('admin/navigation-form', {
       title: 'Edit menu item', item: rows[0],
-      parents: await navParents(rows[0].location, rows[0].id), active: 'navigation',
-      formAction: `/admin/navigation/${req.params.id}`,
+      parents: await navParents(rows[0].location, rows[0].id), collectionLinks: await navLinkOptions(),
+      active: 'navigation', formAction: `/admin/navigation/${req.params.id}`,
     });
   } catch (err) {
     next(err);
@@ -997,8 +1037,12 @@ router.post('/content/items/:itemId/delete', async (req, res, next) => {
 // =================== MESSAGES (contact form) ===================
 router.get('/messages', async (req, res, next) => {
   try {
-    const { rows } = await pool.query('SELECT * FROM contact_messages ORDER BY is_read, created_at DESC');
-    res.render('admin/messages', { title: 'Messages', messages: rows, active: 'messages' });
+    const { limit, offset, pagination } = await paginate(req, {
+      perPage: 30, path: '/admin/messages',
+      countSql: 'SELECT COUNT(*)::int AS n FROM contact_messages',
+    });
+    const { rows } = await pool.query('SELECT * FROM contact_messages ORDER BY is_read, created_at DESC LIMIT $1 OFFSET $2', [limit, offset]);
+    res.render('admin/messages', { title: 'Messages', messages: rows, pagination, active: 'messages' });
   } catch (err) {
     next(err);
   }
@@ -1029,8 +1073,15 @@ router.get('/email', async (req, res, next) => {
     const params = [];
     let where = '';
     if (q) { params.push(`%${q}%`); where = 'WHERE email ILIKE $1 OR discount_code ILIKE $1'; }
+    const perPage = 30;
+    const total = (await pool.query(`SELECT COUNT(*)::int AS n FROM email_subscribers ${where}`, params)).rows[0].n;
+    const totalPages = Math.max(1, Math.ceil(total / perPage));
+    const page = Math.min(totalPages, Math.max(1, parseInt(req.query.page, 10) || 1));
+    const offset = (page - 1) * perPage;
+    const qsStr = new URLSearchParams(q ? { q } : {}).toString();
+    const pagination = { page, totalPages, total, perPage, base: `/admin/email?${qsStr ? qsStr + '&' : ''}` };
     const [subs, stats, settingsRows] = await Promise.all([
-      pool.query(`SELECT * FROM email_subscribers ${where} ORDER BY created_at DESC LIMIT 500`, params),
+      pool.query(`SELECT * FROM email_subscribers ${where} ORDER BY created_at DESC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`, [...params, perPage, offset]),
       pool.query('SELECT COUNT(*)::int AS total, COUNT(*) FILTER (WHERE is_used)::int AS used FROM email_subscribers'),
       pool.query("SELECT key, value FROM settings WHERE key LIKE 'signup_%'"),
     ]);
@@ -1038,7 +1089,7 @@ router.get('/email', async (req, res, next) => {
     settingsRows.rows.forEach((r) => (settings[r.key] = r.value));
     res.render('admin/email', {
       title: 'Email & Discounts', subscribers: subs.rows, stats: stats.rows[0],
-      settings, q, active: 'email', saved: req.query.saved,
+      settings, q, pagination, active: 'email', saved: req.query.saved,
     });
   } catch (err) {
     next(err);
@@ -1111,12 +1162,18 @@ router.get('/settings', async (req, res, next) => {
   }
 });
 
-router.post('/settings', upload.fields([{ name: 'og_image_file', maxCount: 1 }, { name: 'contact_banner_file', maxCount: 1 }, { name: 'size_guide_image_file', maxCount: 1 }]), async (req, res, next) => {
+router.post('/settings', upload.fields([{ name: 'og_image_file', maxCount: 1 }, { name: 'contact_banner_file', maxCount: 1 }, { name: 'size_guide_image_file', maxCount: 1 }, { name: 'logo_file', maxCount: 1 }]), async (req, res, next) => {
   try {
     const currentRows = await pool.query(
-      "SELECT key, value FROM settings WHERE key IN ('og_image', 'contact_banner', 'size_guide_image')"
+      "SELECT key, value FROM settings WHERE key IN ('og_image', 'contact_banner', 'size_guide_image', 'logo_url')"
     );
     const current = Object.fromEntries(currentRows.rows.map((row) => [row.key, row.value]));
+    const logo = resolveMedia(
+      req.files?.logo_file?.[0],
+      req.body.logo_url,
+      current.logo_url,
+      false
+    );
     const ogImage = resolveMedia(
       req.files?.og_image_file?.[0],
       req.body.og_image_url,
@@ -1139,12 +1196,13 @@ router.post('/settings', upload.fields([{ name: 'og_image_file', maxCount: 1 }, 
       'og_image_url',
       'contact_banner_url',
       'size_guide_image_url',
+      'logo_url',
       'remove_og_image',
       'remove_contact_banner',
       'remove_size_guide_image',
     ]);
     const entries = Object.entries(req.body).filter(([key]) => !mediaFields.has(key));
-    entries.push(['og_image', ogImage], ['contact_banner', contactBanner], ['size_guide_image', sizeGuideImage]);
+    entries.push(['og_image', ogImage], ['contact_banner', contactBanner], ['size_guide_image', sizeGuideImage], ['logo_url', logo]);
     for (const [key, value] of entries) {
       await pool.query(
         `INSERT INTO settings (key, value) VALUES ($1,$2)
@@ -1152,7 +1210,7 @@ router.post('/settings', upload.fields([{ name: 'og_image_file', maxCount: 1 }, 
         [key, value]
       );
     }
-    await cleanupMediaUrls([current.og_image, current.contact_banner, current.size_guide_image]);
+    await cleanupMediaUrls([current.og_image, current.contact_banner, current.size_guide_image, current.logo_url]);
     res.redirect('/admin/settings?saved=1');
   } catch (err) {
     next(err);

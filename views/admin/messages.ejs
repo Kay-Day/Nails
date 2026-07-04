@@ -1,7 +1,15 @@
 <%- include('partials/head') %>
 
+<div class="admin-intro">
+  <strong>Tin nhắn liên hệ</strong> — lời nhắn khách gửi từ trang Liên hệ. Nhãn <strong>New</strong> là tin chưa đọc.
+  <ul class="admin-intro__tips">
+    <li>Bấm <strong>Mark read</strong> để đánh dấu đã xử lý, <strong>Delete</strong> để xóa.</li>
+    <li>Bấm vào email khách để trả lời trực tiếp.</li>
+  </ul>
+</div>
+
 <div class="panel">
-  <div class="panel__head"><h2><%= messages.length %> Messages</h2></div>
+  <div class="panel__head"><h2><%= (typeof pagination !== 'undefined' ? pagination.total : messages.length) %> Messages</h2></div>
   <table>
     <thead><tr><th>Status</th><th>Sender</th><th>Contact</th><th>Message</th><th>Received</th><th></th></tr></thead>
     <tbody>
@@ -9,6 +17,7 @@
       <% messages.forEach(function(message) { %><tr><td><span class="badge badge--<%= message.is_read ? 'off' : 'on' %>"><%= message.is_read ? 'Read' : 'New' %></span></td><td><strong><%= message.name %></strong><% if (message.phone) { %><br><small><%= message.phone %></small><% } %></td><td><a href="mailto:<%= message.email %>"><%= message.email %></a></td><td style="white-space:pre-wrap;min-width:280px"><%= message.message %></td><td><%= new Date(message.created_at).toLocaleString() %></td><td class="actions"><form action="/admin/messages/<%= message.id %>/read" method="post"><button class="btn btn--ghost btn--sm" type="submit"><%= message.is_read ? 'Mark new' : 'Mark read' %></button></form><form action="/admin/messages/<%= message.id %>/delete" method="post" onsubmit="return confirm('Delete this message?')"><button class="btn btn--danger btn--sm" type="submit">Delete</button></form></td></tr><% }) %>
     </tbody>
   </table>
+  <%- include('partials/pagination', { pagination: typeof pagination !== 'undefined' ? pagination : null }) %>
 </div>
 
 <%- include('partials/foot') %>

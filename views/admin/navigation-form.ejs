@@ -22,9 +22,18 @@
       <label>Label</label>
       <input type="text" name="label" value="<%= item.label || '' %>" placeholder="Shop All" required />
     </div>
-    <div class="form-row">
-      <label>Link (URL)</label>
-      <input type="text" name="url" value="<%= item.url || '' %>" placeholder="/products" />
+    <div class="form-row form-row--full">
+      <label>Link to a collection <span class="hint">pick one to fill the URL automatically — avoids typos that cause 404 pages</span></label>
+      <select id="nav-collection-picker">
+        <option value="">— Choose a collection —</option>
+        <% (typeof collectionLinks !== 'undefined' ? collectionLinks : []).forEach(function(c) { %>
+          <option value="<%= c.url %>" data-label="<%= c.label %>"><%= c.label %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-row form-row--full">
+      <label>Link (URL) <span class="hint">or type any address, e.g. /products, /contact, /blog</span></label>
+      <input type="text" id="nav-url-input" name="url" value="<%= item.url || '' %>" placeholder="/products" />
     </div>
     <div class="form-row">
       <label>Badge <span class="hint">(optional, e.g. HOT)</span></label>
@@ -43,5 +52,20 @@
     <a href="/admin/navigation" class="btn btn--ghost">Cancel</a>
   </div>
 </form>
+
+<script>
+  (function () {
+    var picker = document.getElementById('nav-collection-picker');
+    var urlInput = document.getElementById('nav-url-input');
+    var labelInput = document.querySelector('input[name="label"]');
+    if (!picker || !urlInput) return;
+    picker.addEventListener('change', function () {
+      var opt = picker.options[picker.selectedIndex];
+      if (!opt.value) return;
+      urlInput.value = opt.value;
+      if (labelInput && !labelInput.value.trim()) labelInput.value = opt.getAttribute('data-label') || '';
+    });
+  })();
+</script>
 
 <%- include('partials/foot') %>

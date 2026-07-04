@@ -2,6 +2,14 @@
 
 <% if (saved === '1') { %><div class="flash">Popup settings saved.</div><% } %>
 
+<div class="admin-intro">
+  <strong>Email &amp; Giảm giá</strong> — cài đặt popup thu email ở trang chủ và xem danh sách khách đã đăng ký nhận mã giảm giá.
+  <ul class="admin-intro__tips">
+    <li>Ô trên: bật/tắt popup, đặt % giảm và nội dung.</li>
+    <li>Bảng dưới: tìm theo email/mã, đánh dấu <strong>đã dùng</strong>, hoặc <strong>Export CSV</strong> để tải danh sách.</li>
+  </ul>
+</div>
+
 <div class="form-card" style="margin-bottom:24px">
   <h2 style="margin-top:0">Signup popup &amp; discount</h2>
   <form method="post" action="/admin/email/config">
@@ -44,6 +52,7 @@
       <% }) %>
     </tbody>
   </table>
+  <%- include('partials/pagination', { pagination: typeof pagination !== 'undefined' ? pagination : null }) %>
 </div>
 
 <%- include('partials/foot') %>

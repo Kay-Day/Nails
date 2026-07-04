@@ -1,8 +1,16 @@
 <%- include('partials/head') %>
 
+<div class="admin-intro">
+  <strong>Sản phẩm</strong> — quản lý toàn bộ mẫu nail của cửa hàng. Bấm <strong>+ New Product</strong> để thêm, <strong>Edit</strong> để sửa, <strong>Delete</strong> để xóa. Rê chuột vào ảnh để xem lớn hơn.
+  <ul class="admin-intro__tips">
+    <li>Danh sách dài sẽ tự chia trang — dùng thanh phân trang ở cuối bảng.</li>
+    <li><strong>Export Excel</strong> để tải toàn bộ sản phẩm ra file.</li>
+  </ul>
+</div>
+
 <div class="panel">
   <div class="panel__head">
-    <h2><%= products.length %> Products</h2>
+    <h2><%= (typeof pagination !== 'undefined' ? pagination.total : products.length) %> Products</h2>
     <div style="display:flex;gap:8px;align-items:center">
       <a href="/admin/products/export.xlsx" class="btn btn--ghost btn--sm">⤓ Export Excel</a>
       <a href="/admin/products/new" class="btn btn--accent btn--sm">+ New Product</a>
@@ -34,6 +42,7 @@
       <% }) %>
     </tbody>
   </table>
+  <%- include('partials/pagination', { pagination: typeof pagination !== 'undefined' ? pagination : null }) %>
 </div>
 
 <%- include('partials/foot') %>

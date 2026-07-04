@@ -1,8 +1,16 @@
 <%- include('partials/head') %>
 
+<div class="admin-intro">
+  <strong>Bộ sưu tập (Collections)</strong> — nhóm các sản phẩm theo chủ đề, hình dáng hoặc độ dài. Bấm <strong>+ New Collection</strong> để tạo mới.
+  <ul class="admin-intro__tips">
+    <li>Tạo xong, vào từng sản phẩm tick bộ sưu tập để gán hàng vào.</li>
+    <li>Muốn bộ sưu tập hiện trên menu web: vào <strong>Navigation</strong> → chọn nó từ ô "Link to a collection".</li>
+  </ul>
+</div>
+
 <div class="panel">
   <div class="panel__head">
-    <h2><%= collections.length %> Collections</h2>
+    <h2><%= (typeof pagination !== 'undefined' ? pagination.total : collections.length) %> Collections</h2>
     <a href="/admin/collections/new" class="btn btn--accent btn--sm">+ New Collection</a>
   </div>
   <table>
@@ -27,6 +35,7 @@
       <% }) %>
     </tbody>
   </table>
+  <%- include('partials/pagination', { pagination: typeof pagination !== 'undefined' ? pagination : null }) %>
 </div>
 
 <%- include('partials/foot') %>

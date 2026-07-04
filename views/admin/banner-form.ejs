@@ -1,25 +1,32 @@
 <%- include('partials/head') %>
 
+<div class="admin-intro">
+  <strong>Chỉnh banner</strong> — ảnh/slide lớn ở đầu trang chủ. Đổi ảnh ở mục <strong>“Ảnh nền banner”</strong> bên dưới (chọn file trong máy hoặc dán link), ảnh xem trước hiện ngay.
+  <ul class="admin-intro__tips">
+    <li>Sửa xong nhớ bấm <strong>Lưu banner</strong>.</li>
+  </ul>
+</div>
+
 <form class="form-card" method="post" action="<%= formAction %>" enctype="multipart/form-data">
   <div class="form-grid">
     <div class="form-row form-row--full">
-      <label>Title</label>
+      <label>Tiêu đề</label>
       <input type="text" name="title" value="<%= banner.title || '' %>" />
     </div>
     <div class="form-row form-row--full">
-      <label>Subtitle</label>
+      <label>Mô tả phụ</label>
       <textarea name="subtitle" rows="2"><%= banner.subtitle || '' %></textarea>
     </div>
     <div class="form-row">
-      <label>Button text</label>
+      <label>Chữ trên nút</label>
       <input type="text" name="button_text" value="<%= banner.button_text || '' %>" placeholder="Shop Now" />
     </div>
     <div class="form-row">
-      <label>Link</label>
+      <label>Đường dẫn khi bấm nút</label>
       <input type="text" name="link" value="<%= banner.link || '' %>" placeholder="/products" />
     </div>
     <%- include('partials/media-field', {
-      label: 'Background image',
+      label: '🖼️ Ảnh nền banner',
       kind: 'image',
       currentUrl: banner.image || '',
       fileName: 'image',
@@ -27,30 +34,30 @@
       removeName: 'remove_image',
       accept: 'image/*',
       placeholder: 'https://example.com/banner.jpg',
-      hint: 'Choose a wide image from this device or paste a direct image link.'
+      hint: 'Chọn ảnh ngang từ máy hoặc dán link ảnh trực tiếp. Ảnh xem trước sẽ hiện ngay bên dưới.'
     }) %>
     <%- include('partials/media-field', {
-      label: 'Background video',
+      label: 'Video nền (không bắt buộc)',
       kind: 'video',
       currentUrl: banner.video || '',
       fileName: 'video',
       urlName: 'video_url',
       removeName: 'remove_video',
       accept: 'video/mp4,video/webm',
-      placeholder: 'YouTube, Vimeo, MP4, or WebM URL',
-      hint: 'Optional. A video replaces the background image when available.'
+      placeholder: 'Link YouTube, Vimeo, MP4 hoặc WebM',
+      hint: 'Không bắt buộc. Nếu có video thì video sẽ thay cho ảnh nền.'
     }) %>
     <div class="form-row">
-      <label>Sort order</label>
+      <label>Thứ tự</label>
       <input type="number" name="sort_order" value="<%= banner.sort_order || 0 %>" />
     </div>
     <div class="form-row">
-      <label class="check"><input type="checkbox" name="is_active" <%= (banner.is_active===undefined||banner.is_active)?'checked':'' %> /> Active</label>
+      <label class="check"><input type="checkbox" name="is_active" <%= (banner.is_active===undefined||banner.is_active)?'checked':'' %> /> Hiển thị trên web</label>
     </div>
   </div>
   <div class="form-actions">
-    <button type="submit" class="btn btn--primary">Save Banner</button>
-    <a href="/admin/banners" class="btn btn--ghost">Cancel</a>
+    <button type="submit" class="btn btn--primary">Lưu banner</button>
+    <a href="/admin/banners" class="btn btn--ghost">Hủy</a>
   </div>
 </form>
 

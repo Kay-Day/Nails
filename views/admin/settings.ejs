@@ -4,15 +4,29 @@
 <% if (saved === 'pw') { %><div class="flash">Password updated successfully.</div><% } %>
 <% if (saved === 'err') { %><div class="flash flash--err">Current password is incorrect.</div><% } %>
 
+<div class="admin-intro">
+  <strong>Cài đặt cửa hàng</strong> — thông tin chung của website: tên shop, logo, liên hệ, mạng xã hội, ảnh chia sẻ...
+  <ul class="admin-intro__tips">
+    <li>Dán link mạng xã hội (Facebook, TikTok, YouTube...) để icon hiện ở chân trang.</li>
+    <li>Các ô ảnh đều có <strong>xem trước ngay bên dưới</strong> khi chọn file hoặc dán link.</li>
+    <li>Nhớ bấm <strong>Save Settings</strong> sau khi sửa.</li>
+  </ul>
+</div>
+
 <form class="form-card" method="post" action="/admin/settings" enctype="multipart/form-data" style="margin-bottom:28px">
   <h2 style="margin-top:0">Store & Contact Settings</h2>
   <div class="form-grid">
     <div class="form-row"><label>Shop name</label><input type="text" name="shop_name" value="<%= settings.shop_name || '' %>" /></div>
-    <div class="form-row">
-      <label>Primary logo URL</label>
-      <input type="text" name="logo_url" value="<%= settings.logo_url || '/images/Logo/Logo.jpeg' %>" />
-      <% if (settings.logo_url) { %><img src="<%= settings.logo_url %>" alt="Current logo" style="width:96px;height:96px;object-fit:contain;margin-top:10px;border:1px solid #ddd;border-radius:8px" /><% } %>
-    </div>
+    <%- include('partials/media-field', {
+      label: 'Logo cửa hàng',
+      kind: 'image',
+      currentUrl: settings.logo_url || '/images/Logo/Logo.jpg',
+      fileName: 'logo_file',
+      urlName: 'logo_url',
+      accept: 'image/*',
+      placeholder: 'https://example.com/logo.png',
+      hint: 'Chọn ảnh logo từ máy (nút chọn tệp) hoặc dán link. Nên dùng ảnh vuông, nền trong suốt (PNG). Ảnh xem trước hiện ngay bên dưới.'
+    }) %>
     <div class="form-row"><label>Tagline</label><input type="text" name="tagline" value="<%= settings.tagline || '' %>" /></div>
     <div class="form-row form-row--full"><label>Announcement 1</label><input type="text" name="announcement" value="<%= settings.announcement || '' %>" /></div>
     <div class="form-row form-row--full"><label>Announcement 2</label><input type="text" name="announcement_2" value="<%= settings.announcement_2 || '' %>" /></div>
@@ -24,7 +38,16 @@
     <div class="form-row form-row--full"><label>Address</label><input type="text" name="contact_address" value="<%= settings.contact_address || '' %>" /></div>
     <div class="form-row"><label>Instagram URL</label><input type="text" name="instagram" value="<%= settings.instagram || '' %>" /></div>
     <div class="form-row"><label>TikTok URL</label><input type="text" name="tiktok" value="<%= settings.tiktok || '' %>" /></div>
-    <div class="form-row"><label>Facebook URL</label><input type="text" name="facebook" value="<%= settings.facebook || '' %>" /></div>
+    <div class="form-row"><label>Facebook URL</label><input type="text" name="facebook" value="<%= settings.facebook || '' %>" placeholder="https://facebook.com/..." /></div>
+    <div class="form-row"><label>YouTube URL</label><input type="text" name="youtube" value="<%= settings.youtube || '' %>" placeholder="https://youtube.com/@..." /></div>
+    <div class="form-row"><label>Pinterest URL</label><input type="text" name="pinterest" value="<%= settings.pinterest || '' %>" placeholder="https://pinterest.com/..." /></div>
+    <div class="form-row"><label>X (Twitter) URL</label><input type="text" name="twitter" value="<%= settings.twitter || '' %>" placeholder="https://x.com/..." /></div>
+    <div class="form-row"><label>Threads URL</label><input type="text" name="threads" value="<%= settings.threads || '' %>" placeholder="https://threads.net/@..." /></div>
+    <div class="form-row"><label>WhatsApp link</label><input type="text" name="whatsapp" value="<%= settings.whatsapp || '' %>" placeholder="https://wa.me/1..." /></div>
+    <div class="form-row"><label>Telegram link</label><input type="text" name="telegram" value="<%= settings.telegram || '' %>" placeholder="https://t.me/..." /></div>
+    <div class="form-row"><label>Snapchat URL</label><input type="text" name="snapchat" value="<%= settings.snapchat || '' %>" placeholder="https://snapchat.com/add/..." /></div>
+    <div class="form-row"><label>Messenger link</label><input type="text" name="messenger" value="<%= settings.messenger || '' %>" placeholder="https://m.me/..." /></div>
+    <div class="form-row"><label>LinkedIn URL</label><input type="text" name="linkedin" value="<%= settings.linkedin || '' %>" placeholder="https://linkedin.com/company/..." /></div>
     <div class="form-row form-row--full"><label>Default SEO description</label><textarea name="seo_description" rows="3"><%= settings.seo_description || '' %></textarea></div>
     <div class="form-row"><label>Public site URL</label><input type="url" name="site_url" value="<%= settings.site_url || '' %>" placeholder="https://example.com" /></div>
     <%- include('partials/media-field', {

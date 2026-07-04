@@ -1,0 +1,32 @@
+<%
+  // Expects `pagination = { page, totalPages, total, perPage, base }`.
+  // `base` is a URL prefix ready for a page number, e.g. "/admin/products?" or
+  // "/admin/products?q=abc&". Only renders when there is more than one page.
+  var _p = (typeof pagination !== 'undefined' && pagination) ? pagination : null;
+%>
+<% if (_p && _p.totalPages > 1) {
+     var cur = _p.page, last = _p.totalPages;
+     var start = Math.max(1, cur - 2), end = Math.min(last, cur + 2);
+     var url = function (n) { return _p.base + 'page=' + n; };
+%>
+<nav class="admin-pagination" aria-label="Phân trang">
+  <span class="admin-pagination__info">
+    Trang <strong><%= cur %></strong>/<%= last %> · <%= _p.total %> mục
+  </span>
+  <div class="admin-pagination__pages">
+    <a class="admin-pagination__btn<%= cur <= 1 ? ' is-disabled' : '' %>" href="<%= cur <= 1 ? '#' : url(cur - 1) %>" aria-label="Trang trước">‹</a>
+    <% if (start > 1) { %>
+      <a class="admin-pagination__btn" href="<%= url(1) %>">1</a>
+      <% if (start > 2) { %><span class="admin-pagination__gap">…</span><% } %>
+    <% } %>
+    <% for (var n = start; n <= end; n++) { %>
+      <a class="admin-pagination__btn<%= n === cur ? ' is-current' : '' %>" href="<%= url(n) %>"><%= n %></a>
+    <% } %>
+    <% if (end < last) { %>
+      <% if (end < last - 1) { %><span class="admin-pagination__gap">…</span><% } %>
+      <a class="admin-pagination__btn" href="<%= url(last) %>"><%= last %></a>
+    <% } %>
+    <a class="admin-pagination__btn<%= cur >= last ? ' is-disabled' : '' %>" href="<%= cur >= last ? '#' : url(cur + 1) %>" aria-label="Trang sau">›</a>
+  </div>
+</nav>
+<% } %>

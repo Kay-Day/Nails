@@ -21,7 +21,7 @@ const sections = [
     title: 'A salon manicure, minus the salon.',
     subtitle: 'Each set is hand-finished and built to last up to two weeks. No appointments, no drying time, no damage - just press, wear, and reuse.',
     body: '<p>Our nails are designed in-house for a natural fit and an effortless everyday finish. Browse your favourite look, choose a size, then contact our studio for availability and ordering.</p>',
-    image: '/images/0326009_2.jpg', buttonText: 'Explore the Collection', buttonLink: '/collections/all', order: 50,
+    image: '/images/about-runzie-nails.jpg', buttonText: 'Explore the Collection', buttonLink: '/collections/all', order: 50,
   },
   { page: 'home', key: 'features', type: 'items', order: 60 },
   { page: 'home', key: 'reviews', type: 'items', title: 'Let Customers Speak For Us', subtitle: 'Real notes from customers who wear and reuse their sets.', order: 70 },
@@ -68,9 +68,11 @@ const items = {
     { title: 'Square', image: '/images/shapes/square.png', link: '/collections/square-shape' },
   ],
   'home.shop-by-length': [
+    { title: 'Extra Short', image: '/images/shapes/square.png', link: '/products?length=Extra%20Short' },
     { title: 'Short', image: '/images/shapes/round.png', link: '/products?length=Short' },
     { title: 'Medium', image: '/images/shapes/almond.png', link: '/products?length=Medium' },
     { title: 'Long', image: '/images/shapes/stiletto.png', link: '/products?length=Long' },
+    { title: 'Extra Long', image: '/images/shapes/coffin.png', link: '/products?length=Extra%20Long' },
   ],
   'home.curated': [
     { label: 'Freshly added', title: 'New Arrivals', body: '<p>Discover the latest hand-finished sets from our studio.</p>', image: shopPhoto(30), link: '/collections/new-arrival' },

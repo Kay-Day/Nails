@@ -1,8 +1,16 @@
 <%- include('partials/head') %>
 
+<div class="admin-intro">
+  <strong>Bài viết (Blog)</strong> — đăng tin, hướng dẫn, mẹo làm nail cho khách. Bấm <strong>+ New Post</strong> để viết bài mới.
+  <ul class="admin-intro__tips">
+    <li>Bài để <strong>Draft</strong> sẽ chưa hiện trên web; chuyển <strong>Published</strong> mới hiển thị.</li>
+    <li>Nhớ thêm ảnh bìa để bài trông đẹp hơn.</li>
+  </ul>
+</div>
+
 <div class="panel">
   <div class="panel__head">
-    <h2><%= posts.length %> Blog Posts</h2>
+    <h2><%= (typeof pagination !== 'undefined' ? pagination.total : posts.length) %> Blog Posts</h2>
     <a href="/admin/posts/new" class="btn btn--accent btn--sm">+ New Post</a>
   </div>
   <table>
@@ -26,6 +34,7 @@
       <% }) %>
     </tbody>
   </table>
+  <%- include('partials/pagination', { pagination: typeof pagination !== 'undefined' ? pagination : null }) %>
 </div>
 
 <%- include('partials/foot') %>
