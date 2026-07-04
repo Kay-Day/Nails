@@ -434,7 +434,8 @@ body.db-overlay-open {
   }
 }
 @media (max-width: 600px) {
-  .db-shape-section .db-grid > * { flex-basis: 40%; }
+  /* Show 2 category cards per view on phones (was ~2.5). */
+  .db-shape-section .db-grid > * { flex-basis: 47%; }
 }
 /* Collection cover photos — fill the circle */
 .db-round-photo .m-collection-card__image img {
@@ -3568,9 +3569,10 @@ body.mnc-signup-open { overflow: hidden; }
   }
   .db-reviews::-webkit-scrollbar { display: none; }
   .db-reviews > .db-review {
-    flex: 0 0 62% !important;
-    max-width: 62% !important;
-    scroll-snap-align: center;
+    /* Show 2 review cards per view on mobile (was ~1.5). */
+    flex: 0 0 46% !important;
+    max-width: 46% !important;
+    scroll-snap-align: start;
     border-radius: 10px;
   }
   .db-review__media { aspect-ratio: 4 / 3 !important; }
