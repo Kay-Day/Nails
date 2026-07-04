@@ -67,67 +67,48 @@
   white-space: nowrap;
 }
 
+/* The uploaded logo is a wide horizontal lockup (emblem + wordmark), so show it
+   full inside a white rounded card at a readable height — not squeezed into a
+   tiny circle. Raised shadow keeps it lifted off the header. */
 .db-brand-logo-frame {
   position: relative;
-  display: block;
-  flex: 0 0 88px;
-  width: 88px;
-  height: 88px;
+  display: inline-flex;
+  align-items: center;
+  height: 56px;
+  padding: 4px 10px;
   overflow: hidden;
-  border-radius: 50%;
+  border-radius: 12px;
   background: #fff;
-  /* Raised badge: thick white ring + a bright halo and layered shadows so the
-     logo pops off the dark header like it is lifted off the page. */
-  border: 3px solid #fff;
   box-shadow:
-    0 0 0 1px rgba(0, 0, 0, .05),
-    0 3px 6px rgba(0, 0, 0, .30),
-    0 12px 26px rgba(0, 0, 0, .38),
-    0 0 22px rgba(255, 255, 255, .18);
+    0 2px 5px rgba(0, 0, 0, .14),
+    0 10px 22px rgba(120, 70, 80, .26);
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
 .db-brand-lockup:hover .db-brand-logo-frame {
-  transform: translateY(-3px) scale(1.03);
+  transform: translateY(-2px);
   box-shadow:
-    0 0 0 1px rgba(0, 0, 0, .05),
-    0 5px 10px rgba(0, 0, 0, .34),
-    0 20px 36px rgba(0, 0, 0, .44),
-    0 0 30px rgba(255, 255, 255, .26);
+    0 4px 8px rgba(0, 0, 0, .18),
+    0 16px 30px rgba(120, 70, 80, .32);
 }
 
 .db-brand-logo-frame img {
-  position: absolute;
-  inset: 0;
-  width: 100% !important;
-  max-width: none !important;
+  position: static;
+  inset: auto;
   height: 100% !important;
+  width: auto !important;
+  max-width: none !important;
   object-fit: contain;
+  display: block;
 }
 
-.db-brand-name {
-  font-family: "Gilda Display", Georgia, serif;
-  font-size: 18px;
-  font-weight: 400;
-  letter-spacing: .14em;
-  line-height: 1;
-}
-
-.m-logo--mobile .db-brand-lockup {
-  gap: 7px;
-}
+/* The logo already includes the brand name — hide the duplicate text label. */
+.db-brand-name { display: none; }
 
 .m-logo--mobile .db-brand-logo-frame {
-  flex-basis: 62px;
-  width: 62px;
-  height: 62px;
-  border-width: 2px;
-}
-
-.m-logo--mobile .db-brand-logo-frame img {
-  inset: 0;
-  width: 100% !important;
-  height: 100% !important;
+  height: 46px;
+  padding: 3px 8px;
+  border-radius: 10px;
 }
 
 .m-logo--mobile .db-brand-name {
@@ -463,7 +444,7 @@ body.db-overlay-open {
 /* Homepage UGC strip */
 .db-as-seen-section {
   padding: 72px 0;
-  background: #fff;
+  background: #fdedf0;
   max-width: 100%;
   overflow: hidden;
 }
