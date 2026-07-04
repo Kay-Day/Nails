@@ -451,6 +451,9 @@ body.db-overlay-open {
     max-width: none;
     scroll-snap-align: start;
   }
+  /* These sections have no bottom padding, so the slider dots were jammed flush
+     against the next section. Give them breathing room on scroll/mobile views. */
+  .db-shape-section { padding-bottom: 26px; }
 }
 @media (max-width: 600px) {
   .db-shape-section .db-grid > * { flex-basis: 40%; }
