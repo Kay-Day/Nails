@@ -451,9 +451,10 @@ body.db-overlay-open {
     max-width: none;
     scroll-snap-align: start;
   }
-  /* These sections have no bottom padding, so the slider dots were jammed flush
-     against the next section. Give them breathing room on scroll/mobile views. */
-  .db-shape-section { padding-bottom: 26px; }
+  /* The container clips with overflow:hidden and these sections have no bottom
+     padding, so the slider dots sat at the clip edge and got cut off. Pad the
+     container itself so the dots stay clear of the clip edge with breathing room. */
+  .db-shape-section .db-home-container { padding-bottom: 28px; }
 }
 @media (max-width: 600px) {
   .db-shape-section .db-grid > * { flex-basis: 40%; }
