@@ -451,10 +451,6 @@ body.db-overlay-open {
     max-width: none;
     scroll-snap-align: start;
   }
-  /* The container clips with overflow:hidden and these sections have no bottom
-     padding, so the slider dots sat at the clip edge and got cut off. Pad the
-     container itself so the dots stay clear of the clip edge with breathing room. */
-  .db-shape-section .db-home-container { padding-bottom: 28px; }
 }
 @media (max-width: 600px) {
   .db-shape-section .db-grid > * { flex-basis: 40%; }
@@ -3515,7 +3511,8 @@ body.mnc-signup-open { overflow: hidden; }
 .db-bundle-track__item .m-product-card__media img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
 @media (max-width: 768px) {
   .db-bundle-banner { aspect-ratio: 3 / 2; }
-  .db-bundle-track__item { flex-basis: 62%; }
+  /* Show 2 bundle cards per view on mobile (was ~1.6). */
+  .db-bundle-track__item { flex-basis: 46%; }
 }
 
 /* Sale pricing on product cards — "From <new price>" in red, original price
@@ -3553,6 +3550,13 @@ body.mnc-signup-open { overflow: hidden; }
   justify-content: center;
   gap: 8px;
   margin-top: 18px;
+  /* Space below the dots. Their containers use overflow:hidden, so without this
+     the dots sit at the clip edge and their bottom gets cut off. Because the
+     container establishes a block formatting context, this margin is retained
+     inside it — keeping the dots clear of the clip edge on every slider. */
+  margin-bottom: 22px;
+  position: relative;
+  z-index: 1;
 }
 .db-slider-dot {
   width: 9px; height: 9px;
