@@ -5,7 +5,7 @@
   <ul class="admin-intro__tips">
     <li>Mỗi <strong>nhóm</strong> chứa nhiều <strong>lựa chọn con</strong> (VD: Màu → Hồng, Xanh). Thêm/đổi tên tại đây.</li>
     <li>Sau đó vào trang sửa sản phẩm để tick lựa chọn phù hợp cho từng sản phẩm.</li>
-    <li><em>Riêng Hình dáng (Shape) &amp; Độ dài (Length) lấy từ chính field của sản phẩm.</em></li>
+    <li><em>Riêng <strong>Shop By Shape</strong> &amp; <strong>Shop By Length</strong> KHÔNG sửa ở đây — chúng lấy tự động từ field Shape/Length của từng sản phẩm (xem mục "Tự động" bên dưới).</em></li>
   </ul>
 </div>
 
@@ -60,6 +60,36 @@
   </form>
 </div>
 
+<% if (typeof columnGroups !== 'undefined' && columnGroups.length) { %>
+<div class="panel" style="margin-top:20px">
+  <div class="panel__head"><h2>Bộ lọc tự động (từ field sản phẩm)</h2></div>
+  <p class="hint" style="margin:-4px 0 16px; max-width:760px">
+    Hai bộ lọc này hiện trên web nhưng <strong>không sửa ở đây</strong>. Giá trị (VD Almond, Short…) tự lấy từ field
+    <strong>Shape</strong> &amp; <strong>Length</strong> của từng sản phẩm. Muốn thêm/đổi: vào
+    <a href="/admin/products">Sản phẩm</a> → sửa ô Shape / Length.
+  </p>
+  <div class="cats">
+    <% columnGroups.forEach(function(cg){ %>
+      <div class="cat cat--readonly">
+        <div class="cat__head" style="border-bottom:none; padding-bottom:0">
+          <div style="display:flex; align-items:center; gap:10px">
+            <span class="cat__tag cat__tag--auto">Tự động</span>
+            <strong style="font-size:17px"><%= cg.title %></strong>
+            <span class="hint">— từ field <%= cg.field === 'shape' ? 'Shape (Hình dáng)' : 'Length (Độ dài)' %></span>
+          </div>
+        </div>
+        <div class="cat__subs">
+          <% if (!cg.values.length) { %><p class="hint" style="margin:0">Chưa sản phẩm nào có giá trị này.</p><% } %>
+          <% cg.values.forEach(function(v){ %>
+            <span class="sub sub--readonly"><%= v.label %> <span class="hint">(<%= v.n %>)</span></span>
+          <% }) %>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>
+<% } %>
+
 <style>
   .cats { display: flex; flex-direction: column; gap: 16px; }
   .cat { border: 1px solid rgba(0,0,0,.12); border-radius: 10px; padding: 16px 18px; background: #fff; }
@@ -79,6 +109,9 @@
   .cat-add { display: flex; gap: 10px; margin-top: 20px; padding-top: 18px; border-top: 1px dashed rgba(0,0,0,.18); }
   .cat-add input { min-width: 320px; padding: 10px 12px; border: 1px solid rgba(0,0,0,.2); border-radius: 6px; font: inherit; }
   .btn--xs { padding: 3px 8px; font-size: 12px; }
+  .cat--readonly { background: #faf7f5; }
+  .cat__tag--auto { background: #a86a6a; }
+  .sub--readonly { background: #efe7e4; padding: 5px 12px; color: #4a3d3d; }
 </style>
 
 <%- include('partials/foot') %>

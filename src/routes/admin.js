@@ -449,7 +449,19 @@ router.post('/product-images/:id/delete', async (req, res, next) => {
 router.get('/filters', async (req, res, next) => {
   try {
     const groups = await loadFilterGroupsWithValues();
-    res.render('admin/filters', { title: 'Categories', groups, active: 'filters' });
+    // Shape & Length aren't editable categories — they come from each product's
+    // own field. Surface them read-only so the admin shows every storefront filter.
+    const columnGroups = [];
+    for (const col of [{ field: 'shape', title: 'Shop By Shape' }, { field: 'length', title: 'Shop By Length' }]) {
+      const { rows } = await pool.query(
+        `SELECT BTRIM(${col.field}) AS label, COUNT(*)::int AS n
+         FROM products
+         WHERE is_active = true AND NULLIF(BTRIM(${col.field}), '') IS NOT NULL
+         GROUP BY 1 ORDER BY 1`
+      );
+      columnGroups.push({ ...col, values: rows });
+    }
+    res.render('admin/filters', { title: 'Categories', groups, columnGroups, active: 'filters' });
   } catch (err) {
     next(err);
   }
