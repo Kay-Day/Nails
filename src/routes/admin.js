@@ -528,6 +528,22 @@ router.post('/filters/values/:id/delete', async (req, res, next) => {
 });
 
 // =================== COLLECTIONS ===================
+
+// Keep the header menu label in sync with a collection's title. The collection
+// page banner already shows the title, so this makes the menu name and the banner
+// name always match when the shop owner renames a collection in admin. Matches the
+// menu item by the collection slug in its URL; only the label is touched.
+async function syncCollectionNavLabel(slugs, title) {
+  const list = (Array.isArray(slugs) ? slugs : [slugs]).filter(Boolean);
+  if (!list.length || !title) return;
+  const urls = [];
+  list.forEach((s) => { urls.push(`/collections/${s}`, `/products?collection=${s}`); });
+  await pool.query(
+    `UPDATE navigation_items SET label = $1 WHERE url = ANY($2::text[])`,
+    [title, urls]
+  );
+}
+
 router.get('/collections', async (req, res, next) => {
   try {
     const { limit, offset, pagination } = await paginate(req, {
@@ -559,6 +575,7 @@ router.post('/collections', upload.single('image'), async (req, res, next) => {
        VALUES ($1,$2,$3,$4,$5,$6)`,
       [slug, b.title, b.description || null, image, parseInt(b.sort_order) || 0, b.is_active === 'on']
     );
+    await syncCollectionNavLabel(slug, b.title);
     res.redirect('/admin/collections');
   } catch (err) {
     next(err);
@@ -587,6 +604,7 @@ router.post('/collections/:id', upload.single('image'), async (req, res, next) =
       `UPDATE collections SET slug=$1, title=$2, description=$3, image=$4, sort_order=$5, is_active=$6 WHERE id=$7`,
       [slug, b.title, b.description || null, image, parseInt(b.sort_order) || 0, b.is_active === 'on', req.params.id]
     );
+    await syncCollectionNavLabel([existing.rows[0].slug, slug], b.title);
     await cleanupMediaUrls([oldImage]);
     res.redirect('/admin/collections');
   } catch (err) {
