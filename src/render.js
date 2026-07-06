@@ -310,7 +310,7 @@ function productsPage({ products, collections, filterGroups, priceRange, inStock
   </aside>`;
 
   const cards = products.length
-    ? `<div class="db-grid db-grid--4" data-product-grid>${products.map((p) => productCard(p, p.hover_image)).join('')}</div>`
+    ? `<div class="db-grid db-grid--small" data-product-grid>${products.map((p) => productCard(p, p.hover_image)).join('')}</div>`
     : '<div class="db-empty"><h3>No products found</h3><p>Try clearing your filters.</p><a class="m-button m-button--primary" href="/products">View all</a></div>';
 
   let pagination = '';
@@ -335,10 +335,9 @@ function productsPage({ products, collections, filterGroups, priceRange, inStock
   }
 
   const gridToggle = `
-    <div class="db-grid-toggle" role="group" aria-label="Products per row">
-      <button type="button" data-grid-cols="2" aria-label="2 per row"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg></button>
-      <button type="button" data-grid-cols="3" aria-label="3 per row"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="2" width="6" height="6"/><rect x="9" y="2" width="6" height="6"/><rect x="16" y="2" width="6" height="6"/><rect x="2" y="9" width="6" height="6"/><rect x="9" y="9" width="6" height="6"/><rect x="16" y="9" width="6" height="6"/></svg></button>
-      <button type="button" data-grid-cols="4" class="is-active" aria-label="4 per row"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="1" y="1" width="4.5" height="4.5"/><rect x="6.5" y="1" width="4.5" height="4.5"/><rect x="12" y="1" width="4.5" height="4.5"/><rect x="17.5" y="1" width="4.5" height="4.5"/><rect x="1" y="6.5" width="4.5" height="4.5"/><rect x="6.5" y="6.5" width="4.5" height="4.5"/><rect x="12" y="6.5" width="4.5" height="4.5"/><rect x="17.5" y="6.5" width="4.5" height="4.5"/></svg></button>
+    <div class="db-grid-toggle" role="group" aria-label="View size">
+      <button type="button" data-grid-view="big" aria-label="Large view — 1 per row on mobile"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="4" y="4" width="16" height="16" rx="2"/></svg></button>
+      <button type="button" data-grid-view="small" class="is-active" aria-label="Small view — 2 per row on mobile"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg></button>
     </div>`;
 
   // Active-filter chips (runzie shows removable chips + "Clear All" above the grid)
@@ -409,20 +408,20 @@ ${marquee()}
   const search = form && form.querySelector('.db-search__field');
   if (search) search.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); form.requestSubmit ? form.requestSubmit() : form.submit(); } });
 
-  // Grid columns toggle (persisted)
+  // Product view size toggle (Big = 1 per row on mobile, Small = 2). Persisted.
   const grid = document.querySelector('[data-product-grid]');
-  const toggles = document.querySelectorAll('[data-grid-cols]');
-  const applyCols = (cols) => {
+  const toggles = document.querySelectorAll('[data-grid-view]');
+  const applyView = (view) => {
     if (!grid) return;
-    grid.classList.remove('db-grid--2', 'db-grid--3', 'db-grid--4');
-    grid.classList.add('db-grid--' + cols);
-    toggles.forEach((t) => t.classList.toggle('is-active', t.dataset.gridCols === cols));
+    grid.classList.remove('db-grid--big', 'db-grid--small');
+    grid.classList.add('db-grid--' + view);
+    toggles.forEach((t) => t.classList.toggle('is-active', t.dataset.gridView === view));
   };
-  const saved = (() => { try { return localStorage.getItem('db-grid-cols'); } catch (e) { return null; } })();
-  if (saved) applyCols(saved);
+  const saved = (() => { try { return localStorage.getItem('db-grid-view'); } catch (e) { return null; } })();
+  applyView(saved === 'big' || saved === 'small' ? saved : 'small');
   toggles.forEach((t) => t.addEventListener('click', () => {
-    applyCols(t.dataset.gridCols);
-    try { localStorage.setItem('db-grid-cols', t.dataset.gridCols); } catch (e) {}
+    applyView(t.dataset.gridView);
+    try { localStorage.setItem('db-grid-view', t.dataset.gridView); } catch (e) {}
   }));
 
   // Dual-handle price slider

@@ -309,6 +309,23 @@ body.db-overlay-open {
 @media (max-width: 989px)  { .db-grid--4, .db-grid--3, .db-grid--5 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 600px)  { .db-grid--4, .db-grid--3, .db-grid--5 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; } }
 
+/* Product listing view toggle — Small = more/smaller cards, Big = fewer/larger.
+   On mobile: Small = 2 per row, Big = 1 per row. */
+[data-product-grid].db-grid--small { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+[data-product-grid].db-grid--big   { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1100px) {
+  [data-product-grid].db-grid--small { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  [data-product-grid].db-grid--big   { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 989px) {
+  [data-product-grid].db-grid--small { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  [data-product-grid].db-grid--big   { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  [data-product-grid].db-grid--small { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; }
+  [data-product-grid].db-grid--big   { grid-template-columns: 1fr; gap: 20px; }
+}
+
 .db-home-container {
   width: min(var(--container-width, 1200px), calc(100vw - 32px));
   max-width: calc(100vw - 32px);
@@ -1260,7 +1277,8 @@ body.db-overlay-open {
   .db-filters.is-open { display: block; }
   .db-filters__head { justify-content: flex-end; }
   .db-filters__title { display: none; }
-  .db-grid-toggle { display: none; }
+  /* Keep the view-size toggle visible on mobile so shoppers can switch 1/2 per row. */
+  .db-grid-toggle { display: flex; }
 }
 @media (max-width: 600px) {
   .db-toolbar { align-items: stretch; }
