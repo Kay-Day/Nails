@@ -1082,7 +1082,7 @@ function collectionsPage({ collections, bannerImage }) {
   return `${header()}
 ${pageBanner({ image: bannerImage || DEFAULT_BANNER, title: 'Collections', subtitle: 'Browse all our curated nail collections.', breadcrumbHtml: '<a href="/">Home</a> / Collections' })}
 ${marquee()}
-<section class="m-section m-section-my m-section-py"><div class="container db-page">
+<section class="m-section m-section-my m-section-py db-collections-section"><div class="container db-page">
   <div class="db-collections-grid">${cards || '<p class="db-empty">No collections yet.</p>'}</div>
 </div></section>`;
 }

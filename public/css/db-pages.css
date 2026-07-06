@@ -327,6 +327,8 @@ body.db-overlay-open {
 }
 
 /* Collections index page (/collections) */
+.db-collections-section { padding-top: 48px; padding-bottom: 60px; }
+@media (max-width: 600px) { .db-collections-section { padding-top: 30px; padding-bottom: 40px; } }
 .db-collections-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px 22px; }
 .db-collection-tile { display: block; color: inherit; border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 8px 24px rgba(120, 70, 80, .10); transition: transform .25s ease, box-shadow .25s ease; }
 .db-collection-tile:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(120, 70, 80, .16); }
