@@ -246,6 +246,20 @@ async function showProducts(req, res, next) {
 
 router.get('/products', showProducts);
 
+// Collections index — a grid of every active collection (header "Collections" link).
+router.get('/collections', async (req, res, next) => {
+  try {
+    const [cols, banner] = await Promise.all([
+      pool.query('SELECT slug, title, image FROM collections WHERE is_active = true ORDER BY sort_order, id'),
+      pool.query("SELECT image FROM banners WHERE is_active = true AND image <> '' ORDER BY sort_order, id LIMIT 1"),
+    ]);
+    const html = render.collectionsPage({ collections: cols.rows, bannerImage: banner.rows[0] && banner.rows[0].image });
+    sendThemed(res, html, pageTitle(res, 'Collections'));
+  } catch (err) {
+    next(err);
+  }
+});
+
 // The header's Shop link opens the unfiltered catalog with the All option active.
 router.get('/collections/all', showProducts);
 

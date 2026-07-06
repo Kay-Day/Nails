@@ -1069,6 +1069,24 @@ function aboutPage({ sections }) {
   return `${header()}<div class="db-about">${content}</div>`;
 }
 
+// Collections index page (/collections) — a grid of all active collections.
+function collectionsPage({ collections, bannerImage }) {
+  const cards = (collections || []).map((c) => `
+    <a href="/collections/${e(c.slug)}" class="db-collection-tile">
+      <span class="db-collection-tile__media"><img src="${e(c.image || PLACEHOLDER)}" alt="${e(c.title || '')}" loading="lazy"></span>
+      <span class="db-collection-tile__body">
+        <strong class="db-collection-tile__title">${e(c.title || '')}</strong>
+        <span class="db-collection-tile__link">View collection <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M14 7l5 5-5 5"/></svg></span>
+      </span>
+    </a>`).join('');
+  return `${header()}
+${pageBanner({ image: bannerImage || DEFAULT_BANNER, title: 'Collections', subtitle: 'Browse all our curated nail collections.', breadcrumbHtml: '<a href="/">Home</a> / Collections' })}
+${marquee()}
+<section class="m-section m-section-my m-section-py"><div class="container db-page">
+  <div class="db-collections-grid">${cards || '<p class="db-empty">No collections yet.</p>'}</div>
+</div></section>`;
+}
+
 function fmtDate(d) {
   return new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 }
@@ -1651,4 +1669,4 @@ ${marquee()}
 </section>`;
 }
 
-module.exports = { productsPage, productPage, blogPage, postPage, contactPage, aboutPage, homePage, policyPage, faqPage, tutorialPage, accountPage, notFound };
+module.exports = { productsPage, productPage, collectionsPage, blogPage, postPage, contactPage, aboutPage, homePage, policyPage, faqPage, tutorialPage, accountPage, notFound };
