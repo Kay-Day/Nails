@@ -315,12 +315,22 @@ function productsPage({ products, collections, filterGroups, priceRange, inStock
 
   let pagination = '';
   if (totalPages > 1) {
+    const numBtn = (p) => (p === page
+      ? `<span class="is-current" aria-current="page">${p}</span>`
+      : `<a href="${pageLink(p)}">${p}</a>`);
+    const gap = '<span class="db-pagination__gap">…</span>';
     let items = '';
-    if (page > 1) items += `<a href="${pageLink(page - 1)}">←</a>`;
-    for (let p = 1; p <= totalPages; p++) {
-      items += p === page ? `<span class="is-current">${p}</span>` : `<a href="${pageLink(p)}">${p}</a>`;
+    if (page > 1) items += `<a class="db-pagination__nav" href="${pageLink(page - 1)}" aria-label="Previous page">←</a>`;
+    if (totalPages <= 7) {
+      for (let p = 1; p <= totalPages; p++) items += numBtn(p);
+    } else {
+      const start = Math.max(1, page - 1);
+      const end = Math.min(totalPages, page + 1);
+      if (start > 1) { items += numBtn(1); if (start > 2) items += gap; }
+      for (let p = start; p <= end; p++) items += numBtn(p);
+      if (end < totalPages) { if (end < totalPages - 1) items += gap; items += numBtn(totalPages); }
     }
-    if (page < totalPages) items += `<a href="${pageLink(page + 1)}">→</a>`;
+    if (page < totalPages) items += `<a class="db-pagination__nav" href="${pageLink(page + 1)}" aria-label="Next page">→</a>`;
     pagination = `<div class="db-pagination">${items}</div>`;
   }
 
