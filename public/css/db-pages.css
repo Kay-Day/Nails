@@ -67,17 +67,21 @@
   white-space: nowrap;
 }
 
-/* The uploaded logo is a wide horizontal lockup (emblem + wordmark), so show it
-   full inside a white rounded card at a readable height — not squeezed into a
-   tiny circle. Raised shadow keeps it lifted off the header. */
+/* The uploaded logo is a self-contained square emblem (already includes the
+   wordmark), so show it as large as the header allows with only a thin white
+   frame. The image carries its own white margin, so scale it up slightly to fill
+   the frame; overflow:hidden trims the excess. Raised shadow lifts it off the
+   header. */
 .db-brand-logo-frame {
   position: relative;
   display: inline-flex;
   align-items: center;
-  height: 66px;
-  padding: 5px 12px;
+  justify-content: center;
+  height: 82px;
+  width: 82px;
+  padding: 2px;
   overflow: hidden;
-  border-radius: 13px;
+  border-radius: 16px;
   background: #fff;
   box-shadow:
     0 2px 5px rgba(0, 0, 0, .14),
@@ -96,19 +100,21 @@
   position: static;
   inset: auto;
   height: 100% !important;
-  width: auto !important;
+  width: 100% !important;
   max-width: none !important;
   object-fit: contain;
   display: block;
+  transform: scale(1.42); /* eat the logo's baked-in white margin */
 }
 
 /* The logo already includes the brand name — hide the duplicate text label. */
 .db-brand-name { display: none; }
 
 .m-logo--mobile .db-brand-logo-frame {
-  height: 56px;
-  padding: 4px 9px;
-  border-radius: 11px;
+  height: 72px;
+  width: 72px;
+  padding: 2px;
+  border-radius: 14px;
 }
 
 .m-logo--mobile .db-brand-name {
@@ -512,7 +518,7 @@ body.db-overlay-open {
 .db-as-seen-card__media {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 0.563 / 1;
+  aspect-ratio: 1 / 1; /* match the square product cards elsewhere */
   border-radius: 8px;
   background: #f3f3f3;
 }

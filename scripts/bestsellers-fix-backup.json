@@ -1,0 +1,90 @@
+{
+  "collectionId": 1,
+  "sectionId": 1,
+  "removedFromCollection": [
+    {
+      "id": 3,
+      "title": "Mocha Dots"
+    },
+    {
+      "id": 4,
+      "title": "Starfish Shore"
+    },
+    {
+      "id": 6,
+      "title": "Sacred Armor"
+    },
+    {
+      "id": 7,
+      "title": "Island Glow Edit"
+    },
+    {
+      "id": 9,
+      "title": "Totoro's Garden"
+    },
+    {
+      "id": 11,
+      "title": "Mocha Muse"
+    }
+  ],
+  "isFeaturedResetToFalse": [
+    {
+      "id": 3,
+      "title": "Mocha Dots"
+    },
+    {
+      "id": 4,
+      "title": "Starfish Shore"
+    },
+    {
+      "id": 6,
+      "title": "Sacred Armor"
+    },
+    {
+      "id": 7,
+      "title": "Island Glow Edit"
+    },
+    {
+      "id": 9,
+      "title": "Totoro's Garden"
+    },
+    {
+      "id": 11,
+      "title": "Mocha Muse"
+    }
+  ],
+  "sectionProductsBefore": [
+    {
+      "product_id": 1,
+      "sort_order": 0
+    },
+    {
+      "product_id": 2,
+      "sort_order": 1
+    },
+    {
+      "product_id": 3,
+      "sort_order": 2
+    },
+    {
+      "product_id": 4,
+      "sort_order": 3
+    },
+    {
+      "product_id": 5,
+      "sort_order": 4
+    },
+    {
+      "product_id": 6,
+      "sort_order": 5
+    },
+    {
+      "product_id": 7,
+      "sort_order": 6
+    },
+    {
+      "product_id": 8,
+      "sort_order": 7
+    }
+  ]
+}
