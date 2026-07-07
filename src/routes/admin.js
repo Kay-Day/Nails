@@ -8,7 +8,7 @@ const {
   upload,
   fileUrl,
   normalizeMediaUrl,
-  uploadedFilePath,
+  isRemovableUpload,
   removeUploadedFile,
 } = require('../middleware/upload');
 
@@ -66,7 +66,7 @@ async function mediaReferenceCount(url) {
 async function cleanupMediaUrls(values) {
   const urls = Array.from(new Set((values || []).filter(Boolean)));
   for (const url of urls) {
-    if (!uploadedFilePath(url)) continue;
+    if (!isRemovableUpload(url)) continue;
     if ((await mediaReferenceCount(url)) === 0) await removeUploadedFile(url);
   }
 }
