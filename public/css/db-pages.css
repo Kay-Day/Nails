@@ -2991,12 +2991,12 @@ m-footer .social-media-links,
 
 /* About */
 .db-about-story {
-  background: #fff;
+  background: transparent; /* show the pink page background */
 }
 
 .db-about-story--muted,
 .db-about-features {
-  background: #f8f8f8;
+  background: #fbe3e8; /* soft pink, matches the homepage alternating sections */
 }
 
 .db-about-story .m-section-py,
