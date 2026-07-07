@@ -565,7 +565,7 @@ function productPage({ product, gallery, variants, collections, related, reviewC
   ].join('');
 
   const relatedHtml = related.length
-    ? `<div style="margin-top:72px">${sectionHeading('You May Also Like')}<div class="db-grid db-grid--4">${related.map((p) => productCard(p, p.hover_image)).join('')}</div></div>`
+    ? `<div style="margin-top:72px">${sectionHeading('You May Also Like')}<div class="db-bundle-track" data-slider-track>${related.map((p) => `<div class="db-bundle-track__item">${productCard(p, p.hover_image)}</div>`).join('')}</div></div>`
     : '';
 
   const reviewStars = '<span class="db-review-card__stars" aria-hidden="true">★★★★★</span>';
@@ -1389,7 +1389,7 @@ function homePage({ banners, featured, posts, sections: cmsSections, settings })
   const heroScript = (banners || []).length > 1 ? `<script>(()=>{const root=document.querySelector('[data-slideshow]');if(!root)return;const track=root.querySelector('.m-slideshow__track');const slides=[...root.querySelectorAll('.m-slide')];const dots=[...root.querySelectorAll('.m-slideshow__dot')];let index=0,timer;const go=n=>{index=(n+slides.length)%slides.length;track.style.transform='translateX('+(-index*100)+'%)';dots.forEach((dot,i)=>dot.classList.toggle('is-active',i===index));};const restart=()=>{clearInterval(timer);timer=setInterval(()=>go(index+1),5000);};root.querySelector('.m-slideshow__arrow--prev')?.addEventListener('click',()=>{go(index-1);restart();});root.querySelector('.m-slideshow__arrow--next')?.addEventListener('click',()=>{go(index+1);restart();});dots.forEach((dot,i)=>dot.addEventListener('click',()=>{go(i);restart();}));restart();})();</script>` : '';
 
   const bestHtml = bestProducts.length ? `<section class="m-section m-section-my m-section-py"><div class="container db-home-container">
-    ${sectionHeading(best.title || '', best.subtitle || '')}<div class="db-grid db-grid--5">${bestProducts.slice(0, 5).map((product) => productCard(product, product.hover_image)).join('')}</div>
+    ${sectionHeading(best.title || '', best.subtitle || '')}<div class="db-bundle-track" data-slider-track>${bestProducts.map((product) => `<div class="db-bundle-track__item">${productCard(product, product.hover_image)}</div>`).join('')}</div>
     ${best.button_link ? `<div class="db-section-action"><a class="m-button m-button--primary" href="${e(best.button_link)}">${e(best.button_text || 'View all')}</a></div>` : ''}
   </div></section>` : '';
 
