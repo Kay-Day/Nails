@@ -113,9 +113,18 @@ async function showProducts(req, res, next) {
     const baseParams = [];
     if (collection) {
       baseParams.push(collection);
-      baseWhere.push(`EXISTS (SELECT 1 FROM product_collections pc_filter
-        JOIN collections c_filter ON c_filter.id = pc_filter.collection_id
-        WHERE pc_filter.product_id = p.id AND c_filter.slug = $${baseParams.length})`);
+      const ci = baseParams.length;
+      // A product belongs to a collection if it's tagged with the matching
+      // "Shop By Collection" category value, OR (backward compat, so existing
+      // menu links like /collections/best-sellers-1 and the shape pages keep
+      // working) it's in the old collections table under that slug.
+      baseWhere.push(`(EXISTS (SELECT 1 FROM product_filter_values pfv_col
+          JOIN filter_values fv_col ON fv_col.id = pfv_col.value_id
+          JOIN filter_groups fg_col ON fg_col.id = fv_col.group_id
+          WHERE pfv_col.product_id = p.id AND fg_col.slug = 'shop-by-collection' AND fv_col.slug = $${ci})
+        OR EXISTS (SELECT 1 FROM product_collections pc_filter
+          JOIN collections c_filter ON c_filter.id = pc_filter.collection_id
+          WHERE pc_filter.product_id = p.id AND c_filter.slug = $${ci}))`);
     }
     if (q) {
       baseParams.push(`%${q}%`);
@@ -169,7 +178,7 @@ async function showProducts(req, res, next) {
       params
     );
 
-    const [collectionsRes, colFacetsRes, tagFacetsRes, statsRes, bannerRes, sections] = await Promise.all([
+    const [collectionsRes, colFacetsRes, tagFacetsRes, statsRes, bannerRes, sections, sbcRes] = await Promise.all([
       pool.query('SELECT * FROM collections WHERE is_active = true ORDER BY sort_order, id'),
       // Column facets (shape/length) counted over the base scope.
       pool.query(
@@ -198,9 +207,13 @@ async function showProducts(req, res, next) {
       ),
       pool.query("SELECT image FROM banners WHERE is_active = true AND image <> '' ORDER BY sort_order, id LIMIT 1"),
       loadSections('shop'),
+      pool.query("SELECT fv.slug FROM filter_values fv JOIN filter_groups fg ON fg.id = fv.group_id WHERE fg.slug = 'shop-by-collection'"),
     ]);
 
-    if (collection && !collectionsRes.rows.some((item) => item.slug === collection)) {
+    const isKnownCollection = (slug) =>
+      collectionsRes.rows.some((item) => item.slug === slug) ||
+      sbcRes.rows.some((item) => item.slug === slug);
+    if (collection && !isKnownCollection(collection)) {
       return sendThemed(res, render.notFound(), pageTitle(res, 'Collection not found'), 404);
     }
 
@@ -246,11 +259,26 @@ async function showProducts(req, res, next) {
 
 router.get('/products', showProducts);
 
-// Collections index — a grid of every active collection (header "Collections" link).
+// Collections index — driven by the "Shop By Collection" category group (managed
+// under admin Categories). Each value that has products shows as a collection card
+// linking to /collections/<value-slug>, which filters the catalog by that category.
 router.get('/collections', async (req, res, next) => {
   try {
     const [cols, banner] = await Promise.all([
-      pool.query('SELECT slug, title, image FROM collections WHERE is_active = true ORDER BY sort_order, id'),
+      pool.query(
+        `SELECT fv.slug, fv.label AS title,
+           (SELECT p.image FROM product_filter_values pfv
+              JOIN products p ON p.id = pfv.product_id
+              WHERE pfv.value_id = fv.id AND p.is_active = true AND COALESCE(p.image, '') <> ''
+              ORDER BY p.sort_order, p.id LIMIT 1) AS image
+         FROM filter_values fv
+         JOIN filter_groups fg ON fg.id = fv.group_id
+         WHERE fg.slug = 'shop-by-collection'
+           AND EXISTS (SELECT 1 FROM product_filter_values pfv
+             JOIN products p ON p.id = pfv.product_id
+             WHERE pfv.value_id = fv.id AND p.is_active = true)
+         ORDER BY fv.sort_order, fv.id`
+      ),
       pool.query("SELECT image FROM banners WHERE is_active = true AND image <> '' ORDER BY sort_order, id LIMIT 1"),
     ]);
     const html = render.collectionsPage({ collections: cols.rows, bannerImage: banner.rows[0] && banner.rows[0].image });
