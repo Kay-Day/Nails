@@ -256,8 +256,10 @@
       // add pointer(mouse)-drag so it can be dragged on desktop too, and keep a
       // guard so a drag doesn't trigger a click on the card underneath.
       var down = false, startX = 0, startLeft = 0, moved = false;
+      function scrollable() { return track.scrollWidth > track.clientWidth + 4; }
       track.addEventListener('pointerdown', function (e) {
         if (e.pointerType === 'touch') return; // let the browser handle touch
+        if (!scrollable()) return; // nothing to drag → don't interfere with card clicks
         down = true; moved = false;
         startX = e.clientX; startLeft = track.scrollLeft;
         track.classList.add('is-dragging');
@@ -265,7 +267,7 @@
       track.addEventListener('pointermove', function (e) {
         if (!down) return;
         var dx = e.clientX - startX;
-        if (Math.abs(dx) > 4) moved = true;
+        if (Math.abs(dx) > 8) moved = true; // only a real drag suppresses the click
         track.scrollLeft = startLeft - dx;
       });
       function endDrag() { if (!down) return; down = false; track.classList.remove('is-dragging'); }
