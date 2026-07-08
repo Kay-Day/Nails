@@ -67,42 +67,20 @@
   white-space: nowrap;
 }
 
-/* The uploaded logo is a self-contained square emblem (already includes the
-   wordmark), so show it as large as the header allows with only a thin white
-   frame. The image carries its own white margin, so scale it up slightly to fill
-   the frame; overflow:hidden trims the excess. Raised shadow lifts it off the
-   header. */
+/* The logo is a wide horizontal lockup (emblem + wordmark). Show it naturally,
+   vertically centered in the header: fixed height, width auto, contained — no
+   scaling, cropping, or boxed frame. */
 .db-brand-logo-frame {
-  position: relative;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  height: 96px;
-  width: 96px;
-  padding: 2px;
-  overflow: hidden;
-  border-radius: 18px;
-  background: #fff;
-  box-shadow:
-    0 2px 5px rgba(0, 0, 0, .14),
-    0 10px 22px rgba(120, 70, 80, .26);
-  transition: transform .25s ease, box-shadow .25s ease;
-}
-
-.db-brand-lockup:hover .db-brand-logo-frame {
-  transform: translateY(-2px);
-  box-shadow:
-    0 4px 8px rgba(0, 0, 0, .18),
-    0 16px 30px rgba(120, 70, 80, .32);
+  height: 58px;
 }
 
 .db-brand-logo-frame img {
-  position: static;
-  inset: auto;
   height: 100% !important;
-  width: 100% !important;
+  width: auto !important;
   max-width: none !important;
-  object-fit: contain; /* show the uploaded logo in full, uncropped */
+  object-fit: contain;
   display: block;
 }
 
@@ -110,10 +88,7 @@
 .db-brand-name { display: none; }
 
 .m-logo--mobile .db-brand-logo-frame {
-  height: 84px;
-  width: 84px;
-  padding: 2px;
-  border-radius: 16px;
+  height: 46px;
 }
 
 .m-logo--mobile .db-brand-name {
