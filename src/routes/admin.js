@@ -461,7 +461,14 @@ router.get('/filters', async (req, res, next) => {
       );
       columnGroups.push({ ...col, values: rows });
     }
-    res.render('admin/filters', { title: 'Categories', groups, columnGroups, active: 'filters' });
+    // Collections are managed here too (the standalone Collections tab was merged
+    // into Categories). The `collections` table still powers /collections and the
+    // Shop "collection" filter — only the admin location moved.
+    const collections = (await pool.query(
+      `SELECT c.*, (SELECT COUNT(*) FROM product_collections pc WHERE pc.collection_id = c.id)::int AS product_count
+       FROM collections c ORDER BY sort_order, id`
+    )).rows;
+    res.render('admin/filters', { title: 'Categories', groups, columnGroups, collections, active: 'filters' });
   } catch (err) {
     next(err);
   }
@@ -556,25 +563,12 @@ async function syncCollectionNavLabel(slugs, title) {
   );
 }
 
-router.get('/collections', async (req, res, next) => {
-  try {
-    const { limit, offset, pagination } = await paginate(req, {
-      perPage: 20, path: '/admin/collections',
-      countSql: 'SELECT COUNT(*)::int AS n FROM collections',
-    });
-    const { rows } = await pool.query(
-      `SELECT c.*, (SELECT COUNT(*) FROM product_collections pc WHERE pc.collection_id = c.id)::int AS product_count
-       FROM collections c ORDER BY sort_order, id LIMIT $1 OFFSET $2`,
-      [limit, offset]
-    );
-    res.render('admin/collections', { title: 'Collections', collections: rows, pagination, active: 'collections' });
-  } catch (err) {
-    next(err);
-  }
-});
+// The standalone Collections list was merged into the Categories page; keep the
+// URL working (dashboard stat, old bookmarks) by redirecting there.
+router.get('/collections', (req, res) => res.redirect('/admin/filters'));
 
 router.get('/collections/new', (req, res) => {
-  res.render('admin/collection-form', { title: 'New Collection', collection: {}, active: 'collections', formAction: '/admin/collections' });
+  res.render('admin/collection-form', { title: 'New Collection', collection: {}, active: 'filters', formAction: '/admin/collections' });
 });
 
 router.post('/collections', upload.single('image'), async (req, res, next) => {
@@ -588,7 +582,7 @@ router.post('/collections', upload.single('image'), async (req, res, next) => {
       [slug, b.title, b.description || null, image, parseInt(b.sort_order) || 0, b.is_active === 'on']
     );
     await syncCollectionNavLabel(slug, b.title);
-    res.redirect('/admin/collections');
+    res.redirect('/admin/filters');
   } catch (err) {
     next(err);
   }
@@ -597,8 +591,8 @@ router.post('/collections', upload.single('image'), async (req, res, next) => {
 router.get('/collections/:id/edit', async (req, res, next) => {
   try {
     const { rows } = await pool.query('SELECT * FROM collections WHERE id = $1', [req.params.id]);
-    if (!rows.length) return res.redirect('/admin/collections');
-    res.render('admin/collection-form', { title: 'Edit Collection', collection: rows[0], active: 'collections', formAction: `/admin/collections/${req.params.id}` });
+    if (!rows.length) return res.redirect('/admin/filters');
+    res.render('admin/collection-form', { title: 'Edit Collection', collection: rows[0], active: 'filters', formAction: `/admin/collections/${req.params.id}` });
   } catch (err) {
     next(err);
   }
@@ -608,7 +602,7 @@ router.post('/collections/:id', upload.single('image'), async (req, res, next) =
   try {
     const b = req.body;
     const existing = await pool.query('SELECT * FROM collections WHERE id = $1', [req.params.id]);
-    if (!existing.rows.length) return res.redirect('/admin/collections');
+    if (!existing.rows.length) return res.redirect('/admin/filters');
     const oldImage = existing.rows[0].image;
     const image = resolveMedia(req.file, b.image_url, oldImage, b.remove_image === 'on');
     const slug = await uniqueSlug('collections', b.slug || b.title, req.params.id);
@@ -618,7 +612,7 @@ router.post('/collections/:id', upload.single('image'), async (req, res, next) =
     );
     await syncCollectionNavLabel([existing.rows[0].slug, slug], b.title);
     await cleanupMediaUrls([oldImage]);
-    res.redirect('/admin/collections');
+    res.redirect('/admin/filters');
   } catch (err) {
     next(err);
   }
@@ -629,7 +623,7 @@ router.post('/collections/:id/delete', async (req, res, next) => {
     const existing = await pool.query('SELECT image FROM collections WHERE id = $1', [req.params.id]);
     await pool.query('DELETE FROM collections WHERE id = $1', [req.params.id]);
     await cleanupMediaUrls([existing.rows[0]?.image]);
-    res.redirect('/admin/collections');
+    res.redirect('/admin/filters');
   } catch (err) {
     next(err);
   }
