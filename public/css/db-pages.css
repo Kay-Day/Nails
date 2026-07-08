@@ -77,11 +77,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 82px;
-  width: 82px;
+  height: 96px;
+  width: 96px;
   padding: 2px;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 18px;
   background: #fff;
   box-shadow:
     0 2px 5px rgba(0, 0, 0, .14),
@@ -111,10 +111,10 @@
 .db-brand-name { display: none; }
 
 .m-logo--mobile .db-brand-logo-frame {
-  height: 72px;
-  width: 72px;
+  height: 84px;
+  width: 84px;
   padding: 2px;
-  border-radius: 14px;
+  border-radius: 16px;
 }
 
 .m-logo--mobile .db-brand-name {
