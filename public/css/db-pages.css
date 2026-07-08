@@ -88,8 +88,37 @@
 .db-brand-name { display: none; }
 
 .m-logo--mobile .db-brand-logo-frame {
-  height: 68px;
+  height: 76px;
 }
+
+/* Mobile: center the logo horizontally, float the search + menu icons at the
+   far right (over the logo row). */
+@media (max-width: 1023px) {
+  .m-header__mobile {
+    position: relative;
+    justify-content: center;
+  }
+  .m-header__mobile .m-logo--mobile {
+    flex: 1 1 auto;
+    width: auto;
+    justify-content: center;
+  }
+  .m-header__mobile .m-header__mobile-right {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+  }
+}
+
+/* Narrow phones: shrink the wide logo a touch so it never overlaps the icons. */
+@media (max-width: 380px) {
+  .m-logo--mobile .db-brand-logo-frame {
+    height: 64px;
+  }
+}
+
 
 .m-logo--mobile .db-brand-name {
   font-size: 13px;
@@ -151,7 +180,7 @@ body.db-inner-page .m-header__desktop,
 body.db-inner-page .m-header__mobile,
 body.db-inner-page .m-header__bg,
 body.db-inner-page .m-header__dropdown-bg {
-  background: #fff !important;
+  background: #fdedf0 !important;
   color: #111 !important;
 }
 
