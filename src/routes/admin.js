@@ -461,14 +461,7 @@ router.get('/filters', async (req, res, next) => {
       );
       columnGroups.push({ ...col, values: rows });
     }
-    // Collections are managed here too (the standalone Collections tab was merged
-    // into Categories). The `collections` table still powers /collections and the
-    // Shop "collection" filter — only the admin location moved.
-    const collections = (await pool.query(
-      `SELECT c.*, (SELECT COUNT(*) FROM product_collections pc WHERE pc.collection_id = c.id)::int AS product_count
-       FROM collections c ORDER BY sort_order, id`
-    )).rows;
-    res.render('admin/filters', { title: 'Categories', groups, columnGroups, collections, active: 'filters' });
+    res.render('admin/filters', { title: 'Categories', groups, columnGroups, active: 'filters' });
   } catch (err) {
     next(err);
   }
