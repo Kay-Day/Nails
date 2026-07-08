@@ -88,7 +88,7 @@
 .db-brand-name { display: none; }
 
 .m-logo--mobile .db-brand-logo-frame {
-  height: 76px;
+  height: 60px;
 }
 
 /* Mobile: center the logo horizontally, float the search + menu icons at the
@@ -115,7 +115,7 @@
 /* Narrow phones: shrink the wide logo a touch so it never overlaps the icons. */
 @media (max-width: 380px) {
   .m-logo--mobile .db-brand-logo-frame {
-    height: 64px;
+    height: 54px;
   }
 }
 
