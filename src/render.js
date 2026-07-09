@@ -664,7 +664,7 @@ function productPage({ product, gallery, variants, collections, related, reviewC
     </button>
     <div class="db-size-guide__scroll">
       <div class="db-size-guide__chart">
-        <img src="${e(settings.size_guide_image || '/images/size-guide/size-guide.jpg')}" alt="${e(shopName)} size guide — how to measure your nails and the size chart" loading="lazy">
+        <img src="${e(settings.size_guide_image || '/images/size-guide/size-guide.jpg')}" alt="${e(shopName)} size guide — how to measure your nails and the size chart">
       </div>
       <p class="db-size-guide__note">Still unsure? Message us your measurements and we'll help you pick the perfect fit — or arrange a custom-sized set.</p>
     </div>
