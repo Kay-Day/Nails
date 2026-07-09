@@ -91,24 +91,10 @@
   height: 68px;
 }
 
-/* Mobile: center the logo horizontally, float the search + menu icons at the
-   far right (over the logo row). */
+/* Mobile: logo in the top-left corner, search + menu icons on the right. */
 @media (max-width: 1023px) {
-  .m-header__mobile {
-    position: relative;
-    justify-content: center;
-  }
   .m-header__mobile .m-logo--mobile {
-    flex: 1 1 auto;
-    width: auto;
-    justify-content: center;
-  }
-  .m-header__mobile .m-header__mobile-right {
-    position: absolute;
-    right: 6px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: auto;
+    justify-content: flex-start;
   }
 }
 
