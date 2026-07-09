@@ -88,7 +88,7 @@
 .db-brand-name { display: none; }
 
 .m-logo--mobile .db-brand-logo-frame {
-  height: 60px;
+  height: 68px;
 }
 
 /* Mobile: center the logo horizontally, float the search + menu icons at the
@@ -112,10 +112,15 @@
   }
 }
 
-/* Narrow phones: shrink the wide logo a touch so it never overlaps the icons. */
-@media (max-width: 380px) {
+/* Narrower phones: shrink the wide logo step by step so it never overlaps the icons. */
+@media (max-width: 400px) {
   .m-logo--mobile .db-brand-logo-frame {
-    height: 54px;
+    height: 60px;
+  }
+}
+@media (max-width: 360px) {
+  .m-logo--mobile .db-brand-logo-frame {
+    height: 52px;
   }
 }
 
