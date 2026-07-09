@@ -1374,8 +1374,8 @@ body.db-size-guide-open { overflow: hidden; }
 .db-size-guide__table tbody tr:nth-child(even) { background: #faf7f5; }
 .db-size-guide__note { font-size: 13px; opacity: .7; margin: 14px 0 0; }
 /* Downloaded size-guide image: crop the top wordmark band so the chart starts at its own "SIZE GUIDE" title */
-.db-size-guide__chart { overflow: hidden; border-radius: 6px; line-height: 0; }
-.db-size-guide__chart img { display: block; width: 100%; height: auto; margin-top: -15.5%; }
+.db-size-guide__chart { border-radius: 6px; line-height: 0; }
+.db-size-guide__chart img { display: block; width: 100%; height: auto; }
 @media (max-width: 600px) {
   .db-size-guide__scroll { padding: 34px 20px 24px; }
   .db-size-guide__title { font-size: 32px; }
