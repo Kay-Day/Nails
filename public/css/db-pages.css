@@ -73,7 +73,7 @@
 .db-brand-logo-frame {
   display: inline-flex;
   align-items: center;
-  height: 90px;
+  height: 60px;
 }
 
 .db-brand-logo-frame img {
@@ -116,36 +116,8 @@
   letter-spacing: .1em;
 }
 
-/* --- Centered-logo desktop header --------------------------------------
-   Logo sits centered on the top row; the nav menu is centered on the row
-   below; the search/account icons float at the top-right. Requested layout:
-   "logo giữa menu". Desktop only — the mobile header is untouched. */
-@media (min-width: 1024px) {
-  .m-header__desktop .m-header__inner {
-    flex-wrap: wrap;
-    justify-content: center;
-    position: relative;
-    row-gap: 2px;
-  }
-  .m-header__desktop .m-header__left {
-    order: 1;
-    flex: 0 0 100%;
-    justify-content: center;
-  }
-  .m-header__desktop .m-header__center {
-    order: 2;
-    flex: 1 1 100%;
-    justify-content: center;
-  }
-  .m-header__desktop .m-header__right {
-    order: 3;
-    position: absolute;
-    top: 0;
-    right: 16px;
-    height: 90px;
-    align-items: center;
-  }
-}
+/* Desktop header keeps the theme's default logo-left layout (logo on the left,
+   menu in the middle, icons on the right) — same left-corner logo as mobile. */
 
 /* Dynamic storefront pages are browse-and-contact only, so hide Shopify cart UI. */
 a[href="/cart"].m-cart-icon-bubble,
